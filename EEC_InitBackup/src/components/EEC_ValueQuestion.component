@@ -1,0 +1,5 @@
+<apex:component layout="none">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" /> 
+    <apex:outputText styleclass="form-control" value="{! question['value'] }" /> 
+</apex:component>

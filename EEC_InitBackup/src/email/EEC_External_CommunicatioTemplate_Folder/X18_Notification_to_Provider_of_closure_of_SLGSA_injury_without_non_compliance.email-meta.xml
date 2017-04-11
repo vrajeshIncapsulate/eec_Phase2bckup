@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>18 - Notification to Provider of closure of SLGSA injury without non-compliance</name>
+    <style>formalLetter</style>
+    <subject>Department of Early Education and Care - Information related to your recent illness/injury report</subject>
+    <type>html</type>
+</EmailTemplate>

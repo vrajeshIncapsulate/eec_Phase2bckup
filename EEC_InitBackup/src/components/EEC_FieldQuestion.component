@@ -1,0 +1,9 @@
+<apex:component layout="none">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" /> 
+    <apex:attribute name="readOnly" type="Boolean" description="Is the field readOnly" /> 
+    <c:noDateLink ><apex:inputField rendered="{! !readOnly }" html-data-parsley-required="{! question.isRequired }" styleclass="form-control {! question.className }" value="{! object[question['fieldName']] }">
+        <apex:actionSupport event="onchange" reRender="questionRefreshSection" />
+    </apex:inputField></c:noDateLink>
+    <c:noDateLink ><apex:outputField rendered="{! readOnly }" html-data-parsley-required="{! question.isRequired }" styleclass="form-control" value="{! object[question['fieldName']] }" /></c:noDateLink>
+</apex:component>

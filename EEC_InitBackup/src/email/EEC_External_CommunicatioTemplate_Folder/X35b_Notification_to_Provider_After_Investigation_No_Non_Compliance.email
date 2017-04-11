@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div><div style="font-size: medium;"><p style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, sans-serif; background-color: rgb(255, 255, 255);"><i><font size="2">This email is intended to the licensed provider under the name: {!Account.Name}</font></i></p><div><i><font size="2"><br></font></i></div></div><font face="Arial, sans-serif" size="2"></font></div><font face="Arial, sans-serif" size="2">Dear Provider,<br><br>The results from the recent investigation {!Investigation__c.Name} conducted by the Department of Early Education and Care (EEC) are available for your review and record.&nbsp; Please follow the link below to the related documents:&nbsp;&nbsp; &nbsp;<br><br><a href="{!$Setup.EEC_Config__c.Portal_Url__c}/eec_portalproviderpage?accountId={!Account.Id}"><span style="background-color: rgb(255, 255, 255);">L</span>ink to portal</a></font><div><font face="Arial, sans-serif" size="2"><br>You may contact your licensor {!Account.OwnerFirstName}&nbsp; {!Account.OwnerLastName} by phone at {!Account.OwnerPhone} or by email at&nbsp; {!Account.OwnerEmail} with any questions or concerns related to this matter. &nbsp;<br><br>Sincerely,<br><br>The Department of Early Education and Care.<br></font><br></div>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<div align="center"><font face="Arial,Sans-Serif" size="2">{!Account.Region_Address__c}<br>{!Account.Region_Phone__c} • {!Account.Region_Fax__c} • {!Account.Region_Email__c}<br>www.mass.gov/eec</font></div>]]></td>
+</tr>
+</table>

@@ -1,0 +1,1143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>License Application</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>License Applications</value>
+    </caseValues>
+    <fields>
+        <help><!-- Use Control+Click to multi-select all of the days for Provider&apos;s Afternoon operating schedule --></help>
+        <label><!-- Afternoon-Days --></label>
+        <name>Afternoon_Days__c</name>
+        <picklistValues>
+            <masterLabel>Fri</masterLabel>
+            <translation><!-- Fri --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mon</masterLabel>
+            <translation><!-- Mon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thu</masterLabel>
+            <translation><!-- Thu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tue</masterLabel>
+            <translation><!-- Tue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wed</masterLabel>
+            <translation><!-- Wed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the end time for the Provider&apos;s Afternoon operating schedule --></help>
+        <label><!-- Afternoon-End Time --></label>
+        <name>Afternoon_End_Time__c</name>
+        <picklistValues>
+            <masterLabel>1 pm</masterLabel>
+            <translation><!-- 1 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 pm</masterLabel>
+            <translation><!-- 2 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 pm</masterLabel>
+            <translation><!-- 3 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 pm</masterLabel>
+            <translation><!-- 4 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 pm</masterLabel>
+            <translation><!-- 5 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 pm</masterLabel>
+            <translation><!-- 6 pm --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the start time for the Provider&apos;s Afternoon operating schedule --></help>
+        <label><!-- Afternoon-Start Time --></label>
+        <name>Afternoon_Start_Time__c</name>
+        <picklistValues>
+            <masterLabel>1 pm</masterLabel>
+            <translation><!-- 1 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 pm</masterLabel>
+            <translation><!-- 2 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 pm</masterLabel>
+            <translation><!-- 3 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 pm</masterLabel>
+            <translation><!-- 4 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 pm</masterLabel>
+            <translation><!-- 5 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 pm</masterLabel>
+            <translation><!-- 6 pm --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Does Licensee hold a Dept. of Public Health Summer Camp permit? --></help>
+        <label><!-- DPH Summer Camp Permit? --></label>
+        <name>DPH_Summer_Camp_Permit__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Drop In --></label>
+        <name>Drop_In__c</name>
+    </fields>
+    <fields>
+        <label><!-- Evening --></label>
+        <name>Evening__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Use Control+Click to multi-select all of the days for Provider&apos;s Extended Days service --></help>
+        <label><!-- Extended Days --></label>
+        <name>Extended_Days__c</name>
+        <picklistValues>
+            <masterLabel>Fri</masterLabel>
+            <translation><!-- Fri --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mon</masterLabel>
+            <translation><!-- Mon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thu</masterLabel>
+            <translation><!-- Thu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tue</masterLabel>
+            <translation><!-- Tue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wed</masterLabel>
+            <translation><!-- Wed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the FCC Licensee, the person to whom the FCC license is granted --></help>
+        <label><!-- FCC Licensee --></label>
+        <name>FCC_Licensee__c</name>
+        <relationshipLabel><!-- License Applications (FCC Licensee) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- FinancialAssistance --></label>
+        <name>FinancialAssistance__c</name>
+        <picklistValues>
+            <masterLabel>Contracted Slots</masterLabel>
+            <translation><!-- Contracted Slots --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>DCF Supportive Slots</masterLabel>
+            <translation><!-- DCF Supportive Slots --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Headstart</masterLabel>
+            <translation><!-- Headstart --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Private Scholarship</masterLabel>
+            <translation><!-- Private Scholarship --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sibling Discount</masterLabel>
+            <translation><!-- Sibling Discount --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sliding Fee Scale</masterLabel>
+            <translation><!-- Sliding Fee Scale --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Teen Parent Slot</masterLabel>
+            <translation><!-- Teen Parent Slot --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>United Way</masterLabel>
+            <translation><!-- United Way --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Voucher</masterLabel>
+            <translation><!-- Voucher --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- First Issue Date --></label>
+        <name>First_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select the end time for the Provider&apos;s Full Day operating schedule --></help>
+        <label><!-- Full Day-End Time --></label>
+        <name>Full_Day_End_Time__c</name>
+        <picklistValues>
+            <masterLabel>1 pm</masterLabel>
+            <translation><!-- 1 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10 am</masterLabel>
+            <translation><!-- 10 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11 am</masterLabel>
+            <translation><!-- 11 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 pm</masterLabel>
+            <translation><!-- 2 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 pm</masterLabel>
+            <translation><!-- 3 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 pm</masterLabel>
+            <translation><!-- 4 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 pm</masterLabel>
+            <translation><!-- 5 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 am</masterLabel>
+            <translation><!-- 6 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 pm</masterLabel>
+            <translation><!-- 6 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7 am</masterLabel>
+            <translation><!-- 7 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 am</masterLabel>
+            <translation><!-- 8 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9 am</masterLabel>
+            <translation><!-- 9 am --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the start time for the Provider&apos;s Full Day operating schedule --></help>
+        <label><!-- Full Day-Start Time --></label>
+        <name>Full_Day_Start_Time__c</name>
+        <picklistValues>
+            <masterLabel>1 pm</masterLabel>
+            <translation><!-- 1 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>10 am</masterLabel>
+            <translation><!-- 10 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11 am</masterLabel>
+            <translation><!-- 11 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>2 pm</masterLabel>
+            <translation><!-- 2 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>3 pm</masterLabel>
+            <translation><!-- 3 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>4 pm</masterLabel>
+            <translation><!-- 4 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>5 pm</masterLabel>
+            <translation><!-- 5 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 am</masterLabel>
+            <translation><!-- 6 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 pm</masterLabel>
+            <translation><!-- 6 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7 am</masterLabel>
+            <translation><!-- 7 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 am</masterLabel>
+            <translation><!-- 8 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9 am</masterLabel>
+            <translation><!-- 9 am --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate for the full day --></help>
+        <label><!-- Full Day --></label>
+        <name>Full_Day__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate for the full year --></help>
+        <label><!-- Full Year --></label>
+        <name>Full_Year__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate for the afternoon only --></help>
+        <label><!-- Half day-Afternoon --></label>
+        <name>Half_day_Afternoon__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate for the morning only --></help>
+        <label><!-- Half day-Morning --></label>
+        <name>Half_day_Morning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Historic License No --></label>
+        <name>Historic_License_No__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is the indoor portion of your program in compliance with American with Disabilities Act (ADA) requirements? --></help>
+        <label><!-- Indoor --></label>
+        <name>Indoor__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sure</masterLabel>
+            <translation><!-- Not Sure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Infant/Toddler (birth-33mo) --></label>
+        <name>Infant_Toddler_birth_33mo__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Infant (birth-15mo) --></label>
+        <name>Infant_birth_15mo__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Kindergarten --></label>
+        <name>Kindergarten__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select the LG or SG Administrator, required on the LG/SG license application --></help>
+        <label><!-- LG/SG Administrator --></label>
+        <name>LG_SG_Administrator__c</name>
+        <relationshipLabel><!-- License Applications (LG/SG Administrator) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Select the Licensee Contact for the LG or SG license application --></help>
+        <label><!-- LG/SG Licensee Contact --></label>
+        <name>LG_SG_Licensee_Contact__c</name>
+        <relationshipLabel><!-- License Applications (LG/SG Licensee Contact) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Latitude --></label>
+        <name>Latitude__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Status --></label>
+        <name>License_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Awaiting Provider</masterLabel>
+            <translation><!-- Awaiting Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Complete</masterLabel>
+            <translation><!-- Complete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Incomplete</masterLabel>
+            <translation><!-- Incomplete --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Open</masterLabel>
+            <translation><!-- Open --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the appropriate License Type value --></help>
+        <label><!-- License Type --></label>
+        <name>License_Type__c</name>
+        <picklistValues>
+            <masterLabel>Change in Licensee</masterLabel>
+            <translation><!-- Change in Licensee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Move</masterLabel>
+            <translation><!-- Move --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-open</masterLabel>
+            <translation><!-- Re-open --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Enter the name of the Provider owner, whether that be a person or a corporation --></help>
+        <label><!-- Licensee --></label>
+        <name>Licensee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Longitude --></label>
+        <name>Longitude__c</name>
+    </fields>
+    <fields>
+        <label><!-- Meals --></label>
+        <name>Meals__c</name>
+        <picklistValues>
+            <masterLabel>Afternoon Snack</masterLabel>
+            <translation><!-- Afternoon Snack --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Breakfast</masterLabel>
+            <translation><!-- Breakfast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dinner</masterLabel>
+            <translation><!-- Dinner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Lunch</masterLabel>
+            <translation><!-- Lunch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Morning Snack</masterLabel>
+            <translation><!-- Morning Snack --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parents Provide Food</masterLabel>
+            <translation><!-- Parents Provide Food --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parents Provide Lunch</masterLabel>
+            <translation><!-- Parents Provide Lunch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Special Meal Request</masterLabel>
+            <translation><!-- Special Meal Request --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>TEMP Morning Snack</masterLabel>
+            <translation><!-- TEMP Morning Snack --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>USDA Food Program</masterLabel>
+            <translation><!-- USDA Food Program --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Use Control+Click to multi-select all of the days for Provider&apos;s Morning operating schedule --></help>
+        <label><!-- Morning-Days --></label>
+        <name>Morning_Days__c</name>
+        <picklistValues>
+            <masterLabel>Fri</masterLabel>
+            <translation><!-- Fri --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mon</masterLabel>
+            <translation><!-- Mon --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Thu</masterLabel>
+            <translation><!-- Thu --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Tue</masterLabel>
+            <translation><!-- Tue --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Wed</masterLabel>
+            <translation><!-- Wed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the end time for the Provider&apos;s Morning operating schedule --></help>
+        <label><!-- Morning-End Time --></label>
+        <name>Morning_End_Time__c</name>
+        <picklistValues>
+            <masterLabel>10 am</masterLabel>
+            <translation><!-- 10 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11 am</masterLabel>
+            <translation><!-- 11 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 am</masterLabel>
+            <translation><!-- 6 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7 am</masterLabel>
+            <translation><!-- 7 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 am</masterLabel>
+            <translation><!-- 8 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9 am</masterLabel>
+            <translation><!-- 9 am --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the start time for the Provider&apos;s Morning operating schedule --></help>
+        <label><!-- Morning-Start Time --></label>
+        <name>Morning_Start_Time__c</name>
+        <picklistValues>
+            <masterLabel>10 am</masterLabel>
+            <translation><!-- 10 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>11 am</masterLabel>
+            <translation><!-- 11 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>12 pm</masterLabel>
+            <translation><!-- 12 pm --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>6 am</masterLabel>
+            <translation><!-- 6 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>7 am</masterLabel>
+            <translation><!-- 7 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>8 am</masterLabel>
+            <translation><!-- 8 am --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>9 am</masterLabel>
+            <translation><!-- 9 am --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Multi-Age Group (birth-14yr) --></label>
+        <name>Multi_Age_Group_birth_14yr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Does Licensee hold any other EEC Licenses? --></help>
+        <label><!-- Other EEC Licenses? --></label>
+        <name>Other_EEC_Licenses__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Is the outdoor/playground portion of your program in compliance with American with Disabilities Act (ADA) requirements? --></help>
+        <label><!-- Outdoor/Playground --></label>
+        <name>Outdoor_Playground__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Sure</masterLabel>
+            <translation><!-- Not Sure --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Preschool (33mo-K) --></label>
+        <name>Preschool_33mo_K__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Preschool/SA (33mo-8yr) --></label>
+        <name>Preschool_SA_33mo_8yr__c</name>
+    </fields>
+    <fields>
+        <label><!-- Account --></label>
+        <name>Provider_No__c</name>
+        <relationshipLabel><!-- License Applications --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- School Age (5yr-14yr) --></label>
+        <name>School_Age_5yr_14yr__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select the starting month for the Provider&apos;s School Year operating schedule --></help>
+        <label><!-- School Year-From: --></label>
+        <name>School_Year_From__c</name>
+        <picklistValues>
+            <masterLabel>Apr</masterLabel>
+            <translation><!-- Apr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aug</masterLabel>
+            <translation><!-- Aug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dec</masterLabel>
+            <translation><!-- Dec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feb</masterLabel>
+            <translation><!-- Feb --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jan</masterLabel>
+            <translation><!-- Jan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jul</masterLabel>
+            <translation><!-- Jul --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jun</masterLabel>
+            <translation><!-- Jun --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mar</masterLabel>
+            <translation><!-- Mar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nov</masterLabel>
+            <translation><!-- Nov --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oct</masterLabel>
+            <translation><!-- Oct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sep</masterLabel>
+            <translation><!-- Sep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the ending month for the Provider&apos;s School Year operating schedule --></help>
+        <label><!-- School Year-To: --></label>
+        <name>School_Year_To__c</name>
+        <picklistValues>
+            <masterLabel>Apr</masterLabel>
+            <translation><!-- Apr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aug</masterLabel>
+            <translation><!-- Aug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dec</masterLabel>
+            <translation><!-- Dec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feb</masterLabel>
+            <translation><!-- Feb --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jan</masterLabel>
+            <translation><!-- Jan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jul</masterLabel>
+            <translation><!-- Jul --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jun</masterLabel>
+            <translation><!-- Jun --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mar</masterLabel>
+            <translation><!-- Mar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May</masterLabel>
+            <translation><!-- May --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nov</masterLabel>
+            <translation><!-- Nov --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oct</masterLabel>
+            <translation><!-- Oct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sep</masterLabel>
+            <translation><!-- Sep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate only for the school year --></help>
+        <label><!-- School Year --></label>
+        <name>School_Year__c</name>
+    </fields>
+    <fields>
+        <label><!-- SpecialNeeds --></label>
+        <name>SpecialNeeds__c</name>
+        <picklistValues>
+            <masterLabel>ADD/ADHD</masterLabel>
+            <translation><!-- ADD/ADHD --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Asthma/Allergies</masterLabel>
+            <translation><!-- Asthma/Allergies --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>At Risk</masterLabel>
+            <translation><!-- At Risk --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Autism Spectrum Disorder</masterLabel>
+            <translation><!-- Autism Spectrum Disorder --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Behavioral</masterLabel>
+            <translation><!-- Behavioral --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developmental</masterLabel>
+            <translation><!-- Developmental --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emotional/Social</masterLabel>
+            <translation><!-- Emotional/Social --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Experience</masterLabel>
+            <translation><!-- Experience --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feeding Tube</masterLabel>
+            <translation><!-- Feeding Tube --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hearing Impairment</masterLabel>
+            <translation><!-- Hearing Impairment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Learning</masterLabel>
+            <translation><!-- Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medical Condition</masterLabel>
+            <translation><!-- Medical Condition --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>None</masterLabel>
+            <translation><!-- None --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Other</masterLabel>
+            <translation><!-- Other --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Parental Incapacity</masterLabel>
+            <translation><!-- Parental Incapacity --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical</masterLabel>
+            <translation><!-- Physical --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sensory Integration</masterLabel>
+            <translation><!-- Sensory Integration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Special Diet</masterLabel>
+            <translation><!-- Special Diet --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Speech/Language</masterLabel>
+            <translation><!-- Speech/Language --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Summer Camp --></label>
+        <name>Summer_Camp__c</name>
+    </fields>
+    <fields>
+        <help><!-- Select the starting month for the Provider&apos;s Summer operating schedule --></help>
+        <label><!-- Summer-From: --></label>
+        <name>Summer_From__c</name>
+        <picklistValues>
+            <masterLabel>Apr</masterLabel>
+            <translation><!-- Apr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aug</masterLabel>
+            <translation><!-- Aug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dec</masterLabel>
+            <translation><!-- Dec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feb</masterLabel>
+            <translation><!-- Feb --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jan</masterLabel>
+            <translation><!-- Jan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jul</masterLabel>
+            <translation><!-- Jul --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jun</masterLabel>
+            <translation><!-- Jun --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mar</masterLabel>
+            <translation><!-- Mar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May</masterLabel>
+            <translation><!-- May --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nov</masterLabel>
+            <translation><!-- Nov --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oct</masterLabel>
+            <translation><!-- Oct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sep</masterLabel>
+            <translation><!-- Sep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select the ending month for the Provider&apos;s Summer operating schedule --></help>
+        <label><!-- Summer-To: --></label>
+        <name>Summer_To__c</name>
+        <picklistValues>
+            <masterLabel>Apr</masterLabel>
+            <translation><!-- Apr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Aug</masterLabel>
+            <translation><!-- Aug --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Dec</masterLabel>
+            <translation><!-- Dec --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feb</masterLabel>
+            <translation><!-- Feb --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jan</masterLabel>
+            <translation><!-- Jan --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jul</masterLabel>
+            <translation><!-- Jul --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Jun</masterLabel>
+            <translation><!-- Jun --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mar</masterLabel>
+            <translation><!-- Mar --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>May</masterLabel>
+            <translation><!-- May --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Nov</masterLabel>
+            <translation><!-- Nov --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Oct</masterLabel>
+            <translation><!-- Oct --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sep</masterLabel>
+            <translation><!-- Sep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Select if Provider intends to operate for the summer only --></help>
+        <label><!-- Summer --></label>
+        <name>Summer__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Toddler (15mo-33mo) --></label>
+        <name>Toddler_15mo_33mo__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter the number of clients for this age group --></help>
+        <label><!-- Toddler/Preschool (15mo-K) --></label>
+        <name>Toddler_Preschool_15mo_K__c</name>
+    </fields>
+    <fields>
+        <help><!-- Calculates sum of Large Group client category values --></help>
+        <label><!-- Total License Capacity --></label>
+        <name>Total_License_Capacity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transportation --></label>
+        <name>Transportation__c</name>
+        <picklistValues>
+            <masterLabel>Near Public Transportation</masterLabel>
+            <translation><!-- Near Public Transportation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>On Public School Bus Route</masterLabel>
+            <translation><!-- On Public School Bus Route --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provides School Age Transportation</masterLabel>
+            <translation><!-- Provides School Age Transportation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation Provided</masterLabel>
+            <translation><!-- Transportation Provided --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Walking Distance to School</masterLabel>
+            <translation><!-- Walking Distance to School --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- If Licensee does hold another EEC License(s) please list type of license(s): --></help>
+        <label><!-- Type of EEC License --></label>
+        <name>Type_of_EEC_License__c</name>
+    </fields>
+    <fields>
+        <label><!-- 6 or fewer --></label>
+        <name>X6_or_fewer__c</name>
+    </fields>
+    <fields>
+        <label><!-- 7-8 --></label>
+        <name>X7_8__c</name>
+    </fields>
+    <fields>
+        <label><!-- 9-10 --></label>
+        <name>X9_10__c</name>
+    </fields>
+    <layouts>
+        <layout>FCC</layout>
+        <sections>
+            <label><!-- ADA Compliance --></label>
+            <section>ADA Compliance</section>
+        </sections>
+        <sections>
+            <label><!-- Administrator --></label>
+            <section>Administrator</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Licensee --></label>
+            <section>Licensee</section>
+        </sections>
+        <sections>
+            <label><!-- Operations Schedule --></label>
+            <section>Operations Schedule</section>
+        </sections>
+        <sections>
+            <label><!-- Other Licenses and Permits --></label>
+            <section>Other Licenses and Permits</section>
+        </sections>
+        <sections>
+            <label><!-- Other Services Provided --></label>
+            <section>Other Services Provided</section>
+        </sections>
+        <sections>
+            <label><!-- Services and Options --></label>
+            <section>Services and Options</section>
+        </sections>
+        <sections>
+            <label><!-- Total License Capacity Requested --></label>
+            <section>Total License Capacity Requested</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Large Group</layout>
+        <sections>
+            <label><!-- ADA Compliance --></label>
+            <section>ADA Compliance</section>
+        </sections>
+        <sections>
+            <label><!-- Administrator --></label>
+            <section>Administrator</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Licensee --></label>
+            <section>Licensee</section>
+        </sections>
+        <sections>
+            <label><!-- Operating Schedule --></label>
+            <section>Operating Schedule</section>
+        </sections>
+        <sections>
+            <label><!-- Other LIcenses and Permits --></label>
+            <section>Other LIcenses and Permits</section>
+        </sections>
+        <sections>
+            <label><!-- Services and Options --></label>
+            <section>Services and Options</section>
+        </sections>
+        <sections>
+            <label><!-- Total License Capacity Requested --></label>
+            <section>Total License Capacity Requested</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Small Group</layout>
+        <sections>
+            <label><!-- ADA Compliance --></label>
+            <section>ADA Compliance</section>
+        </sections>
+        <sections>
+            <label><!-- Administrator --></label>
+            <section>Administrator</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Licensee --></label>
+            <section>Licensee</section>
+        </sections>
+        <sections>
+            <label><!-- Operations Schedule --></label>
+            <section>Operations Schedule</section>
+        </sections>
+        <sections>
+            <label><!-- Other Licenses and Permits --></label>
+            <section>Other Licenses and Permits</section>
+        </sections>
+        <sections>
+            <label><!-- Services and Options --></label>
+            <section>Services and Options</section>
+        </sections>
+        <sections>
+            <label><!-- Total License Capacity Requested --></label>
+            <section>Total License Capacity Requested</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Adoption Agency --></label>
+        <name>Adoption_Agency</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Family Child Care --></label>
+        <name>FCC</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Foster Care Agency --></label>
+        <name>Foster_Care_Agency</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Large Group --></label>
+        <name>Large_Group</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Residential --></label>
+        <name>Residential</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Small Group --></label>
+        <name>Small_Group</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

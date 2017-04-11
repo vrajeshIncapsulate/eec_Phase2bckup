@@ -1,0 +1,5 @@
+<apex:component controller="EEC_NewFile_Controller">
+
+<apex:inputFile value="{!newFile.body}" fileName="{!newFile.name}" id="file" />
+
+</apex:component>

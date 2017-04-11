@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>EEC MVCData</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>EEC MVCDatas</value>
+    </caseValues>
+    <fields>
+        <label><!-- choices --></label>
+        <name>choices__c</name>
+    </fields>
+    <fields>
+        <label><!-- defaultRequired --></label>
+        <name>defaultRequired__c</name>
+    </fields>
+    <fields>
+        <label><!-- dependentFields --></label>
+        <name>dependentFields__c</name>
+    </fields>
+    <fields>
+        <label><!-- isActive --></label>
+        <name>isActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- isDependent --></label>
+        <name>isDependent__c</name>
+    </fields>
+    <fields>
+        <label><!-- key --></label>
+        <name>key__c</name>
+    </fields>
+    <fields>
+        <label><!-- label --></label>
+        <name>label__c</name>
+    </fields>
+    <fields>
+        <label><!-- pageName --></label>
+        <name>pageName__c</name>
+    </fields>
+    <fields>
+        <label><!-- recordTypesRequired --></label>
+        <name>recordTypesRequired__c</name>
+    </fields>
+    <fields>
+        <label><!-- sortOrder --></label>
+        <name>sortOrder__c</name>
+    </fields>
+    <fields>
+        <label><!-- type --></label>
+        <name>type__c</name>
+        <picklistValues>
+            <masterLabel>date</masterLabel>
+            <translation><!-- date --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>picklist</masterLabel>
+            <translation><!-- picklist --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>radio</masterLabel>
+            <translation><!-- radio --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>text</masterLabel>
+            <translation><!-- text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>textarea</masterLabel>
+            <translation><!-- textarea --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>upload</masterLabel>
+            <translation><!-- upload --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- uploadName --></label>
+        <name>uploadName__c</name>
+    </fields>
+    <layouts>
+        <layout>EEC MVCData Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

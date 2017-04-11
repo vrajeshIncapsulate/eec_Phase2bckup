@@ -1,0 +1,1118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <name>myDecision</name>
+        <label>Primary Decision</label>
+        <locationX>300</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_pmetdec</targetReference>
+            </connector>
+            <label>Unlic Prov and Approver #2 is NOT NULL</label>
+        </rules>
+        <rules>
+            <name>myRule_2</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_2</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_2_pmetdec</targetReference>
+            </connector>
+            <label>FCC / GSA Prov and Approver #2 is NOT NULL</label>
+        </rules>
+        <rules>
+            <name>myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_pmetdec</targetReference>
+            </connector>
+            <label>R&amp;P Prov and Approver #2 is NOT NULL</label>
+        </rules>
+        <rules>
+            <name>myRule_4</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_4</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_4_pmetdec</targetReference>
+            </connector>
+            <label>Unlic Prov and Approver #2 is NULL</label>
+        </rules>
+        <rules>
+            <name>myRule_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_pmetdec</targetReference>
+            </connector>
+            <label>FCC / GSA Prov and Approver #2 is NULL</label>
+        </rules>
+        <rules>
+            <name>myRule_6</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_6</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_6_pmetdec</targetReference>
+            </connector>
+            <label>R&amp;P Prov and Approver #2 is NULL</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_1_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>100</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_1_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_1_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_2_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>200</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_2_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_2_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_2_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_2_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_2_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_3_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>300</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_3_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_3_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_4_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>400</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_4_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_4_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_4_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_4_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_4_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_5_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>500</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_5_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_5_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_5_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>myRule_6_pmetdec</name>
+        <label>Previously Met Decision</label>
+        <locationX>600</locationX>
+        <locationY>100</locationY>
+        <defaultConnector>
+            <targetReference>myRule_6_A1</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
+        <rules>
+            <name>myRule_6_pmetnullrule</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>myVariable_old</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_6_A1</targetReference>
+            </connector>
+            <label>Previously Met - Null</label>
+        </rules>
+        <rules>
+            <name>myRule_6_pmetrule</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_6_pmetrule</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <label>Previously Met - Prev</label>
+        </rules>
+    </decisions>
+    <description>Update Case Escalation Approvers for the different types of providers - Implementation of LEAD-2377</description>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISBLANK([Case].AccountId), AND(OR(ISNEW(), PRIORVALUE([Case].Unlicensed_Provider_Region__c.Name) &lt;&gt; [Case].Unlicensed_Provider_Region__c.Name), NOT(ISBLANK([Case].Unlicensed_Provider_Region__c )), NOT(ISBLANK([Case].Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c ))), FALSE)  </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!myVariable_current.AccountId}), AND(OR(ISNEW(), PRIORVALUE({!myVariable_current.Unlicensed_Provider_Region__c.Name}) &lt;&gt; {!myVariable_current.Unlicensed_Provider_Region__c.Name}), NOT(ISBLANK({!myVariable_current.Unlicensed_Provider_Region__c} )), NOT(ISBLANK({!myVariable_current.Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} ))), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISBLANK([Case].AccountId), AND(OR(ISNEW(), PRIORVALUE([Case].Unlicensed_Provider_Region__c.Name) &lt;&gt; [Case].Unlicensed_Provider_Region__c.Name), NOT(ISBLANK([Case].Unlicensed_Provider_Region__c )), NOT(ISBLANK([Case].Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c ))), FALSE)  </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!myVariable_old.AccountId}), AND(OR(ISNEW(), PRIORVALUE({!myVariable_old.Unlicensed_Provider_Region__c.Name}) &lt;&gt; {!myVariable_old.Unlicensed_Provider_Region__c.Name}), NOT(ISBLANK({!myVariable_old.Unlicensed_Provider_Region__c} )), NOT(ISBLANK({!myVariable_old.Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} ))), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )),  AND(
+[Case].Account.Is_R_P__c = FALSE, OR(ISNEW(), PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), 
+NOT(ISBLANK([Case].Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c ))), FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_2</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_current.AccountId} )),  AND(
+{!myVariable_current.Account.Is_R_P__c} = FALSE, OR(ISNEW(), PRIORVALUE({!myVariable_current.Account.Name}) &lt;&gt; {!myVariable_current.Account.Name}), 
+NOT(ISBLANK({!myVariable_current.Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} ))), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )),  AND(
+[Case].Account.Is_R_P__c = FALSE, OR(ISNEW(), PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), 
+NOT(ISBLANK([Case].Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c ))), FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_2_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_old.AccountId} )),  AND(
+{!myVariable_old.Account.Is_R_P__c} = FALSE, OR(ISNEW(), PRIORVALUE({!myVariable_old.Account.Name}) &lt;&gt; {!myVariable_old.Account.Name}), 
+NOT(ISBLANK({!myVariable_old.Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} ))), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )), 
+AND([Case].Account.Is_R_P__c = TRUE, 
+OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name),NOT(ISBLANK([Case].Account.Region__c.R_P_2nd_Escalation_Case_Approver__c  ))), 
+FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_current.AccountId} )), 
+AND({!myVariable_current.Account.Is_R_P__c} = TRUE, 
+OR(ISNEW(),  PRIORVALUE({!myVariable_current.Account.Name}) &lt;&gt; {!myVariable_current.Account.Name}),NOT(ISBLANK({!myVariable_current.Account.Region__c.R_P_2nd_Escalation_Case_Approver__c}  ))), 
+FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )), 
+AND([Case].Account.Is_R_P__c = TRUE, 
+OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name),NOT(ISBLANK([Case].Account.Region__c.R_P_2nd_Escalation_Case_Approver__c  ))), 
+FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_old.AccountId} )), 
+AND({!myVariable_old.Account.Is_R_P__c} = TRUE, 
+OR(ISNEW(),  PRIORVALUE({!myVariable_old.Account.Name}) &lt;&gt; {!myVariable_old.Account.Name}),NOT(ISBLANK({!myVariable_old.Account.Region__c.R_P_2nd_Escalation_Case_Approver__c}  ))), 
+FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISBLANK([Case].AccountId), AND(OR(ISNEW(), PRIORVALUE([Case].Unlicensed_Provider_Region__c.Name) &lt;&gt; [Case].Unlicensed_Provider_Region__c.Name),  NOT(ISBLANK([Case].Unlicensed_Provider_Region__c )), ISBLANK([Case].Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c )), FALSE) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_4</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!myVariable_current.AccountId}), AND(OR(ISNEW(), PRIORVALUE({!myVariable_current.Unlicensed_Provider_Region__c.Name}) &lt;&gt; {!myVariable_current.Unlicensed_Provider_Region__c.Name}),  NOT(ISBLANK({!myVariable_current.Unlicensed_Provider_Region__c} )), ISBLANK({!myVariable_current.Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} )), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(ISBLANK([Case].AccountId), AND(OR(ISNEW(), PRIORVALUE([Case].Unlicensed_Provider_Region__c.Name) &lt;&gt; [Case].Unlicensed_Provider_Region__c.Name),  NOT(ISBLANK([Case].Unlicensed_Provider_Region__c )), ISBLANK([Case].Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c )), FALSE) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_4_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(ISBLANK({!myVariable_old.AccountId}), AND(OR(ISNEW(), PRIORVALUE({!myVariable_old.Unlicensed_Provider_Region__c.Name}) &lt;&gt; {!myVariable_old.Unlicensed_Provider_Region__c.Name}),  NOT(ISBLANK({!myVariable_old.Unlicensed_Provider_Region__c} )), ISBLANK({!myVariable_old.Unlicensed_Provider_Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} )), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )),  AND(
+[Case].Account.Is_R_P__c = FALSE, OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), 
+ISBLANK([Case].Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c )), FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_current.AccountId} )),  AND(
+{!myVariable_current.Account.Is_R_P__c} = FALSE, OR(ISNEW(),  PRIORVALUE({!myVariable_current.Account.Name}) &lt;&gt; {!myVariable_current.Account.Name}), 
+ISBLANK({!myVariable_current.Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} )), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )),  AND(
+[Case].Account.Is_R_P__c = FALSE, OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), 
+ISBLANK([Case].Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c )), FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_old.AccountId} )),  AND(
+{!myVariable_old.Account.Is_R_P__c} = FALSE, OR(ISNEW(),  PRIORVALUE({!myVariable_old.Account.Name}) &lt;&gt; {!myVariable_old.Account.Name}), 
+ISBLANK({!myVariable_old.Account.Region__c.FCC_GSA_2nd_Escalation_Case_Approver__c} )), FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )), 
+AND([Case].Account.Is_R_P__c = TRUE, 
+OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), ISBLANK([Case].Account.Region__c.R_P_2nd_Escalation_Case_Approver__c )), 
+FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_6</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_current.AccountId} )), 
+AND({!myVariable_current.Account.Is_R_P__c} = TRUE, 
+OR(ISNEW(),  PRIORVALUE({!myVariable_current.Account.Name}) &lt;&gt; {!myVariable_current.Account.Name}), ISBLANK({!myVariable_current.Account.Region__c.R_P_2nd_Escalation_Case_Approver__c} )), 
+FALSE)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>IF(NOT(ISBLANK([Case].AccountId )), 
+AND([Case].Account.Is_R_P__c = TRUE, 
+OR(ISNEW(),  PRIORVALUE([Case].Account.Name) &lt;&gt; [Case].Account.Name), ISBLANK([Case].Account.Region__c.R_P_2nd_Escalation_Case_Approver__c )), 
+FALSE)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_6_pmetrule</name>
+        <dataType>Boolean</dataType>
+        <expression>IF(NOT(ISBLANK({!myVariable_old.AccountId} )), 
+AND({!myVariable_old.Account.Is_R_P__c} = TRUE, 
+OR(ISNEW(),  PRIORVALUE({!myVariable_old.Account.Name}) &lt;&gt; {!myVariable_old.Account.Name}), ISBLANK({!myVariable_old.Account.Region__c.R_P_2nd_Escalation_Case_Approver__c} )), 
+FALSE)</expression>
+    </formulas>
+    <interviewLabel>Case_Escalation_Approver_Updates-1_Case</interviewLabel>
+    <label>Case Escalation Approver Updates</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Case</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Update FCC/RSA 1st Escalation Approvers</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Unlicensed_Provider_Region__r.FCC_GSA_1st_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Unlicensed_Provider_Region__r.FCC_GSA_2nd_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_2_A1</name>
+        <label>Update FCC/GSA Case Escalation Approvers</label>
+        <locationX>200</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.FCC_GSA_1st_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.FCC_GSA_2nd_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_3_A1</name>
+        <label>Update R&amp;P Case Escalation Approver</label>
+        <locationX>300</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.R_P_1st_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.R_P_2nd_Escalation_Case_Approver__r.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_4_A1</name>
+        <label>Update FCC/RSA 1st Escalation Approvers</label>
+        <locationX>400</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Unlicensed_Provider_Region__r.FCC_GSA_1st_Escalation_Case_Approver__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>GlobalConstant</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_5_A1</name>
+        <label>Update FCC/GSA Case Escalation Approvers</label>
+        <locationX>500</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.FCC_GSA_1st_Escalation_Case_Approver__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>GlobalConstant</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
+                <booleanValue>false</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[Case]</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_6_A1</name>
+        <label>Update R&amp;P Case Escalation Approver</label>
+        <locationX>600</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>1st Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X1st_Escalation_Case_Approver__c</field>
+            <value>
+                <elementReference>myVariable_current.Account.Region__r.R_P_1st_Escalation_Case_Approver__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>2nd Escalation Case Approver</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>GlobalConstant</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>X2nd_Escalation_Case_Approver__c</field>
+        </inputAssignments>
+        <object>Case</object>
+    </recordUpdates>
+    <startElementReference>myDecision</startElementReference>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Case</objectType>
+    </variables>
+</Flow>

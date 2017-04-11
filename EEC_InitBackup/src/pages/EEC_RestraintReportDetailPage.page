@@ -1,0 +1,383 @@
+<apex:page showHeader="false" standardStylesheets="false"
+    sidebar="false" controller="EEC_RestraintReport">
+    <head>
+    <title>EEC : Restraint Report</title>
+    <c:EEC_Header id="pageHeader" />
+    <style type="text/css">
+        .form-label{
+          font-weight: bold;
+          font-size:14px;
+        }
+        thead{
+                background-color : #f5f5f5;
+        }
+        .table > thead:first-child > tr:first-child > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table {
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+        #restraintReportView{
+            margin-bottom : 100px;
+        }
+        .header{
+            margin-bottom : 50px;
+        }
+        .td-header{
+            font-weight: bold;
+            font-size: 14px;
+         }
+</style>
+<script>
+    
+</script>
+    </head>
+    <body>
+        <c:EEC_Nav_Bar id="navBar" />
+        <div class="container">
+            <br />
+            <apex:form >
+                <div id="restraintReportView">
+                    <div class="header">
+                        <br/><h2 class="pull-left">Restraint Report</h2><br />
+                            <apex:commandButton styleClass="md-button md-raised md-eec pull-right" value="Back to Provider" action="{!returnProvider}"> </apex:commandButton>   
+                        <br/>
+                    </div>
+                    <apex:pageMessages />
+                     <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Restraint Report
+                          </h3>
+                       </div>
+                          <div class="panel-body">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Provider : </span> {!account.Name}
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Restraint Method : </span>
+                                                {!rReport.Restraint_Method2__c}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Calendar Year : </span>
+                                                {!rReport.Calendar_Year__c}
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Quarter : </span>
+                                                {!rReport.Quarter__c}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Submitted By : </span>
+                                                {!rReport.Contact_Submitted_By__r.Name}
+
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="form-label">Submitted Date : </span>
+                                                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!rReport.Submitted_Date__c}" />
+                                                </apex:outputText>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                    </div>
+
+                     <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Position / Minutes
+                          </h3>
+                       </div>
+                          <div class="panel-body">
+                                <div class="col-lg-12">
+                                    <div class="form-group" id="no-more-tables">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>0-5</th>
+                                                <th>6-10</th>
+                                                <th>11-20</th>
+                                                <th>21-30</th>
+                                                <th>31-40</th>
+                                                <th>41-50</th>
+                                                <th>51-60</th>
+                                                <th>>60</th>
+                                            </tr>
+                                            </thead>    
+                                            <apex:outputPanel rendered="{!IF(account.Restraint_Method__c != 'DYS' , true, false)}">
+                                            <tr>
+                                                <td class="td-header">Standing</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Standing_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Standing_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Standing_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Standing_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Standing_31_40__c}">
+                                                        <apex:selectOption itemValue="0" itemLabel="0" />
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Standing_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Standing_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Standing_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td-header">Sitting</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Sitting_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Sitting_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Sitting_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Sitting_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Sitting_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Sitting_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Sitting_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Sitting_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td-header">Floor(Supine)</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Floor_Supine_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Floor_Supine_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Floor_Supine_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Floor_Supine_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Floor_Supine_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Floor_Supine_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Floor_Supine_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Floor_Supine_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td-header">Floor(Prone)</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Floor_Prone_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Floor_Prone_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Floor_Prone_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Floor_Prone_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Floor_Prone_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Floor_Prone_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Floor_Prone_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Floor_Prone_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td-header">Floor (Both Prone and Supine)</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Floor_Both_Prone_and_Supine_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel rendered="{!IF(account.Restraint_Method__c = 'DYS' , true, false)}">
+                                            <tr>
+                                                <td class="td-header">Physical and Mechanical</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Physical_Mechanical_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Physical_Mechanical_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Physical_Mechanical_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Physical_Mechanical_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Physical_Mechanical_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Physical_Mechanical_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Physical_Mechanical_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Physical_Mechanical_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="td-header">Physical holds Only</td>
+                                                <td data-title="0-5"><apex:outputField value="{!rReport.Physical_holds_Only_0_5__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="6-10"><apex:outputField value="{!rReport.Physical_Holds_Only_6_10__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="11-20"><apex:outputField value="{!rReport.Physical_Holds_Only_11_20__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="21-30"><apex:outputField value="{!rReport.Physical_Holds_Only_21_30__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="31-40"><apex:outputField value="{!rReport.Physical_Holds_Only_31_40__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="41-50"><apex:outputField value="{!rReport.Physical_Holds_Only_41_50__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title="51-60"><apex:outputField value="{!rReport.Physical_Holds_Only_51_60__c}">
+                                                    </apex:outputField></td>
+                                                <td data-title=">60"><apex:outputField value="{!rReport.Physical_Holds_Only_60__c}">
+                                                    </apex:outputField></td>
+                                            </tr>
+                                            </apex:outputPanel>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Injury Info -->
+                    <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Injury Information
+                          </h3>
+                       </div>
+                          <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Injured Resident (Minor
+                                                Injury): </span>
+                                            <apex:outputField value="{!rReport.Injured_Residents_Minor_Injury__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Injured Resident (Serious
+                                                Injury): </span>
+                                            <apex:outputField value="{!rReport.Injured_Residents_Serious_Injury__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Injured Staff (Minor Injury):
+                                            </span>
+                                            <apex:outputField value="{!rReport.Injured_Staff_Minor_Injury__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Injured Staff (Serious
+                                                Injury): </span>
+                                            <apex:outputField value="{!rReport.Injured_Staff_Serious_Injury__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <!--Others-->
+                    <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Other Restraints Information
+                          </h3>
+                       </div>
+                          <div class="panel-body">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Number of Restraints Leading
+                                                to Resident Injury: </span>
+                                            <apex:outputField value="{!rReport.No_Restraints_Leading_to_Res_Injury__c}">
+
+
+
+
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Number of Restraints Leading
+                                                to Staff Injury: </span>
+                                            <apex:outputField value="{!rReport.No_Restraints_Leading_to_Staff_Injury__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Total Bed Days Utilized this
+                                                Quarter: </span>
+                                            <apex:outputField value="{!rReport.Total_Bed_Days_Utilized_this_Quarter__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Unduplicated Count of
+                                                Residents Restrained: </span>
+                                            <apex:outputField value="{!rReport.Unduplicated_Count_of_Residnts_Restraind__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="form-label">Unduplicated Count of
+                                                Residents Served: </span>
+                                            <apex:outputField value="{!rReport.Unduplicated_Count_of_Residents_Served__c}">
+                                            </apex:outputField>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </apex:form>
+        </div>
+        <c:EEC_Site_Footer id="siteFooter" />
+    </body>
+</apex:page>

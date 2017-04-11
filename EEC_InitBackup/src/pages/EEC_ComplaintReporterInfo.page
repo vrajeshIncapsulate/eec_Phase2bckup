@@ -1,0 +1,82 @@
+<apex:page controller="EEC_ComplaintReporterInfoController" doctype="html-5.0" showheader="false" sidebar="false" standardstylesheets="false" action="{! noComplaintRedirect }" cache="false">  
+    <c:EEC_Complaints_NavBar /> 
+    <div class="complaints-wrapper">
+        <div class="complaints-title-bar">
+            <h3 class="md-headline">
+                Reporter Information
+            </h3>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span>Providing EEC with your contact information will allow us to have the best possible information 
+                with which to properly investigate your concerns.  EEC will protect the anonymity of all complainants 
+                to the extent that we can.  If you have questions or concerns about this, please feel free to contact 
+                your local regional EEC office and ask to speak with someone in the licensing unit.</span>
+            </div>
+        </div>
+        
+        <apex:form id="questionRefreshSection" styleClass="complaints-form">
+        
+            <h3 class="eec-subhead">Reporter Information</h3>
+            <div class="question-wrapper">
+                <apex:repeat value="{! ReporterQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+            
+            <h3 class="eec-subhead">Address</h3>
+            <div class="question-wrapper">
+                <apex:repeat value="{! AddressQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+            
+            <h3 class="eec-subhead">Contact Information</h3>
+        
+            <apex:pageMessages />
+            <div class="question-wrapper">
+                <apex:repeat value="{! ContactQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+             <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandbutton styleclass="md-button md-raised md-button md-default-theme md-eec trigger-validate"
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1"
+                                    html-flex-order-md="1" 
+                                    html-md-button="true"
+                                    action="{! back }"
+                                    value="Previous" />
+                <apex:actionstatus id="nextStatus">
+                    <apex:facet name="stop">
+                        <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue trigger-validate"
+                                            html-layout-padding="true"
+                                            html-flex-order-sm="1"
+                                            html-flex-order-md="1"
+                                            html-md-button="true"
+                                            status="nextStatus"
+                                            action="{! goToSummary }"  
+                                            value="Next" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <button class="md-button md-raised md-eec complaints-search">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </button>
+                    </apex:facet>
+                </apex:actionstatus> 
+            </md-content> 
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandLink styleclass="md-button md-raised md-button md-default-theme"
+                                    onclick="return confirm('Are you sure you wish to cancel your complaint?');" 
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1" 
+                                    html-flex-order-md="1"
+                                    html-md-button="true"
+                                    status="searchStatus"
+                                    action="{! cancel }" 
+                                    value="Cancel" />
+            </md-content>
+            <c:EEC_ComplaintsFooter /> 
+        </apex:form>
+    </div>
+</apex:page>

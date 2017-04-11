@@ -1,0 +1,708 @@
+<apex:page doctype="html-5.0" standardcontroller="Inspection__c" extensions="InspectVisitModeController" id="InspectVisitModeId" sidebar="false" action="{!lockVisitMode}">
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <head>
+    <link rel="alternate" href="/apex/InspectVisitModeTabletVersion" id="tablet" media="only screen and (min-device-width: 641px)" />
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0120, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.StylesScripts, 'StylesScripts/css/bootstrap.css')}" />
+    <apex:includescript value="{!URLFOR($Resource.StylesScripts, 'StylesScripts/js/jquery.js')}" />
+    <apex:includescript value="{!URLFOR($Resource.EEC_Bootstrap, 'EEC_Bootstrap/js/jquery-1.11.2.min.js')}" />
+    <apex:includescript value="{!URLFOR($Resource.StylesScripts, 'StylesScripts/js/bootstrap.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.EEC_Bootstrap, 'EEC_Bootstrap/js/jquery.validate.js')}"/>
+    <script src="https://jqueryvalidation.org/files/dist/additional-methods.min.js"></script>       
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.js" type="text/javascript"></script>      
+      
+  </head>
+  
+  <apex:messages style="color: #FF0000; font-weight: bold;" />
+  <apex:outputtext value="{!Inspection__c.Id}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Abandon_Tool_Reason__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.RecordType.Name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Status__c}" rendered="false" />    
+  <style>
+    .nonAssessedColor {
+      background-color: #FFCC66;
+    }
+    .RandomVisitColor {
+      background-color: #dbff66;
+    }
+    .bold{
+    font-weight: bold;
+    }
+    .tool-abandoned {
+      background-color: #ff8066;
+    }
+
+    .required {
+      color: #ff8066;
+    }
+
+    .not-visible {
+      display: none;
+    }
+    
+    #bp-modal-messages {
+        margin-bottom: 10px;
+        display: none;
+    }
+    
+    #ba-modal-messages {
+        margin-bottom: 10px;
+        display: none;
+    }
+
+    .bp-list-panel-container {
+        display: none;
+    }
+
+    .bp-panel-button-group {
+        margin-top: 10px;
+        justify-content: flex-end;
+    }  
+    
+    body {
+      /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+      font-size: 11.5px;
+      line-height: 1.42857143;
+      /* color: #333; */
+      background-color: #fff;
+    }
+
+    input[type="radio"], input[type="checkbox"] {
+      margin: 4px 5px 0;
+      margin-top: 1px \9;
+      line-height: normal;
+    }
+
+    .error-msg {
+      color: #FF0000;
+      font-weight: bold;
+    }
+  </style>
+  <script language="JavaScript" type="text/javascript">
+        $.noConflict();
+        function showAttachMessage(attachmessage){
+            if(attachmessage != null && attachmessage != '' && attachmessage.length > 1){
+                document.getElementById('{!$Component.iiDocAttach}').innerHTML = attachmessage.substring(0, attachmessage.length-2) + ' attached successfully.';
+            }
+        }
+
+        function autoSaveComplete() {
+            // Logic to occur after auto save is complete can go here.
+            console.log('Autosave complete');
+        }
+        function endTimerJS(){
+            var assessed = {!allItemsAssesed};
+            var inspID = '{!Inspection__c.Id}';
+            //alert(assessed);
+            if($('.iresult:not(:has(:radio:checked))').length){
+                if (confirm('All visit items of the checklist have not been assessed. Do you want to continue with ending the visit timer?')) {
+                    endTimer(inspID);
+                }
+                else{
+                    return false;
+                }
+            }
+            else{
+                endTimer(inspID);
+            }
+        }
+        function saveAbandoned(){
+            document.getElementById('#dialog').dialog('open');
+        }
+        function autoReasonSaveComplete(){
+             location.reload();
+        }
+        
+        jQuery(document).ready(function($){
+            $('#alert').hide();
+            $('#btnSaveAb').click(function(event) {
+                autoSaveText();
+            });
+            $('#btnSaveReason').click(function(event) {
+                var reason = $('#reason').val();
+                if(reason != ''){
+                    $('#alert').hide();
+                    saveReason(reason);
+                }
+                else{
+                    $('#alert').html('<strong>You need to fill the reason if you want to abandon the visit.</strong>');
+                    $('#alert').show();
+                }
+            });
+        });
+  </script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.6.0/parsley.js" type="text/javascript"></script>    
+  <apex:outputtext value="" id="iiDocAttach" style="padding-left:25em;color: #008080;font-size: 110%;; font-weight: bold;" />
+  <apex:form id="inspect_visitmode" styleClass="inspect_visitmode">
+    <c:EEC_ActionStatus ></c:EEC_ActionStatus>
+    <apex:actionfunction name="saveReason" action="{!SaveReason}" oncomplete="autoReasonSaveComplete()">
+      <apex:param name="reason" value="" />
+    </apex:actionfunction>
+    <apex:actionfunction name="autoSaveText" action="{!Save}" oncomplete="autoSaveComplete()" />
+    <apex:outputpanel layout="block">
+      <apex:pageblock id="inspectionListBlock" mode="detail">
+        <apex:pageblockbuttons location="top">
+          <apex:commandbutton status="pageStatus" rerender="IIListTable" onclick="if(!visitModeForm.parsley().validate()){return false;}" action="{!Save}" value="Save" disabled="{!disableButton}"/>
+          <apex:commandbutton status="pageStatus" rerender="IIListTable" onclick="if(!visitModeForm.parsley().validate()){return false;}" action="{!SaveAndCloseVisitMode}" value="Save and Close Visit Mode" disabled="{!disableButton}"/>
+          <apex:commandlink action="{!CancelAndCloseVisitMode}" styleclass="btn"
+                            style="text-decoration:none;padding:4px;" target="_parent" value="Cancel and Close Visit Mode" />
+          <apex:commandbutton status="pageStatus" rerender="IIListTable" onclick="if(!visitModeForm.parsley().validate()){return false;}" action="{!SaveAndAddNewVisitItem}" value="Save and Add New Visit Item" disabled="{!disableButton}"/>
+          <button type="button" data-toggle="modal" data-target="#bestPractice" class="btn" style="padding: 4px 3px;">New Best Practice</button>  
+          <!--<apex:commandbutton status="pageStatus" rerender="IIListTable" action="{!SaveAndAddNewBP}" value="Save and Add New Best Practice" disabled="{!disableButton}"/>-->
+         <!-- <apex:commandbutton status="pageStatus" rerender="IIListTable" onclick="if(!visitModeForm.parsley().validate()){return false;}" action="{!MarkCompliant}" value="Mark Compliant" disabled="{!disableButton}"/>-->
+          <apex:outputpanel rendered="{!IF(iiWrapperList.size > 0 && Inspection__c.Abandon_Tool_Reason__c == '' && selectedResultFilter == '' && selectedCategoryFilter == '',true,false)}">
+            <button  id="btnSaveAb" data-toggle="modal" data-target="#abandonTool" type="button" style="padding: 4px 3px;" class="btn">Save and Abandon Visit Tool</button>
+          </apex:outputpanel>
+          <apex:commandbutton action="{!StartTimer}" rendered="{!Inspection__c.Start_Time__c == null}" value="Start Timer" />
+          <button id="btnEnd" type="button" onclick="endTimerJS();" style="padding: 4px 3px;" class="btn {!IF(Inspection__c.Start_Time__c != null,IF(Inspection__c.End_Time__c == null ,'', 'not-visible'),'not-visible')}">End Timer</button>
+          <button type="button" data-toggle="modal" data-target="#bulkAssess" class="btn" style="padding: 4px 3px;" onClick="refreshBPModal();">Bulk Assess</button> 
+          <br /><br />
+          <apex:outputpanel >
+          <b style="font-size:150%;">Current Visit Tool Used : {!ToolName} </b>
+          </apex:outputpanel>
+          <br/><br/>
+
+          <b>Result Filter Criteria - </b>
+          <apex:selectlist value="{!selectedResultFilter}" multiselect="false" size="1">
+            <apex:actionsupport event="onchange" action="{!getInspectionItemData}" />
+            <apex:selectoptions value="{!filterOptions}" />
+          </apex:selectlist>
+          <b>Domain Filter Criteria - </b>
+          <apex:selectlist value="{!selectedCategoryFilter}" multiselect="false" size="1">
+            <apex:actionsupport event="onchange" action="{!getInspectionItemData}" />
+            <apex:selectoptions value="{!CatFilterOptions}" />
+          </apex:selectlist>
+          <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Non Inspected Items - </b><apex:outputtext value="{!numberItemsNonSelected}" />
+        </apex:pageblockbuttons>
+        <apex:actionfunction action="{!EndTimer}" name="endTimer">
+          <apex:param name="inspID" value="" />
+        </apex:actionfunction>
+        <div class="modal fade" id="abandonTool" role="dialog"> 
+          <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Abandon Visit Tool</h4>
+              </div>
+              <div class="modal-body">
+                <div id="alert" class="alert alert-danger fade in" tabindex="1">
+                  <a href="#" class="close" data-dismiss="alert">&times;</a>
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="control-label">Abandon Reason: <span class="required">*</span></label>
+                  <textarea rows="2" id="reason" class="form-control text-area" html-placeholder="Abandon Reason"></textarea>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="btnSaveReason">Abandon</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Best Practice Modal -->
+        <div class="slds modal fade" id="bestPractice" role="dialog">
+                <apex:outputpanel id="activateSldsModelBPContainer" layout="block">
+                  <apex:outputpanel >
+                    <div id="slds-modal-bp" aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                      <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                          <h2 class="slds-text-heading--medium slds-modal-bp-header-text">Add a New Best Practice</h2>
+                          <button class="slds-button slds-button--icon-inverse slds-modal__close" data-dismiss="modal" type="button" onclick="refreshBPModal();">
+                            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                              <use xlink:href="{!URLFOR($Resource.SLDS0101, '/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                          </button>
+                        </div>
+                        <div class="slds-modal__content">
+                          <div id="bp-modal-messages">
+                            <div class="slds-box">
+                              <p class="message"></p>
+                            </div>
+                          </div>
+                          <!-- Domain Section -->
+                          <div class="slds-model-domain-container">
+                            <label for="slds-model-domain-dropdown" class="control-label">Domain</label>
+                            <apex:selectlist id="slds-model-domain-dropdown" size="1" styleclass="form-control slds-model-domain-dropdown" onchange="retrieveBestPracticeListForDomain($(this).val())">
+                              <apex:selectoptions value="{!allDomainList}" />
+                            </apex:selectlist>
+                          </div>
+                          <!-- Best Practice Section -->
+                          <apex:outputpanel id="sldsModalBPContainer">
+                            <apex:outputpanel styleclass="slds-modal-bp-content" id="sldsModalBPContent" layout="block" rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}" style="margin-top: 10px;">
+                              <label for="slds-model-bp-dropdown" class="control-label">Best Practices</label>
+                              <apex:selectlist id="slds-model-bp-dropdown" size="1" styleclass="form-control slds-model-bp-dropdown">
+                                <apex:selectoptions value="{!activeDomainBPList}" />
+                              </apex:selectlist>
+                            </apex:outputpanel>
+                            <!-- Best Practice Observations Section -->
+                            <apex:outputpanel styleclass="slds-modal-bp-observation-container" style="margin-top: 10px;" layout="block" id="sldsModalBPObservations" rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}">
+                              <label for="slds-modal-bp-practice-observation" class="control-label">Best Practice Observation</label>
+                              <input id="slds-modal-bp-practice-observation" class="form-control slds-modal-bp-practice-observation" type="text" />
+                            </apex:outputpanel>
+                            <apex:outputpanel rendered="{!activeDomainBPList == null || (activeDomainBPList != null && activeDomainBPList.size == 0)}" layout="block" style="text-align: center; margin-top: 10px;">
+                              <p>No Best Practices available for this domain.</p>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                        <apex:outputpanel id="slds-modal-footer" styleclass="slds-modal__footer">
+                          <div class="slds-x-small-buttons--horizontal">
+                            <button class="slds-button slds-button--neutral" data-dismiss="modal" type="button" onclick="refreshBPModal();">Cancel</button>                            
+                            <apex:outputpanel rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}">
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" type="button" onclick="addNewBP($(this));">Add</button>
+                            </apex:outputpanel>
+                            <apex:outputpanel rendered="{!activeDomainBPList == null || (activeDomainBPList != null && activeDomainBPList.size == 0)}">
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" type="button" disabled="true">Add</button>
+                            </apex:outputpanel>
+                          </div>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                  </apex:outputpanel>
+                </apex:outputpanel>
+         </div>  
+         <!------ Bulk Assess -------------------------------->
+         <div class="slds modal fade" id="bulkAssess" role="dialog">
+               
+                <apex:outputpanel id="activateSldsModelBAContainer" layout="block">
+                  <apex:outputpanel >
+                    <div id="slds-modal-bp" aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                      <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                          <h2 class="slds-text-heading--medium slds-modal-bp-header-text">Bulk Assess of Visit Items</h2>
+                          <button class="slds-button slds-button--icon-inverse slds-modal__close" data-dismiss="modal" type="button" onclick="refreshBPModal();">
+                            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                              <use xlink:href="{!URLFOR($Resource.SLDS0101, '/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                          </button>
+                        </div>
+                        <div class="slds-modal__content">
+                          <div id="ba-modal-messages">
+                            <div class="slds-box">
+                              <p class="message"></p>
+                            </div>
+                          </div>
+                          <!-- Domain Section -->
+                          <div class="slds-model-domain-container">
+                            <p>This functionality allows you to edit in bulk all visit items that are currently filtered in your visit mode view. All items that do not currently have a result (compliant, non compliant or other) will have their result value changed to the selection made below. If you select "Not Applicable" or "Not Assessed" then you will be required to add an Observation.</p><br/>
+                            <label for="slds-model-domain-dropdown" class="control-label">Mark all items filtered and currently without result as</label>
+                            
+                            <apex:selectList size="1" id="bulkAsVal" value="{!bulkPickVal}" styleclass="form-control slds-model-domain-dropdown  bulkAsVal">
+                                <apex:selectoption itemvalue=""/>
+                                <apex:selectoption id="compliant" itemvalue="Compliant"></apex:selectoption>
+                                <!--<apex:selectoption id="non-compliant" itemvalue="Non-Compliant">&nbsp;&nbsp;</apex:selectoption>-->
+                                <apex:selectoption id="not-applicable" itemvalue="Not Applicable">&nbsp;&nbsp;</apex:selectoption>
+                                <apex:selectoption id="not-assessed" itemvalue="Not Assessed">&nbsp;&nbsp;</apex:selectoption>
+                                <!--<apex:selectoption id="abandoned" itemvalue="Non Assessed (tool abandoned)" itemdisabled="true">&nbsp;&nbsp;</apex:selectoption>-->       
+                          </apex:selectList>
+                            
+                          
+                           <apex:outputpanel styleclass="slds-modal-bp-observation-container" style="margin-top: 10px;" layout="block" id="sldsModalBAObservations" >
+                              <label for="slds-modal-bp-practice-observation" class="control-label">Observation</label>
+                            
+                              <apex:inputText value="{!bulkObservation}" id="slds-modal-bp-practice-observation-bulkObsText" styleclass="form-control slds-modal-bp-practice-observation" />
+                            </apex:outputpanel>
+                          </div>
+                        <script>
+                            $('.bulkAsVal').change(function() { 
+                                var groupName = $(this).attr('id');
+                                var theRadioButtonSet = document.getElementsByName(groupName);
+                                var selectList = document.getElementById(groupName);
+                                
+                                var selectedVal = selectList.options[selectList.selectedIndex].value;
+                                
+                                var flag = false;
+                                
+                                if(selectedVal =='Non-Compliant' || selectedVal =='Not Assessed'||selectedVal =='Not Applicable'){
+                                    flag=true;
+                                
+                                }
+                               
+                                if(flag){ 
+                                    //$('.inspect_visitmode').parsley().destroy();
+                                    $('.bulkObsText').attr('data-parsley-required', 'true');
+                                    $('.inspect_visitmode').parsley().validate();
+                                }
+                                else{
+                                    $('.bulkObsText').removeAttr('data-parsley-required');
+                                    $('.inspect_visitmode').parsley().validate();
+                                }
+                            });
+                        </script> 
+                         </div>
+                        <apex:outputpanel id="slds-modal-ba-footer" styleclass="slds-modal__footer">
+                          <div class="slds-x-small-buttons--horizontal">
+                            <button class="slds-button slds-button--neutral" data-dismiss="modal" type="button" onclick="refreshBPModal();">Cancel</button>                            
+                            
+                            <apex:outputpanel >
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" onclick="addNewBA($(this));refreshBPModal();"  type="button">Submit</button>
+                               <apex:actionfunction name="retrieveBulkAssess" action="{!MarkBulkAssess}" >
+                                    <apex:param value="" name="domain" />
+                                </apex:actionfunction>
+                            </apex:outputpanel>
+                          </div>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                  </apex:outputpanel>
+                </apex:outputpanel>
+         </div> 
+        <!------ Bulk Assess -------------------------------->       
+        <apex:pageblocktable value="{!iiWrapperList}" var="ii" id="IIListTable" rendered="{!iiWrapperList.size > 0}">
+          <apex:column >
+            <apex:facet name="header">
+              <apex:commandlink action="{!getInspectionItemData}" value="Name {!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}">
+                <apex:param value="Name" name="column" assignto="{!sortExpression}"></apex:param>
+              </apex:commandlink>
+            </apex:facet>
+            <apex:outputtext value="{!ii.Name}" rendered="{!!ii.isDeleted}" styleclass="  {!IF(ii.nonAssessed == true,'nonAssessedColor','')} {!IF(ii.result == 'Non Assessed (tool abandoned)','tool-abandoned','')} {!IF(ii.Keyindicator == true,'bold','')}" />
+              <!--apex:commandlink onclick="window.open('/{!ii.Id}','_blank','width=1000, height=700');" value="{!ii.Name}" /> 
+            </apex:outputpanel-->
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">Associated Regulation</a>
+            </apex:facet>
+            <!--  <apex:outputField value="{!t.WhoId}" /> -->
+            <apex:outputpanel rendered="{!!ii.isDeleted && ii.regulationMap != null}">
+              <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                <apex:commandlink onclick="window.open('/apex/EEC_RegulationView?id={!ii.regulationMap[iiName]}','_blank','width=500, height=400');" value="{!iiName}" styleclass="{!IF(ii.nonAssessed == true,'nonAssessedColor','')} {!IF(ii.result == 'Non Assessed (tool abandoned)','tool-abandoned','')} {!IF(ii.Keyindicator == true,'bold','')}" />&nbsp;&nbsp;&nbsp;
+              </apex:repeat>
+            </apex:outputpanel>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <apex:commandlink action="{!getInspectionItemData}" value="Domain {!IF(sortExpression=='Category_list__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                <apex:param value="Category_list__c" name="column" assignto="{!sortExpression}"></apex:param>
+              </apex:commandlink>
+            </apex:facet>
+            <apex:outputtext value="{!ii.iCategory}" rendered="{!!ii.isDeleted}" styleclass="{!IF(ii.nonAssessed == true,'nonAssessedColor','')} {!IF(ii.result == 'Non Assessed (tool abandoned)','tool-abandoned','')} {!IF(ii.Keyindicator == true,'bold','')}" />
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <apex:commandlink action="{!getInspectionItemData}" value="Item Name {!IF(sortExpression=='Inspection_Item_Name__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                <apex:param value="Inspection_Item_Name__c" name="column" assignto="{!sortExpression}"></apex:param>
+              </apex:commandlink>
+            </apex:facet>
+            <apex:outputtext value="{!ii.itemName}" rendered="{!!ii.isDeleted}" styleclass="{!IF(ii.nonAssessed == true,'nonAssessedColor','')} {!IF(ii.result == 'Non Assessed (tool abandoned)','tool-abandoned','')} {!IF(ii.Keyindicator == true,'bold','')}" />
+          </apex:column>
+          <apex:column colspan="{!IF(ii.guidance != null, 1, 2)}">
+            <apex:facet name="header">
+              <apex:commandlink action="{!getInspectionItemData}" value="Description {!IF(sortExpression=='Description_of_inspection__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                <apex:param value="Description_of_inspection__c" name="column" assignto="{!sortExpression}"></apex:param>
+              </apex:commandlink>
+            </apex:facet>
+            <apex:outputtext value="{!ii.description}" rendered="{!!ii.isDeleted}" styleclass="{!IF(ii.nonAssessed == true,'nonAssessedColor','')} {!IF(ii.result == 'Non Assessed (tool abandoned)','tool-abandoned','')} {!IF(ii.Keyindicator == true,'bold','')}" />
+          </apex:column>
+
+          <!-- Tooltip-->
+          <apex:column rendered="{!ii.guidance != null}">
+            <div class="slds" style="position: relative;">
+              <span class="slds-icon__container slds-icon-utility-info" onhover="">
+                <svg aria-hidden="true" class="slds-icon slds-icon--small slds-icon-text-default">
+                  <use xlink:href="{!URLFOR($Resource.SLDS0120, '/assets/icons/utility-sprite/svg/symbols.svg#info')}"></use>
+                </svg>
+                <span class="slds-assistive-text">Guidence Information</span>
+              </span>
+              <div class="slds-popover slds-popover--tooltip slds-nubbin-custom--top-right" role="tooltip" style=" position: absolute; right: 4px; width: 325px; margin-top: 13px;">
+                <div class="slds-popover__body">{!ii.guidance}</div>
+              </div>
+              <style>
+                .slds .slds-nubbin-custom--top-right:before {
+                  content: "";
+                  width: 0;
+                  height: 0;
+                  border-top: 15px solid transparent;
+                  border-bottom: 15px solid transparent;
+                  border-left: 15px solid #061c3f;
+                  position: absolute;
+                  right: 0;
+                  top: -15px;
+                  transform: rotate(180deg);
+                }
+
+                .slds .slds-popover {
+                  display: none;
+                  border-radius: 4px 0px 4px 4px;
+                  -o-transition: color .2s ease-out, background 1s ease-in;
+                  -ms-transition: color .2s ease-out, background 1s ease-in;
+                  -moz-transition: color .2s ease-out, background 1s ease-in;
+                  -webkit-transition: color .2s ease-out, background 1s ease-in;
+                  /* ...and now override with proper CSS property */
+                  transition: color .2s ease-out, background 1s ease-in;
+                }
+              </style>
+            </div>
+          </apex:column>
+
+          
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">Result</a>
+            </apex:facet>
+            <apex:outputpanel rendered="{!!ii.isDeleted}">
+                
+            <apex:selectList size="1" id="iresult" value="{!ii.result}" disabled="{!IF(ii.result == 'Non Assessed (tool abandoned)' || ii.nonAssessed,true,false)}" styleclass="{!IF(ii.nonAssessed,'','iresult')} iresult_{!ii.Id}">
+                <apex:selectoption itemvalue=""/>
+                <apex:selectoption id="compliant" itemvalue="Compliant"></apex:selectoption>
+                <apex:selectoption id="non-compliant" itemvalue="Non-Compliant">&nbsp;&nbsp;</apex:selectoption>
+                <apex:selectoption id="not-applicable" itemvalue="Not Applicable">&nbsp;&nbsp;</apex:selectoption>
+                <apex:selectoption id="not-assessed" itemvalue="Not Assessed">&nbsp;&nbsp;</apex:selectoption>
+                <apex:selectoption id="abandoned" itemvalue="Non Assessed (tool abandoned)" itemdisabled="true">&nbsp;&nbsp;</apex:selectoption>
+              </apex:selectList>
+              <input type="hidden" value="{!ii.result}" />
+            </apex:outputpanel>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">Observations</a>
+            </apex:facet>
+            <apex:inputtextarea value="{!ii.observations}" id="iiObservations" rows="5" cols="40" rendered="{!!ii.isDeleted}" onblur="autoSaveText()" styleClass="observations_{!ii.Id}"/>
+            <script>
+                $('.iresult_{!ii.Id}').change(function() { 
+                    var groupName = $(this).attr('id');
+                    var theRadioButtonSet = document.getElementsByName(groupName);
+                    var selectList = document.getElementById(groupName);
+                    
+                    var selectedVal = selectList.options[selectList.selectedIndex].value;
+                    
+                    var flag = false;
+                    
+                    if(selectedVal =='Non-Compliant' || selectedVal =='Not Assessed'||selectedVal =='Not Applicable'){
+                        flag=true;
+                    
+                    }
+                   
+                    if(flag){ 
+                        //$('.inspect_visitmode').parsley().destroy();
+                        $('.observations_{!ii.Id}').attr('data-parsley-required', 'true');
+                        $('.inspect_visitmode').parsley().validate();
+                    }
+                    else{
+                        $('.observations_{!ii.Id}').removeAttr('data-parsley-required');
+                        $('.inspect_visitmode').parsley().validate();
+                    }
+                });
+            </script>  
+            
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">Technical Assistance</a>
+            </apex:facet>
+            <apex:inputtextarea value="{!ii.techAssistance}" id="iiTechAssistance" rows="5" cols="30" rendered="{!!ii.isDeleted}" />
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">Corrective Actions</a>
+            </apex:facet>
+            <apex:inputtextarea value="{!ii.correctionPlan}" id="iiCorrectionAction" rows="5" cols="40" rendered="{!!ii.isDeleted}" onblur="autoSaveText()" />
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">&nbsp;</a>
+            </apex:facet>
+            <apex:commandlink onclick="window.open('/apex/EEC_AttachDocument?iiId={!ii.Id}&namefield={!$Component.iiDocAttach}','_blank','width=500, height=300, left=800,top=100');">
+              <apex:param name="deleteIndex" value="{!ii.rowIndex}" />
+              <apex:param name="deleteId" value="{!ii.Id}" />
+              <apex:image url="{!URLFOR($Resource.Attachments)}" width="25px" height="25px" rendered="{!(!ii.isDeleted)}" />
+            </apex:commandlink>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">
+              <a href="#" onclick="return false;">&nbsp;</a>
+            </apex:facet>
+            <apex:commandlink action="{!DeleteInspectionItem}">
+              <apex:param name="deleteIndex" value="{!ii.rowIndex}" />
+              <apex:param name="deleteId" value="{!ii.Id}" />
+              <apex:image url="{!URLFOR($Resource.DeleteIcon)}" width="25px" height="25px" rendered="{!(!ii.isDeleted && ii.Type=='Additional Inspection Item')}" />
+            </apex:commandlink>
+          </apex:column>
+        </apex:pageblocktable>
+      </apex:pageblock>
+    </apex:outputpanel>
+    <apex:actionfunction name="retrieveBestPracticeListForDomain" action="{!retrieveBestPracticeListForDomain}" rerender="sldsModalBPContainer,slds-modal-footer">
+        <apex:param value="" name="domain" />
+    </apex:actionfunction>
+    <apex:actionfunction name="retrieveBestPracticeListForDomainEditMode" action="{!retrieveBestPracticeListForDomain}" rerender="sldsModalBPContainer,slds-modal-footer" oncomplete="editModeFillAutoComplete()">
+        <apex:param value="" name="domain" />
+    </apex:actionfunction>
+    <apex:actionfunction name="SaveBP" action="{!SaveBP}" oncomplete="onSaveBPComplete();">
+        <apex:param name="bpID" value="" />
+        <apex:param name="optObservation" value="" />
+        <apex:param name="vbpId" value="" />
+    </apex:actionfunction>
+  </apex:form>
+  <script>
+    var visitModeForm = $(".inspect_visitmode");
+    var form = $(".inspect_visitmode").parsley({
+        errorsWrapper: '<div class="parsley-errors-list"></div>',
+        errorTemplate: '<p class="errorMsg"></p>'    
+    });  
+      
+    $('.slds-icon__container.slds-icon-utility-info').hover(function() {
+      $(this).parent().find('.slds-popover').slideToggle(100);
+    }, function() {
+      $(this).parent().find('.slds-popover').slideToggle(100);
+    });
+    
+    var refreshBPModal = function refreshBPModal() {
+        $('.slds-model-domain-dropdown').removeAttr('disabled');
+        $('.slds-model-domain-dropdown').val('');
+        $('.slds-modal-bp-practice-observation-bulkObsText').val('');
+        //$('.slds-modal-bp-header-text').html('Add a New Best Practice');
+        $('#bestPractice').data('vbpId', '');
+        // Reset the meassage modal.
+        $('#bp-modal-messages').hide();
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+        retrieveBestPracticeListForDomain('');
+    
+      }
+      
+   
+      var deleteSelectedVBP = function deleteSelectedVBP(ele) {
+        var bpId = ele.data('id');
+        DeleteBP(bpId);
+      }
+
+      var switchModalToEditMode = function switchModalToEditMode(ele) {
+        var modal = $('#bestPractice');
+        // Pre-set the values.
+        $('.slds-modal-bp-header-text').html('Edit Best Practice');
+        $('.slds-model-domain-dropdown').val(ele.data('domain'));
+        modal.data('bp-guidance', ele.data('bp-guidance'));
+        modal.data('observation', ele.data('observation'));
+        modal.data('vbpId', ele.data('id'));
+        retrieveBestPracticeListForDomainEditMode(ele.data('domain'));
+          //$('.slds-model-bp-dropdown').val(ele.data('bp-guidance'));
+          //$('.slds-modal-bp-practice-observation').val(ele.data('observation'));
+      }
+
+      var editModeFillAutoComplete = function editModeFillAutoComplete() {
+        var modal = $('#bestPractice');
+        $('.slds-model-domain-dropdown').attr('disabled', 'true');
+        $('.slds-model-bp-dropdown').attr('disabled', 'true');
+        $('.slds-model-bp-dropdown').val(modal.data('bp-guidance'));
+        $('.slds-modal-bp-practice-observation').val(modal.data('observation'));
+        $('.slds-button-bp-submit').html('Save');
+      }
+
+      var hideAdditionalInformation = function hideAdditionalInformation(ele) {
+        ele.parent().parent().find('.success-label').hide();
+        var dropdownEle = ele.parent().parent().find('.bp-dropdown');
+
+        dropdownEle.val('');
+        dropdownEle.parents('.best-practices-container').children('.bp-observation-container').find('input').val('');
+        dropdownEle.parents('.best-practices-container').children('.bp-observation-container').hide();
+        dropdownEle.parents('.best-practices-container').children('.bp-button-container').hide();
+      }
+
+      var showAdditionalInformation = function showAdditionalInformation(ele) {
+        if (ele.val() != '') {
+          ele.parents('.best-practices-container').children('.bp-observation-container').show();
+          ele.parents('.best-practices-container').children('.bp-button-container').show();
+        } else {
+          ele.parents('.best-practices-container').children('.bp-observation-container').hide();
+          ele.parents('.best-practices-container').children('.bp-button-container').hide();
+        }
+      }
+
+      $('body').on('click', '.bp-submit-button', function() {
+        $('.success-label').hide();
+        var dropdownVal = $(this).parents('.best-practices-container').find('.bp-dropdown').val();
+        var optObservationVal = $(this).parents('.best-practices-container').find('.bp-practice-observation').val();
+
+        SaveBP(dropdownVal, optObservationVal);
+        hideAdditionalInformation($(this));
+    });
+  
+      
+    var addNewBP = function addNewBP(ele) {
+        // Reset the meassage modal.
+        $('#bp-modal-messages').hide();
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+        // Get the id and observation text.
+        var bpId = ele.parents('.slds-modal__container').find('.slds-model-bp-dropdown').val();
+        var bpObservation = ele.parents('.slds-modal__container').find('.slds-modal-bp-practice-observation').val();
+        var vbpId = $('#bestPractice').data('vbpId');
+        // If the id is available then save the record.
+        if (bpId != null && bpId != '') {
+          SaveBP(bpId, bpObservation, vbpId);
+          ele.parents('.slds-modal__container').find('.slds-model-domain-dropdown').val('');
+          retrieveBestPracticeListForDomain('');
+          // Show the success message.
+          $('#bp-modal-messages').show();
+          $('#bp-modal-messages .slds-box').addClass('slds-theme--success');
+          $('#bp-modal-messages .slds-box p').html('Best Practice Saved Successfully.');
+          window.setTimeout(function() {
+            $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+            $('#bp-modal-messages').hide();
+          }, 3000);
+
+          if (typeof vbpId != "undefined" && vbpId != null && vbpId != '') {
+            $('#bestPractice').modal('toggle');
+            refreshBPModal();
+          }
+        } else {
+          // If no id is present then show the error.
+          $('#bp-modal-messages').show();
+          $('#bp-modal-messages .slds-box').addClass('slds-theme--error');
+          $('#bp-modal-messages .slds-box p').html('A best practice must be provided in order to save.');
+        }
+      }
+      
+      var addNewBA = function addNewBA(ele) {
+        
+        // Reset the meassage modal.
+        var bpId = ele.parents('.slds-modal__container').find('.bulkAsVal').val();
+        var bpObservation = ele.parents('.slds-modal__container').find('.slds-modal-bp-practice-observation').val();
+        
+        $('#ba-modal-messages').hide();
+        $('#ba-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#ba-modal-messages .slds-box').removeClass('slds-theme--success');
+        // Get the id and observation text.
+       
+        // If the id is available then save the record.
+        if (bpId != null && bpId != '') {
+          
+          if ((bpId == 'Compliant' && (bpObservation == null || bpObservation == '' || bpObservation != null || bpObservation !='')) || ( bpId!='Compliant' && bpId != null && bpId != '' && bpObservation != null && bpObservation != '' )) {
+            retrieveBulkAssess();
+            // If no id is present then show the error.
+              $('#ba-modal-messages').show();
+              $('#ba-modal-messages .slds-box').addClass('slds-theme--success');
+              $('#ba-modal-messages .slds-box p').html('Updated Successfully.');
+          }else {
+              // If no id is present then show the error.
+          $('#ba-modal-messages').show();
+          $('#ba-modal-messages .slds-box').addClass('slds-theme--error');
+          $('#ba-modal-messages .slds-box p').html('Observation should be filled in.');
+          }
+        } 
+      }
+
+      var onSaveBPComplete = function onSaveBPComplete() {
+        $('.bp-dropdown').val('');
+        $('.bp-practice-observation').val('');
+        $('.success-label').show();
+        window.setTimeout(function() {
+          $('.success-label').hide();
+        }, 3000);
+      }  
+      var disableButton = {!disableButton};
+      console.log('------> DiableButton: ' + disableButton);
+      if(disableButton){$(document).ready($("#btnSaveAb").prop("disabled", true));}
+  </script>
+</html>
+</apex:page>

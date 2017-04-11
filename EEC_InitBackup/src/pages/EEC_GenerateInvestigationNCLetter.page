@@ -1,0 +1,154 @@
+<apex:page standardController="Investigation__c" extensions="EEC_GenerateInvCoverLetterExtension" applyBodyTag="false" renderas="pdf">
+<head>
+    <style type="text/css">
+        .removeLastPage:last-child {
+             position: absolute;
+             bottom: 0;
+        }
+        .removeLastPage { 
+            font-family: "Times New Roman";
+            font-size: 10pt;
+            display:table;
+            table-layout:fixed;
+            width: 100%;
+        }
+        
+        @page {
+            size:landscape;
+        }
+        
+        table {
+            -fs-table-paginate: paginate !important;
+        }
+       
+        table tr {
+            page-break-inside:avoid !important;
+        } 
+              
+        div.row {
+            margin-left: 25px;
+        }
+        
+        div.row .title {
+            width: 110px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        div.section {
+            width: 49%;
+            display:  table-cell;
+        }
+        div.section .header {
+            height: 40px;
+        }
+        
+       
+        .container {
+            display: table;
+            width: 100%;
+        }
+        
+        .col {    
+            display: table-cell;
+            width: 50%;
+        }
+       
+    </style>
+</head>
+<apex:variable var="provider" value="{! Investigation__c.Provider_No__r }" /> 
+<apex:variable var="umbrealla" value="{! Investigation__c.Provider_No__r.Umbrella_Members__r }" /> 
+<div class="removeLastPage">
+    <div class="container">
+        <div class="col"><b>Intake Number:</b> {! CaseNumbers }</div>
+        <div class="col"><b>Date of Report:</b> &nbsp;<c:EEC_DateFormat date="{! Today()  }" /></div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="col">
+            <div><b>Provider Information:</b></div>
+            <div class="row">
+                <div class="title">Phone number: </div>
+                {! provider.Phone }
+            </div>
+            <div class="row">
+                <div class="title">Licensee ID: </div>
+                {!IF(provider.Use_Legacy_Prov_Number__c == true , provider.Provider_No__c,provider.Provider_Number__c)}
+            </div>
+            <div class="row">
+                <div class="title">Licensee name: </div>
+                {! provider.Name }
+            </div>
+            <div class="row">
+                <div class="title">Address: </div>
+                {! provider.Provider_Address_1__c } {! provider.Provider_Address_2__c }
+            </div>
+            <div class="row">
+                <div class="title"></div>
+                {! provider.Provider_City__r.Name } {! provider.State__c } {! provider.Provider_Zip_Code__c}
+            </div>
+        </div>
+        <apex:outputPanel styleClass="col" layout="block" rendered="{! umbrealla != NULL }">
+            <div><b>Umbrella Organization Information:</b></div>
+            <div class="row">
+                <div class="title">Phone number: </div>
+                {! umbrealla.Phone }
+            </div>
+            <div class="row">
+                <div class="title">Program ID: </div>
+                <!--{! umbrealla.Provider_Number__c }-->
+                {!IF(umbrealla.Use_Legacy_Prov_Number__c == true , umbrealla.Provider_No__c,umbrealla.Provider_Number__c)}
+            </div>
+            <div class="row">
+                <div class="title">Program name: </div>
+                {! umbrealla.Name }
+            </div>
+            <div class="row">
+                <div class="title">Address: </div>
+                {! umbrealla.Provider_Address_1__c } {! umbrealla.Provider_Address_2__c }
+            </div>
+            <div class="row">
+                <div class="title"></div>
+                {! umbrealla.Provider_City__r.Name } {! umbrealla.State__c } {! umbrealla.Provider_Zip_Code__c}
+            </div>
+        </apex:outputPanel>
+    </div>
+    <br />
+    <div><center><b>Outstanding Compliance Issues</b></center></div>
+    <br/>
+    <apex:dataTable headerClass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleClass="table" columnsWidth="22%, 15%, 70%, 13%" cellpadding="3" width="100%" value="{! OustandingComplianceIssues }" var="item">
+        <apex:column >
+            <apex:facet name="header"><center>Regulation</center></apex:facet> 
+                <apex:outputText rendered="{! item.inspectionItem != NULL }" value="{! item.inspectionItem.Associated_regulation__r.Name }"/>
+                <apex:outputText value="{! item.standardRegulations  }"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header"><center>Statement of Non-Compliance</center></apex:facet>
+            <apex:outputText rendered="{! item.inspectionItem != NULL }" value="{! item.inspectionItem.Observations__c }"/>
+            <apex:outputText rendered="{! item.nonCompliantItem != NULL }" value="{! item.nonCompliantItem.Observations__c }"/>
+        </apex:column> 
+        <apex:column >
+            <apex:facet name="header"><center>Corrective action plan (Describe how, when and by whom, e.g., correction has been / will be made. Please be specific)</center></apex:facet>
+            <apex:outputText rendered="{! item.inspectionItem != NULL }" value="{! item.inspectionItem.Correction_Plan__c }"/>
+            <apex:outputText rendered="{! item.nonCompliantItem != NULL }" value="{! item.nonCompliantItem.Correction_Plan__c }"/>
+        </apex:column>
+        <apex:column >
+            <apex:facet name="header"><center>Date correction implemented </center></apex:facet>
+            <div style="height: 95px; line-height:95px;">
+                <apex:outputText rendered="{! item.inspectionItem != NULL }" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!item.inspectionItem.Date_Implemented__c}" /> 
+                </apex:outputText>
+                <apex:outputText rendered="{! item.nonCompliantItem != NULL }" value="{0,date,MM'/'dd'/'yyyy}">
+                    <apex:param value="{!item.nonCompliantItem .Date_Implemented__c}" /> 
+                </apex:outputText>
+            </div>
+        </apex:column>
+    </apex:dataTable>
+    <br />
+    <div>{! Investigation__c.Assigned_To__r.Name }</div>
+    <div>{! Investigation__c.Assigned_To__r.Title }</div>
+    <br /> 
+    <div>I have reviewed the above non-compliances and have specified my plan and date of correction for each outstanding compliance issue.</div>
+    <br /> 
+    <div>LICENSEE’S SIGNATURE:<span style="margin-left: 350px;">DATE:</span></div>
+</div>
+</apex:page>

@@ -1,0 +1,332 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="EEC_VisitReportController"> 
+  <head>
+    <title>EEC : View Visit Report</title>
+    <c:EEC_Header id="pageHeader" />
+
+    <script>
+          
+    </script>
+    <style type="text/css">
+        .form-label{
+          font-weight: bold;
+          font-size:14px;
+        }
+        .not-visible{
+        	display : none;
+        }  
+        .header-button {
+          margin-right: 3px; 
+        }
+        .img-thumbnail{
+        	width:60px;
+        	height : 60px;
+        	border:0px;
+        }
+        thead{
+                background-color : #f5f5f5;
+        }
+        .table > thead:first-child > tr:first-child > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table {
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+         .table-group-one .table > thead:first-child > tr:first-child > th{
+            width: 369px;
+         }
+      </style>  
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+          <div class="container">
+             <br/>
+             
+             <apex:outputPanel id="visitReport">
+                <apex:form >  
+                <apex:pageMessages id="showmsg" ></apex:pageMessages>
+                <br/>
+                 <h2 class="pull-left">Visit Report</h2>
+                <br/>
+                <br/><br/><br/> 
+                <apex:outputPanel rendered="{!pageID == 'provider'}">
+					<apex:commandButton styleClass="md-button md-raised md-eec header-button pull-right" value="Back to Provider" action="{!returnProvider}"></apex:commandButton>
+            	</apex:outputPanel> 
+                
+ 				<apex:outputPanel rendered="{!pageID == 'investigation' && investId != null}">
+                	<a type="button" class="md-button md-raised md-eec header-button"  href="/EEC_PortalInvestigationPage?id={!investId}">Back to Investigation</a> 
+            	</apex:outputPanel> 
+                </apex:form>    
+                <br/><br/>
+                <div class="row">
+                <div class="col-lg-12">
+                    <section class="contact-information">
+                        <h4 class="md-title">Visit Detail</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <p flex-sm="80" flex="90"><strong>Visit ID: </strong>{!inspection.Name}</p>
+                            </div>
+                            <div class="md-subhead" layout="row">
+                              <p flex-sm="80" flex="90"><strong>Status:</strong> {!inspection.Status__c}</p>
+                            </div>
+                            <div class="md-subhead" layout="row">
+                              <p flex-sm="80" flex="90"><strong>Date of Visit: </strong>
+                                  <c:EEC_DateFormat date="{!inspection.Date_of_Visit__c}"></c:EEC_DateFormat>
+                                  </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <p flex-sm="80" flex="90"><strong>Time of Visit: </strong>{!inspection.Time_of_visit__c}</p>
+                            </div>
+                            <div class="md-subhead" layout="row">
+                              <p flex-sm="80" flex="90"><strong>EEC Licensor / Investigator:</strong> {!inspection.Inspector_del__r.Name}</p>
+                            </div>
+                            <apex:outputPanel rendered="{!IF(account.Record_Type_Name__c == 'Investigation Visits' && inspection.Status__c == 'Closed', true, false)}">  
+                            <div class="md-subhead" layout="row">
+                              <p flex-sm="80" flex="90"><a href="#">View Associated Investigation</a></p>
+                            </div>
+                            </apex:outputPanel>
+                        </div>
+                        </div>    
+                    </section>
+                    </div> 
+                 </div>
+               <div class="panel panel-default" >
+                   <div class="panel-heading">
+                      <h3 class="panel-title">
+                         Visit Activity Summary
+                      </h3>
+                   </div>
+                   <div class="panel-body"> 
+                          <div class="{!IF(inspection.Updates_Changes__c == null && inspection.Comments__c == null ,'col-lg-12','col-lg-6')}">
+                                    <apex:outputPanel rendered="{!IF(inspection.Activity_Summary__c != null, true, false)}">
+                                       <div class="form-group">
+                                           <div class="input-group"> <span class="form-label">Visit Activity Summary : </span>
+                                           <apex:outputField styleClass="form-control" value="{!inspection.Activity_Summary__c}" />
+                                           </div>
+                                       </div>
+                                      </apex:outputPanel>  
+                                    <apex:outputPanel rendered="{!IF(inspection.Corrective_Action_Required__c != null, true, false)}">
+                                       <div class="form-group">
+                                               <div class="input-group"> <span class="form-label">Corrective Action Required : </span>
+                                               <apex:outputField styleClass="form-control" value="{!inspection.Corrective_Action_Required__c}" />
+                                               </div>
+                                       </div>
+                                    </apex:outputPanel>
+                                    <apex:outputPanel rendered="{!IF(inspection.Tech_Assist_Recommendations_Comments__c != null, true, false)}">
+                                       <div class="form-group">
+                                               <div class="input-group"> <span class="form-label">Additional Technical Assistance Provided : </span>
+                                               <apex:outputField styleClass="form-control" value="{!inspection.Tech_Assist_Recommendations_Comments__c}" />
+                                               </div>
+                                       </div>	
+                                    </apex:outputPanel>
+                                  </div>
+                       			<div class="{!IF(inspection.Tech_Assist_Recommendations_Comments__c == null && inspection.Corrective_Action_Required__c == null && inspection.Activity_Summary__c == null,'col-lg-12','col-lg-6')}">
+                                    <apex:outputPanel rendered="{!IF(inspection.Updates_Changes__c != null, true, false)}">
+                                      <div class="form-group">
+                                               <div class="input-group"> <span class="form-label">Updates and Changes Required : </span>
+                                               		<apex:outputField styleClass="form-control" value="{!inspection.Updates_Changes__c}" />
+                                               </div>
+                                       </div>
+                                   </apex:outputPanel>
+                                   <apex:outputPanel rendered="{!IF(inspection.Comments__c != null, true, false)}">
+                                       <div class="form-group">
+                                               <div class="input-group"> <span class="form-label">Comments  : </span>
+                                               		<apex:outputField styleClass="form-control" value="{!inspection.Comments__c}" />
+                                               </div>
+                                       </div>
+                                    </apex:outputPanel>  
+                       			</div>
+                              </div>
+                     </div>
+                     <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                             Visit Reports
+                          </h3>
+                       </div>
+                       <div class="panel-body"> 
+                         <apex:outputPanel rendered="{!IF(account.Record_Type_Name__c != 'Investigation Visits', true, false)}">  
+                          <apex:outputPanel rendered="{!coverLetter != null || nonComplianceLetter != null}"> 
+                          <div class="col-lg-6">
+                                       <div class="form-group">
+                                                   <apex:outputPanel rendered="{!coverLetter != null}"> 
+                                                   		<span class="form-label">
+                                                            <a href="/servlet/servlet.FileDownload?file={!coverLetter.Id}" target="_blank">
+                                                                <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Cover Letter" class="img-thumbnail"/>  
+                                                            </a>
+                                                       </span>
+                                                       Cover Letter
+                                                   </apex:outputPanel>
+                                       </div>
+                                       <div class="form-group">
+                                               <apex:outputPanel rendered="{!nonComplianceLetter != null}"> 
+                                                  <span class="form-label">
+													<a href="/servlet/servlet.FileDownload?file={!nonComplianceLetter.Id}" target="_blank">
+														<img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Statement of Non-Compliance" class="img-thumbnail"/>  
+													</a>
+                                                  </span>
+                                                   Statement of Non-Compliance 
+                                               </apex:outputPanel>
+                                       </div>
+                     		</div>
+                             </apex:outputPanel>  
+                              <div class="col-lg-6"> 
+                                 	<div class="form-group">
+                                              <apex:outputPanel rendered="{!visitCheckListReport != null}"> 
+                                                 <span class="form-label">
+													<a href="/servlet/servlet.FileDownload?file={!visitCheckListReport.Id}" target="_blank">
+														<img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Visit Summary Report" class="img-thumbnail"/>  
+													</a>
+                                                 </span>
+                                                  Visit Summary Report
+                                              </apex:outputPanel>
+                                      </div>
+                                      <div class="form-group">
+											<apex:outputPanel rendered="{!visitReportReport != null}"> 
+                                                   		<span class="form-label">
+                                                            <a href="/servlet/servlet.FileDownload?file={!visitReportReport.Id}" target="_blank">
+                                                                <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Visit Report" class="img-thumbnail"/>  
+                                                            </a>
+                                                       </span>
+                                                       Visit Report
+											</apex:outputPanel>
+                                       </div> 
+                              </div>
+                         </apex:outputPanel>
+                         </div>
+                 	</div>
+                 	<div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                             Non Compliance Identified During the Visit
+                          </h3>
+                       </div>
+                       <div class="panel-body"> 
+                           		<div id="no-more-tables">
+                                <table class="table table-hover">
+                                    <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Domain </th>
+                                        <th>Observations </th>
+                                        <th>Correction Plan</th>  
+                                        <th>Date Implemented</th>  
+                                        <th>Corrective Actions Submitter</th>                           
+                                        <th>Date Corrective Actions Submitted</th>                     
+                                      </tr>
+                                      </thead>  
+                                      <apex:repeat value="{! nonComplianceInspectionItem }" var="item" >  
+                                          <tr>
+                                            <td data-title="Name">{!item.Inspection_Item_Name_for_list__c }</td>
+                                            <td data-title="Domain">{!item.Category_list__c }</td>
+                                            <td data-title="Observations">{!item.Observations__c }</td>
+                                            <td data-title="Correction Plan">{!item.Correction_Plan__c }</td>
+                                            <td data-title="Date Implemented">
+                                                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                	<apex:param value="{!item.Date_Implemented__c}" />
+                                            	</apex:outputText>  
+                                            </td>
+                                            <td data-title="Submitter">{!item.Corrective_Actions_Submitter__c}</td>
+                                            <td data-title="Date Submitted">
+                                                <apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                	<apex:param value="{!item.Date_Corrective_Actions_Received__c}" />
+                                            	</apex:outputText> 
+                                            </td>    
+                                          </tr>
+                                      </apex:repeat>
+                              </table>
+                           	  </div>      
+                              </div>
+                      </div>
+                      
+                 	 <div class="panel panel-default {!IF(visitBestPractices.size > 0,'','not-visible')}" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title"> 
+                             Identified Best Practices
+                          </h3>
+                       </div>
+                       <div class="panel-body"> 
+                          <div id="no-more-tables" class="table-group-one"> 
+                               <table class="table table-hover">
+                                   <thead>
+                                      <tr>
+                                        <th style="width: 33%;">Name</th>
+                                        <th>Observations</th>
+                                      </tr>
+                                    </thead>
+                                   <apex:repeat value="{! visitBestPractices }" var="visitbp" >  
+                                          <tr>
+                                            <td data-title="Name">{!visitbp.Best_Practice__r.Name }</td>
+                                            <td data-title="Observation">{!visitbp.Observation__c }</td>
+                                          </tr>
+                                   </apex:repeat>
+                               </table>
+                           </div>
+                         </div>
+                 	</div>
+                    <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                             Comments Provided
+                          </h3>
+                       </div>
+                       <div class="panel-body"> 
+                            <div id="no-more-tables" class="table-group-one">
+                               <table class="table table-hover">
+                                   <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Domain </th>
+                                        <th>Observations </th>
+                                      </tr>
+                                    </thead>
+                                      <apex:repeat value="{! commentInspectionItem }" var="item" >  
+                                          <tr>
+                                            <td data-title="Name">{!item.Inspection_Item_Name_for_list__c }</td>
+                                            <td data-title="Domain">{!item.Category_list__c }</td>
+                                            <td data-title="Observation">{!item.Observations__c }</td>
+                                          </tr>
+                                      </apex:repeat>
+                              </table>
+                           	  </div>
+                           </div>
+                     </div>
+                     <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                             Technical Assistance Provided
+                          </h3>
+                       </div>
+                       <div class="panel-body"> 
+                                 <div id="no-more-tables" class="table-group-one">
+                               	  <table class="table table-hover">
+                                   <thead>
+                                      <tr>
+                                        <th>Name</th>
+                                        <th>Domain </th>
+                                        <th>Technical Assistance </th>
+                                      </tr>
+                                   </thead>
+                                      <apex:repeat value="{! technicalInspectionItem }" var="item" >  
+                                          <tr>
+                                            <td data-title="Name">{!item.Inspection_Item_Name_for_list__c }</td>
+                                            <td data-title="Domain">{!item.Category_list__c }</td>
+                                            <td data-title="Assistance">{!item.Technical_Assistance__c  }</td>
+                                          </tr>
+                                      </apex:repeat>
+                              	 </table>
+                                </div>
+                        </div>
+                     </div>
+             </apex:outputPanel>
+          </div>
+ </body>
+</apex:page>

@@ -1,0 +1,102 @@
+<apex:page standardController="Inspection__c" extensions="EEC_GenerateVisitCoverLetterExtension" applyBodyTag="false" renderAs="pdf">
+    <head>
+        <style type="text/css">
+          .removeLastPage:last-child {
+             position: absolute;
+             bottom: 0;
+           }
+           .removeLastPage { 
+               font-family: "Times New Roman";
+             font-size: 10pt;
+           }
+           @page {
+               margin: 25.4mm 31.75mm 25.4mm 31.75mm;
+           }
+        </style>
+        <div class="removeLastPage"> 
+            <apex:outputText value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+            <apex:outputText value="{!Inspection__c.Cover_Letter_Narrative__c}" rendered="false" />
+            
+            <apex:variable var="provider" value="{! Inspection__c.Provider_No__r }" />
+            <apex:variable var="providerRegion" value="{! Inspection__c.Provider_No__r.Region__r }" />
+            <apex:variable var="director" value="{! DirectorContact }" />
+            
+            <c:EEC_PDFHeaderTemplate providerRegion="{! providerRegion }"></c:EEC_PDFHeaderTemplate>
+            
+            <c:EEC_DateFormat date="{! TODAY() }" style="text-align: right; width: 100%; display: block;" />
+            
+            <!--<apex:outputPanel rendered="{! director != null && provider.RecordType.DeveloperName != 'FCC' }" layout="block">{! director.Salutation } {! director.FirstName } {! director.LastName }</apex:outputPanel>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName == 'FCC' }" layout="block">{! provider.Name }</apex:outputPanel> 
+            <div>{!IF(provider.ShippingStreet != '',provider.ShippingStreet,provider.Provider_Address_1__c)}</div >
+            <div>{!IF(provider.ShippingStreet != '',(provider.ShippingCity+', '+provider.ShippingState+', '+provider.ShippingPostalCode),(provider.Provider_City__r.name+', '+provider.State__c+', '+provider.Provider_Zip_Code__c))}</div >
+             
+            <br />
+            
+            
+            <div>Re: Visit conducted on&nbsp;<c:EEC_DateFormat date="{! Inspection__c.Date_of_visit__c }" /> <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' }"> for {! provider.Name }</apex:outputPanel></div>
+            
+            <br />-->
+            <br /><apex:outputText escape="false" value="{! CoverLetterNarrative }&nbsp;" />
+            <!--  
+            <apex:outputPanel rendered="{! director != null }">
+            <apex:outputPanel layout="block">Dear {! director.Salutation } {! director.FirstName } {! director.LastName },</apex:outputPanel>
+            
+            <br />
+            </apex:outputPanel>
+            <div>
+                Attached please find the {! IF(provider.RecordType.DeveloperName == 'FCC' , 'results', 'report resulting') } from my recent {! Inspection__c.Type_of_Visit__c } visit to your {! provider.RecordType.Name }
+                program{! IF(provider.RecordType.DeveloperName == 'FCC' || provider.RecordType.DeveloperName == 'Small_Group' || provider.RecordType.DeveloperName == 'Large_Group', '', '(s)') }.
+            </div>
+            
+            <br />
+                
+            <apex:outputPanel layout="block" rendered="{! HasNonCompliant }">
+                As you will note, there are non-compliances which must be corrected. Therefore, please read carefully the attached report and submit required
+                corrective action by&nbsp;<apex:outputText value="{0,date,MM'/'dd'/'yyyy}"><apex:param value="{! Inspection__c.Corrective_Action_Deadline__c }" /></apex:outputText>. 
+                
+                <apex:outputPanel rendered="{!
+                    Inspection__c.Type_of_Visit__c == 'Pre-Licensing' ||
+                    Inspection__c.Type_of_Visit__c == 'Provisional License Renewal' ||
+                    Inspection__c.Type_of_Visit__c == 'Renewal' ||
+                    Inspection__c.Type_of_Visit__c == 'Change of Location' || 
+                    Inspection__c.Type_of_Visit__c == 'License Upgrade' ||
+                    Inspection__c.Type_of_Visit__c == 'Capacity Increase'}">
+                    Following receipt of an acceptable corrective action plan, and assuming all other required documentation has been received, your new license
+                    will be issued.
+                </apex:outputPanel>
+            </apex:outputPanel>
+             
+            <apex:outputPanel layout="block" rendered="{! !HasNonCompliant }">
+                There are no non-compliances which need to be corrected. 
+                <apex:outputPanel rendered="{!
+                    Inspection__c.Type_of_Visit__c == 'Pre-Licensing' ||
+                    Inspection__c.Type_of_Visit__c == 'Provisional License Renewal' ||
+                    Inspection__c.Type_of_Visit__c == 'Renewal' ||
+                    Inspection__c.Type_of_Visit__c == 'Change of Location' || 
+                    Inspection__c.Type_of_Visit__c == 'License Upgrade' ||
+                    Inspection__c.Type_of_Visit__c == 'Capacity Increase'}">
+                Therefore, assuming all required documentation has been received, your new license will
+                be issued and sent via U.S. Mail.
+                </apex:outputPanel> 
+                Please keep this report for your records.
+            </apex:outputPanel>
+            
+            <br />
+            
+            <apex:outputPanel layout="block" >
+                If you have any questions regarding this report, please feel free to contact me at the address: {! Inspection__c.Inspector_del__r.Email }
+                or by phone: {! Inspection__c.Inspector_del__r.Phone }
+            </apex:outputPanel> 
+            
+            <br/>
+            
+            <div> 
+                Respectfully,
+            </div>
+            
+            <br/> 
+            <div>{!Inspection__c.Inspector_del__r.Name }</div>
+            <div>{!Inspection__c.Inspector_del__r.Title }</div> --> 
+        </div>
+    </head>
+</apex:page>

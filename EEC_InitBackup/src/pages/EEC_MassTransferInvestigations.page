@@ -1,0 +1,28 @@
+<apex:page standardController="Investigation__c" recordSetVar="inv" extensions="EEC_MassTransferInvestigationsExtension">
+	<apex:form >
+		<apex:pageBlock title="Transfer Investigations">
+			<apex:pageMessages id="showMsg"></apex:pageMessages>
+			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:selectList value="{!selectedUserId}" size="1" label="Transfer To Leader">
+					<apex:selectOptions value="{!transferToOptionsDisplay}"/>
+				</apex:selectList>
+			</apex:pageBlockSection>
+			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:selectList value="{!selectedBackup}" size="1" label="Transfer To Backup">
+					<apex:selectOptions value="{!transferToOptionsDisplay}"/>
+				</apex:selectList>
+			</apex:pageBlockSection>
+<!-- 			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:pageBlockTable value="{!selected}" var="v">
+					<apex:column value="{!v.name}"/>
+					<apex:column value="{!v.Assigned_To_Id__c}"/>
+					<apex:column value="{!v.Status__c}"/>
+				</apex:pageBlockTable>
+			</apex:pageBlockSection> -->
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!massTransferinvestigations}" rendered="{!transferAllowed}"/>
+				<apex:commandButton value="Cancel" action="{!goBackToinvestigationsTab}" />
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

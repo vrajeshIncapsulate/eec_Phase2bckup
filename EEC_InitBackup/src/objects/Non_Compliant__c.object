@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is used for non-compliant items outside a visit</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Correction_Plan_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Correction Plan Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>To Collect</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provider To Submit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provider Submitted, EEC to Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EEC Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legacy Non-compliance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Correction_Plan__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe here the corrective actives that have been taken or will be taken to resolve this non-compliance</inlineHelpText>
+        <label>Correction Plan</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Corrective_Action_EEC_Feedback__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Fill this field if the corrective action submitted by the provider is not appropriate. By updating this field, Providers using electronic communication will be informed by email and will be able to update the correction plan on the portal</inlineHelpText>
+        <label>Corrective Action EEC Feedback</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Corrective_Actions_Submitter__c</fullName>
+        <description>Update &quot;Corrective Actions Submitter&quot; with First / Last name of the user who did the update</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Update &quot;Corrective Actions Submitter&quot; with First / Last name of the user who did the update</inlineHelpText>
+        <label>Corrective Actions Submitter</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Create_History_Record_flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Create History Record flag</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_Correction_Plan_Accepted__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Correction Plan Accepted</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Corrective_Actions_Received__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Corrective Actions Received</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Implemented__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Mention here the date the corrective actions were implemented or the expected date of completion</inlineHelpText>
+        <label>Date Implemented</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Feedback_Requested__c</fullName>
+        <externalId>false</externalId>
+        <formula>AND( ISBLANK( Date_Implemented__c ),  NOT(Investigation__r.isLegacyInvestigation__c) )</formula>
+        <label>Feedback Requested</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>InvestigationId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Investigation__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>InvestigationId</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Investigation__c</fullName>
+        <description>In case of non-compliant item associated to an investigation, this field must be filled.</description>
+        <externalId>false</externalId>
+        <label>Investigation</label>
+        <referenceTo>Investigation__c</referenceTo>
+        <relationshipLabel>Non Compliant Item (additional to visit)</relationshipLabel>
+        <relationshipName>Non_Compliant_Item</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Key_Indicator__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked if this non compliant item is associated to a high risk regulation</inlineHelpText>
+        <label>Key Indicator</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Corrective_Action_EEC_Feedback__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date of the last update of corrective action feedback</inlineHelpText>
+        <label>Last Corrective Action EEC Feedback</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Observations__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe here the non-compliance</inlineHelpText>
+        <label>Observations</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Provider_Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Email address of the provider used to send EEC Feedback if corrective plan is not correct.</inlineHelpText>
+        <label>Provider Email Address</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Require_Portal_Feedback__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, it means that the report was published on the web and the investigation has non-compliance items that needs to be filled by the provider</inlineHelpText>
+        <label>Require Portal Feedback</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>To_Review_on_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, the Provider needs to review the item on the portal.</inlineHelpText>
+        <label>To Review on Portal</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Non Compliant Item</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Investigation__c</columns>
+        <columns>Observations__c</columns>
+        <columns>Correction_Plan__c</columns>
+        <columns>Feedback_Requested__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>NC-{00000}</displayFormat>
+        <label>Non Compliant ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Non Compliant Item</pluralLabel>
+    <recordTypes>
+        <fullName>Investigation_Non_Compliant_Item</fullName>
+        <active>true</active>
+        <description>Non-compliant item discovered in the scope of an investigation and that does not relate to a visit</description>
+        <label>Investigation Non Compliant Item</label>
+        <picklistValues>
+            <picklist>Correction_Plan_Status__c</picklist>
+            <values>
+                <fullName>EEC Accepted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy Non-compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider Submitted%2C EEC to Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider To Submit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Collect</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Observations__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Observations__c</lookupPhoneDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Cannot_save_NC_Item_with_Observ_NULL</fullName>
+        <active>true</active>
+        <description>If the user tries to save a Non Compliant item that is non-compliant and &quot;Observations&quot; is empty, it will show an error message</description>
+        <errorConditionFormula>ISBLANK( Observations__c )</errorConditionFormula>
+        <errorDisplayField>Observations__c</errorDisplayField>
+        <errorMessage>Observations must be provided for non-compliant item as it will be used in the Non-Compliant Statement</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Corr_Action_EEC_Feedback_empty_if_no_Cor</fullName>
+        <active>true</active>
+        <description>&quot;Corrective Action EEC Feedback&quot; should stay empty if: Correction Plan is NULL or Corrective Actions Submitter is NULL
+Attached story : LEAD-2733</description>
+        <errorConditionFormula>AND(
+NOT(ISBLANK( Corrective_Action_EEC_Feedback__c )) ,
+
+ISBLANK( Corrective_Actions_Submitter__c )
+
+)</errorConditionFormula>
+        <errorDisplayField>Corrective_Action_EEC_Feedback__c</errorDisplayField>
+        <errorMessage>Corrective Action EEC Feedback should be empty if no correction plan has been yet submitted.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Correction_Plan_NULL_Date_Impl_NOT_Null</fullName>
+        <active>true</active>
+        <description>If Correction Plan is not empty then Date Implemented should not be empty</description>
+        <errorConditionFormula>NOT( ISBLANK( Correction_Plan__c ) ) &amp;&amp; ISBLANK( Date_Implemented__c ) &amp;&amp;  NOT( Investigation__r.isLegacyInvestigation__c )</errorConditionFormula>
+        <errorDisplayField>Date_Implemented__c</errorDisplayField>
+        <errorMessage>If Correction Plan is provided then Date Implemented is mandatory</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Creation_Updates_on_Closed_Investigation</fullName>
+        <active>false</active>
+        <errorConditionFormula>AND(ISPICKVAL(Investigation__r.Investigation_Status__c,&apos;Closed&apos;),$UserRole.Name !=&apos;Executive_and_Directors&apos;, $UserRole.Name!=&apos;Regional_Director&apos;,OR(NOT(OR(CONTAINS($UserRole.DeveloperName,&apos;Director&apos;),CONTAINS($UserRole.DeveloperName,&apos;Supervisor&apos;))),AND($UserRole.DeveloperName==&apos;FCC_Supervisor&apos;, Investigation__r.Provider_No__r.RecordType.Name != &apos;Family Child Care&apos;), AND($UserRole.DeveloperName==&apos;SLGSA_Supervisor&apos;,AND(Investigation__r.Provider_No__r.RecordType.Name != &apos;Large Group&apos;, Investigation__r.Provider_No__r.RecordType.Name != &apos;Small Group&apos;)) ,AND($UserRole.DeveloperName==&apos;R_P_Supervisor&apos;, Investigation__r.Provider_No__r.RecordType.Name != &apos;Group Care&apos;,Investigation__r.Provider_No__r.RecordType.Name != &apos;Temporary Shelter&apos;,Investigation__r.Provider_No__r.RecordType.Name != &apos;Adoption Agency&apos;,Investigation__r.Provider_No__r.RecordType.Name != &apos;Foster Care Agency&apos;)))</errorConditionFormula>
+        <errorMessage>Non Compliant Items can&apos;t be created or updated on &apos;Closed&apos; Investigation.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Impl_NULL_Cor_Plan_NOT_NULL</fullName>
+        <active>true</active>
+        <description>If Date Implemented is not empty then Correction Planshould not be empty</description>
+        <errorConditionFormula>NOT( ISBLANK( Date_Implemented__c ) ) &amp;&amp; ISBLANK( Correction_Plan__c )</errorConditionFormula>
+        <errorDisplayField>Correction_Plan__c</errorDisplayField>
+        <errorMessage>If Date Implemented is provided then Correction Plan is mandatory</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Update_on_legacy_investigation_not_allow</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( Investigation__r.isLegacyInvestigation__c == true,
+  OR( ISCHANGED( Correction_Plan__c ),
+    ISCHANGED( Correction_Plan_Status__c ),
+    ISCHANGED(  Corrective_Action_EEC_Feedback__c  ),
+    ISCHANGED(  Corrective_Actions_Submitter__c ),
+    ISCHANGED(  Date_Correction_Plan_Accepted__c ),
+    ISCHANGED(  Date_Corrective_Actions_Received__c ),
+    ISCHANGED(  Date_Implemented__c ),
+    ISCHANGED(  Feedback_Requested__c ),
+    ISCHANGED(  Key_Indicator__c ),
+    ISCHANGED(  Observations__c ),
+    ISCHANGED(  Last_Corrective_Action_EEC_Feedback__c ),
+    ISCHANGED(  Require_Portal_Feedback__c ),
+    ISCHANGED(  To_Review_on_Portal__c )
+  )
+)</errorConditionFormula>
+        <errorMessage>Updates not allowed on legacy data.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Accept_Correction_Plan</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Accept Correction Plan</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)} 
+if(&apos;{!JSENCODE(Non_Compliant__c.Correction_Plan__c)}&apos;==&apos;&apos;||&apos;{!JSENCODE(Non_Compliant__c.Correction_Plan__c)}&apos;==null){ 
+alert(&apos;Correction Plan has not been entered in the system, so it can not be accepted&apos;); 
+}else if(&apos;{!Non_Compliant__c.Correction_Plan_Status__c}&apos;==&apos;EEC Accepted&apos;){ 
+alert(&apos;Correction Plan has already been accepted&apos;); 
+}else if(&apos;{!Non_Compliant__c.Correction_Plan_Status__c}&apos;==&apos;Provider To Submit&apos;){ 
+alert(&apos;Correction Plan should first be submitted by Provider&apos;); 
+}else if(&apos;{!Non_Compliant__c.Correction_Plan_Status__c}&apos;==&apos;Provider Submitted, EEC to Review&apos;){ 
+var nc = new sforce.SObject(&apos;Non_Compliant__c&apos;); 
+nc.id = &quot;{!Non_Compliant__c.Id}&quot;; 
+nc.Correction_Plan_Status__c = &quot;EEC Accepted&quot;; 
+result = sforce.connection.update([nc]); 
+location.reload(true); 
+}</url>
+    </webLinks>
+</CustomObject>

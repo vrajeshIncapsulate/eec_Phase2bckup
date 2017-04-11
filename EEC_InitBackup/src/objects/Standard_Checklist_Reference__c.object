@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Standard Checklist Reference object manages standard inspection checklists for all Provider Types</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Active__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked, this checklist is active and can be used.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, this checklist is active and can be used. If not checked, it will not be available for use.</inlineHelpText>
+        <label>Active</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Additional_information__c</fullName>
+        <description>Additional information</description>
+        <externalId>false</externalId>
+        <label>Additional information</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Applicable_To__c</fullName>
+        <description>Type of provider this checklist applies to</description>
+        <externalId>false</externalId>
+        <label>Applicable To</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Family Child Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Large Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Small Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Care Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adoption Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Group Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Temporary Shelter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Available_for__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>List of visit reasons that could use this visit tool. If a reason is selected, then this tool should be available as a selection for this type of visits.</inlineHelpText>
+        <label>Available for</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>CopyNonComplainceVisitItems__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Add Non Compliance from previous visit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Description__c</fullName>
+        <description>Description of how and when this checklist should be used.</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>External_VT_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>External VT ID</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Longer_visit_if_Non_Compliant__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Visit tool that should be recommended by the system instead of the standard tool (Recommended For) if the selected provider as too many violations in the past period.</inlineHelpText>
+        <label>Longer visit if Non-Compliant</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visit Tools</relationshipLabel>
+        <relationshipName>Visit_Tools</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>No_of_Random_Items_Per_Domain_to_Pick__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Random Items that should be added to the visit tool key indicators when this visit tool is used. Select &quot;0&quot; if no random item should be added.</inlineHelpText>
+        <label>No. of Random Items Per Domain to Pick</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Order__c</fullName>
+        <description>The order of the tools in the views.</description>
+        <externalId>false</externalId>
+        <label>Rank In Tool Selection Screen</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Recommended_for__c</fullName>
+        <externalId>false</externalId>
+        <label>Recommended for</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <label>Visit Tool</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Applicable_To__c</columns>
+        <columns>Active__c</columns>
+        <columns>Available_for__c</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Active</fullName>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>Description__c</columns>
+        <columns>Applicable_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Active</label>
+    </listViews>
+    <listViews>
+        <fullName>All_FCC_Active</fullName>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>Description__c</columns>
+        <columns>Applicable_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Family Child Care</value>
+        </filters>
+        <label>All FCC Active</label>
+    </listViews>
+    <listViews>
+        <fullName>All_R_P_Active</fullName>
+        <booleanFilter>1 AND (2 OR 3 OR 4 OR 5)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>Description__c</columns>
+        <columns>Applicable_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Foster Care Agency</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Adoption Agency</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Temporary Shelter</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Group Care</value>
+        </filters>
+        <label>All R&amp;P Active</label>
+    </listViews>
+    <listViews>
+        <fullName>All_SG_LG_Active</fullName>
+        <booleanFilter>1 AND (2 OR 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Active__c</columns>
+        <columns>Description__c</columns>
+        <columns>Applicable_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Active__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Small Group</value>
+        </filters>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Large Group</value>
+        </filters>
+        <label>All SG / LG Active</label>
+    </listViews>
+    <nameField>
+        <label>Name</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Visit Tools</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Description__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Active__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Description__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Active__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Description__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Active__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Description__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Active__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>Available_Included_in_Recommended</fullName>
+        <active>true</active>
+        <description>*Recommended for* should contain only elements selected in *Available for* meaning that if an choice is not selected in *Available for*, it shouldn&apos;t be selected for *Recommended for*.</description>
+        <errorConditionFormula>(INCLUDES( Recommended_for__c , &quot;Pre-Licensing&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Pre-Licensing&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Provisional License Renewal&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Provisional License Renewal&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Renewal&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Renewal&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Monitoring&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Monitoring&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Progress&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Progress&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Enhanced Monitoring&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Enhanced Monitoring&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Follow-up&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Follow-up&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Change of Location&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Change of Location&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Change of Space&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Change of Space&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;License Upgrade&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;License Upgrade&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Capacity Increase&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Capacity Increase&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Technical Assistance&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Technical Assistance&quot;))) ||
+(INCLUDES( Recommended_for__c , &quot;Investigation&quot;) &amp;&amp; NOT( INCLUDES( Available_for__c , &quot;Investigation&quot;)))</errorConditionFormula>
+        <errorMessage>An item cannot be in Recommended for unless it is selected in Available for as well.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Associated_Visit_Items_List</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Associated Visit Items List</masterLabel>
+        <openType>noSidebar</openType>
+        <page>EEC_ToolVisitItemsPage</page>
+        <protected>false</protected>
+    </webLinks>
+</CustomObject>

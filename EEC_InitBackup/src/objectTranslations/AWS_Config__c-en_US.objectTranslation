@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>AWS Configuration</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>AWS Configuration</value>
+    </caseValues>
+    <fields>
+        <label><!-- S3 Access Control Level --></label>
+        <name>S3_Access_Control_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- S3 Bucket Name --></label>
+        <name>S3_Bucket_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- S3 Endpoint Url --></label>
+        <name>S3_Endpoint_Url__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

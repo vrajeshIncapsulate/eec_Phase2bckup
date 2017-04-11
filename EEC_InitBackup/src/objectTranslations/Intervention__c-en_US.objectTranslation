@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Intervention</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Interventions</value>
+    </caseValues>
+    <fields>
+        <help><!-- Detail here the additional information related to this intervention --></help>
+        <label><!-- Additional Description --></label>
+        <name>Additional_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Reason this intervention was not done and cancelled --></help>
+        <label><!-- Cancel Reason --></label>
+        <name>Cancel_Reason__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Completed --></label>
+        <name>Date_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Intervention Type --></label>
+        <name>Intervention_Type__c</name>
+        <relationshipLabel><!-- Interventions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- InvestigationId --></label>
+        <name>InvestigationId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email address of the lead investigator --></help>
+        <label><!-- Investigation Leader Email --></label>
+        <name>Investigation_Leader_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- First Name of the Investigation Leader --></help>
+        <label><!-- Investigation Leader Full Name --></label>
+        <name>Investigation_Leader_Full_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Phone # of the Lead Investigator --></help>
+        <label><!-- Investigation Leader Phone Number --></label>
+        <name>Investigation_Leader_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation --></label>
+        <name>Investigation__c</name>
+        <relationshipLabel><!-- Interventions --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Leader Email Workflow --></label>
+        <name>Leader_Email_Workflow__c</name>
+    </fields>
+    <fields>
+        <help><!-- Detail here the observations of the investigator --></help>
+        <label><!-- Investigator Observations --></label>
+        <name>Observations__c</name>
+    </fields>
+    <fields>
+        <help><!-- Instructions to be given to the portal user in order to complete internal investigation. --></help>
+        <label><!-- Portal User Instructions --></label>
+        <name>Portal_User_Instructions__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email id of the provider --></help>
+        <label><!-- Provider Email --></label>
+        <name>Provider_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Done</masterLabel>
+            <translation><!-- Done --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Do</masterLabel>
+            <translation><!-- To Do --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Submit</masterLabel>
+            <translation><!-- To Submit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Submit via Portal</masterLabel>
+            <translation><!-- To Submit via Portal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date the internal investigation was submitted. --></help>
+        <label><!-- Submission Date --></label>
+        <name>Submission_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Deadline to fill internal investigation --></help>
+        <label><!-- To Be Provided By --></label>
+        <name>To_Be_Provided_By__c</name>
+    </fields>
+    <layouts>
+        <layout>Internal Investigation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Observations --></label>
+            <section>EEC Observations</section>
+        </sections>
+        <sections>
+            <label><!-- Internal Investigation Request --></label>
+            <section>Internal Investigation Request</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Intervention Layout</layout>
+        <sections>
+            <label><!-- Additional Information --></label>
+            <section>Additional Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Internal Investigation --></label>
+        <name>Internal_Investigation</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Other Intervention --></label>
+        <name>Other_Intervention</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- Interventions can&apos;t be created or updated on &apos;Closed&apos; Investigation. --></errorMessage>
+        <name>Creation_Updates_on_Closed_Investigation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please provide the reason this intervention was not done and cancelled. --></errorMessage>
+        <name>Status_Cancel_Require_Reason</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Date completed must be provided if this intervention is done --></errorMessage>
+        <name>Status_Done_Require_Date</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Request_Electronically_Internal_Investigation --></label>
+        <name>Request_Electronically_Internal_Investigation</name>
+    </webLinks>
+    <workflowTasks>
+        <description><!-- Email sent to the provider 7 days after first email to remind  that internal investigation must be completed and submitted --></description>
+        <name>Email_sent_Internal_Investigation_Request_Reminder_40</name>
+        <subject><!-- Email sent - Internal Investigation Request Reminder - #40 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Email sent to the provider to inform that an internal investigation is requested and can be uploaded on the portal --></description>
+        <name>Email_sent_Internal_Investigation_Requested_39</name>
+        <subject><!-- Email sent - Internal Investigation Requested - #39 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Email sent to the provider 7 days after first email to remind  that internal investigation must be completed and submitted --></description>
+        <name>Internal_Investigation_Request_Reminder_40</name>
+        <subject><!-- Internal Investigation Request Reminder - #40 --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

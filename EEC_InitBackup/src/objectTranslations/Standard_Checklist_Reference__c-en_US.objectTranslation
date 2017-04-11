@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visit Tool</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visit Tools</value>
+    </caseValues>
+    <fields>
+        <help><!-- If checked, this checklist is active and can be used. If not checked, it will not be available for use. --></help>
+        <label><!-- Active --></label>
+        <name>Active__c</name>
+    </fields>
+    <fields>
+        <label><!-- Additional information --></label>
+        <name>Additional_information__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applicable To --></label>
+        <name>Applicable_To__c</name>
+        <picklistValues>
+            <masterLabel>Adoption Agency</masterLabel>
+            <translation><!-- Adoption Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Child Care</masterLabel>
+            <translation><!-- Family Child Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Care Agency</masterLabel>
+            <translation><!-- Foster Care Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Care</masterLabel>
+            <translation><!-- Group Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Large Group</masterLabel>
+            <translation><!-- Large Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Small Group</masterLabel>
+            <translation><!-- Small Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Temporary Shelter</masterLabel>
+            <translation><!-- Temporary Shelter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of visit reasons that could use this visit tool. If a reason is selected, then this tool should be available as a selection for this type of visits. --></help>
+        <label><!-- Available for --></label>
+        <name>Available_for__c</name>
+        <picklistValues>
+            <masterLabel>Capacity Increase</masterLabel>
+            <translation><!-- Capacity Increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Location</masterLabel>
+            <translation><!-- Change of Location --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Space</masterLabel>
+            <translation><!-- Change of Space --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Enhanced Monitoring</masterLabel>
+            <translation><!-- Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up</masterLabel>
+            <translation><!-- Follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Investigation</masterLabel>
+            <translation><!-- Investigation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>License Upgrade</masterLabel>
+            <translation><!-- License Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monitoring</masterLabel>
+            <translation><!-- Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pre-Licensing</masterLabel>
+            <translation><!-- Pre-Licensing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress</masterLabel>
+            <translation><!-- Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provisional License Renewal</masterLabel>
+            <translation><!-- Provisional License Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Activate Provider</masterLabel>
+            <translation><!-- Re-Activate Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Enhanced Monitoring</masterLabel>
+            <translation><!-- Renewal - Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Full Review</masterLabel>
+            <translation><!-- Renewal - Full Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Technical Assistance</masterLabel>
+            <translation><!-- Technical Assistance --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Add Non Compliance from previous visit --></label>
+        <name>CopyNonComplainceVisitItems__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- External VT ID --></label>
+        <name>External_VT_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- Visit tool that should be recommended by the system instead of the standard tool (Recommended For) if the selected provider as too many violations in the past period. --></help>
+        <label><!-- Longer visit if Non-Compliant --></label>
+        <name>Longer_visit_if_Non_Compliant__c</name>
+        <relationshipLabel><!-- Visit Tools --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Number of Random Items that should be added to the visit tool key indicators when this visit tool is used. Select &quot;0&quot; if no random item should be added. --></help>
+        <label><!-- No. of Random Items Per Domain to Pick --></label>
+        <name>No_of_Random_Items_Per_Domain_to_Pick__c</name>
+    </fields>
+    <fields>
+        <label><!-- Rank In Tool Selection Screen --></label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recommended for --></label>
+        <name>Recommended_for__c</name>
+        <picklistValues>
+            <masterLabel>Capacity Increase</masterLabel>
+            <translation><!-- Capacity Increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Location</masterLabel>
+            <translation><!-- Change of Location --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Space</masterLabel>
+            <translation><!-- Change of Space --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Enhanced Monitoring</masterLabel>
+            <translation><!-- Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up</masterLabel>
+            <translation><!-- Follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Investigation</masterLabel>
+            <translation><!-- Investigation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>License Upgrade</masterLabel>
+            <translation><!-- License Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monitoring</masterLabel>
+            <translation><!-- Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pre-Licensing</masterLabel>
+            <translation><!-- Pre-Licensing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress</masterLabel>
+            <translation><!-- Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provisional License Renewal</masterLabel>
+            <translation><!-- Provisional License Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Activate Provider</masterLabel>
+            <translation><!-- Re-Activate Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Enhanced Monitoring</masterLabel>
+            <translation><!-- Renewal - Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Full Review</masterLabel>
+            <translation><!-- Renewal - Full Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Technical Assistance</masterLabel>
+            <translation><!-- Technical Assistance --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Standard Checklist Reference Layout</layout>
+        <sections>
+            <label><!-- Availability --></label>
+            <section>Availability</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Differential Licensing Visit Tools Characteristics --></label>
+            <section>Differential Licensing Visit Tools Characteristics</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- An item cannot be in Recommended for unless it is selected in Available for as well. --></errorMessage>
+        <name>Available_Included_in_Recommended</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Associated_Visit_Items_List --></label>
+        <name>Associated_Visit_Items_List</name>
+    </webLinks>
+</CustomObjectTranslation>

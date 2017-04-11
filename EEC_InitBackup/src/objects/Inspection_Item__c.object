@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Inspection Items records (one or more) manage data for an individual Inspection record</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Additional_Inspection_Item_Name__c</fullName>
+        <description>Allow user to name this additional inspection item</description>
+        <externalId>false</externalId>
+        <label>Name</label>
+        <length>80</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assessed_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the visit item was assessed (= mark compliant / non compliant / not applicable) by the licensor. This date is automatically filled by the system when a result is added for the first time.</inlineHelpText>
+        <label>Assessed Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Associated_regulation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>For non standard items, this lookup allows the user to select the regulation associated with this inspection item.</description>
+        <externalId>false</externalId>
+        <label>Associated regulation</label>
+        <referenceTo>Regulation__c</referenceTo>
+        <relationshipName>Inspection_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Category_additional__c</fullName>
+        <externalId>false</externalId>
+        <label>Domain</label>
+        <picklist>
+            <picklistValues>
+                <fullName>BRC Information</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Classroom</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Curriculum and Activities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Equipments and Materials</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Involvement</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health and Safety</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Infection Control</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Inspections</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interactions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Mealtime, Food, Food Preparation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medications</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Personal Hygiene</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical Facility - Indoors</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical Facility - Outdoors</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Postings</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Progress Reports</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Review of Written Materials</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Sleep, Rest, Quiet Activities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Staff and Educators</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Supervision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Toileting / Diapering / Handwashing</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Water Safety</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Category_list__c</fullName>
+        <description>Domain(Category) used for list.</description>
+        <externalId>false</externalId>
+        <formula>TEXT( Category_additional__c ) &amp; IF(ISPICKVAL(Category_additional__c,&quot;&quot;) , Category_standard__c , &quot;&quot;)</formula>
+        <label>Domain (list)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Category_standard__c</fullName>
+        <description>Category of the inspection items</description>
+        <externalId>false</externalId>
+        <formula>text(Standard_Inspection_Item__r.Category__c)</formula>
+        <label>Domain</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Correction_Plan_Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Correction Plan Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>To Collect</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provider To Submit</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provider Submitted, EEC to Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>EEC Accepted</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legacy Non-compliance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Correction_Plan__c</fullName>
+        <description>Will be filled by the corrective actions taken by the provider in case of non-compliance</description>
+        <externalId>false</externalId>
+        <label>Correction Plan</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Corrective_Action_EEC_Feedback__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Fill this field if the corrective action submitted by the provider is not appropriate. By updating this field, Providers using electronic communication will be informed by email and will be able to update the correction plan on the portal.</inlineHelpText>
+        <label>Corrective Action EEC Feedback</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Corrective_Actions_Submitter__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>User who added the corrective actions</inlineHelpText>
+        <label>Corrective Actions Submitter</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Create_History_Record_flag__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Create History Record flag</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_Correction_Plan_Accepted__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Correction Plan Accepted</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Corrective_Actions_Received__c</fullName>
+        <externalId>false</externalId>
+        <label>Date Corrective Actions Received</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Implemented__c</fullName>
+        <description>Date the corrective actions were or will be implemented. This information should be provided by the provider when filling the answer of statement of non-compliance.</description>
+        <externalId>false</externalId>
+        <label>Date Implemented</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Description_of_additional_inspection__c</fullName>
+        <description>Describe the nature of the visit (what, how)</description>
+        <externalId>false</externalId>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Description_of_inspection__c</fullName>
+        <externalId>false</externalId>
+        <formula>Standard_Inspection_Item__r.Description__c</formula>
+        <label>Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Description_of_inspection_list__c</fullName>
+        <description>This is used in related list to display the description no matter the record type</description>
+        <externalId>false</externalId>
+        <formula>Description_of_inspection__c &amp;  Description_of_additional_inspection__c</formula>
+        <label>Description (list)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Discussed__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Discussed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>ExternalOfflineId__c</fullName>
+        <description>This is used as an ExternalId for Offline Application</description>
+        <externalId>true</externalId>
+        <label>ExternalOfflineId</label>
+        <length>36</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Feedback_Requested__c</fullName>
+        <externalId>false</externalId>
+        <formula>AND(
+ISPICKVAL(Inspection_Result__c, &quot;Non-Compliant&quot;),
+ISBLANK( Date_Implemented__c )
+)</formula>
+        <label>Feedback Requested</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Inspection_Item_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Standard_Inspection_Item__r.Name</formula>
+        <label>Visit Item Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Inspection_Item_Name_for_list__c</fullName>
+        <description>This is used in related list to display the name no matter the record type</description>
+        <externalId>false</externalId>
+        <formula>Inspection_Item_Name__c &amp;  Additional_Inspection_Item_Name__c</formula>
+        <label>Visit Item Name for list</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Inspection_No__c</fullName>
+        <description>The visit No. field identifies the master Inspection record for the Inspection Item detail record</description>
+        <externalId>false</externalId>
+        <label>Visit No</label>
+        <referenceTo>Inspection__c</referenceTo>
+        <relationshipLabel>Visit Items</relationshipLabel>
+        <relationshipName>Inspection_Items</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Inspection_Result__c</fullName>
+        <description>This picklist will be used during the visit in order to provide the result of the visit.</description>
+        <externalId>false</externalId>
+        <label>Result</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Compliant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non-Compliant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Non Assessed (tool abandoned)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Not Assessed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Discussion</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Inspection_Standard_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Inspection_No__c +  Standard_Inspection_Item__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Standard Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Key_Indicator__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Checked if this visit item is identified as a key indicator = associated to a regulation flagged as high risk</inlineHelpText>
+        <label>Key Indicator</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Last_Corrective_Action_EEC_Feedback__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date of the last update of corrective action feedback.</inlineHelpText>
+        <label>Last Corrective Action EEC Feedback</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Non_Assessed_Item__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked, it means that this visit item is only for information and does not need to be assessed during the visit</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, this visit item is only for information and does not need to be assessed during the visit</inlineHelpText>
+        <label>Non-Assessed Item</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Observations__c</fullName>
+        <description>Notes related to the inspection</description>
+        <externalId>false</externalId>
+        <label>Observations</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Provider_Email_Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Provider Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Random_Item_from_Visit_Tool__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is checked if this item was picked as random item from the visit tool.</inlineHelpText>
+        <label>Random Item from Visit Tool</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Read_Only_Attachments__c</fullName>
+        <description>A list of S3 File Mapping Id&apos;s for files that have been processed for review. Once these files have been processed they are no longer eligible for deletion if a user has a rejected Corrective Action.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Only enter S3 File Map Id&apos;s into this field. It does not support Files &amp; Attachment Id&apos;s.</inlineHelpText>
+        <label>Read Only Attachments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Standard_Inspection_Item__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>For standard visit item, this lookup allows the user to associated the inspection item with a standard item.</description>
+        <externalId>false</externalId>
+        <label>Associated Standard Item</label>
+        <referenceTo>Standard_Inspection_Item__c</referenceTo>
+        <relationshipLabel>Visit Items</relationshipLabel>
+        <relationshipName>Inspection_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Technical_Assistance__c</fullName>
+        <externalId>false</externalId>
+        <label>Technical Assistance</label>
+        <length>32768</length>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>To_Review_on_Portal__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, the Provider needs to review the item on the portal</inlineHelpText>
+        <label>To Review on Portal</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Unique_Inspection_Standard_Id__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>false</externalId>
+        <label>Unique Visit Standard Id</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Mode_Ranking__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Allows you to sort visit items as they will be displayed in visit mode and on visit summary. Lowest ranking will be displayed first. Ranking should be set for each item. Items with empty rank will be displayed last.</inlineHelpText>
+        <label>Visit Mode Ranking</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Tool_Origin__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Visit Tool this visit item was created from</inlineHelpText>
+        <label>Visit Tool Origin</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visit Items</relationshipLabel>
+        <relationshipName>Visit_Items</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Visit Item</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Inspection_Item_Name__c</columns>
+        <columns>RECORDTYPE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>VI-{000000}</displayFormat>
+        <label>Visit Item No</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Visit Items</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Additional_Inspection_Item</fullName>
+        <active>true</active>
+        <description>Visit item that is not defined in LEAD Configuration, and most likely will reference a regulation article that needs to be or has been reviewed during the visit</description>
+        <label>Non Standard Visit Item</label>
+        <picklistValues>
+            <picklist>Category_additional__c</picklist>
+            <values>
+                <fullName>BRC Information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Classroom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Curriculum and Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equipments and Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Involvement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health and Safety</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infection Control</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inspections</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interactions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mealtime%2C Food%2C Food Preparation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Personal Hygiene</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Facility - Indoors</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Facility - Outdoors</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Postings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress Reports</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review of Written Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sleep%2C Rest%2C Quiet Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staff and Educators</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supervision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Toileting %2F Diapering %2F Handwashing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Water Safety</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Correction_Plan_Status__c</picklist>
+            <values>
+                <fullName>EEC Accepted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy Non-compliance</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider Submitted%2C EEC to Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider To Submit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Collect</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Inspection_Result__c</picklist>
+            <values>
+                <fullName>Compliant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Discussion</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Compliant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Standard_Item</fullName>
+        <active>true</active>
+        <description>Check list items that are coming from the standard list of inspection items</description>
+        <label>Standard Visit Item</label>
+        <picklistValues>
+            <picklist>Category_additional__c</picklist>
+            <values>
+                <fullName>BRC Information</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Classroom</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Curriculum and Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Equipments and Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Involvement</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Health and Safety</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Infection Control</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Inspections</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Interactions</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Mealtime%2C Food%2C Food Preparation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medications</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Personal Hygiene</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Facility - Indoors</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Physical Facility - Outdoors</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Postings</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress Reports</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Review of Written Materials</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Sleep%2C Rest%2C Quiet Activities</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Staff and Educators</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Supervision</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Toileting %2F Diapering %2F Handwashing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Water Safety</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Correction_Plan_Status__c</picklist>
+            <values>
+                <fullName>EEC Accepted</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider Submitted%2C EEC to Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider To Submit</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To Collect</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Inspection_Result__c</picklist>
+            <values>
+                <fullName>Compliant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non Assessed %28tool abandoned%29</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Non-Compliant</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Applicable</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Not Assessed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Category_list__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Inspection_Item_Name_for_list__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Description_of_inspection_list__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Inspection_Result__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Key_Indicator__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Category_list__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Inspection_Item_Name_for_list__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Description_of_inspection_list__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Key_Indicator__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Category_list__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Inspection_Item_Name_for_list__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Description_of_inspection_list__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Key_Indicator__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Cor_Plan_Status_is_NULL_if_Result_is_NC</fullName>
+        <active>true</active>
+        <description>The Correction Plan Status must be = &quot;--None--&quot; if the Visit Item &quot;Result&quot; is = &quot;Non-Compliant&quot;</description>
+        <errorConditionFormula>NOT(ISBLANK(TEXT(Correction_Plan_Status__c)))
+&amp;&amp;
+NOT(ISPICKVAL(Inspection_Result__c, &quot;Non-Compliant&quot;))</errorConditionFormula>
+        <errorDisplayField>Correction_Plan_Status__c</errorDisplayField>
+        <errorMessage>This status is only used for Non-Compliant Visit Items</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Correction_Plan_NULL_Date_Impl_NOT_Null</fullName>
+        <active>true</active>
+        <description>If Correction Plan is not empty then Date Implemented should not be empty</description>
+        <errorConditionFormula>NOT( ISBLANK( Correction_Plan__c ) )  &amp;&amp;  ISBLANK( Date_Implemented__c ) &amp;&amp; ISBLANK( Inspection_No__r.Legacy_FCC_LM_Mobile_Visit__c )</errorConditionFormula>
+        <errorDisplayField>Date_Implemented__c</errorDisplayField>
+        <errorMessage>If Correction Plan is provided then Date Implemented is mandatory</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Date_Impl_NULL_Cor_Plan_NOT_NULL</fullName>
+        <active>true</active>
+        <description>If  Date Implemented is not empty then  Correction Planshould not be empty</description>
+        <errorConditionFormula>NOT( ISBLANK( Date_Implemented__c ) )  &amp;&amp;  ISBLANK( Correction_Plan__c )</errorConditionFormula>
+        <errorDisplayField>Correction_Plan__c</errorDisplayField>
+        <errorMessage>If Date Implemented is provided then Correction Plan is mandatory</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_Cor_Plan_or_Sub_NULL_EEC_fdbk_Null</fullName>
+        <active>true</active>
+        <description>&quot;Corrective Action EEC Feedback&quot; should stay empty if: Correction Plan is NULL or Corrective Actions Submitter is NULL</description>
+        <errorConditionFormula>NOT(ISBLANK(Corrective_Action_EEC_Feedback__c)) &amp;&amp; (ISBLANK(Corrective_Actions_Submitter__c))</errorConditionFormula>
+        <errorDisplayField>Corrective_Action_EEC_Feedback__c</errorDisplayField>
+        <errorMessage>If Correction Plan has not been submitted and entered in LEAD, Corrective Action Feedback can not be filled. Enter first a correction plan and then add feedback.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>No_Result_for_Non_Assessed</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(Non_Assessed_Item__c, !ISPICKVAL(Inspection_Result__c,&apos;&apos;))</errorConditionFormula>
+        <errorDisplayField>Inspection_Result__c</errorDisplayField>
+        <errorMessage>Non-Assessed visit items should not be assessed and their assessment result should remain empty</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>No_updates_allowed_on_legacy_visit_data</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( Inspection_No__r.RecordType.DeveloperName = &apos;Legacy_System_Import_Visit_Non_Compliance&apos;
+,  OR(ISCHANGED( Category_additional__c ) 
+,  ISCHANGED( Key_Indicator__c ) 
+,  ISCHANGED( Description_of_additional_inspection__c ) 
+,  ISCHANGED( Assessed_Date__c ) 
+,  ISCHANGED( Inspection_Result__c )
+,  ISCHANGED( Observations__c )
+,  ISCHANGED( Technical_Assistance__c )
+,  ISCHANGED( Correction_Plan__c )
+,  ISCHANGED( Correction_Plan_Status__c )
+,  ISCHANGED( Corrective_Actions_Submitter__c )
+,  ISCHANGED( Corrective_Action_EEC_Feedback__c )
+,  ISCHANGED( Date_Implemented__c )
+,  ISCHANGED( Date_Corrective_Actions_Received__c )
+,  ISCHANGED( Date_Correction_Plan_Accepted__c )
+,  ISCHANGED( Last_Corrective_Action_EEC_Feedback__c )
+,  ISCHANGED( Visit_Mode_Ranking__c )
+, ISCHANGED( Observations__c ))
+)</errorConditionFormula>
+        <errorMessage>No updates allowed on legacy data.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Regulation_match_provider_type</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( RecordType.Name = &quot;Non Standard Visit Item&quot;, Associated_regulation__c != null,NOT(OR(
+(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Adoption Agency&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Adoption Agency&apos;), (INCLUDES(Associated_regulation__r.Applicable_To__c, &apos;Family Child Care&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Family Child Care&apos;), (INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Foster Care Agency&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Foster Care Agency&apos;), (INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Group Care&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Group Care&apos;),(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Large Group&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Large Group&apos;),(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Large and Small Group Umbrella&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Large and Small Group Umbrella&apos;),(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;R&amp;P Umbrella&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;R&amp;P Umbrella&apos;),(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Small Group&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Small Group&apos;),
+(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Temporary Shelter&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Temporary Shelter&apos;),
+(INCLUDES(Associated_regulation__r.Applicable_To__c,&apos;Unlicensed Provider&apos;) &amp;&amp; Inspection_No__r.Provider_No__r.RecordType.Name = &apos;Unlicensed Provider&apos;))
+))</errorConditionFormula>
+        <errorDisplayField>Associated_regulation__c</errorDisplayField>
+        <errorMessage>Regulation associated with this item does not  match the provider type. Please select another regulation.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Visit_Items_NC_and_Observation_NULL</fullName>
+        <active>true</active>
+        <description>If the user tries to save a visit item that is (&apos;Non-compliant&apos;, &apos;Not Applicable&apos; or &apos;Not Assessed&apos;). and &quot;Observations&quot; empty it will show an error message</description>
+        <errorConditionFormula>AND(OR(ISBLANK( Observations__c ),ISNULL( Observations__c )), 
+OR(ISPICKVAL( Inspection_Result__c , &quot;Non-Compliant&quot;),ISPICKVAL( Inspection_Result__c , &quot;Not Assessed&quot;),ISPICKVAL( Inspection_Result__c , &quot;Not Applicable&quot;)) )</errorConditionFormula>
+        <errorDisplayField>Observations__c</errorDisplayField>
+        <errorMessage>Observations should be provided for items marked as &apos;Non-compliant&apos;, &apos;Not Applicable&apos; or &apos;Not Assessed&apos;.</errorMessage>
+    </validationRules>
+</CustomObject>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Standard Best Practices</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Standard Best Practices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applicable To Text Version --></label>
+        <name>Applicable_To_Text_Version__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applicable To --></label>
+        <name>Applicable_To__c</name>
+        <picklistValues>
+            <masterLabel>Adoption Agency</masterLabel>
+            <translation><!-- Adoption Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Child Care</masterLabel>
+            <translation><!-- Family Child Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Care Agency</masterLabel>
+            <translation><!-- Foster Care Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Care</masterLabel>
+            <translation><!-- Group Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Large Group</masterLabel>
+            <translation><!-- Large Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Small Group</masterLabel>
+            <translation><!-- Small Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Temporary Shelter</masterLabel>
+            <translation><!-- Temporary Shelter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Practice Guidance --></label>
+        <name>Best_Practice_Guidance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Domain --></label>
+        <name>Domain__c</name>
+        <picklistValues>
+            <masterLabel>Administration</masterLabel>
+            <translation><!-- Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>BRC Information</masterLabel>
+            <translation><!-- BRC Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Behavior Support</masterLabel>
+            <translation><!-- Behavior Support --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Care of Children</masterLabel>
+            <translation><!-- Care of Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Classroom</masterLabel>
+            <translation><!-- Classroom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Curriculum and Activities</masterLabel>
+            <translation><!-- Curriculum and Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency Preparedness</masterLabel>
+            <translation><!-- Emergency Preparedness --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equipments and Materials</masterLabel>
+            <translation><!-- Equipments and Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Executive Administration</masterLabel>
+            <translation><!-- Executive Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Involvement</masterLabel>
+            <translation><!-- Family Involvement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Children Records</masterLabel>
+            <translation><!-- Foster Children Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Parent Records</masterLabel>
+            <translation><!-- Foster Parent Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster/Adoptive Child Records</masterLabel>
+            <translation><!-- Foster/Adoptive Child Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster/Adoptive Home Approval</masterLabel>
+            <translation><!-- Foster/Adoptive Home Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster/Adoptive Parent Records</masterLabel>
+            <translation><!-- Foster/Adoptive Parent Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>General records/logs</masterLabel>
+            <translation><!-- General records/logs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health</masterLabel>
+            <translation><!-- Health --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health and Safety</masterLabel>
+            <translation><!-- Health and Safety --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health/Medications</masterLabel>
+            <translation><!-- Health/Medications --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Infection Control</masterLabel>
+            <translation><!-- Infection Control --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inspections</masterLabel>
+            <translation><!-- Inspections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interactions</masterLabel>
+            <translation><!-- Interactions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Logs</masterLabel>
+            <translation><!-- Logs --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mealtime, Food, Food Preparation</masterLabel>
+            <translation><!-- Mealtime, Food, Food Preparation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medications</masterLabel>
+            <translation><!-- Medications --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal Hygiene</masterLabel>
+            <translation><!-- Personal Hygiene --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personnel Records</masterLabel>
+            <translation><!-- Personnel Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Indoors</masterLabel>
+            <translation><!-- Physical Facility - Indoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Outdoors</masterLabel>
+            <translation><!-- Physical Facility - Outdoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Plant</masterLabel>
+            <translation><!-- Physical Plant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Plant and Vehicles</masterLabel>
+            <translation><!-- Physical Plant and Vehicles --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Space (Indoor &amp; Outdoor)</masterLabel>
+            <translation><!-- Physical Space (Indoor &amp; Outdoor) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Placement/ Pre-Placement</masterLabel>
+            <translation><!-- Placement/ Pre-Placement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Policies</masterLabel>
+            <translation><!-- Policies --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Policies/Inspections</masterLabel>
+            <translation><!-- Policies/Inspections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Postings</masterLabel>
+            <translation><!-- Postings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress Reports</masterLabel>
+            <translation><!-- Progress Reports --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Records</masterLabel>
+            <translation><!-- Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review of Written Materials</masterLabel>
+            <translation><!-- Review of Written Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Routine &amp; Activities</masterLabel>
+            <translation><!-- Routine &amp; Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Services to Birthparents</masterLabel>
+            <translation><!-- Services to Birthparents --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Services to Children</masterLabel>
+            <translation><!-- Services to Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Services to Foster/Adoptive Parents</masterLabel>
+            <translation><!-- Services to Foster/Adoptive Parents --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Services/Treatment</masterLabel>
+            <translation><!-- Services/Treatment --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sleep, Rest, Quiet Activities</masterLabel>
+            <translation><!-- Sleep, Rest, Quiet Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff Training/Support</masterLabel>
+            <translation><!-- Staff Training/Support --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff and Educators</masterLabel>
+            <translation><!-- Staff and Educators --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supervision</masterLabel>
+            <translation><!-- Supervision --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Toileting / Diapering / Handwashing</masterLabel>
+            <translation><!-- Toileting / Diapering / Handwashing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation</masterLabel>
+            <translation><!-- Transportation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Water Safety</masterLabel>
+            <translation><!-- Water Safety --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Standard Best Practices Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

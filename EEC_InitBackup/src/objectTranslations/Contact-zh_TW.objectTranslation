@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <help><!-- The External ID value as used in Licensing Manager (or other external feeder systems) for managing UPSERTS into LEAD --></help>
+        <label><!-- EEC Legacy Contact ID --></label>
+        <name>EEC_Legacy_Contact_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Extension --></label>
+        <name>Extension__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Foster Parent --></label>
+        <name>Is_Foster_Parent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Name_text --></label>
+        <name>Name_text__c</name>
+    </fields>
+    <fields>
+        <help><!-- Professional Qualification Registry Number --></help>
+        <label><!-- Prof. Qualification Reg. Number --></label>
+        <name>Prof_Qualification_Reg_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Role --></label>
+        <name>Role__c</name>
+        <picklistValues>
+            <masterLabel>Board Chair</masterLabel>
+            <translation><!-- Board Chair --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Designee</masterLabel>
+            <translation><!-- Designee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Director</masterLabel>
+            <translation><!-- Director --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Funding Source</masterLabel>
+            <translation><!-- Funding Source --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Main Contact / Assistant</masterLabel>
+            <translation><!-- Main Contact / Assistant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Main Contact / Licensee</masterLabel>
+            <translation><!-- Main Contact / Licensee --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Licensee Contact</layout>
+        <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Provider / Umbrella Information --></label>
+            <section>Provider / Umbrella Information</section>
+        </sections>
+        <sections>
+            <label><!-- Provider Information --></label>
+            <section>Provider Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Contact --></label>
+        <name>Contact</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- Not a valid role for the Assistant type --></errorMessage>
+        <name>FCC_Assistant_Contact_Role</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Not a valid role for the Provider type --></errorMessage>
+        <name>FCC_Provider_Contact_Role</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- GoogleMaps --></label>
+        <name>GoogleMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GoogleSearch --></label>
+        <name>GoogleSearch</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- SendGmail --></label>
+        <name>SendGmail</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooMaps --></label>
+        <name>YahooMaps</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- YahooWeather --></label>
+        <name>YahooWeather</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_DocuSign --></label>
+        <name>dsfs__Send_with_DocuSign</name>
+    </webLinks>
+</CustomObjectTranslation>

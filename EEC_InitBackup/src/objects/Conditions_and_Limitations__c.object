@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Condition_Additional_Information__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>To be filled if the standard condition selected needs some additional information (ex: Other)</inlineHelpText>
+        <label>Condition Additional Information</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Condition_Name__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Condition Name</label>
+        <referenceTo>Condition__c</referenceTo>
+        <relationshipLabel>Conditions and Limitations</relationshipLabel>
+        <relationshipName>Conditions_and_Limitations</relationshipName>
+        <required>true</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Condition_On_License__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF ( FIND(&quot;#Effective_Date#&quot;,  Condition_Name__r.Full_Description__c ) &lt;&gt; 0,  
+
+SUBSTITUTE(IF (FIND(&quot;#Add_Info#&quot;, Condition_Name__r.Full_Description__c ) &lt;&gt; 0, SUBSTITUTE(Condition_Name__r.Full_Description__c, &quot;#Add_Info#&quot;,  Condition_Additional_Information__c ), Condition_Name__r.Full_Description__c), &quot;#Effective_Date#&quot;,  TEXT(MONTH( Start_Date__c ))+&quot;/&quot; +TEXT(DAY( Start_Date__c ))+&quot;/&quot; +TEXT(YEAR( Start_Date__c ))),  
+
+IF (FIND(&quot;#Add_Info#&quot;, Condition_Name__r.Full_Description__c ) &lt;&gt; 0, SUBSTITUTE(Condition_Name__r.Full_Description__c, &quot;#Add_Info#&quot;,  Condition_Additional_Information__c ), Condition_Name__r.Full_Description__c))</formula>
+        <inlineHelpText>Condition as it&apos;ll be displayed on the license</inlineHelpText>
+        <label>Condition Full Description</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Conditions__c</fullName>
+        <externalId>false</externalId>
+        <label>Conditions</label>
+        <length>10000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Current__c</fullName>
+        <externalId>false</externalId>
+        <formula>AND( Start_Date__c &lt;=  TODAY(),
+OR(
+ISBLANK(Expiration_Date__c), 
+ Expiration_Date__c  &gt;= TODAY())
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Current</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Expiration_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Expiration Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Provider__c</fullName>
+        <externalId>false</externalId>
+        <label>Provider</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Conditions and Limitations</relationshipLabel>
+        <relationshipName>Conditions_and_Limitations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Source_Transaction__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Source Transaction</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Transaction selected must be associated to the provider this condition applies.</errorMessage>
+            <filterItems>
+                <field>Licensing_Transaction__c.Provider__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.Provider__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Licensing_Transaction__c</referenceTo>
+        <relationshipLabel>Conditions and Limitations</relationshipLabel>
+        <relationshipName>Conditions_and_Limitations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Start_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <label>Conditions and Limitations</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>CL-{000000}</displayFormat>
+        <label>ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Conditions and Limitations</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Condition_Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Condition_On_License__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Current__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Start_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Expiration_Date__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Expiration_Date_Greater_than_Start_Date</fullName>
+        <active>true</active>
+        <description>Expiration Date must be &gt; Start Date</description>
+        <errorConditionFormula>Expiration_Date__c  &lt;=  Start_Date__c</errorConditionFormula>
+        <errorDisplayField>Expiration_Date__c</errorDisplayField>
+        <errorMessage>Expiration Date must be greater than the Start Date</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>If_Standard_Cond_needs_Add_Info_then_Req</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISBLANK( Condition_Additional_Information__c ),FIND(&quot;#Add_Info#&quot;,Condition_Name__r.Full_Description__c) &lt;&gt; 0)</errorConditionFormula>
+        <errorDisplayField>Condition_Additional_Information__c</errorDisplayField>
+        <errorMessage>The selected condition requires some additional information. Please fill this field with correct information</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Standard_Condition_Apply_To_Prov_Type</fullName>
+        <active>true</active>
+        <errorConditionFormula>TEXT(Condition_Name__r.Apply_To__c)&lt;&gt; Provider__r.RecordType.Name</errorConditionFormula>
+        <errorDisplayField>Condition_Name__c</errorDisplayField>
+        <errorMessage>The standard condition selected does not apply to this record type, please select another one.</errorMessage>
+    </validationRules>
+</CustomObject>

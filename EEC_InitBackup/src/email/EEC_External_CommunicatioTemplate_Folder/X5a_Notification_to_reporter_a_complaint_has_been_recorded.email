@@ -1,0 +1,30 @@
+<table height="400" width="550" cellpadding="5" border="0" cellspacing="5" >
+<tr height="400" valign="top" >
+<td style=" color:#000000; font-size:12pt; background-color:#FFFFFF; font-family:arial; bLabel:main; bEditID:r3st1;" tEditID="c1r1" locked="0" aEditID="c1r1" >
+<![CDATA[<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><font style="color: rgb(0, 0, 0);">Dear&nbsp;</font><font>{!Case.Contact}</font><span style="color: rgb(0, 0, 0);">,</span></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><span style="color: rgb(0, 0, 0);">The Department of Early
+Education and Care (EEC) has received your complaint regarding&nbsp;</span>{!Case.Provider_Name_For_Email_Merge__c}&nbsp;located at&nbsp;{!Case.Provider_Address_For_Email_Merge__c}. Someone from EEC may be in touch with you to gather additional
+information. EEC will look into the
+matter if your concerns are related to possible regulatory violations.&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">Sincerely,<o:p></o:p></font></p><p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><br></font></p>
+
+<font face="Arial, sans-serif" size="2"><span style="color: rgb(0, 0, 0);">Department
+of Early Education and Care</span>
+
+</font><div style="color: rgb(0, 0, 0);"><!--[if !supportAnnotations]-->
+
+<font face="Arial, sans-serif" size="2"><br></font><div><div id="_com_2" class="msocomtxt" language="JavaScript">
+
+<!--[if !supportAnnotations]--></div>
+
+<!--[endif]--></div>
+
+</div><div><div style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><br></font></div><div style="color: rgb(0, 0, 0); text-align: center;"><font face="Arial, sans-serif" size="2"><br></font></div><div style="text-align: center;"><div style="background-color: rgb(255, 255, 255);"><font face="Arial, sans-serif" size="2">{!Case.Associated_Region_Address__c}</font></div><div style="background-color: rgb(255, 255, 255);"><font face="Arial, sans-serif" size="2"><font><font style="color: rgb(0, 0, 0);">Phone:&nbsp;</font><font>{!Case.Associated_Region_Phone__c} -&nbsp;Fax:&nbsp;</font></font>{!Case.Associated_Region_Fax__c}</font></div><div style="background-color: rgb(255, 255, 255);"><font face="Arial, sans-serif"><font size="2" style="color: rgb(0, 0, 0);">Email:&nbsp;</font><font size="2">{!Case.Associated_Region_Email__c}</font></font></div></div></div><div style="color: rgb(0, 0, 0); text-align: center;"><a href="http://www.mass.gov/eec"><font face="Arial, sans-serif" size="2">www.mass.gov/eec</font></a></div>]]></td>
+</tr>
+</table>

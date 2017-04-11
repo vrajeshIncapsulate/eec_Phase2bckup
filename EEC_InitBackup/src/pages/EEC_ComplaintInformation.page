@@ -1,0 +1,201 @@
+<apex:page controller="EEC_ComplaintsInformationController" doctype="html-5.0" 
+           showheader="false" sidebar="false" standardstylesheets="false" 
+           action="{! noComplaintRedirect }" cache="false" language="en_US">
+    <c:EEC_Complaints_NavBar /> 
+    <div class="complaints-wrapper">
+        <div class="complaints-title-bar">
+            <h3 class="md-headline">
+                Complaint Information
+            </h3>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <span>Please describe your complaint with as much detail as possible so we can accurately assess your case. 
+                Make sure you add all persons associated with this complaint (children and names of educators or program staff 
+                people as well as, if applicable, family members of a family child care provider, family child care system, 
+                police department, hospital, medical staff, transportation company, resource and referral agency, community 
+                agency, etc.). Note that most of the fields of this form are mandatory, if an item is not applicable to your 
+                complaint, please enter N/A.  If you are filing a complaint about abuse or neglect of a child, you should also 
+                contact the Department of Children and Families to file a 51A report in addition to completing this process 
+                with EEC.</span>
+            </div>
+        </div>
+        <apex:form id="questionRefreshSection" styleClass="complaints-form">
+            <h3 class="eec-subhead">Complaint Description</h3>
+            <div class="question-wrapper">
+                <apex:repeat value="{! ComplaintInformationQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" /> 
+                </apex:repeat>
+                
+                <div class="form-group" layout="column">
+                    <apex:outputLabel rendered="{! complaint.DateEventOccuredAsDate != NULL && complaint.DateEventOccuredAsDate < OneMonthAgo }" styleClass="base-label">What is prompting you to contact EEC at this time? <span styleclass="errorMsg"> *</span></apex:outputLabel>
+                    <apex:inputTextArea rendered="{! complaint.DateEventOccuredAsDate != NULL && complaint.DateEventOccuredAsDate < OneMonthAgo }" html-data-parsley-required="true" styleclass="form-control" value="{! complaint.Reason_to_Report_Now }" />
+                </div>
+            </div>
+            
+            <h3 class="eec-subhead">Involved Persons</h3>
+            
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>Add below all persons (children and adults) who were involved in this complaint</span>
+                </div>
+            </div>
+            
+            <div class="inline-row add-person-row" layout="row">
+                <div></div>
+                <apex:actionstatus id="addPerson">
+                    <apex:facet name="stop">
+                        <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue"
+                                            html-layout-padding="true"
+                                            html-flex-order-sm="1"
+                                            html-flex-order-md="1"
+                                            html-md-button="true"
+                                            action="{! addInvolved }"
+                                            rerender="questionRefreshSection"
+                                            status="addPerson" 
+                                            value="Add" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <button class="md-button md-raised md-eec complaints-search">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </button>
+                    </apex:facet>
+                </apex:actionstatus>
+            </div> 
+            <apex:outputPanel >
+                <div class="parsley-errors-list filled hide" id="age-dob-errormsg"><p class="errorMsg parsley-required">Please enter the date of birth of the child or, if not known, his / her approximate age.</p></div>
+                <apex:variable var="num" value="0" />
+                <apex:repeat value="{! involvedPersons }" var="p">
+                    <div class="panel panel-default panel-padding">
+                        <div class="question-wrapper-continuous">
+                            <apex:repeat value="{! InvolvedQuestions }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! p}" />
+                            </apex:repeat>
+                        </div>
+                        <div class="inline-row" layout="row">
+                            <div></div>
+                            <apex:actionstatus id="removePerson">
+                                <apex:facet name="stop">
+                                    <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue"
+                                                        html-layout-padding="true"
+                                                        html-flex-order-sm="1"
+                                                        html-flex-order-md="1"
+                                                        html-md-button="true"
+                                                        action="{! removeInvolved }"
+                                                        rerender="questionRefreshSection"
+                                                        status="removePerson" 
+                                                        value="Remove">
+                                        <apex:param name="personToRemove" assignTo="{! personToRemove }" value="{! num }" />
+                                    </apex:commandbutton>
+                                </apex:facet>
+                                <apex:facet name="start">
+                                    <button class="md-button md-raised md-eec complaints-search">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                    </button>
+                                </apex:facet>
+                            </apex:actionstatus>
+                        </div>
+                    </div>
+                    
+                    <apex:variable var="num" value="{! VALUE(num) + 1 }" />
+                </apex:repeat>
+            </apex:outputPanel>
+            
+            <h3 class="eec-subhead">Information Shared with Provider</h3>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>It is helpful for us to know whether your concerns were shared with the provider/program and what happened once the information was shared:</span>
+                </div>
+            </div>
+            <div class="question-wrapper">
+                <apex:repeat value="{! SharedQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+            
+            <h3 class="eec-subhead">Filing with DCF</h3>
+            <div class="question-wrapper flex-last-end">
+                <apex:repeat value="{! DCFFilingQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+            <h3 class="eec-subhead">Other Information</h3> 
+            <div>
+                <apex:repeat value="{! OtherInformationQuestions }" var="q">
+                    <c:EEC_Question question="{! q }" object="{! complaint }" />
+                </apex:repeat>
+            </div>
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandbutton styleclass="md-button md-raised md-button md-default-theme md-eec trigger-validate"
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1"
+                                    html-flex-order-md="1" 
+                                    html-md-button="true"
+                                    action="{! back }"
+                                    value="Previous" />
+                <apex:actionstatus id="nextStatus">
+                    <apex:facet name="stop">
+                        <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue trigger-validate"
+                                            html-layout-padding="true"
+                                            html-flex-order-sm="1"
+                                            html-flex-order-md="1"
+                                            html-md-button="true"
+                                            status="nextStatus"
+                                            onclick="if(!customValidation()){return false}" 
+                                            action="{! goToComplainerInfo }"  
+                                            value="Next" 
+                                            />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <button class="md-button md-raised md-eec complaints-search">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </button>
+                    </apex:facet>
+                </apex:actionstatus> 
+            </md-content> 
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandLink styleclass="md-button md-raised md-button md-default-theme"
+                                    onclick="return confirm('Are you sure you wish to cancel your complaint?');" 
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1" 
+                                    html-flex-order-md="1"
+                                    html-md-button="true"
+                                    status="searchStatus"
+                                    action="{! cancel }" 
+                                    value="Cancel" />
+            </md-content>
+            <c:EEC_ComplaintsFooter /> 
+        </apex:form>
+        <script>
+            function customValidation(){
+                var flag = false;
+                var pair = 1;
+                var erroMsg = $('#age-dob-errormsg');
+                $('.inputGroupHasValue-1').each(function(i, obj) {
+                    if (this.value.length != 0) {
+                      if($(this).find('#age-dob-errormsg')){
+                          $(this).closest("#age-dob-errormsg").remove();
+                      }    
+                      flag = true;
+                    }
+                    if(pair == 2){
+                         if(!flag){
+                            var clonedMsg = erroMsg.clone();
+                            $(obj).parent().parent().parent().parent().append(clonedMsg);
+                            clonedMsg.removeClass('hide');
+                         }
+                         if(i < $('.inputGroupHasValue-1').length - 1)
+                             flag = false;
+                         pair=0;
+                    }
+                    pair++;
+                });
+                
+                if($('.inputGroupHasValue-1').length == 0){
+                    flag = true;
+                }
+                return flag;
+            }
+        </script>
+    </div>
+</apex:page>

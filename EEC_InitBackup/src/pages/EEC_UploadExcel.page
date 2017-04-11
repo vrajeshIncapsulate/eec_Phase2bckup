@@ -1,0 +1,9 @@
+<apex:page standardController="Inspection__c" extensions="EEC_UploadExcelController">
+	<apex:outputPanel id="disableImg"> 
+    	<apex:form style="min-height:300px;">
+	        <apex:pagemessages escape="false" />
+	        <apex:inputFile value="{!csvFileBody}"  filename="{!csvAsString}"/>
+	        <apex:commandButton value="Upload CSV" action="{!uploadExcel}" />
+	    </apex:form>
+	</apex:outputPanel>
+</apex:page>

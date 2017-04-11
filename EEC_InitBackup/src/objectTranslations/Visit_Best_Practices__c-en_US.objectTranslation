@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visit Best Practices</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visit Best Practices</value>
+    </caseValues>
+    <fields>
+        <label><!-- Associated Visit --></label>
+        <name>Associated_Visit__c</name>
+        <relationshipLabel><!-- Visit Best Practices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Practice Guidance --></label>
+        <name>Best_Practice_Guidance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Best Practice --></label>
+        <name>Best_Practice__c</name>
+        <relationshipLabel><!-- Visit Best Practices --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Observation --></label>
+        <name>Observation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Provider Type --></label>
+        <name>Visit_Provider_Type__c</name>
+    </fields>
+    <layouts>
+        <layout>Visit Best Practices Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action. --></errorMessage>
+        <name>Lock_in_RO_Visits</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The Best Practice must be Applicable To the Provider Type. It is possible that the Best Practice selected appears multiple times as applicable to different Provider types, but the one matching this Visits Provider must be the one selected. --></errorMessage>
+        <name>Verify_Best_Practice_Applicable_to_Type</name>
+    </validationRules>
+</CustomObjectTranslation>

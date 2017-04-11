@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Once a license transaction requiring signature of BRC Consent is received, this email is sent to require the licensee to sign a BRC consent</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>67 - Request signature of Licensee BRC consent</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - Your BRC Consent Form is ready for signature</subject>
+    <type>html</type>
+</EmailTemplate>

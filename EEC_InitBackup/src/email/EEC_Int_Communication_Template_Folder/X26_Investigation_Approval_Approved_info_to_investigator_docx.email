@@ -1,0 +1,8 @@
+Hello,
+
+Investigation {!Investigation__c.Name} associated to Provider {!Investigation__c.Provider_No__c} has been reviewed and approved. The investigation report is now ready to be issued and sent to the Provider, a task has been created in LEAD for this purpose.
+
+This investigation can be directly access from this email using the following link: 
+{!Investigation__c.Link}.
+
+LEAD System

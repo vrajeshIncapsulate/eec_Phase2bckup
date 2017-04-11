@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label><!-- DB Region --></label>
+        <name>DB_Region__c</name>
+        <picklistValues>
+            <masterLabel>APAC</masterLabel>
+            <translation><!-- APAC --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EMEA</masterLabel>
+            <translation><!-- EMEA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>LA</masterLabel>
+            <translation><!-- LA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NA</masterLabel>
+            <translation><!-- NA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- For_Portal Email --></label>
+        <name>For_Portal_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- Licensor ID as used in legacy systems. --></help>
+        <label><!-- Historic Licensor No --></label>
+        <name>Historic_Licensor_No__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Member of My Team --></label>
+        <name>Is_Member_of_My_Team__c</name>
+    </fields>
+    <fields>
+        <label><!-- My Team Members --></label>
+        <name>My_Team_Members__c</name>
+    </fields>
+    <fields>
+        <help><!-- If check, this user will need his/her supervisor approval before being able to process / close licensing transactions --></help>
+        <label><!-- Need Supervisor Approval --></label>
+        <name>Need_Supervisor_Approval__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <name>Region__c</name>
+        <picklistValues>
+            <masterLabel>Central</masterLabel>
+            <translation><!-- Central --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Metro Boston</masterLabel>
+            <translation><!-- Metro Boston --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Northeast</masterLabel>
+            <translation><!-- Northeast --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Southeast and Cape</masterLabel>
+            <translation><!-- Southeast and Cape --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Western</masterLabel>
+            <translation><!-- Western --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- DSProSFMembershipStatus --></label>
+        <name>dsfs__DSProSFMembershipStatus__c</name>
+    </fields>
+    <fields>
+        <label><!-- DSProSFPassword --></label>
+        <name>dsfs__DSProSFPassword__c</name>
+    </fields>
+    <fields>
+        <label><!-- DSProSFUsername --></label>
+        <name>dsfs__DSProSFUsername__c</name>
+    </fields>
+    <layouts>
+        <layout>User Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>User Profile Layout</layout>
+        <layoutType>UserAlt</layoutType>
+        <sections>
+            <label><!-- About --></label>
+            <section>About</section>
+        </sections>
+        <sections>
+            <label><!-- Contact --></label>
+            <section>Contact</section>
+        </sections>
+    </layouts>
+    <validationRules>
+        <errorMessage><!-- This profile shouldn&apos;t be used. Please use the profile: &quot;Community Standard User without transactions for EEC&quot; --></errorMessage>
+        <name>Customer_Community_User_Not_Used</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please add the region for this user. --></errorMessage>
+        <name>Region_Required_for_Internal_User</name>
+    </validationRules>
+</CustomObjectTranslation>

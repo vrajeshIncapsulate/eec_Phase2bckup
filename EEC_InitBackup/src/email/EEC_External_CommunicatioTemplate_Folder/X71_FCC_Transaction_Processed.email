@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div><p style="margin-top: 10px; margin-right: 0px; margin-left: 0px; font-size: medium; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, sans-serif; background-color: rgb(255, 255, 255);"><i><font size="2">This email is intended to the licensed provider under the name: {!Account.Name}</font></i></p></div><div><i><font size="2"><br></font></i></div><font face="Arial, sans-serif" size="2">Dear {!Licensing_Transaction__c.Provider__c},<br><br>For your information, your {!Licensing_Transaction__c.RecordType} transaction submitted on {!Licensing_Transaction__c.Submission_Date__c} has been completed and closed by EEC.&nbsp; <br><br>You may contact your licensor&nbsp; {!Licensing_Transaction__c.Assigned_To__c} by phone at {!Licensing_Transaction__c.Assigned_To_Phone__c} or by email at {!Licensing_Transaction__c.Assigned_User_Email__c} with any questions or concerns related to this matter.&nbsp; <br><br>Sincerely,<br><br>The Department of Early Education and Care.</font><br><br>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<div align="center"><font face="Arial,Sans-Serif" size="2">{!Account.Region_Address__c}<br>{!Account.Region_Phone__c} • {!Account.Region_Fax__c} • {!Account.Region_Email__c}<br>www.mass.gov/eec</font></div>]]></td>
+</tr>
+</table>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email notification is sent to the Provider few days before the deadline to receive correction actions after a visit so the Provider can send the corrective actions on time</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>6 - Notification to Provider of deadline approaching for corrective action</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - Deadline Approaching for Corrective Action</subject>
+    <type>html</type>
+</EmailTemplate>

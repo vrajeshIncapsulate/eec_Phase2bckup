@@ -1,0 +1,7 @@
+Hello,
+
+Investigation {!Investigation__c.Name} associated to Provider {!Investigation__c.Provider_No__c} which was sent for your approval has been recalled by {!User.Name} and does not need your review anymore.
+
+For more information, this investigation can be directly access from this email using the following link: {!Investigation__c.Link}.
+
+LEAD System

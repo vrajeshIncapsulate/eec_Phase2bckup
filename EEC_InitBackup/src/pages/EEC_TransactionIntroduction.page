@@ -1,0 +1,146 @@
+<apex:page controller="EEC_TransactionWizardController" standardStylesheets="false" showheader="false" sidebar="false">
+  <head>
+    <title>EEC : Transaction - Introduction</title>
+    <c:EEC_Header id="pageHeader" />
+      
+    <style>
+      [id*='IntroductionForm'] {
+        margin-bottom: 120px;  
+      }
+        
+      .trans-title {
+        margin-top: 45px;
+        margin-bottom: 10px;
+        padding: 5px;
+      }
+      p{
+      	font-weight : normal;
+        font-size : 16px;
+      }
+      label{
+      	font-weight : normal;  
+      }  
+      
+      .trans-button span {
+        white-space: normal;
+      }
+        div.featured-box {
+            background: rgba(0, 0, 0, 0.01) none repeat scroll 0 0;
+            border-radius: 6px;
+            padding: 23px;
+            text-align: center;
+            transition: all 0.2s ease 0s;
+        	margin-bottom:20px;
+        }
+        div.featured-box i.fa {
+            background-color: #a94545;
+            border-radius: 50%;
+            color: #fff;
+            display: inline-block;
+            font-size: 40px;
+            height: 100px;
+            line-height: 100px;
+            margin: 20px 0;
+            padding: 0;
+            position: relative;
+            text-align: center;
+            width: 100px;
+        }
+        i.fa {
+            text-decoration: none !important;
+        }
+        .cancel-btn{
+        	margin-bottom: 30px;
+            margin-left: 15px;
+            margin-top: -10px;
+        }
+        .not-visible{
+        	display : none;
+        }
+        .card-holder{
+        	margin-top : -20px
+        }
+        .md-display-1 {
+    		font-size: 24px;
+        }
+        .panel{
+        	margin-left: 20px;
+    		margin-right: 20px;
+    		font-size: 17px;
+        	font-family: RobotoDraft,Roboto,'Helvetica Neue',sans-serif;
+        }
+    </style>
+  </head>
+    
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />  
+     
+    <apex:form id="IntroductionForm">
+      <apex:actionFunction action="{!callTransaction}" name="callTransaction">
+        <apex:param name="buttonLabel" value=""/>   
+      </apex:actionFunction>  
+        
+	  <apex:outputPanel layout="block" rendered="true">
+        <div class="trans-title">
+          <h3 class="md-display-1">
+              <div class="panel panel-default">
+                	<div class="panel-body">
+              			<apex:outputtext value="{!leadConfiguration.Portal_Transaction_Introduction__c}" escape="false"/>
+                  </div>
+              </div>
+          </h3>
+        </div>
+        <div layout="row" layout-align="center center">
+		<div class="trans-button-container ng-cloak" flex="90" layout-margin="true" layout-padding="true" layout-align="center center">
+          <div class="row cancel-btn">
+              <apex:commandLink action="{!cancelInstruction}" styleClass="md-button md-raised md-eec pull-right">Cancel and Return to Provider</apex:commandLink>
+          </div>
+          <div class="card-holder">
+          <apex:repeat id="ButtonList" value="{!buttonList}" var="bl">
+              {!IF(provider.Licensing_Transactions__r != null,'','')}
+            <div class="col-md-4 {!IF(bl == 'Cancel','not-visible','')}" style="height: 287px; margin-bottom: 10px;margin-top: 25px;">
+            	<div class="featured-box noborder" style="height: 310px;">  
+                <apex:commandLink action="{!callTransaction}" styleClass="trans-button md-raised {!IF(bl != 'Cancel', 'md-eec', '')}" >
+                  	<apex:param name="buttonLabel" value="{!bl}"/> 
+                    <i class="fa fa-file-text-o"></i>
+                    <h4>{!bl} {!IF(bl == 'Apply for an License Upgrade' , ' for eight or ten children ', ' ')}</h4>
+                </apex:commandLink>    
+                    <h4><apex:outputLabel escape="false" value="<p>Instructions page will inform you about all items that EEC must receive in order to process your application.</p>" rendered="{!bl == 'Apply for a New License'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Instructions page will inform you about all items that EEC must receive in order to process your application.</p>" rendered="{!bl == 'Apply for License Renewal'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Please see regulation <a href='/EEC_PortalRegulationView?id=a08j0000002oqb7' target='_blank'>7.09(15)(b)(2)</a> and <a href='/EEC_PortalRegulationView?id=a08j0000002oqb4' target='_blank'>7.09(15)(b)(3)</a> regarding qualifications to upgrade your license prior to beginning this application. </p>" rendered="{!bl == 'Apply for an License Upgrade'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Once you move, you may not reopen your program until the EEC licensor has visited your new address.</p>" rendered="{!bl == 'Apply for a Change of Address'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Add or delete an area approved for family child care.  This could impact your licensed capacity.</p>" rendered="{!bl == 'Notify Change of Room usage'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Add or remove a household member or someone regularly on the licensed premises.</p>" rendered="{!bl == 'Notify Change in Household / Individuals Regularly on the Premises'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>Replace a lost or damaged license.</p>" rendered="{!bl == 'Request Re-issuance of License Certificate'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>This is only necessary if your license has in-active status.  If the license is in-active, you may not resume care until you receive your license back from EEC.</p>" rendered="{!bl == 'Re-Activate License'}"></apex:outputLabel></h4>
+                	<h4><apex:outputLabel escape="false" value="<p>You may only do so if you are not caring for children.</p>" rendered="{!bl == 'De-Activate License'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<p>This action will permanently closed your licensing file.  You may only do so if you are not caring for children.</p>" rendered="{!bl == 'Close Prior Expiration'}"></apex:outputLabel></h4>
+                    <h4><apex:outputLabel escape="false" value="<h4>{!bl}</h4>" rendered="{!bl == 'Cancel'}"></apex:outputLabel></h4>
+                </div>
+              </div>
+          </apex:repeat>
+         </div>
+        </div>
+        </div>
+	  </apex:outputPanel>
+    </apex:form>
+
+    <c:EEC_Site_Footer id="siteFooter" /> 
+      
+    <script>
+     app.controller('TransactionController', ['$scope', '$location', function($scope, $location) {
+       // Instance of controller.
+       var tranCtrl = this;
+       // Controller level variables.
+       
+       // Function to convert the unix date to a usable format.
+       tranCtrl.convertDateToString = function(dateStr) {
+         var d = new Date(dateStr);
+         // Format the date in English standard. Increment the month by one due to Date returning 0-11.  
+         var formattedDate = d.getUTCDate() + '/' + (d.getUTCMonth() + 1) + '/' + d.getUTCFullYear(); 
+         return formattedDate;
+       }
+     }]);
+    </script>
+  </body>  
+</apex:page>

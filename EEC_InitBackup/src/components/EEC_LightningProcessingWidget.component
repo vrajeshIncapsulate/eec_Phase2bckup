@@ -1,0 +1,41 @@
+<apex:component >
+  <apex:attribute name="primaryMsg" description="The primary message of the spinner." type="String" required="false" default="Processing..." />
+  <apex:attribute name="secondaryMsg" description="The secondary message of the spinner." type="String" required="false" default="Will proceed to next page when completed." />
+    
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS100, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />  
+    
+  <style>
+    .slds-spinner {
+      left: 0 !important; 
+      right: 0; 
+      bottom: 0; 
+      margin: 0 auto;  
+    }
+      
+    .message-text {
+      position: absolute; 
+      width: 100%; 
+      text-align: center; 
+      padding-left: 30px;    
+    }
+      
+    .primary-message-text {
+      top: 55%; 
+    }
+      
+    .secondary-message-text {
+      top: 57%;
+    }
+  </style>
+
+  <div class="lpw-widget-container lpw-widget slds" style="display: none;">
+    <div class="slds-spinner_container">
+      <div class="slds-spinner--brand slds-spinner slds-spinner--large" aria-hidden="false" role="alert">
+        <div class="slds-spinner__dot-a"></div>
+        <div class="slds-spinner__dot-b"></div>
+      </div>
+      <strong class="message-text primary-message-text">{!primaryMsg}</strong>
+      <small class="message-text secondary-message-text">{!secondaryMsg}</small>
+    </div>
+  </div>
+</apex:component>

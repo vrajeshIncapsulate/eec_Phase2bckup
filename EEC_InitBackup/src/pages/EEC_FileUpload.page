@@ -1,0 +1,26 @@
+<apex:page controller="S3AngularSampleCtrl" showHeader="false" standardStylesheets="false" sidebar="false">
+  <head>
+    <c:EEC_Header id="pageHeader" />    
+      
+    <style>
+      html, body, md-content {
+        background-color: transparent; 
+      }
+    </style>
+  </head>
+    
+  <body ng-app="eecApp">
+    <!-- This page requires that all Angular Assets are loaded in the parent container. -->
+    <s3-File-Upload 
+      bucket_name="{!bucketName}" 
+      prefix="{!transactionNumber}/"
+      key="{!key}" 
+      acl="{!bucketItemAccess}" 
+      redirect_url="{!portalUrl}" 
+      remote_func_params="{!$RemoteAction.S3AngularSampleCtrl.generateMultiplePolicySignature}"
+      target="{!formTarget}">
+    </s3-File-Upload>  
+    
+    <c:EEC_Site_Scripts id="pageScripts"/>  
+  </body>  
+</apex:page>

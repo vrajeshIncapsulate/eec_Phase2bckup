@@ -1,0 +1,259 @@
+<apex:page standardController="Inspection__c" showHeader="false" standardStylesheets="false" extensions="InspectVisitModeController" id="InspectVisitModeId" sidebar="false">
+    <head>
+        <c:EEC_VisitModeHeader id="pageHeader" />
+        
+        <style>
+            
+        </style>
+        <script language="JavaScript" type="text/javascript">
+            $(document).ready(function() {
+                $('#Container').mixItUp();
+                
+                $('.file').fileinput();
+                $('[id$=attachments]').fileinput({
+                    showRemove: false,
+                    
+                    showUpload: false
+                });  
+            });
+        
+            function getData()
+            {
+                getItems();
+            }
+        
+            function save(id){
+                $('#lblMessage').text("");
+                var observation = $('#obse'+id).val();
+                var techAssistance = $('#tech'+id).val();
+                var result =  $('.radio-'+id).val();
+                var res = $('#div'+ id +' input[name*=result-radio]:checked').val()
+                if(res == "Non-Compliant" && !$('#obse'+id).val())
+                {
+                    $('#lblMessage'+id).text('Observations should be prowvided for non-compliant item as it will be used in Non-Compliant statement.');
+                }
+                else
+                    saveItems(observation,techAssistance,res,id);
+            }
+        
+            function createNew()
+            {
+                sforce.one.createRecord("Inspection_Item__c");  
+            }
+            
+        
+            function toggleSideBar()
+            {
+                if ($('#sidebar > ul').is(":visible") === true) {
+                    $('#main-content').css({
+                        'margin-left': '0px',
+                    });
+                    $('.wrapper').css({
+                        'padding-left': '60px',
+                    });
+                    $('#sidebar').css({
+                        'margin-left': '-300px'
+                    });
+                    $('#sidebar > ul').hide();
+                    $("#container").addClass("sidebar-closed");
+                } else {
+                    $('#main-content').css({
+                        'margin-left': '300px',
+                    });
+                     $('.wrapper').css({
+                        'padding-left': '10px',
+                    });
+                    $('#sidebar > ul').show();
+                    $('#sidebar').css({
+                        'margin-left': '0',
+                    });
+                    $("#container").removeClass("sidebar-closed");
+                }
+            }
+        </script>
+  </head>
+    <body>
+        <section id="container">
+            <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" onClick="toggleSideBar();" data-placement="right" id="toggle-btn"></div>
+              </div>
+              <a class="logo centered"><b>Visit Mode</b></a>  
+            </header>
+          <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
+                  <h5 class="centered">EEC</h5>
+                  <hr/>
+                  <li class="sub-menu">
+                      <a class="active" href="javascript:;">
+                          <i class="fa fa-cogs"></i>
+                          <span>Result Filter</span>
+                      </a>
+                      <ul class="sub">
+                          <li><span class="btn filter active" data-filter="all">All</span></li>
+                          <li><span class="btn filter" data-filter="none">Non Selected</span></li>
+                          <li><span class="btn filter" data-filter=".non-assessed">Non Assesed Items</span></li>
+                          <li><span class="btn filter" data-filter=".Non-Compliant">Non-Compliant Items</span></li>
+                          <li><span class="btn filter" data-filter=".Compliant">Compliant Items</span></li>
+                          <li><span class="btn filter" data-filter=".TechAssistance">Technical Assistance Provided</span></li>
+                          <li><span class="btn filter" data-filter=".Observation">Observations Provider</span></li>
+                          
+                      </ul>
+                  </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-cogs"></i>
+                          <span>Category Filter</span>
+                      </a>
+                      <ul class="sub">
+                          <li><span class="btn filter active"  data-filter="all">All</span></li>
+                          <li><span class="btn filter" data-filter="none">Non Selected</span></li>
+                          <li><span class="btn filter" data-filter=".BRC">BRC Information</span></li>
+                          <li><span class="btn filter" data-filter=".Classroom">Classroom</span></li>
+                          <li><span class="btn filter" data-filter=".Curriculum">Curriculum and Activities</span></li>
+                          <li><span class="btn filter" data-filter=".Equipments">Equipments and Materials</span></li>
+                          <li><span class="btn filter" data-filter=".Family">Family Involvement</span></li>
+                          <li><span class="btn filter" data-filter=".Health">Health and Safety</span></li>
+                          <li><span class="btn filter" data-filter=".Infection">Infection Control</span></li>
+                          <li><span class="btn filter" data-filter=".Inspections">Inspections</span></li>
+                          <li><span class="btn filter" data-filter=".Interactions">Interactions</span></li>
+                          <li><span class="btn filter" data-filter=".Mealtime">Mealtime, Food, Food Preparation</span></li>
+                          <li><span class="btn filter" data-filter=".Medications">Medications </span></li>
+                          <li><span class="btn filter" data-filter=".Physical">Physical Facility - Indoors</span></li>
+                          <li><span class="btn filter" data-filter=".Physical">Physical Facility - Outdoors</span></li>
+                          <li><span class="btn filter" data-filter=".Postings">Postings</span></li>
+                          <li><span class="btn filter" data-filter=".Progress">Progress Reports</span></li>
+                          <li><span class="btn filter" data-filter=".Review">Review of Written Materials</span></li>
+                          <li><span class="btn filter" data-filter=".Sleep">Sleep, Rest, Quiet Activities</span></li>
+                          <li><span class="btn filter" data-filter=".Staff">Staff and Educators</span></li>
+                          <li><span class="btn filter" data-filter=".Toileting">Toileting / Diapering Handwashing </span></li>
+                          <li><span class="btn filter" data-filter=".Transportation">Transportation</span></li>
+                          <li><span class="btn filter" data-filter=".Water">Water and Safety</span></li>
+
+                      </ul>
+                  </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+       <apex:form id="mainForm" enctype="multipart/form-data">     
+       <section id="main-content">
+          <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i> List of Visit Items</h3>
+                  <div class="row">
+                      <div class="col-lg-12">
+                        <apex:commandbutton styleClass="btn btn-info" onClick="createNew();" value="Add New Visit Item"/>
+                        <apex:commandbutton styleClass="btn btn-info pull-right" action="{!MarkCompliantTabletView}" value="Mark Compliant"/> 
+                      </div>
+                  </div>
+                    <apex:messages style="color: #FF0000; font-weight: bold;"/>
+                    <apex:outputText value="{!Inspection__c.Id}" rendered="false" />
+                    <apex:outputText value="{!Inspection__c.name}" rendered="false" />
+                    <apex:outputText value="{!Inspection__c.Provider_No__c}" rendered="false" />
+                    <apex:outputText value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+              <apex:outputText value="{!Inspection__c.Can_be_Edited__c}" rendered="false" /><br/><br/>
+                    <div class="row mt">
+                        <div class="col-lg-12">
+                            <div class="row" id="Container">
+                                <apex:outputPanel id="visitItemsConainer">
+                                <apex:outputPanel id="visitItems">
+                                <apex:repeat value="{!iiWrapperList}" var="ii" rendered="{!iiWrapperList.size > 0}">
+                                    <div class="col-lg-4 col-md-4 col-sm-4 mb mix {!ii.iCategory} {!ii.result} {!IF(ii.observations != null, 'Observation', '')} {!IF(ii.RandomVisitItem != true, 'KeyIndicators', '')} {!IF(ii.techAssistance != null, 'TechAssistance', '')} {!IF(ii.result == null || ii.result == '', 'non-assessed', '')}">
+                                        <div class="twitter-panel pn {!IF(ii.result == null || ii.result == '', '', 'nonAssessed')}"><br/>
+                                            <p class="user"><span class="pull-left panel-label">Name: </span> <a href="#" data-toggle="modal" data-target="#{!ii.Name}"><span class="badge {!IF(ii.result == 'Compliant', 'bg-success fa fa-pencil-square-o' , 'bg-info fa fa-pencil-square-o')} pull-right">{!IF(ii.result != null, ii.result,'Not Assesed')}</span></a>
+                                                <span class="panel-content"><apex:outputpanel rendered="{!!ii.isDeleted}">
+                                                    <apex:commandlink onclick="window.open('/{!ii.Id}','_blank','width=1000, height=700'); return false;" value="{!ii.Name}" />
+                                                </apex:outputpanel></span>
+                                            </p>
+                                            <p class="user"><span class="pull-left panel-label">Associated Regulation:</span> 
+                                                <span class="panel-content"><apex:outputpanel rendered="{!!ii.isDeleted && ii.regulationMap != null}">
+                                                    <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                                                        <apex:commandlink onclick="window.open('/apex/EEC_RegulationView?id={!ii.regulationMap[iiName]}','_blank','width=500, height=400'); return false;" value="{!iiName}" />&nbsp;&nbsp;&nbsp;
+                                                    </apex:repeat>
+                                                    </apex:outputpanel></span>
+                                            </p>
+                                            <p class="user">
+                                                <span class="pull-left panel-label">Category: </span>
+                                                <span class="panel-content"><apex:outputText value="{!ii.iCategory}" rendered="{!!ii.isDeleted}" /></span>
+                                            </p>
+                                            <p class="user">
+                                                <span class="pull-left panel-label">Item Name: </span>
+                                                <span class="panel-content"><apex:outputText value="{!ii.itemName}" rendered="{!!ii.isDeleted}"/></span>
+                                            </p>
+                                        </div>
+                                        </div>
+                                    <div class="modal fade " id="{!ii.Name}" tabindex="-1" role="dialog" aria-labelledby="{!ii.Name}Label" aria-hidden="true">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="exampleModalLabel">Update Visit Item</h4>
+                                          </div>
+                                          <div class="modal-body">
+                                            <form>
+                                              <div class="form-group">
+                                                <label id="lblMessage{!ii.Id}" style="color: #FF0000; font-weight: bold;"></label>  
+                                                <label for="message-text" class="control-label">Name:</label>
+                                                    <apex:outputpanel rendered="{!!ii.isDeleted}" >
+                                                        <apex:commandlink onclick="window.open('/{!ii.Id}','_blank','width=1000, height=700'); return false;" value="{!ii.Name}" />
+                                                    </apex:outputpanel>                                              
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="message-text" class="control-label">Description:</label>
+                                                    <apex:outputText value="{!ii.description}" rendered="{!!ii.isDeleted}" />                                              
+                                              </div>  
+                                              <div class="form-group" id="div{!ii.Id}">
+                                                    <apex:outputpanel rendered="{!!ii.isDeleted}">
+                                                        <apex:selectRadio value="{!ii.result}"  id="result-radio" styleClass="radio-{!ii.Id} input-group" style="padding-left:50px;" disabled="{!ii.nonAssessed}">
+                                                            <table style="display: block;">
+                                                                <tr><apex:selectOption itemLabel="Compliance" itemValue="Compliant" ></apex:selectOption></tr>
+                                                                <tr><apex:selectOption itemValue="Non-Compliant" itemLabel="Non-Compliance" >&nbsp;&nbsp;</apex:selectOption>&nbsp;&nbsp;</tr>
+                                                                <tr><apex:selectOption itemValue="Not Applicable" itemLabel="Not Applicable">&nbsp;&nbsp;</apex:selectOption></tr>
+                                                            </table>
+                                                        </apex:selectRadio>
+                                                    </apex:outputpanel>
+                                              </div>  
+                                              <div class="form-group">
+                                                <label for="message-text" class="control-label">Technical Assistance:</label>
+                                                <textarea rows="4" id="tech{!ii.Id}" class="form-control text-area" html-placeholder="Add Technical Assistance">{!ii.techAssistance}</textarea>    
+                                              </div>
+                                              <div class="form-group">
+                                                <label for="message-text" class="control-label">Observations:</label>
+                                                <textarea rows="4" id="obse{!ii.Id}" class="form-control text-area" html-placeholder="Add Observation">{!ii.observations}</textarea>  
+                                              </div>  
+                                              <div class="form-group">
+                                                 <apex:inputFile id="attachments" styleclass="form-control" value="{!tAttachment.Body}" filename="{!tAttachment.Name}" filesize="{!tAttachment.BodyLength}" contentType="{!tAttachment.ContentType}" /> 
+                                              </div>    
+                                            </form>
+                                          </div>
+                                          <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" onClick="getData()" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" onClick="save('{!ii.Id}');">Save</button>
+                                          </div>
+                                            </div>
+                                          </div>
+                                    </div>  
+                                </apex:repeat>
+                                </apex:outputPanel>
+                                </apex:outputPanel>    
+                            </div>
+                        </div>
+                      </div>
+                  </section>
+              </section>
+            </apex:form>
+            <apex:form >
+            <apex:actionFunction name="getItems" action="{!getInspectionItemData}" oncomplete="location.reload();">
+            </apex:actionFunction>    
+            <apex:actionFunction name="saveItems" action="{!SaveItems}" rerender="visitItems" oncomplete="location.reload();">
+                <apex:param name="observations" value="" />
+                <apex:param name="techAssistance" value="" />
+                <apex:param name="result" value="" />
+                <apex:param name="itemId" value="" />
+            </apex:actionFunction>
+            </apex:form>
+        </section>
+    </body>
+</apex:page>

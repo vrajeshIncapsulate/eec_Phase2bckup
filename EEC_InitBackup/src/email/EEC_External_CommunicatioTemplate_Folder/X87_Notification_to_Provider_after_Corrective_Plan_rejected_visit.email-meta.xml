@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent to the provider to inform that one corrective action has been reviewed by EEC and rejected, so it needs to be re-worked (not attached to an Investigation)</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>87 - Notification to Provider after Corrective Plan rejected (visit)</name>
+    <style>formalLetter</style>
+    <subject>EEC - A correction plan you submitted on {!Inspection_Item__c.Date_Corrective_Actions_Received__c} requires your additional review</subject>
+    <type>html</type>
+</EmailTemplate>

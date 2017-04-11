@@ -1,0 +1,215 @@
+<apex:page docType="html-5.0" showHeader="false" standardStylesheets="false" sidebar="false" controller="EEC_PortalNonCompliancePageController">
+ <head>
+    <title>EEC : Portal Provider Page</title>
+    <c:EEC_Header id="pageHeader" />
+
+    <script>
+        
+    </script>
+      <style type="text/css">
+         .input-group .form-control:first-child{
+            border-bottom-right-radius: 4px;
+            border-top-right-radius: 4px;
+          } 
+        .noncompliance-container{
+          margin-bottom : 100px; 
+        }  
+        .parsley-errors-list {
+            position: absolute;
+            bottom: -30px; 
+          }
+        thead{
+                background-color : #f5f5f5;
+        }
+        .table > thead:first-child > tr:first-child > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .footable > thead > tr > th, .footable > thead > tr > td{
+                background-image: linear-gradient(to bottom, #f5f5f5, #f5f5f5);  
+        }
+        .table {
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+        
+      .parsley-error {
+        border: 2px solid #c00;
+      }
+      .footable-row-detail-name{
+        font-weight : bold;
+      }
+      .footable-row-detail-row{
+        padding-top : 7px;    
+      }    
+        
+      .errorMsg {
+        color: #d74c3b; 
+      }
+        
+      .message[class*='error'] {
+        min-height: 90px;
+        padding: 0 20px 10px;
+        margin-bottom: 25px;
+        border-radius: 3px;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+        box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+      }
+        
+      .message[class*='error'] .messageTable {
+        width: 100%;
+      }
+        
+      .message[class*='error'] .messageText {
+        border-bottom: 1px solid grey;
+        height: 30px; 
+      }
+         
+        .form-label{
+          font-weight: bold;
+          font-size:14px;
+        }
+          
+        .header-button {
+          margin-right: 3px; 
+        }
+        .not-visible{
+            display : none;
+         }
+         .visible{
+            display : inline;
+          }
+          .input-group{
+            width : 100%;
+          }
+      
+      .correction-textarea {
+        width: 50%;   
+      }
+          
+      @media only screen and (max-width: 992px) {
+        .correction-textarea {
+          width: 65%;   
+        }    
+      }
+          
+      @media only screen and (max-width: 800px) {
+     
+        #no-more-tables td { 
+          padding-left: 30%;
+        }
+      }
+      .panel-title{
+        font-weight : normal;   
+       }    
+          
+      </style>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar"/>
+      <div class="container">
+      <apex:form styleClass="noncompliance-form">
+      <apex:outputPanel id="userDetail">    
+            <br/><br/><br/>
+            <h2 class="pull-left">Submit Corrective Actions</h2>
+            <br/><br/><br/>
+          <apex:pageMessages id="msg"></apex:pageMessages>
+      </apex:outputPanel>
+          <apex:commandButton styleClass="md-button md-raised md-eec pull-right" action="{!returnProvider}" value="Back to Provider"></apex:commandButton>
+        <apex:commandButton id="save" value="Submit" rendered="{!iiWrapperList.size != 0}" styleClass="md-button md-raised md-eec pull-right" action="{!save}"/>  
+      <br/><br/><br/>
+      
+       <div id="NoncomplianceDetail" class="noncompliance-container">
+           <apex:outputPanel rendered="{!iiWrapperList.size == 0}">
+               <md-content style="margin-top: 20px;" layout="row" flex="100" layout-align="center center">   
+                <div class="panel panel-default">
+                    <div class="panel-body"> 
+                        Currently, there are no non-compliant items identified
+                    </div>
+               </div>
+               </md-content>
+           </apex:outputPanel>
+           <apex:outputPanel rendered="{!iiWrapperList.size != 0}">
+             <h3 class="panel-title">
+               Please provide your corrective action plan by responding 
+               to each area of non-compliance noted below. 
+               Be as detailed as possible in your response. 
+               Describe what you have done to bring that area into compliance 
+               and/or to prevent a similar non-compliance in the future. 
+               You must provide a date for each correction made. 
+               To submit the response to your licensor, press "submit." 
+               Your licensor will not receive an alert that your plan is 
+               available for review until all areas have been completed and submitted. 
+               Your licensor will be in touch with you if further 
+               information is needed in order for EEC to determine compliance. 
+               Once submitted, your response will become part of your licensing record.
+               </h3>  <br/><br/>
+           </apex:outputPanel>
+           <apex:outputPanel rendered="{!iiWrapperList.size > 0}">
+           <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Statement of Non-Compliance (click on "+" on each item to respond to the non-compliance)
+                </h3>
+            </div>
+            <div class="panel-body"> 
+                <div>
+                  <table class="table table-hover crtable">
+                      <thead>
+                          <tr>    
+                            <th data-class="expand">Associated Regulations</th>                                     
+                            <th>Statement of Non-Compliance</th>
+                            <th data-hide="all">Corrective Action EEC Feedback</th>  
+                            <th data-hide="all">Correction Plan</th>
+                            <th data-hide="all">Date Correction Implemented</th>  
+                          </tr>
+                       </thead>   
+                          <apex:repeat value="{!iiWrapperList}" var="visit" >  
+                              <script> console.log(visit); </script>
+                              <tr>  
+                                <td data-title="Regulations">  
+                                  <apex:repeat value="{!visit.regulationMap}" var="iiName">
+                                     <apex:commandlink onclick="window.open('/apex/EEC_PortalRegulationView?id={!visit.regulationMap[iiName]}','_blank','width=800, height=600,scrollbars=yes');" value="{!iiName}" />
+                                  </apex:repeat>
+                                </td>
+                                <td data-title="Statement">{!visit.observations}</td> 
+                                <td data-title="Feedback">{!visit.viFeedback}{!visit.ncFeedback}</td>   
+                                <td data-title="Correction Plan">
+                                    <apex:inputtextarea styleClass="form-control" value="{!visit.correctionPlan}" rows="20"/><br/>
+                                    <div class="errorMsg {!IF(visit.implementdate == null || visit.correctionPlan != null, 'not-visible'  , 'visible')}" >This value is required</div>  
+                                </td>                                
+                                <td data-title="Date Correction">
+                                       <apex:input styleClass="form-control" type="text" html-data-provide="datepicker" value="{!visit.implementdate}" >
+                                       </apex:input>
+                                       <div class="errorMsg {!IF(visit.correctionPlan == '' || visit.implementdate != null, 'not-visible'  , 'visible')}" >This value is required</div>  
+                                </td>
+                              </tr>
+                          </apex:repeat>
+                 </table>
+                </div>
+             </div>
+            </div>
+           </apex:outputPanel>   
+    </div>
+    </apex:form>
+          <script type="text/javascript">
+              var form = j$(".noncompliance-form").parsley({
+                errorsWrapper: '<div class="parsley-errors-list"></div>',
+                errorTemplate: '<p class="errorMsg"></p>'    
+              });
+             
+              j$(document).ready(function() {
+                  j$('.crtable').footable();
+                  j$('.crtable').trigger('footable_expand_first_row');
+                  j$('.footable-even').css('display', 'table-row');
+                  j$('.footable-odd').css('display', 'table-row');
+              });
+            </script>
+    </div>
+   <c:EEC_Site_Footer id="siteFooter" />   
+ </body>
+</apex:page>

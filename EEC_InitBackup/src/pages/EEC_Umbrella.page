@@ -1,0 +1,523 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="EEC_PortalMyProviderPageController" >
+  <head>
+    <title>EEC : Umbrella Page</title>
+    <c:EEC_Header id="pageHeader" />
+       
+       
+    <script ></script>    
+        
+    <style>
+        .form-label{
+          right-padding: 1px;   
+          font-weight: bold;
+          font-size:14px;
+        }
+        .form-group{
+            width : 100%;
+        }
+        .btn-group{
+            margin-bottom : 100px;
+        }
+        .contact-container{
+            margin-bottom : 100px;
+        }
+        thead{
+            background-color : #f5f5f5;
+        }
+        .table > thead > tr > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table {
+            border-top: 1px solid #dddddd;
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+         .contact-table > thead:first-child > tr:first-child > th{
+        /*width: 158px;*/
+         }
+         .members-table > thead:first-child > tr:first-child > th{         
+        /*width: 135px;*/
+        }
+        #UMembers > thead > tr > th{
+        cursor: pointer;
+        }
+    </style>  
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+        <apex:form >
+            
+            <div class="contact-container" layout="row" layout-margin="true" layout-padding="true" layout-align="center center" flex="100">
+            <div class="contact-information" layout="column" flex="90" flex-sm="90">
+              <apex:outputPanel id="errorMsg" rendered="{!errorMsg != null}">
+                <h2>{!errorMsg}</h2>  
+              </apex:outputPanel>      
+                
+            <apex:outputPanel id="userDetail">    
+                <br/>
+                <h2 class="pull-left">Umbrella Page</h2>
+                <apex:commandButton action="{!edit}" styleClass="md-button md-raised md-eec pull-right" rendered="{!!isEdit && profileName != 'Community Standard User without transactions for EEC'}"  value="{!$Label.site.edit}" id="editButton"/>      
+                <br/><br/><br/>
+                <apex:pageBlock id="editUserDetail" rendered="{!isEdit}">
+                    <section class="contact-information">
+                        <h4 class="md-title">Umbrella Information</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <p flex-sm="80" flex="90"><strong>Name: </strong>{!account.name}</p>
+                            </div>
+                        </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Type:</strong> {!account.Recordtype.Name}</p>
+                                </div> 
+                            </div>    
+                        </div>
+                    </section>
+                    
+                    <section class="contact-information">
+                        <h4 class="md-title">Contact Information</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <div class="form-group">
+                                   <label>Phone :&nbsp;</label>
+                                   <apex:inputField styleClass="form-control" value="{!account.Phone}" />
+                               </div>
+                            </div>
+                            <div class="md-subhead" layout="row">    
+                               <div class="form-group">
+                                   <label>Alternate Phone :&nbsp;</label>
+                                   <apex:inputField styleClass="form-control" value="{!account.Alternate_Phone__c}"/>
+                               </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row"> 
+                                     <div class="form-group">
+                                      <label>Fax :&nbsp;</label>
+                                       <apex:inputField styleClass="form-control" value="{!account.fax}" />
+                                    </div> 
+                                </div>   
+                                <div class="md-subhead" layout="row">    
+                                    <div class="form-group">
+                                      <label>Email :&nbsp;</label>
+                                       <apex:inputField styleClass="form-control" value="{!account.Provider_Email__c}" />
+                                    </div>
+                                </div> 
+                            </div>    
+                        </div>
+                    </section>
+                    <section class="contact-information">
+                        <h4 class="md-title">Main Address Information</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <div class="form-group">
+                                   <label>Street Address 1 :&nbsp;</label>
+                                   <apex:outputField styleClass="form-control" value="{!account.Provider_Address_1__c}" label="Contact Name"/>
+                               </div>
+                            </div>
+                            <div class="md-subhead" layout="row">    
+                               <div class="form-group">
+                                   <label>Street Address 2 :&nbsp;</label>
+                                   <apex:outputField styleClass="form-control" value="{!account.Provider_Address_2__c}" label="Contact Name"/>
+                               </div>
+                            </div>
+                            <div class="md-subhead" layout="row">
+                                <div class="form-group"> 
+                                    <label>City : &nbsp;</label>
+                                    <apex:outputText value="{!account.Provider_City__r.Name}" label="Contact Name"/>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                     <div class="form-group">
+                                        <label>State :&nbsp;</label>
+                                        <apex:outputField styleClass="form-control" value="{!account.State__c}" label="Contact Name"/>
+                                    </div> 
+                                </div>   
+                                <div class="md-subhead" layout="row">    
+                                    <div class="form-group">
+                                        <label>Zip Code :&nbsp;</label>
+                                        <apex:outputField styleClass="form-control" value="{!account.Provider_Zip_Code__c}" label="Contact Name"/>
+                                    </div>
+                                </div> 
+                            </div>    
+                        </div>
+                    </section>
+                    <section class="contact-information">
+                        <h4 class="md-title">Mailing Address Information</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <div class="form-group">
+                                   <label>Street Address 1 </label>
+                                   <apex:inputField styleClass="form-control" value="{!account.ShippingStreet}" label="Contact Name"/>
+                               </div>
+                            </div>
+                            <div class="md-subhead" layout="row">    
+                               <div class="form-group">
+                                <label>Street Address 2 </label>
+                                <apex:inputField styleClass="form-control" value="{!account.ShippingCity}" label="Contact Name"/>
+                               </div>
+                            </div>
+                        </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row" style="min-height: 98px;">
+                                     <div class="form-group">
+                                        <label>City </label>
+                                        <apex:inputField styleClass="form-control" value="{!account.ShippingState}" label="Contact Name"/>
+                                    </div> 
+                                </div>   
+                                <div class="md-subhead" layout="row">    
+                                    <div class="form-group">
+                                        <label>State </label>
+                                        <apex:inputField styleClass="form-control" value="{!account.ShippingPostalCode}" label="Contact Name"/>
+                                    </div>
+                                </div> 
+                            </div>    
+                        </div>
+                    </section>
+                    <div class="btn-group pull-right">
+                        <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+                            <apex:commandButton id="save" value="Save" styleClass="md-button md-raised md-eec pull-right" action="{!save}" rerender="userDetail"/> 
+                            <apex:commandButton id="cancel" value="Cancel" styleClass="md-button md-raised md-eec pull-right" action="{!cancel}" rerender="userDetail" immediate="true"/>
+                        </md-content>
+                   </div>
+        </apex:pageBlock> 
+        <apex:pageBlock id="viewUserDetail" rendered="{!!isEdit}" >
+            <apex:pageMessages />
+            <section class="contact-information">
+                <h4 class="md-title">Umbrella Information</h4>
+                <md-divider></md-divider><br/>
+                <div class="row">
+                <div class="col-lg-6">
+                    <div class="md-subhead" layout="row">
+                        <p flex-sm="80" flex="90"><strong>Name: </strong>{!account.name}</p>
+                    </div>
+                    <div class="md-subhead" layout="row">
+                      <p flex-sm="80" flex="90"><strong>Business Name:</strong> {!account.Business_Name__c}</p>
+                    </div> 
+                    <div class="md-subhead" layout="row">
+                        <p flex-sm="80" flex="90"><strong>Type: </strong>{!account.Recordtype.Name}</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="md-subhead" layout="row">
+                      <p flex-sm="80" flex="90"><strong>Number:</strong> {!account.Provider_Number__c}</p>
+                    </div>
+                    <div class="md-subhead" layout="row">
+                      <p flex-sm="80" flex="90"><strong>Tax ID:</strong> {!account.Tax_ID__c}</p>
+                    </div> 
+                </div>
+                </div>    
+            </section><br/>   
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#providerContact" href="#providerContact" aria-expanded="false" aria-controls="providerContact" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp; Contact Information
+                    </a>
+                  </h4>
+                </div>
+                <div id="providerContact" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      <div class="panel-body">
+                      <div class="col-lg-6">
+                           <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Phone  : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Phone}" />
+                               </div>
+                           </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Alternate Phone : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Alternate_Phone__c}" />
+                               </div>
+                           </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Fax : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.fax}" />
+                               </div>
+                          </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Email : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Provider_Email__c}" />
+                               </div>
+                           </div>
+                      </div> 
+                  </div>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#mainAddress" href="#mainAddress" aria-expanded="false" aria-controls="mainAddress" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp; Main Address Information
+                    </a>
+                  </h4>
+                </div>
+                <div id="mainAddress" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      <div class="col-lg-6">
+                           <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Street Address 1  : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Provider_Address_1__c}" />
+                               </div>
+                           </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Street Address 2 : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Provider_Address_2__c}" />
+                               </div>
+                           </div>
+                      </div>
+                      <div class="col-lg-6">
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">City : </span>
+                               <apex:outputText value="{!account.Provider_City__r.Name}" />
+                               </div>
+                          </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">State : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.State__c}" />
+                               </div>
+                           </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Zip Code : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.Provider_Zip_Code__c}" />
+                               </div>
+                           </div>
+                      </div> 
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#mailingAddress" href="#mailingAddress" aria-expanded="false" aria-controls="mailingAddress" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp; Mailing Address Information
+                    </a>
+                  </h4>
+                </div>
+                <div id="mailingAddress" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      <div class="col-lg-6">
+                           <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Mailing Street  : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.ShippingStreet}" />
+                               </div>
+                           </div>
+                      </div>
+                      <div class="col-lg-6">
+                            <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Mailing City : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.ShippingCity}" />
+                               </div>
+                            </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Mailing State : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.ShippingState}" />
+                               </div>
+                          </div>
+                          <div class="form-group">
+                               <div class="input-group"> <span class="form-label">Mailing Zip/Postal Code : </span>
+                               <apex:outputField styleClass="form-control" value="{!account.ShippingPostalCode}" />
+                               </div>
+                           </div>
+                      </div> 
+                  </div>
+                </div>
+              </div>
+              
+              <div class="panel panel-default">
+                <div class="panel-heading collapsed" data-toggle="collapse" data-parent="#contacts" href="#contacts" aria-expanded="false" aria-controls="contacts" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp; Contacts
+                    </a>
+                  </h4>
+                </div>
+                <div id="contacts" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      <div id="no-more-tables">
+                      <table class="table table-hover contact-table">
+                          <thead>
+                              <tr>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Email</th>
+                                <th>Phone</th>  
+                                <th>Role</th>
+                                <th></th>  
+                              </tr>
+                           </thead>   
+                              <apex:repeat value="{! contactlist }" var="con" >  
+                                  <tr>
+                                    <td data-title="Name">{!con.name}</td>
+                                    <td data-title="Title">{!con.Title}</td>
+                                    <td data-title="Email">{!con.Email}</td>
+                                    <td data-title="Phone">{!con.Phone}</td>
+                                    <td data-title="Role">{!con.Role__c}</td>
+                                    <td data-title="" style="text-align:center;"><a href="/EEC_ContactPage?Id={!con.Id}" target="_top" title="View"><i class="fa fa-search"></i></a></td>
+                                  </tr>
+                              </apex:repeat>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>  
+                
+              <!-- Umbrella Members -->  
+              <div class="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#umbrellaMembers" href="#umbrellaMembers" aria-expanded="true" aria-controls="umbrellaMembers" role="tab" id="headingOne">
+                  <h3 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp;Umbrella Members
+                    </a>
+                  </h3>
+                </div>
+                <div id="umbrellaMembers" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                      <div id="no-more-tables">
+                      
+                      <table class="table table-hover members-table" id="UMembers">
+                      <meta http-equiv="content-type" content="text/html;charset=Windows-1252">
+    <script type="text/javascript">
+        var people, asc1 = 1,
+            asc2 = 1,
+            asc3 = 1;
+            asc4 = 1;
+            asc5 = 1;
+            asc6 = 1;
+            
+        window.onload = function () {
+            people = document.getElementById("Members");
+        }
+
+        function sort_table(tbody, col, asc) {
+            var rows = tbody.rows,
+                rlen = rows.length,
+                arr = new Array(),
+                i, j, cells, clen;
+            // fill the array with values from the table
+            for (i = 0; i < rlen; i++) {
+                cells = rows[i].cells;
+                clen = cells.length;
+                arr[i] = new Array();
+                for (j = 0; j < clen; j++) {
+                    arr[i][j] = cells[j].innerHTML;
+                }
+            }
+            // sort the array by the specified column number (col) and order (asc)
+            arr.sort(function (a, b) {
+                return (a[col] == b[col]) ? 0 : ((a[col] > b[col]) ? asc : -1 * asc);
+            });
+            // replace existing rows with new rows created from the sorted array
+            for (i = 0; i < rlen; i++) {
+                rows[i].innerHTML = "<td>" + arr[i].join("</td><td>") + "</td>";
+            }
+        }
+    </script>
+    </meta>
+                          <thead>
+                              <tr>
+                                 
+                                 <th onclick="sort_table(Members, 0, asc1); asc1 *= -1; asc2 = 1; asc3 = 1;">Name</th>
+                                <th onclick="sort_table(Members, 1, asc2); asc2 *= -1; asc3 = 1; asc4 = 1;">Number</th>
+                                <th onclick="sort_table(Members, 2, asc3); asc3 *= -1; asc4 = 1; asc5 = 1;">City</th>
+                                <th onclick="sort_table(Members, 3, asc4); asc4 *= -1; asc5 = 1; asc6 = 1;">Provider Type</th>  
+                                <th onclick="sort_table(Members, 4, asc5); asc5 *= -1; asc6 = 1; asc1 = 1;">License Status</th>
+                                <th onclick="sort_table(Members, 5, asc6); asc6 *= -1; asc1 = 1; asc2 = 1;">Provider Status</th>  
+                                <th></th>  
+                              </tr>
+                           </thead>
+                           <tbody id="Members">    
+                              <apex:repeat value="{! providerslist }" var="pro" >  
+                                  <tr>
+                                    <td data-title="Name">{!pro.name} 
+                                    </td>
+                                    <td data-title="Number">{!pro.Provider_Number__c}</td>
+                                    <td data-title="City">{!pro.Provider_city_text__c}</td>
+                                    <td data-title="Provider Type">{!pro.recordtype.name}</td>
+                                    <td data-title="License Status">{!pro.License_Status__c}</td>
+                                    <td data-title="Provider Status">{!pro.Provider_Status__c}</td>  
+                                    <td data-title="" style="text-align:center;">
+                                        <a href="/EEC_PortalProviderPage?member={!secureIdMap[pro.Id]}" target="_top" title="View">
+                                            <i class="fa fa-search"></i>
+                                        </a>
+                                   </td>
+                                  </tr>
+                              </apex:repeat>
+                              </tbody>
+                            </table>
+                        
+                      </div>
+                    </div>
+                </div>
+              </div> 
+               
+              <!-- FCC System -->
+              <apex:outputPanel rendered="{!FCCSystemExists}" layout="block" styleClass="panel panel-default">
+                <div class="panel-heading" data-toggle="collapse" data-parent="#fccSystemMembers" href="#fccSystemMembers" aria-expanded="true" aria-controls="fccSystemMembers" role="tab" id="headingOne">
+                  <h3 class="panel-title">
+                    <a>
+                      <i class="fa fa-chevron-right"></i>&nbsp;Family Child Care Associated (FCC System)
+                    </a>
+                  </h3>
+                </div>
+                <div id="fccSystemMembers" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    <apex:outputLabel rendered="{!FCCSystemExists}" style="margin-top: 10px; font-size: 14px;">If any of your associated Family Child Care must be changed, please connect to CCFA application and do this change in this application: <a href="https://gatewayccfa.eec.state.ma.us/account/signin">Link</a>. Allow few days for a change requested in CCFA to be updated in this list.</apex:outputLabel>
+                    <div id="no-more-tables">
+                      <table class="table table-hover members-table">
+                        <thead>
+                          <tr>
+                            <th>Name </th>
+                            <th>Number</th>
+                            <th>City</th>
+                            <th>Phone</th>  
+                            <th>License Status</th>
+                            <th>Provider Status</th>  
+                          </tr>
+                        </thead>   
+                        <apex:repeat value="{! umbrellaFCCSystem }" var="pro" >  
+                          <tr>
+                            <td data-title="Name">{!pro.name}</td>
+                            <td data-title="Number">{!pro.Provider_Number__c}</td>
+                            <td data-title="City">{!pro.Provider_city_text__c}</td>
+                            <td data-title="Phone">{!pro.Phone}</td>
+                            <td data-title="License Status">{!pro.License_Status__c}</td>
+                            <td data-title="Provider Status">{!pro.Provider_Status__c}</td>  
+                          </tr>
+                        </apex:repeat>
+                      </table>
+                    </div>
+                  </div>
+                </div> 
+              </apex:outputPanel>
+                
+            </div>
+        </apex:pageBlock>    
+            </apex:outputPanel>
+                </div>
+            </div>
+          </apex:form>
+      </div>
+      <c:EEC_Site_Footer id="siteFooter" />   
+ </body>
+ 
+</apex:page>

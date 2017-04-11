@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>The email is sent to a Supervisor when a Licensor chooses to use a Visit Tool different than the recommended one</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>86 - Notification to supervisor that visit tool has been switched</name>
+    <style>none</style>
+    <subject>Tool used for {!Inspection__c.Type_of_Visit__c} visit - {!Inspection__c.Name} has been switched</subject>
+    <type>text</type>
+</EmailTemplate>

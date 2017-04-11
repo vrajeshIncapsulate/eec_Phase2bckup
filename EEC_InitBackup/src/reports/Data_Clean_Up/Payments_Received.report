@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Licensing_Transactions__r.Payments_Recieved__r$Id</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Payments Received</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Providers_with_Licensing_Transactions_with_Payments_Recieved__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

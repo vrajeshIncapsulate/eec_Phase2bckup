@@ -1,0 +1,76 @@
+<apex:page standardcontroller="Inspection__c" extensions="EEC_NCInspectionItemsController">
+<apex:form >
+<style>
+    .bold{
+    font-weight: bold;
+    }
+</style>
+
+  <apex:outputtext value="{!Inspection__c.Id}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Date_of_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.CreatedDate}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.RecordTypeId}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Original_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Original_Visit__r.Date_of_Visit__c}" rendered="false" />
+  <apex:pageblock mode="maindetail">
+    <apex:outputpanel id="InspectionItemsPanel" rendered="{!NCInspItemList.size != 0}">
+      <apex:pageblocktable id="test" value="{!AllNonCompliantItemsCombined}" var="iItem">
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Parent Record Id</a>
+          </apex:facet>
+          <apex:outputlink target="_parent" value="/{!IF(iItem.inspItem != null, iItem.inspItem.Inspection_No__c, iItem.ncItem.Investigation__c)}">{!IF(iItem.inspItem != null, iItem.inspItem.Inspection_No__r.Name, iItem.ncItem.Investigation__r.name)}</apex:outputlink>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Id</a>
+          </apex:facet>
+          <apex:outputlink target="_parent" value="/{!IF(iItem.inspItem != null, iItem.inspItem.Id, iItem.ncItem.Id)}">{!IF(iItem.inspItem != null, iItem.inspItem.Name, iItem.ncItem.Name)}</apex:outputlink>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Date</a>
+          </apex:facet>
+          <apex:outputtext value="{0, date, MM/dd/yyyy}">
+            <!--<apex:param value="{!IF(iItem.inspItem != null, iItem.inspItem.Inspection_No__r.Date_of_Visit__c, iItem.ncItem.CreatedDate)}" />
+			-->          
+              <apex:param value="{!iItem.dt}"/>
+			</apex:outputtext>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Domain</a>
+          </apex:facet>
+          <apex:outputtext value="{!IF(iItem.inspItem != null, iItem.inspItem.Category_list__c, '')}" styleclass="{!IF(iItem.KeyIndicator == true,'bold','')}"/>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Name</a>
+          </apex:facet>
+          <apex:outputtext value="{!IF(iItem.inspItem != null, iItem.inspItem.Inspection_Item_Name_for_list__c, '')}" styleclass="{!IF(iItem.KeyIndicator == true,'bold','')}"/>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Observations</a>
+          </apex:facet>
+          <apex:outputtext value="{!IF(iItem.inspItem != null, iItem.inspItem.Observations__c, iItem.ncItem.Observations__c)}" styleclass="{!IF(iItem.KeyIndicator == true,'bold','')}"/>
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Corrective action</a>
+          </apex:facet>
+          <apex:outputtext value="{!IF(iItem.inspItem != null, iItem.inspItem.Correction_Plan__c, iItem.ncItem.Correction_Plan__c)}" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header">
+            <a href="#" onclick="return false;">Key Indicator</a>
+          </apex:facet>          
+          <apex:inputcheckbox value="{!iItem.KeyIndicator}" disabled="true" />
+        </apex:column>
+      </apex:pageblocktable>
+    </apex:outputpanel>
+  </apex:pageblock>
+  </apex:form>
+</apex:page>

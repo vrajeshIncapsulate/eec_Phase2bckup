@@ -1,0 +1,336 @@
+<apex:page standardController="Inspection__c" extensions="EEC_GenerateVisitNarrativePDFExtension" applyBodyTag="false" renderAs="pdf">
+<head>
+    <style type="text/css">
+      @page {
+        size:landscape; 
+      } 
+      
+      
+      .removeLastPage:last-child {
+         position: absolute;
+         bottom: 0;
+       }
+       .removeLastPage { 
+           font-family: "Times New Roman";
+             font-size: 10pt;
+       }
+       
+        table {
+            -fs-table-paginate: paginate !important;
+        }
+       
+        table tr {
+            page-break-inside:avoid !important;
+        }
+        
+        .table-header {
+            height: 30px !important;
+        }
+        
+        .tab {
+            margin-left: 25px;
+        }
+        
+        .two-tab {
+            margin-left: 50px;
+        }
+        
+        .group-head {
+            font-size: 12pt;
+            font-weight: bold;
+        }
+    </style>
+    
+    <div  class="removeLastPage">
+        <apex:outputText value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+        <apex:outputText value="{!Inspection__c.Provider_No__r.MinAgeServed__c}" rendered="false" />
+        <apex:outputText value="{!Inspection__c.Provider_No__r.MaxAgeServed__c}" rendered="false" />
+        
+        <apex:variable var="provider" value="{! Inspection__c.Provider_No__r }" />
+        <apex:variable var="providerRegion" value="{! Inspection__c.Provider_No__r.Region__r }" />
+        <apex:variable var="executiveDirector" value="{! ExecutiveDirectorContact }" />
+        <apex:variable var="programDirector" value="{! DirectorContact }" />
+        <apex:variable var="umbrellaMembers" value="{! Inspection__c.Provider_No__r.Umbrella_Members__c }" />
+        <c:EEC_PDFHeaderTemplate providerRegion="{! providerRegion }"></c:EEC_PDFHeaderTemplate>
+        
+        <center>
+            <h4>VISIT NARRATIVE -&nbsp;<c:EEC_DateFormat date="{! Inspection__c.Date_of_Visit__c }" /></h4>
+        </center>
+        
+        <br />
+        
+        <apex:outputPanel rendered="{!umbrellaMembers != null}"><div>Umbrella: {!Inspection__c.Provider_No__r.Umbrella_Members__r.Name}</div></apex:outputPanel>
+        
+        <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' && (executiveDirector != NULL || programDirector != NULL)}">
+        <br />
+        </apex:outputPanel>
+         
+        <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' && executiveDirector != NULL}" layout="block">Executive Director: {! executiveDirector.Salutation } {! executiveDirector.FirstName } {! executiveDirector.LastName }</apex:outputPanel>
+        
+        <br/>
+        <div class="group-head">I. Activity Summary</div>
+        <br/>
+         
+        <apex:outputPanel styleClass="tab" layout="block">
+            <apex:outputText escape="false" value="{! Inspection__c.Activity_Summary__c }&nbsp;" />
+        </apex:outputPanel> 
+
+        <br/>
+        <div class="group-head">II. Program Synopsis</div>
+        <br/>
+        
+        <!-- Master Visit -->
+        <apex:outputPanel styleClass="two-tab" layout="block">
+            <apex:outputPanel rendered="{!childVisits.size > 0}"><div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">{!Inspection__c.Name}</div></apex:outputPanel>
+            <div>Provider Name: {! provider.Name }</div>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' && programDirector != NULL}" layout="block">Program Director: {! programDirector.Salutation } {! programDirector.FirstName } {! programDirector.LastName }</apex:outputPanel> 
+            <div class="address-container">
+              Address Visited: {! Inspection__c.Address_1__c }, <apex:outputPanel layout="block" rendered="{! Inspection__c.Address_2__c != ''  }">{! Inspection__c.Address_2__c } - </apex:outputPanel>
+              {! Inspection__c.City__c }, {! Inspection__c.State__c } {! Inspection__c.Zip_Code__c }
+            </div>
+            <div>Provider #: {!IF(provider.Use_Legacy_Prov_Number__c == true , provider.Provider_No__c,provider.Provider_Number__c)}</div>
+            <div>License #: {! Inspection__c.License_Number__c  }</div>
+            <apex:outputPanel layout="block" rendered="{! 
+                provider.RecordType.DeveloperName == 'FCC' ||
+                provider.RecordType.DeveloperName == 'Large_Group' ||
+                provider.RecordType.DeveloperName == 'Small_Group' ||
+                provider.RecordType.DeveloperName == 'Group_Care' ||
+                provider.RecordType.DeveloperName == 'Temporary_Shelter' 
+            }">
+            Capacity : {! provider.Capacity__c }
+            </apex:outputPanel>
+            <div>Expiration Date:&nbsp;<c:EEC_DateFormat date="{! provider.Renewal_date__c }" /></div>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' }" layout="block">Ages Served: {! provider.Min_Age_Years_LG_SG__c } - {! provider.Max_Age_Years_LG_SG__c }</apex:outputPanel>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName != 'FCC' }" layout="block">Program Type: {! provider.RecordType.Name }</apex:outputPanel>
+            <apex:outputPanel rendered="{! 
+                provider.RecordType.DeveloperName == 'Group_Care' || 
+                provider.RecordType.DeveloperName == 'Temporary_Shelter'
+            }" layout="block">
+            Ratio: {! provider.Ratios__c }
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{! 
+                provider.RecordType.DeveloperName == 'Group_Care' || 
+                provider.RecordType.DeveloperName == 'Temporary_Shelter'
+              }" layout="block">
+              Awake Ratio: {!Provider.Awake_Ratio__c }
+            </apex:outputPanel>
+             <apex:outputPanel rendered="{! 
+                provider.RecordType.DeveloperName == 'Group_Care' || 
+                provider.RecordType.DeveloperName == 'Temporary_Shelter'
+              }" layout="block">
+              Asleep Ratio: {!Provider.Asleep_Ratio__c}
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName == 'Foster_Care_Agency' }" layout="block">Number of Foster Homes: {! Inspection__c.Number_of_Foster_Homes__c }</apex:outputPanel>
+            <apex:outputPanel rendered="{! provider.RecordType.DeveloperName == 'Foster_Care_Agency' }" layout="block">Number of Children Placed in Care: {! Inspection__c.NumberOfChildrenPlacedInCare__c }</apex:outputPanel>
+        </apex:outputPanel>
+        
+        <!-- Child Visits -->
+        <apex:repeat value="{!childVisits}" var="visit" rendered="{!childVisits.size > 0}">
+          <br/>
+          <apex:outputPanel styleClass="two-tab" layout="block">
+            <div style="font-weight: bold; font-size: 14px; margin-bottom: 5px;">{!visit.Name}</div>
+            <div>Provider Name: {! visit.Provider_No__r.Name }</div>
+            <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName != 'FCC' && programDirector != NULL}" layout="block">Program Director: {! programDirector.Salutation } {! programDirector.FirstName } {! programDirector.LastName }</apex:outputPanel> 
+            <div class="address-container">
+              Address Visited: {! visit.Address_1__c }, <apex:outputPanel layout="block" rendered="{! visit.Address_2__c != ''  }">{! visit.Address_2__c } - </apex:outputPanel>
+              {! visit.City__c }, {! visit.State__c } {! visit.Zip_Code__c }
+            </div>
+            <div>Provider #: {! visit.Provider_No__r.Provider_Number__c }</div>
+            <div>License #: {! visit.License_Number__c  }</div>
+            <apex:outputPanel layout="block" rendered="{! 
+                visit.Provider_No__r.RecordType.DeveloperName == 'FCC' ||
+                visit.Provider_No__r.RecordType.DeveloperName == 'Large_Group' ||
+                visit.Provider_No__r.RecordType.DeveloperName == 'Small_Group' ||
+                visit.Provider_No__r.RecordType.DeveloperName == 'Group_Care'  
+              }">
+              Capacity : {! visit.Provider_No__r.Capacity__c }
+            </apex:outputPanel>
+            <div>Expiration Date:&nbsp;<c:EEC_DateFormat date="{! visit.Provider_No__r.Renewal_date__c }" /></div>
+            <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName != 'FCC' }" layout="block">Ages Served: {! visit.Provider_No__r.MinAgeServed__c } - {! visit.Provider_No__r.MaxAgeServed__c }</apex:outputPanel>
+            <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName != 'FCC' }" layout="block">Program Type: {! visit.Provider_No__r.RecordType.Name }</apex:outputPanel>
+            <apex:outputPanel rendered="{! 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Group_Care' || 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Temporary_Shelter'
+              }" layout="block">
+              Ratio: {! visit.Provider_No__r.Ratios__c }
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{! 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Group_Care' || 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Temporary_Shelter'
+              }" layout="block">
+              Awake Ratio: {! visit.Provider_No__r.Awake_Ratio__c }
+            </apex:outputPanel>
+             <apex:outputPanel rendered="{! 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Group_Care' || 
+                visit.Provider_No__r.RecordType.DeveloperName == 'Temporary_Shelter'
+              }" layout="block">
+              Asleep Ratio: {! visit.Provider_No__r.Asleep_Ratio__c}
+            </apex:outputPanel>
+           <!--  <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName != 'FCC' }" layout="block">Characteristics of Children Served: {! visit.Provider_No__r.Characteristics_of_Children_Served__c }</apex:outputPanel> -->
+            <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName == 'Foster_Care_Agency' }" layout="block">Number of Foster Homes: {! visit.Number_of_Foster_Homes__c }</apex:outputPanel>
+            <apex:outputPanel rendered="{! visit.Provider_No__r.RecordType.DeveloperName == 'Foster_Care_Agency' }" layout="block">Number of Children Placed in Care: {! visit.NumberOfChildrenPlacedInCare__c }</apex:outputPanel>
+          </apex:outputPanel> 
+        </apex:repeat>
+        
+        <apex:outputPanel styleClass="tab" layout="block" rendered="{! provider.RecordType.DeveloperName == 'Adoption_Agency'}">
+            <br />
+            <div class="group-head"><u>Specifics of Service:</u></div>
+            <br />
+            <apex:outputPanel styleClass="tab" layout="block">
+                <div>Number of Adoptive Placements: {! Inspection__c.Number_of_Adoptive_Placements__c }</div>
+                <div>Number of Foster Homes: {! Inspection__c.Number_of_Foster_Homes__c }</div>
+                <div>Number of Birth Mothers Who Received Services: {! Inspection__c.No_Birth_Mothers_Receiving_Services__c }</div>
+                <div>Number of Birth Mothers Who Made an Adoption Plan: {! Inspection__c.No_Birth_Mothers_Making_Adoption_Plan__c}</div>
+                <div>Number of Waiting Families: {! Inspection__c.Number_of_Waiting_Families__c }</div>
+                <div>Number of Families Receiving Home Study Service Only: {! Inspection__c.No_Families_Rec_Home_Stdy_Serv_Only__c}</div>
+            </apex:outputPanel>
+            <br />
+            <div class="group-head"><u>DCF Contracted Services</u></div>
+            <br />
+            <apex:outputPanel styleClass="tab" layout="block">
+                <div>Number of Child Assessments: {! Inspection__c.Number_of_Child_Assessments__c}</div> 
+                <div>Number of Home Study Services: {! Inspection__c.Number_of_Home_Study_Services__c}</div> 
+                <div>Number of Families Receiving Case Management Services: {! Inspection__c.No_of_Families_Rec_Case_Mgmt_Services__c}</div> 
+                <div>Number of Individuals Receiving Search and/or Reunion Services: {! Inspection__c.No_Indiv_Rec_Search_and_or_Reunion_Serv__c}</div> 
+                <div>Number of Families Received Information and Referral: {! Inspection__c.No_Families_Receiving_Info_and_Referral__c}</div> 
+                <div>Number of Reunions Facilitated: {! Inspection__c.Number_of_Reunions_Facilitated__c}</div> 
+            </apex:outputPanel>
+        </apex:outputPanel>
+        <br />
+        <div class="group-head">III. Updates and Changes</div>
+        <br/>
+        
+        <apex:outputPanel styleClass="tab" layout="block">
+            <apex:outputText escape="false" value="{! IF(Inspection__c.Updates_Changes__c != '', Inspection__c.Updates_Changes__c, 'None') }" />
+        </apex:outputPanel>
+        <br/ >
+        <div class="group-head">IV. Corrective Action Required</div>
+        <br/>
+        <apex:outputPanel layout="block" styleClass="tab">
+            <apex:outputPanel rendered="{! HasNonCompliant }" layout="block">See attached Plan for Compliance. Please complete and return your plan within {! Inspection__c.Number_of_days_to_receive_response__c } days</apex:outputPanel>
+            <apex:outputPanel rendered="{! !HasNonCompliant }"  layout="block">There were no non-compliances noted. No corrective action is required at this time.</apex:outputPanel>
+            <br />
+            <apex:outputText escape="false" value="{! Inspection__c.Corrective_Action_Required__c }" />       
+        </apex:outputPanel>
+        <br />
+        <div class="group-head">V. Technical Assistance / Comments</div>
+        <br/>
+        <apex:outputPanel rendered="{! 
+            NOT(
+                (Inspection__c.Tech_Assist_Recommendations_Comments__c != NULL && Inspection__c.Tech_Assist_Recommendations_Comments__c != '') || 
+                AdditionalInspectionItems.size > 0 ||
+                (Inspection__c.Comments__c != NULL && Inspection__c.Comments__c != '') ||
+                CompliantWithObservations.size > 0
+            )}">
+            
+            <div>None</div>
+        </apex:outputPanel>
+            
+        <apex:outputPanel rendered="{! 
+            (Inspection__c.Tech_Assist_Recommendations_Comments__c != NULL && Inspection__c.Tech_Assist_Recommendations_Comments__c != '') || 
+            AdditionalInspectionItems.size > 0 ||
+            (Inspection__c.Comments__c != NULL && Inspection__c.Comments__c != '') ||
+            CompliantWithObservations.size > 0 }">
+             
+            <apex:outputPanel id="ta-toplevel-container" rendered="{!IF(OR(AdditionalInspectionItems.size != 0, Inspection__c.Tech_Assist_Recommendations_Comments__c != ''), true, false)}">
+              <apex:outputPanel rendered="{!Inspection__c.Tech_Assist_Recommendations_Comments__c != ''}">
+                <i class="tab" style="font-size: 12pt;"><u>Technical Assistance</u></i>
+                <br/>
+                <br />
+                <apex:outputPanel styleClass="two-tab" layout="block">
+                    <apex:outputText escape="false" value="{!IF(Inspection__c.Tech_Assist_Recommendations_Comments__c != '', Inspection__c.Tech_Assist_Recommendations_Comments__c, 'None')}" />
+                </apex:outputPanel>
+                <br /> 
+              </apex:outputPanel>
+            
+              <apex:outputPanel rendered="{!AdditionalInspectionItems.size != 0}">
+                <i class="tab" style="font-size: 12pt;"><u>Technical Assistance provided during the visit:</u></i>
+                <br />
+                <br />
+                <apex:outputPanel layout="block" styleClass="two-tab" rendered="{! AdditionalInspectionItems.size == 0}">
+                  None
+                </apex:outputPanel>
+            
+            
+                <apex:outputPanel rendered="{! AdditionalInspectionItems.size > 0}">
+                  <apex:dataTable headerClass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleClass="table" columnsWidth="25%, 25%, 50%" width="100%" cellpadding="5" value="{! AdditionalInspectionItems }" var="item">
+                    <apex:column >
+                        <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet> 
+                        <apex:outputText value="{! item.inspectionItem.Associated_regulation__r.Name }"/>
+                        <apex:outputText value="{! item.standardRegulations  }"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"><center>Reviewed Item</center></apex:facet>
+                        <apex:outputText value="{! item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c }"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"><center>Technical Assistance Provided</center></apex:facet>
+                        <apex:outputText value="{! item.inspectionItem.Technical_assistance__c }"/>
+                    </apex:column>
+                  </apex:dataTable>  
+                </apex:outputPanel>
+              </apex:outputPanel>
+              <br />
+            </apex:outputPanel>
+            
+            <apex:outputPanel rendered="{!IF(AND(AdditionalInspectionItems.size == 0, Inspection__c.Tech_Assist_Recommendations_Comments__c == ''),true,false)}">
+              <i class="tab" style="font-size: 12pt;"><u>Technical Assistance:</u></i>
+              <br />
+              <br />
+              <apex:outputPanel layout="block" styleClass="two-tab">None</apex:outputPanel>
+            </apex:outputPanel> 
+            
+            <apex:outputPanel id="comments-toplayer-container" layout="block" rendered="{!IF(OR(CompliantWithObservations.size != 0, Inspection__c.Comments__c != ''),true,false)}">
+                
+              <apex:outputPanel rendered="{!IF(Inspection__c.Comments__c != '', true, false)}">
+                <i class="tab" style="font-size: 12pt;"><u>Comments</u></i>
+                <br />
+                <br />
+            
+                <apex:outputPanel styleClass="two-tab" layout="block">
+                  <apex:outputText escape="false" value="{! IF(Inspection__c.Comments__c != '', Inspection__c.Comments__c, 'None')}" />
+                </apex:outputPanel>
+                <br /> 
+              </apex:outputPanel>    
+            
+              <apex:outputPanel rendered="{!CompliantWithObservations.size != 0 }">
+                <i class="tab" style="font-size: 12pt;"><u>Additional Comments provided during the visit:</u></i>
+                <br/>
+                <br/>
+                
+                <apex:outputPanel layout="block" styleClass="two-tab" rendered="{! CompliantWithObservations.size == 0 }">
+                  None
+                </apex:outputPanel>
+                
+                <apex:outputPanel rendered="{! CompliantWithObservations.size != 0 }">
+                  <apex:dataTable headerClass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleClass="table" columnsWidth="25%, 25%, 50%" width="100%" cellpadding="5" value="{! CompliantWithObservations }" var="item">
+                    <apex:column >
+                        <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet> 
+                        <apex:outputText value="{! item.inspectionItem.Associated_regulation__r.Name }"/>
+                        <apex:outputText value="{! item.standardRegulations  }"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"><center>Reviewed Item</center></apex:facet>
+                        <apex:outputText value="{! item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c }"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"><center>Comments</center></apex:facet>
+                        <apex:outputText value="{! item.inspectionItem.Observations__c }"/>
+                    </apex:column>
+                  </apex:dataTable>  
+                </apex:outputPanel>
+              </apex:outputPanel>
+            </apex:outputPanel>
+            
+          <apex:outputPanel rendered="{!IF(AND(CompliantWithObservations.size == 0, Inspection__c.Comments__c == ''),true,false)}">
+            <i class="tab" style="font-size: 12pt;"><u>Comments:</u></i>
+            <br/>
+            <br/>
+            <apex:outputPanel layout="block" styleClass="two-tab">None</apex:outputPanel>
+          </apex:outputPanel>  
+        </apex:outputPanel>
+    </div>
+    <br />
+    <c:EEC_PDFLicensorFooter Inspection__c="{! Inspection__c }"/>
+</head>
+</apex:page>

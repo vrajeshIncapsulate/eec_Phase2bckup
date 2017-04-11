@@ -1,0 +1,21 @@
+<apex:page showHeader="false" controller="ForgotPageController" title="{!$Label.site.forgot_password}">
+    <apex:form >
+        <apex:pageMessages id="error"/>
+        <apex:pageBlock title="Did you forget your password? Please enter your username below.">
+           <apex:pageBlockSection >
+              <apex:pageblockSectionItem >
+                <apex:outputLabel value="{!$Label.site.username}" for="username"/>
+                <apex:inputText id="username" value="{!username}"/>
+              </apex:pageblockSectionItem><br/>
+              <apex:pageblockSectionItem >
+               <apex:commandButton id="submit" value="{!$Label.site.submit}" action="{!forgotPassword}"/>
+              </apex:pageblockSectionItem>
+               <br/>
+             <apex:pageblockSectionItem >
+                 <apex:commandLink value="Return to login page" action="{!returnlogin}"/>
+             </apex:pageblockSectionItem>             
+           </apex:pageBlockSection>
+        </apex:pageBlock>
+
+    </apex:form>
+</apex:page>

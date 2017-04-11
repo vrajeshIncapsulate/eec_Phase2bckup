@@ -1,0 +1,56 @@
+<apex:component layout="none"  rendered="{! 
+    IF(question.firstCondition != NULL, object[question.firstCondition.fieldName] == question.firstCondition.value ,true) && 
+    IF(question.secondCondition != NULL, object[question.secondCondition.fieldName] == question.secondCondition.value, true) &&
+    IF(readOnly, question.questionType != 'empty', true)
+ }">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" />   
+    <apex:attribute name="readOnly" type="Boolean" description="If the question is readOnly" required="false" />
+     
+    <div class="form-group {! question.questionType } {! IF(readOnly, 'read-only', '') } eec-question" layout="column">
+        <label class="base-label">{! question.label } 
+            <apex:outputpanel rendered="{! !readOnly && question.isRequired }" styleclass="errorMsg"> *</apex:outputpanel>
+            <apex:outputpanel rendered="{! readOnly }" >: </apex:outputpanel>
+        </label>
+        
+        <c:EEC_SimpleQuestion rendered="{! question.questionType == 'simple' || question.questionType == 'simple-textarea'}"
+                              question="{! question }"
+                              object="{! object }"
+                              readOnly="{! readOnly }" />
+                              
+        <c:EEC_PicklistQuestion rendered="{! question.questionType == 'picklist'}"
+                                question="{! question }"
+                                object="{! object }"
+                                readOnly="{! readOnly }" />
+                                
+        <c:EEC_ValueQuestion rendered="{! question.questionType == 'value'}"
+                                question="{! question }"
+                                object="{! object }" /> 
+                                
+        <c:EEC_DatetimeQuestion rendered="{! question.questionType == 'datetime'}"
+                                question="{! question }"
+                                object="{! object }"
+                              readOnly="{! readOnly }" /> 
+                                
+        <c:EEC_DateQuestion rendered="{! question.questionType == 'date'}"
+                            question="{! question }"
+                            object="{! object }"
+                              readOnly="{! readOnly }" />
+                            
+        <c:EEC_FieldQuestion rendered="{! question.questionType == 'field'}" 
+                            question="{! question }"
+                            object="{! object }"
+                              readOnly="{! readOnly }" />
+                            
+        <c:EEC_DateFieldQuestion rendered="{! question.questionType == 'date-field'}" 
+                            question="{! question }"
+                            object="{! object }"
+                              readOnly="{! readOnly }" />
+        
+        <c:EEC_EmailQuestion rendered="{! question.questionType == 'email'}" 
+                            question="{! question }"
+                            object="{! object }"
+                                readOnly="{! readOnly }" />
+        <apex:outputPanel layout="div" rendered="{! question.questionType == 'empty' }" />
+    </div>
+</apex:component>

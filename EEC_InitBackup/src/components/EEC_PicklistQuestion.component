@@ -1,0 +1,11 @@
+<apex:component layout="none">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" />   
+    <apex:attribute name="readOnly" type="Boolean" description="Should the field be readOnly" required="false" />   
+    <apex:selectlist rendered="{! !readOnly }" html-data-parsley-required="{! question.isRequired }" styleclass="form-control small-control" value="{! object[question['fieldName']] }" size="1"> 
+        <apex:selectoptions value="{! question['options'] }" />
+        <!-- can't get variable rerender to work -->
+        <apex:actionSupport event="onchange" rendered="{! !ISBLANK(question.rerender) }" rerender="questionRefreshSection" />
+    </apex:selectlist> 
+    <apex:outputLabel rendered="{! readOnly  }" value="{! object[question['fieldName']] }" />
+</apex:component>

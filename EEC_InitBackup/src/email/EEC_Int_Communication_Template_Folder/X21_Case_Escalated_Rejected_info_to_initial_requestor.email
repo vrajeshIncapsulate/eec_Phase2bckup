@@ -1,0 +1,7 @@
+Hello,
+
+For your information, the case associated to Provider {!Case.Provider_Name_For_Email_Merge__c} has been reviewed by the Deputy Commissioner or one of its delegate, and does not need an investigator to work on it. 
+
+If you are the responsible for this case triage, please login to Salesforce, review the case: https://na16.salesforce.com/{!Case.Id} and assign it to a licensor.
+
+LEAD System

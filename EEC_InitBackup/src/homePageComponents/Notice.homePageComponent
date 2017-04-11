@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HomePageComponent xmlns="http://soap.sforce.com/2006/04/metadata">
+    <body>&lt;img alt=&quot;info&quot; src=&quot;http://res.cloudinary.com/dkjlkahgh/image/upload/c_fill,g_south,h_30,r_5,w_30/v1466519092/info_tke83b.png&quot;&gt;&lt;/img&gt; &lt;span style=&quot;font-size: 16px;&quot;&gt;To view up-to-date data on your Dashboard, don’t forget to click on “&lt;b&gt;Refresh&lt;/b&gt;” &lt;/span&gt;&lt;br&gt;&lt;br&gt; </body>
+    <pageComponentType>htmlArea</pageComponentType>
+    <width>wide</width>
+</HomePageComponent>

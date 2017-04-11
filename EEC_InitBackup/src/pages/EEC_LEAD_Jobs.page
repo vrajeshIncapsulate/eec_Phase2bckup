@@ -1,0 +1,58 @@
+<apex:page controller="EEC_LEADJobsController">
+<apex:form >
+ 
+<apex:pageBlock title="Process Historic Data LEAD Jobs">
+
+		<center><apex:pageMessages ></apex:pageMessages></center>
+		<apex:pageBlockSection title="Legacy Visits" collapsible="false" columns="2">
+			<div>
+			   <b>Process LM 2010 / FCC Mobile Legacy Visits</b>
+			</div>
+			<div>
+			   <apex:commandButton value="Process Legacy Visits" action="{!processLegacyVisits}"/>
+			</div>
+		</apex:pageBlockSection>
+		<apex:pageBlockSection title="Legacy Visit Items / Sub-Item visits" collapsible="false" columns="2">
+			<div>
+			   <b>Process FCC Mobile Legacy Visit/Sub-Item visits</b>
+			</div>
+			<div>
+			   <apex:commandButton value="Process Legacy Visit/Sub-Item visits" action="{!processLegacyVisitItems}"/>
+			</div>
+		</apex:pageBlockSection>
+		
+		<apex:pageBlockSection title="EECRs NonCompliance Visits/Investigations" collapsible="false" columns="2">
+			<div>
+			   <b>Process EECRs NonCompliance Visits/Investigations</b>
+			</div>
+			<div>
+			   <apex:commandButton value="Process EECRs NonCompliance Visits/Investigations" action="{!processLegacyNonComplianceVisits}"/>
+			</div>
+		</apex:pageBlockSection>
+		
+		<apex:pageBlockSection title="EECRs NonCompliance Visit items / Investigation Non-compliance items" collapsible="false" columns="2">
+			<div>
+			   <b>Process EECRs NonCompliance Visit items / Investigation Non-compliance items</b>
+			</div>
+			<div>
+			   <apex:commandButton value="Process EECRs NonCompliance Visit items / Investigation Non-compliance item" action="{!processLegacyNonComplianceVisitItems}"/>
+			</div>
+		</apex:pageBlockSection>
+
+		<apex:pageBlockSection title="Clear Staging Data (for testing only)" collapsible="true">
+			<div>
+				<apex:commandButton value="Clear All Staging Data" action="{!clearAllStagingRecords}"/>
+			</div>
+			<div>
+				<apex:commandButton value="Delete All Legacy Visits" action="{!deleteAllLegacyVisits}"/>
+			</div>
+			<div>
+				<apex:commandButton value="Delete All Legacy Investigations" action="{!deleteAllLegacyInvestigations}"/>
+			</div>
+		</apex:pageBlockSection>
+		
+</apex:pageBlock>
+
+
+</apex:form>
+</apex:page>

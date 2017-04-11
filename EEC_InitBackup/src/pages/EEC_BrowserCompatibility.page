@@ -1,0 +1,51 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false">
+  <head>
+    <title>EEC : Browser Compatibility</title>
+    <c:EEC_Header id="pageHeader" />
+	<style>
+    	ul
+        {
+        	list-style-type: none;
+        }  
+    </style>
+    <script>
+          
+    </script>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+         <div class="col-md-6 col-md-offset-3">
+                  <br/><br/><br/>
+             <div class="panel panel-default">
+				 <div class="panel-body"> 
+                     <h2 class="md-title"><i class="fa fa-exclamation-triangle fa-2x"></i> Your browser is out of date!</h2>
+                     <md-divider></md-divider><br/>
+                     
+                     <p>
+                         For the best experience using our web application, 
+                         We recommend upgrading your web browser to a newer version or
+                         download from the list of supported browsers.<br/>
+                     </p>
+                     <p>
+                         Here's a list of supported browsers. 
+                         Follow the link and you'll be redirected to the download page.
+                     </p>
+                     <ul>
+                         <li>
+                         	<a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie"><i class="fa fa-internet-explorer"></i> Internet Explorer</a>
+                         </li>
+                         <li>
+                         	<a href="https://www.google.com/chrome/browser/desktop/index.html"><i class="fa fa-chrome"></i> Chrome</a>
+                         </li>
+                         <li>
+                         	<a href="https://www.mozilla.org/en-US/firefox/new/?scene=2#download-fx"><i class="fa fa-firefox"></i> Firefox</a>
+                         </li>
+                     </ul>
+                 </div>
+             </div>
+          </div>
+      </div>
+      <c:EEC_Site_Footer id="siteFooter" />   
+ </body>
+</apex:page>

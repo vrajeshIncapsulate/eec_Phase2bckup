@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Transaction Document</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Transaction Documents</value>
+    </caseValues>
+    <fields>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document Type --></label>
+        <name>Document_Type__c</name>
+        <relationshipLabel><!-- Transaction Documents --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Document --></label>
+        <name>Document__c</name>
+        <relationshipLabel><!-- Transaction Documents --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Status Date --></label>
+        <name>Last_Status_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensing Transaction --></label>
+        <name>Licensing_Transaction__c</name>
+        <relationshipLabel><!-- Transaction Documents --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Mode --></label>
+        <name>Mode__c</name>
+        <picklistValues>
+            <masterLabel>Additional</masterLabel>
+            <translation><!-- Additional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Optional</masterLabel>
+            <translation><!-- Optional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Required</masterLabel>
+            <translation><!-- Required --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Note For Revision --></label>
+        <name>Note_For_Revision__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Rejected</masterLabel>
+            <translation><!-- Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Returned for Revision</masterLabel>
+            <translation><!-- Returned for Revision --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Transaction Document Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Notes --></label>
+            <section>Notes</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Document Type is required if mode is set to &apos;Required&apos; or &apos;Optional&apos;. --></errorMessage>
+        <name>Doc_Type_required_on_mode_selection</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A note is required if the Transaction Document&apos;s is in need of a revision. --></errorMessage>
+        <name>Note_required_if_returned_for_revision</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Promote_to_Umbrella --></label>
+        <name>Promote_to_Umbrella</name>
+    </webLinks>
+</CustomObjectTranslation>

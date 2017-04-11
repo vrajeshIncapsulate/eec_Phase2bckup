@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Licensor indicating after an Investigation is complete, but without any Non-Compliance Items</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>51 - Followup 15 Days to Submit Quarterly Restratint Report</name>
+    <style>formalLetter</style>
+    <subject>Reminder #1 to provider for restraint report to submit - #51</subject>
+    <type>html</type>
+</EmailTemplate>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Regulation_Compact_Layout</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Regulation_Compact_Layout</fullName>
+        <fields>Reg_key__c</fields>
+        <fields>Name</fields>
+        <fields>Parent_Regulation__c</fields>
+        <label>Regulation Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Regulations object stores the EEC regulations data that are used to populate visit checklists.  These data are managed in the EEC regulations system of record and are updated via a system integration whenever a regulation is updated.</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Additional_description__c</fullName>
+        <description>Can be used to provide additional information related to this regulation</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Can be used to provide additional information related to this regulation</inlineHelpText>
+        <label>Additional description</label>
+        <length>1000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Applicable_To__c</fullName>
+        <description>Type of provider this regulation applies to</description>
+        <externalId>false</externalId>
+        <label>Applicable To</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Family Child Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Large Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Small Group</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Care Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adoption Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Temporary Shelter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Group Care</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Unlicensed Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Article__c</fullName>
+        <description>Regulation article</description>
+        <externalId>false</externalId>
+        <label>Article</label>
+        <length>100000</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Date_Active__c</fullName>
+        <description>Date this regulation must be applied</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date this regulation must be applied by Provider</inlineHelpText>
+        <label>Date Active</label>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Date_Removed__c</fullName>
+        <description>Date this regulation was removed from legal framework</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date this regulation was removed from legal framework</inlineHelpText>
+        <label>Date Removed</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FCC_High_Risk_Reg__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits.</inlineHelpText>
+        <label>FCC High Risk Reg</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>GSA_High_Risk_Reg__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits.</inlineHelpText>
+        <label>GSA High Risk Reg</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>High_Risk__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check if it&apos;s an high risk item</inlineHelpText>
+        <label>High Risk</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Regulation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Higher level regulation in the hierarchy</description>
+        <externalId>false</externalId>
+        <label>Parent Regulation</label>
+        <referenceTo>Regulation__c</referenceTo>
+        <relationshipLabel>Regulations</relationshipLabel>
+        <relationshipName>Regulations</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>R_P_High_Risk_Reg__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits.</inlineHelpText>
+        <label>R&amp;P High Risk Reg</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Reg_key__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>Regulation key from external system (EECRS)</description>
+        <externalId>true</externalId>
+        <label>Reg_key</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>Regulation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Applicable_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Adoption</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Adoption Agency</value>
+        </filters>
+        <label>Apply to Adoption Agency</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_FCC</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Family Child Care</value>
+        </filters>
+        <label>Apply to FCC</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Foster_Care</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Foster Care Agency</value>
+        </filters>
+        <label>Apply to Foster Care Agency</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Group_Care</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Group Care</value>
+        </filters>
+        <label>Apply to Group Care</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Large_Group</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Large Group</value>
+        </filters>
+        <label>Apply to Large Group</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Small_Group</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Small Group</value>
+        </filters>
+        <label>Apply to Small Group</label>
+    </listViews>
+    <listViews>
+        <fullName>Apply_to_Temp_Shelter</fullName>
+        <columns>NAME</columns>
+        <columns>Article__c</columns>
+        <columns>Parent_Regulation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Applicable_To__c</field>
+            <operation>includes</operation>
+            <value>Temporary Shelter</value>
+        </filters>
+        <label>Apply to Temporary Shelter</label>
+    </listViews>
+    <nameField>
+        <label>Regulation No</label>
+        <trackHistory>false</trackHistory>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Regulations</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Article__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Applicable_To__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Article__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Applicable_To__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Article__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Applicable_To__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>Applicable_To__c</searchFilterFields>
+        <searchFilterFields>Parent_Regulation__c</searchFilterFields>
+        <searchFilterFields>Reg_key__c</searchFilterFields>
+        <searchResultsAdditionalFields>Article__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Applicable_To__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

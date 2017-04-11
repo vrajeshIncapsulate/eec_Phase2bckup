@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Conditions and Limitations</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Conditions and Limitations</value>
+    </caseValues>
+    <fields>
+        <help><!-- To be filled if the standard condition selected needs some additional information (ex: Other) --></help>
+        <label><!-- Condition Additional Information --></label>
+        <name>Condition_Additional_Information__c</name>
+    </fields>
+    <fields>
+        <label><!-- Condition Name --></label>
+        <name>Condition_Name__c</name>
+        <relationshipLabel><!-- Conditions and Limitations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Condition as it&apos;ll be displayed on the license --></help>
+        <label><!-- Condition Full Description --></label>
+        <name>Condition_On_License__c</name>
+    </fields>
+    <fields>
+        <label><!-- Conditions --></label>
+        <name>Conditions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- Expiration Date --></label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Conditions and Limitations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Source Transaction --></label>
+        <lookupFilter>
+            <errorMessage><!-- Transaction selected must be associated to the provider this condition applies. --></errorMessage>
+        </lookupFilter>
+        <name>Source_Transaction__c</name>
+        <relationshipLabel><!-- Conditions and Limitations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <layouts>
+        <layout>Conditions and Limitations Layout</layout>
+        <sections>
+            <label><!-- Condition Information --></label>
+            <section>Condition Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Expiration Date must be greater than the Start Date --></errorMessage>
+        <name>Expiration_Date_Greater_than_Start_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The selected condition requires some additional information. Please fill this field with correct information --></errorMessage>
+        <name>If_Standard_Cond_needs_Add_Info_then_Req</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- The standard condition selected does not apply to this record type, please select another one. --></errorMessage>
+        <name>Standard_Condition_Apply_To_Prov_Type</name>
+    </validationRules>
+</CustomObjectTranslation>

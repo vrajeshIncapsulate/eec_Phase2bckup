@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email confirmation is sent to the Reporter of a new case when a new incident is recorded in the system if the email address is known</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>5b - Notification to reporter a incident has been recorded</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - New Incident Submission Confirmation</subject>
+    <type>html</type>
+</EmailTemplate>

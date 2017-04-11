@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email communication sent to the original triage responsible and all previous approvers to inform that the case has been reviewed by the approver and he/she consider this case does not need to be escalated</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>21 - Case Escalated - Rejected info to initial requestor</name>
+    <style>none</style>
+    <subject>A case for {!Case.Provider_Name_For_Email_Merge__c} has not been escalated</subject>
+    <type>text</type>
+</EmailTemplate>

@@ -1,0 +1,7 @@
+Hello,
+
+Visit associated to {!Inspection__c.Provider_No__c} which was sent for your approval has been recalled by {!User.Name} and does not need your review anymore. 
+
+If you want to review the visit, please use this link: https://na16.salesforce.com/{!Inspection__c.Id}
+
+LEAD System

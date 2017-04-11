@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>RestraintReportTemp</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>RestraintReportTemp</value>
+    </caseValues>
+    <fields>
+        <label><!-- Injured Residents (Minor Injury) --></label>
+        <name>Injured_Residents_Minor_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injured Residents (Serious Injury) --></label>
+        <name>Injured_Residents_Serious_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injured Staff (Minor Injury) --></label>
+        <name>Injured_Staff_Minor_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injured Staff (Serious Injury) --></label>
+        <name>Injured_Staff_Serious_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. Restraints Leading to Res. Injury --></label>
+        <name>No_Restraints_Leading_to_Res_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- No. Restraints Leading to Staff Injury --></label>
+        <name>No_Restraints_Leading_to_Staff_Injury__c</name>
+    </fields>
+    <fields>
+        <label><!-- ProgramId --></label>
+        <name>ProgramId__c</name>
+    </fields>
+    <fields>
+        <label><!-- RestraintId --></label>
+        <name>RestraintId__c</name>
+    </fields>
+    <fields>
+        <label><!-- RestraintRecordType --></label>
+        <name>RestraintRecordType__c</name>
+    </fields>
+    <fields>
+        <label><!-- RestraintYear --></label>
+        <name>RestraintYear__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restraint Count --></label>
+        <name>Restraint_Count__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restraint Method --></label>
+        <name>Restraint_Method__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restraint Position Time --></label>
+        <name>Restraint_Position_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restraint Quarter --></label>
+        <name>Restraint_Quarter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted By --></label>
+        <name>Submitted_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitted Date --></label>
+        <name>Submitted_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Bed Days Utilized this Quarter --></label>
+        <name>Total_Bed_Days_Utilized_this_Quarter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unduplicated Count of Residents Restrain --></label>
+        <name>Unduplicated_Count_of_Residents_Restr__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unduplicated Count of Residents Served --></label>
+        <name>Unduplicated_Count_of_Residents_Served__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

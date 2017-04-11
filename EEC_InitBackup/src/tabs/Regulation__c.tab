@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customObject>true</customObject>
+    <description>Regulation object stores EEC regulations data which are used to compile inspection checklists.  Regulation data are managed in EEC&apos;s regulations system of record and are updated via a system integration whenever regulation data are updated.</description>
+    <mobileReady>false</mobileReady>
+    <motif>Custom64: Compass</motif>
+</CustomTab>

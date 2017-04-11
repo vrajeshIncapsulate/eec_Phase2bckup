@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>This email is sent to the reporter if a case does not concerned an area EEC has authority so there will not be any investigation opened</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>7 - Notification to reporter a complaint is not under authority of EEC</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - Complaint Not Under Authority of EEC</subject>
+    <type>html</type>
+</EmailTemplate>

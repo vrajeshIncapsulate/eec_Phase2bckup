@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[<font size="2"><font face="arial" style="color: rgb(0, 0, 0); font-family: arial;">Dear&nbsp;</font><font face="arial">{!Case.Contact},</font></font>]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div style="color: rgb(0, 0, 0); font-family: arial;"><font size="2"><font face="arial" style="color: rgb(0, 0, 0); font-family: arial;">The Department of Early Education and Care (EEC) has received your illness/injury report regarding&nbsp;</font><font face="arial">{!Case.Child_Name__c}&nbsp;at&nbsp;<span style="color: rgb(0, 0, 0); font-family: arial;">{!Case.Provider_Name_For_Email_Merge__c}&nbsp;located at&nbsp;</span><span style="color: rgb(0, 0, 0); font-family: arial;">{!Case.Provider_Address_For_Email_Merge__c}.&nbsp;</span></font></font></div><div style="color: rgb(0, 0, 0); font-family: arial;"><font face="arial" size="2"><br></font></div><div style="color: rgb(0, 0, 0); font-family: arial;"><font size="2"><font face="arial">We reviewed carefully the information you provided to us and based on our analysis, there are no non-</font><span style="font-family: arial;">compliances related to this event. No further investigation of this matter is required and this illness/injury&nbsp;</span><span style="font-family: arial;">report has been closed. &nbsp;</span></font></div><div style="color: rgb(0, 0, 0); font-family: arial;"><font face="arial" size="2"><br></font></div><div><font size="2"><font face="arial" style="color: rgb(0, 0, 0); font-family: arial;"><span style="color: rgb(0, 0, 0); font-family: arial;">If you need more details about this decision, you may contact us by phone at&nbsp;</span>{!Account.Region_Phone__c}&nbsp;</font><font face="arial"><span style="color: rgb(0, 0, 0); font-family: arial;">or by email at&nbsp;</span>{!Account.Licensor_Email__c}&nbsp;with any questions or concerns related&nbsp;to this matter.</font></font></div><div><font size="2"><font face="arial"><br></font></font></div><div><div><font face="arial" size="2">Sincerely,</font></div><div><font face="arial" size="2"><br></font></div><div><font face="arial" size="2">Department of Early Education and Care</font></div></div>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<br>]]></td>
+</tr>
+</table>

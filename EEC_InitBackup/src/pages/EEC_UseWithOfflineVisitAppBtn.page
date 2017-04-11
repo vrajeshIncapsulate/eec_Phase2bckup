@@ -1,0 +1,32 @@
+<apex:page standardcontroller="Inspection__c" doctype="html-5.0"
+           extensions="EEC_UseWithOfflineVisitAppController"
+           sidebar="false" action="{!updateOfflineVisitLock}">
+    <apex:outputtext value="{!Inspection__c.Offline_Lock__c}" rendered="false" />
+    <apex:includeScript value="/soap/ajax/32.0/apex.js"/> 
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    <c:EEC_Header id="pageHeader" />
+    <script> 
+        $j = jQuery.noConflict();
+        $j( document ).ready(function() {
+          if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+              $j('#overlay').fadeOut();
+              if({!!useOnOfflineVisitMode}){
+                  alert('The record is already locked for Offile Visit Mode.');
+                  Sfdc.canvas.publisher.publish({ name : "publisher.close", payload : { refresh:"true" }});
+                  sforce.one.navigateToSObject('{!Inspection__c.Id}','detail'); 
+              }
+              else if({!useOnOfflineVisitMode} && {!Inspection__c.Offline_Lock__c}){
+                  alert('The record has been locked for Offile Visit Mode.');
+                  Sfdc.canvas.publisher.publish({ name : "publisher.close", payload : { refresh:"true" }});
+                  sforce.one.navigateToSObject('{!Inspection__c.Id}','detail'); 
+              }
+          }
+        });
+    </script>
+    <div id="overlay" style="position: fixed; left: 0; top: 100px; bottom: 0; right: 0; z-index: 1001; margin: 15% 50%">
+        <div style="display: inline-block; padding: 2px; background-color: #fff; width: 125px;">
+            <img src="/img/loading32.gif" width="25" height="25" />
+            <apex:outputLabel value="Loading..."/>
+        </div>
+    </div>
+</apex:page>

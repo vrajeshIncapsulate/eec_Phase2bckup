@@ -1,0 +1,2 @@
+<apex:page standardController="Inspection__c" extensions="EEC_AttachGeneratedCoverLetterPDF" action="{! savePDF }">
+</apex:page>

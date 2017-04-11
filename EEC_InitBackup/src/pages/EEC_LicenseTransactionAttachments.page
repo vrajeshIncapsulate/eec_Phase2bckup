@@ -1,0 +1,436 @@
+<apex:page controller="EEC_TransactionWizardController" showHeader="false" standardStylesheets="false">
+    
+<head>
+  <title>EEC</title>
+  <c:EEC_Header id="pageHeader" />  
+  <style>
+    .s3-attachments-inline {
+      font-family: Arial,Helvetica,sans-serif;
+      color: #222;
+    }
+      
+    .s3-attachments-inline form {
+      /*display: flex;
+      flex-direction: column; */
+      overflow-y: scroll;
+      max-height: 180px;
+    }
+      
+    .s3-attachments-inline h3 {
+      font-size: 1.1em; 
+      border-top-color: rgb(153, 89, 5);
+      border-top-style: solid;
+      border-top-width: 2px;
+    }
+      
+    .attachment-item {
+      width: 100%; 
+      display: flex;
+      flex-direction: column; 
+    }
+      
+    .attachment-primary-content {
+      width: 100%; 
+      display: flex;
+      flex-direction: row;
+    }
+      
+    .attachment-primary-content p {
+      float: left; 
+      margin-right: 15px;
+      align-self: center;
+    }
+      
+    .attachment-primary-content p:first-child {
+      flex: 2; 
+    }
+      
+    .navigation-buttons {
+      overflow: visible; 
+    }
+      
+    .clear-button {
+      width: 20px; 
+    }
+        
+    @media only screen and (min-width: 0px) and (max-width: 959px) {
+      .navigation-buttons .md-button {
+        width: 98%;
+      }
+        
+      .navigation-buttons md-content {
+        width: 100%;
+      }
+      
+      .clear-button {
+        width: 98%;
+      }
+    }
+      
+    .top-level-label {
+      font-weight: 600;
+      margin-right: 3px;
+      line-height: 20px; 
+      color: rgba(0,0,0,0.54);
+    }
+      
+    .attachment-description-form {
+      width: 98%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5px;
+    }
+      
+    .attachment-description-form .description-container {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center; 
+    }
+      
+    .attachment-description-form label {
+      flex: 3; 
+      margin: 0;
+      border-radius: 5px 5px 0 0;
+    }
+      
+    .attachment-description-form label input {
+      border-radius: 5px 0px 0px 5px;
+    }
+      
+    .attachment-description-form .icon-container {
+      width: 100%;
+      flex: 1;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+      
+    .attachment-description-form .icon-container i {
+      flex: 1;
+      text-align: center;
+      align-self: center;
+      cursor: pointer;
+      border-radius: 0px 5px 5px 0px;
+      background-color: #853F3F;
+      color: rgba(255,255,255,1);
+      padding: 5px;
+    }
+      
+    .attachment-description-form .icon-container i:hover {
+      background-color: #703E3E; 
+    }
+      
+    .attachment-description-form .icon-container i.success {  
+      background-color: #66BB6A;
+      color: rgba(255,255,255,1);
+      border-radius: 0;
+    }
+      
+    .attachment-description-form .icon-container i.success:hover {  
+      background-color: #81C784;
+    }
+      
+    .attachment-description-form .icon-container i.cancel {  
+      background-color: #EF5350;
+      color: rgba(255,255,255,1);
+      border-radius: 0 5px 5px 0;
+    }  
+      
+    .attachment-description-form .icon-container i.cancel:hover {  
+      background-color: #E57373;
+    }  
+    
+    // Rules for using icons as white on a dark background.
+    .attachment-description-form .icon-container i.md-light { color: rgba(255, 255, 255, 1); }
+    .attachment-description-form .icon-container i.md-inactive { color: rgba(255, 255, 255, 0.3); }
+      
+    .errorMsg {
+      color: red; 
+    }
+  </style>
+</head>
+
+<body ng-app="eecApp">
+  <c:EEC_Nav_Bar id="navBar" />
+  <div class="transaction-attachment-container" ng-controller="TransactionController as ctrl" layout-padding="true" layout-margin="true" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="column">
+    <apex:form html-layout="column" html-layout-padding="true" styleClass="col-lg-8 col-md-8 col-sm-12" style="margin-bottom:100px;padding-left: 50px;" >
+      <h3 class="md-display-1">Attachments</h3>
+        <md-divider class="ng-cloak" layout-align="center center"></md-divider><br/> 
+      <apex:outputLabel styleClass="top-level-label" escape="false" value="{!attachmentSpotlightText}"></apex:outputLabel>  
+      <apex:outputPanel id="fileAttachmentContainer" styleClass="fileAttachmentContainer" style="width: 100%;" >
+        <apex:outputPanel id="fileListContainer">
+          <!-- Incident Attachments -->  
+          <apex:outputPanel rendered="{!attachments.size > 0}">
+            <apex:variable var="counter" value="{!0}"/>  
+              
+            <apex:repeat value="{!attachments}" var="attachment">
+              <div class="attachment-item">
+                <div class="attachment-primary-content">
+                  <p>{!attachment.Filename__c}</p>
+                  <p><apex:outputText value="{0, date, MMMM d','  yyyy}"><apex:param value="{!attachment.CreatedDate}"/></apex:outputText></p>
+                  <p>
+                    <apex:outputPanel rendered="{!AND(attachment.Description__c != null, attachment.Description__c != '')}">
+                      <a href="#attachment-description-{!counter}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="attachment-description">
+                        <i class="material-icons" data-placement="left" data-toggle="tooltip" title="Click this to view/modify a files description.">&#xE88F;</i>
+                      </a>
+                    </apex:outputPanel>
+                  </p>
+                  <p>
+                    <apex:commandLink action="{!deleteAttachment}" value="" reRender="script-existing-items, fileAttachmentContainer" style="color: #000;">
+                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!attachment.Filename__c}"/>  
+                      <i class="material-icons">&#xE872;</i>
+                    </apex:commandLink>  
+                  </p>
+                </div>
+                  
+                <apex:outputPanel rendered="{!AND(attachment.Description__c != null, attachment.Description__c != '')}">
+                    <div id="attachment-description-{!counter}" class="collapse">
+                      <ng-form name="description_form_{!counter}" class="attachment-description-form" ng-controller="FileEditController" ng-init="fileId = '{!attachment.Id}'; description = '{!JSENCODE(attachment.Description__c)}';">
+                        <div class="description-container">
+                          <label class="top-level-label">
+                            Enter a description
+                            <input type="text" class="form-control" name="description" ng-model="description" ng-minlength="1" ng-maxlength="255" ng-required="true" ng-disabled="!editMode"/>
+                          </label>
+                          <div class="icon-container">
+                            <i class="material-icons" ng-hide="editMode" ng-click="oldDescription = description; editMode = !editMode;">&#xE3C9;</i>
+                            <i class="material-icons md-light success" ng-hide="!editMode" ng-click="save(description_form_{!counter});">&#xE876;</i>
+                            <i class="material-icons md-light cancel" ng-hide="!editMode" ng-click="description = oldDescription; editMode = !editMode;">&#xE14C;</i>
+                          </div>
+                        </div>
+                        <div ng-messages="description_form_{!counter}.description.$error" >
+                          <div class="errorMsg" ng-message="required">A description is required.</div>  
+                          <div class="errorMsg" ng-message="maxlength">The description must not exceed 255 characters.</div>  
+                        </div>
+                      </ng-form>  
+                    </div>
+                </apex:outputPanel>
+              </div>
+              <apex:variable var="counter" value="{!counter + 1}"/>
+            </apex:repeat>
+          </apex:outputPanel>
+          <!-- No Attachments -->
+          <apex:outputPanel rendered="{!attachments.size == 0}">
+            <p>No attachments for this Licensing Transaction.</p>
+          </apex:outputPanel>
+        </apex:outputPanel>
+      </apex:outputPanel>
+            
+      <s3-File-Upload
+        button-text="Add Attachments"
+        bucket-name="{!bucketName}" 
+        prefix="{!licenseTransation.Id}/"
+        key="{!accessKey}" 
+        acl="{!bucketItemAccess}" 
+        remote-func-params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"  
+        multiple-enabled="true"
+        timestamp-enabled="true"
+        desc-enabled="true"
+        keep-files-enabled="true">
+      </s3-File-Upload> 
+      <button type="button" class="clear-button md-button md-eec md-raised" ng-click="ctrl.clear()">Clear</button>
+      <p style="margin-top: 10px; margin-bottom: 10px;"><b>Note:</b> If you wish to upload multiple files then select all desired files in the file explorer window OR you may select each file one by one.</p>
+      
+      <apex:actionFunction action="{!SaveAndNextAttachment}" name="SaveAndNext" />
+      <apex:actionFunction action="{!SaveAndPreviousAttachment}" name="SaveAndPrevious" />
+      <apex:actionFunction action="{!SaveAndReturnAttachment}" name="SaveAndReturn" />  
+      <apex:actionfunction name="UpdateTransactionAttachments" action="{!saveAllAttachmentsFromJson}" onComplete="saveAttachmentsFromJsonComplete();" reRender="showmsg, fileAttachmentContainer"> 
+        <apex:param name="json" value="" assignTo="{!attachmentsJson}" /> 
+      </apex:actionfunction>    
+        
+      <apex:actionFunction name="UpdateFileDescription" action="{!saveFileDescription}" reRender="showmsg, script-existing-items">
+        <apex:param name="fileToEditId" value="" assignTo="{!fileToEditId}" /> 
+        <apex:param name="fileToEditDescription" value="" assignTo="{!fileToEditDescription}" />
+      </apex:actionFunction>
+            
+      <apex:actionFunction name="refreshAttachmentsJson" rerender="script-existing-items, fileAttachmentContainer"/>
+        
+      <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+        <apex:commandLink value="Save and Previous" styleClass="md-button md-raised md-eec"
+                        html-layout-padding="true" 
+                        onclick="uploadAttachments(2); return false;" html-role="button"/>  
+        <apex:commandLink value="Save and Next" styleClass="md-button md-raised md-eec"
+                        html-layout-padding="true"  
+                        onclick="uploadAttachments(1); return false;" html-role="button"/>
+      </md-content>
+        
+      <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+        <apex:commandButton value="Cancel {!formattedLicenseRecordTypeLabel} Transaction" action="{!CancelTransaction}" onclick="return confirm('Are you sure to cancel the transaction?');" styleClass="md-button md-raised" style="background: rgb(250,250,250);"/>
+     
+        <apex:commandLink value="Save and Return to Provider" styleClass="md-button md-raised"
+                        html-layout-padding="true"  
+                        onclick="uploadAttachments(3); return false;" html-role="button"/>   
+      </md-content>
+    </apex:form>
+      
+    <eec-wizard btn-progress-color="#fff" class="col-lg-3" flex="30" passed-btn-bg-color="#4CAF50" btn-bg-color="#FAFAFA" active-btn-bg-color="#0288D1" hide="true" show-gt-md="true">
+      <eec-wz-step ng-repeat="step in wizardElements" title="{{step.label}}" step-img="{{step.icon}}" selected="{{step.selected}}" passed="{{step.icon != 'info_outline'}}"></eec-wz-step>
+    </eec-wizard>  
+  </div>  
+  <c:EEC_Site_Footer id="siteFooter" /> 
+    
+  <script>
+    jQuery(function () {
+      jQuery('[data-toggle="tooltip"]').tooltip()
+    });
+    
+    app.controller('FileEditController', ['$scope', 'Util', function($scope, Util) {
+      $scope.editMode = false;
+      $scope.fileId;
+      $scope.description;
+      $scope.oldDescription = '';
+        
+      $scope.save = function($form) {
+        console.log($form);
+        if ($form.$valid) {
+          UpdateFileDescription($scope.fileId, $scope.description);
+          $scope.editMode = !$scope.editMode;
+        }
+      };
+    }]);
+    
+    app.controller('TransactionController', ['$scope', '$rootScope', '$location', 'Util', function($scope, $rootScope, $location, Util) {
+      $scope.funcId = ''; 
+      $scope.numUploadComponents = 0;
+      $scope.timesUploadComplete = 0;
+      $scope.bucketName = '{!bucketName}';
+      $scope.exisitingFiles = '{!attachmentsJson}';
+      $scope.wizardElements = Util.generateWizardElements("{!licenseRecordTypeName}", "Attachments");
+        
+      var ctrl = this;
+      // Call this function to broadcast to the directive to process the upload.  
+      this.upload = function(id) {
+        // Set the callback function ID for later.
+        $scope.funcId = id;  
+        $scope.numUploadComponents = jQuery('s3-file-upload').length;
+        // Call all upload directives to process files.  
+        $rootScope.$broadcast('upload', {});
+      };
+        
+      this.clear = function(clearIndex) {
+        if (!angular.isUndefined(clearIndex)) {
+          $rootScope.$broadcast('clearFiles_' + clearIndex, {});   
+        } else {
+          $rootScope.$broadcast('clearFiles',{});   
+        }
+      }
+          
+      // Capture Emit event from Directive for result data.  
+      $scope.$on('uploadComplete', function(event, data) {
+        $scope.timesUploadComplete++;  
+          
+        if (angular.isArray(data)) {
+          var json = [];
+            
+          for (var i = 0; i < data.length; i++) {
+            if (!data[i].status) {
+              console.log("----> Error: File not successfully uploaded.");
+              break;
+            }
+            console.log(JSON.stringify(data[i].data));
+            var attachment = data[i].data;
+            // Split the filename to get the prefix.  
+            var splitFilename = attachment.key.split('/');
+            // Create the JSON needed for the S3_File__c objects.  
+            var file = {
+              "Filename__c": splitFilename[1],
+              "Prefix__c": splitFilename[0],
+              "Content_Type__c": attachment['Content-Type'],
+              "Acl__c": attachment.acl,
+              "Bucket__c": $scope.bucketName,
+              "Description__c": attachment.description
+            };
+              
+            if (!angular.isUndefined($scope.exisitingFiles) && $scope.exisitingFiles !== '') {
+              var exisitingFilesJson = JSON.parse($scope.exisitingFiles);
+              // Loop through the results.
+              angular.forEach(exisitingFilesJson, function(value, key) {
+                // Get the short names of the files without the file extensions. 
+                var exisitingShortName = value.Filename__c.split('.')[0];
+                var shortName = file.Filename__c.split('.')[0];
+                // If the short name of the file is the same as the existing then set the id for upsert.
+                if (exisitingShortName == shortName) {
+                  file.Id = value.Id;
+                }
+              });
+            }
+            // Push the file into the json object to send.
+            json.push(file);
+          }
+          console.log("Files Uploaded Successfully!");
+          // Call the action function to create the S3 Object entries in Sforce.
+          UpdateTransactionAttachments(JSON.stringify(json));
+        } else if ($scope.timesUploadComplete == $scope.numUploadComponents) {
+          console.log("Error: " + data.error);   
+            
+          if (data.error.indexOf('No files') > -1) {
+            console.log("No files to upload. Continue to next page.");
+            switch($scope.funcId) {
+              case 1:
+                SaveAndNext();    
+                break;
+              case 2:
+                SaveAndPrevious();   
+                break;
+              case 3:
+                SaveAndReturn();    
+                break;
+            }
+          } else if (data.error.indexOf('Invalid') > -1) {
+            $scope.timesUploadComplete = 0; 
+            $scope.numUploadComponents = 0;
+          }
+        }
+      });
+    }]);
+  </script>
+      
+  <script>
+    var inProgress = false;  
+      
+    var uploadAttachments = function(functionId) {
+      // Call the Angular process method from JS.  
+      return angular.element(jQuery('.transaction-attachment-container'))
+        .scope()
+        .ctrl.upload(functionId);
+    }
+    
+    var saveAttachmentsFromJsonComplete = function() {
+      refreshAttachmentsJson();
+      var timesComplete = angular.element(jQuery('.transaction-attachment-container')).scope().timesUploadComplete;
+      var numUploadComponents = angular.element(jQuery('.transaction-attachment-container')).scope().numUploadComponents;
+      
+      if (!inProgress && timesComplete == numUploadComponents) {
+        inProgress = true;  
+        //console.log("----> On Complete for saving attachments");  
+        // Call action function for specified button.
+        switch(angular.element(jQuery('.transaction-attachment-container')).scope().funcId) {
+          case 1:
+            SaveAndNext();    
+            break;
+          case 2:
+            SaveAndPrevious();   
+            break;
+          case 3:
+            SaveAndReturn();    
+            break;
+        }
+      }
+    }
+  </script>  
+    
+  <apex:outputPanel id="script-existing-items">
+    <script>
+      jQuery(window).load(function() {    
+        var scope = angular.element(jQuery('.transaction-attachment-container')).scope();
+        scope.$apply(function() {
+          scope.exisitingFiles = '{!attachmentsJson}';
+        }); 
+      });
+    </script>
+  </apex:outputPanel>  
+</body>
+</apex:page>

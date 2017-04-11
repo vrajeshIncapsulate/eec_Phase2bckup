@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QuickAction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>A button to take the users to a home page for all reports for a visit.</description>
+    <height>250</height>
+    <label>View Report Tools</label>
+    <optionsCreateFeedItem>false</optionsCreateFeedItem>
+    <page>EEC_ReportGeneration_One</page>
+    <type>VisualforcePage</type>
+    <width>-100</width>
+</QuickAction>

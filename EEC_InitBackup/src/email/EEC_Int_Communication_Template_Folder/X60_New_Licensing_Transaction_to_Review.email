@@ -1,0 +1,9 @@
+Hello,
+
+A new transaction for {!Licensing_Transaction__c.RecordType} for {!Licensing_Transaction__c.Provider__c} has been submitted, is complete and requires your attention.
+
+Please login to Salesforce and review the transaction: 
+
+https://na16.salesforce.com/{!Licensing_Transaction__c.Id}
+
+LEAD System

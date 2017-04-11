@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Submitted Transaction still pending after 14 days</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>76 - Submitted Transaction still pending after 14 days</name>
+    <style>formalLetter</style>
+    <subject>Submitted Transaction still pending after 14 days</subject>
+    <textOnly>Dear {!Account.Name}
+
+The following item(s) are still outstanding before your {!Licensing_Transaction__c.RecordType} application submitted on {!Licensing_Transaction__c.Submission_Date__c} can be reviewed by EEC: {!Licensing_Transaction__c.Missing_to_move_to_Under_Review__c}.
+
+Please refer to the specific email(s)associated for instructions.
+
+You may contact your licensor {!Licensing_Transaction__c.Assigned_To__c} by phone at {!Account.OwnerPhone} or by email at {!Account.OwnerEmail} with any questions or concerns related to this matter.
+
+Sincerely,
+
+The Department of Early Education and Care
+{!Account.Region_Address__c}
+{!Account.Region_Phone__c} • {!Account.Region_Fax__c} • {!Account.Region_Email__c}
+www.mass.gov/eec</textOnly>
+    <type>html</type>
+</EmailTemplate>

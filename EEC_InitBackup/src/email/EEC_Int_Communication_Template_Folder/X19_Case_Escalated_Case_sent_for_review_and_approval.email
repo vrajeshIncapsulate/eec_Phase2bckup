@@ -1,0 +1,9 @@
+Hello,
+
+A new case associated to Provider {!Case.Provider_Name_For_Email_Merge__c} requires your review for escalation and assignment to an investigator. The reason for this request is: 
+
+{!Case.Reason_for_Detailed_Investigation__c}
+
+Please login to Salesforce and review the case: {!Case.Link}. 
+
+LEAD System

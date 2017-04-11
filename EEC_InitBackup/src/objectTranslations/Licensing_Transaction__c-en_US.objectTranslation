@@ -1,0 +1,2166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Licensing Transaction</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Licensing Transactions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Abused or neglected child Description --></label>
+        <name>Abused_or_neglected_a_child_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Abused or neglected child --></label>
+        <name>Abused_or_neglected_a_child__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Alcoholic Bev., Narcotics, Drugs Desc --></label>
+        <name>Alcoholic_Bev_Narcotics_Drugs_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved Foster Care Provider Descrip. --></label>
+        <name>Approved_Foster_Care_Provider_Descrip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approved Foster Care Provider --></label>
+        <name>Approved_Foster_Care_Provider__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Approved by Manager --></label>
+        <name>Approved_by_Manager__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email of the manager of the user assigned to the transaction (used in the approval process) --></help>
+        <label><!-- Assigned To Manager Email --></label>
+        <name>Assigned_To_Manager_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Phone --></label>
+        <name>Assigned_To_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Assigned To --></label>
+        <name>Assigned_To__c</name>
+        <relationshipLabel><!-- Licensing Transactions (Transaction Assigned To) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Email address for the record&apos;s assigned user --></help>
+        <label><!-- Assigned User Email --></label>
+        <name>Assigned_User_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned to Me Or Subordinates --></label>
+        <name>Assigned_to_Me_Or_Subordinates__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned to Me --></label>
+        <name>Assigned_to_Me__c</name>
+    </fields>
+    <fields>
+        <label><!-- Associated Fee --></label>
+        <name>Associated_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Associated Visit --></label>
+        <name>Associated_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- At Least 2 Exits? --></label>
+        <name>At_Least_2_Exits__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 1 --></label>
+        <name>BRC_City_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 2 --></label>
+        <name>BRC_City_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 3 --></label>
+        <name>BRC_City_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 4 --></label>
+        <name>BRC_City_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Current Mailing Address --></label>
+        <name>BRC_Current_Mailing_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 1 --></label>
+        <name>BRC_Date_From_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 2 --></label>
+        <name>BRC_Date_From_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 3 --></label>
+        <name>BRC_Date_From_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 4 --></label>
+        <name>BRC_Date_From_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 1 --></label>
+        <name>BRC_Date_To_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 2 --></label>
+        <name>BRC_Date_To_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 3 --></label>
+        <name>BRC_Date_To_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 4 --></label>
+        <name>BRC_Date_To_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date of Birth --></label>
+        <name>BRC_Date_of_Birth__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Father First Name --></label>
+        <name>BRC_Father_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Father Last Name --></label>
+        <name>BRC_Father_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC First Name --></label>
+        <name>BRC_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Gender --></label>
+        <name>BRC_Gender__c</name>
+        <picklistValues>
+            <masterLabel>Female</masterLabel>
+            <translation><!-- Female --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Male</masterLabel>
+            <translation><!-- Male --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BRC Last Name --></label>
+        <name>BRC_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Maiden Name --></label>
+        <name>BRC_Maiden_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Middle name as filled in BRC --></help>
+        <label><!-- BRC Middle Name --></label>
+        <name>BRC_Middle_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother First Name --></label>
+        <name>BRC_Mother_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother Last Name --></label>
+        <name>BRC_Mother_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother Maiden Name --></label>
+        <name>BRC_Mother_Maiden_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Never Had SSN --></label>
+        <name>BRC_Never_Had_SSN__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Not Renewal Flag For DocuSign --></label>
+        <name>BRC_Not_Renewal_Flag_For_DocuSign__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 1 --></label>
+        <name>BRC_Number_Street_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 2 --></label>
+        <name>BRC_Number_Street_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 3 --></label>
+        <name>BRC_Number_Street_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 4 --></label>
+        <name>BRC_Number_Street_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Other Addresses --></label>
+        <name>BRC_Other_Addresses__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Place of Birth --></label>
+        <name>BRC_Place_of_Birth__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Renewal Flag For DocuSign --></label>
+        <name>BRC_Renewal_Flag_For_DocuSign__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Renewal --></label>
+        <name>BRC_Renewal__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Result --></label>
+        <name>BRC_Result__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC SSN Last Six Digits (2) --></label>
+        <name>BRC_SSN_Last_Six_Digits_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC SSN Last Six Digits (4) --></label>
+        <name>BRC_SSN_Last_Six_Digits_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 1 --></label>
+        <name>BRC_State_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 2 --></label>
+        <name>BRC_State_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 3 --></label>
+        <name>BRC_State_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 4 --></label>
+        <name>BRC_State_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Suffix --></label>
+        <name>BRC_Suffix__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 1 --></label>
+        <name>BRC_Zip_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 2 --></label>
+        <name>BRC_Zip_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 3 --></label>
+        <name>BRC_Zip_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 4 --></label>
+        <name>BRC_Zip_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- Becoming Foster Care Provider Descrip. --></label>
+        <name>Becoming_Foster_Care_Provider_Descrip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Becoming Foster Care Provider --></label>
+        <name>Becoming_Foster_Care_Provider__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Belong to Food Program --></label>
+        <name>Belong_to_Food_Program__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Bus.Operated Out of Own Home Descrip. --></label>
+        <name>Bus_Operated_Out_of_Own_Home_Descrip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Business Operated Out of Own Home --></label>
+        <name>Business_Operated_Out_of_Own_Home__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Checked if the CPR Certificate has been uploaded. --></help>
+        <label><!-- CPR Certificate --></label>
+        <name>CPR_Certificate__c</name>
+    </fields>
+    <fields>
+        <label><!-- CPR Certification Issue Date --></label>
+        <name>CPR_Certification_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- CPR Certified --></label>
+        <name>CPR_Certified__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Capacity --></label>
+        <name>Capacity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Caring For Children Not Related --></label>
+        <name>Caring_For_Children_Not_Related__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Certificate of License Revoked / Suspended --></help>
+        <label><!-- Cert. of License Revoked / Suspended --></label>
+        <name>Certificate_of_License_Revoked_Suspend__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Certificate or License Surrendered --></label>
+        <name>Certificate_or_License_Surrendered__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Charged or Arrested for Crime --></label>
+        <name>Charged_or_Arrested_for_Crime__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Charges Description --></label>
+        <name>Charges_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Checking Provider Record Type Name --></label>
+        <name>Checking_Provider_Record_Type_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Child Emergency / Injury Last 3 Years Description --></help>
+        <label><!-- Child Emerg/Injury Last 3 Years Descrip. --></label>
+        <name>Child_Emerg_Injury_Last_3_Years_Descrip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Child Emergency / Injury Last 3 Years --></label>
+        <name>Child_Emergency_Injury_Last_3_Years__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Children Home Schooled Description --></label>
+        <name>Children_Home_Schooled_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Children Home Schooled --></label>
+        <name>Children_Home_Schooled__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Is checked when a condition has been added to the transaction --></help>
+        <label><!-- Condition Added --></label>
+        <name>Condition_Added__c</name>
+    </fields>
+    <fields>
+        <label><!-- Daily Routine and Activities --></label>
+        <name>Daily_Routine_and_Activities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Activity Ends --></label>
+        <name>Date_Activity_Ends__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Care Resumes --></label>
+        <name>Date_Care_Resumes__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Transaction Closed --></label>
+        <name>Date_Closed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date FCC Orientation Mod 1 Taken --></label>
+        <name>Date_FCC_Orientation_Mod_1_Taken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date FCC Orientation Mod 2 Taken --></label>
+        <name>Date_FCC_Orientation_Taken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Last SIDS Training Taken --></label>
+        <name>Date_Last_SIDS_Training_Taken__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date Medical Administration Training Taken --></help>
+        <label><!-- Date Med. Administration Training Taken --></label>
+        <name>Date_Med_Administration_Training_Taken__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date and Time this transaction was closed. This field works as the &quot;Closed Date&quot; field but provide the time in addition. --></help>
+        <label><!-- Date / Time Transaction Closed --></label>
+        <name>Date_Time_Transaction_Closed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Transportation Training Taken --></label>
+        <name>Date_Transportation_Training_Taken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date USDA Nutrition Training Taken --></label>
+        <name>Date_USDA_Nutrition_Training_Taken__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Upgrading Capacity Training Taken --></label>
+        <name>Date_Upgrading_Capacity_Training_Taken__c</name>
+    </fields>
+    <fields>
+        <help><!-- Dealings with Child Protection / Child Welfare Description --></help>
+        <label><!-- Dealing with Child Prot. / Welfar Descri --></label>
+        <name>Dealing_with_Child_Prot_Welfar_Descri__c</name>
+    </fields>
+    <fields>
+        <help><!-- Dealings with Child Protection / Child Welfare Agency --></help>
+        <label><!-- Dealings with Child Prot. / Child Welfar --></label>
+        <name>Dealings_with_Child_Prot_Child_Welfar__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Document / Info. Missing Initial Date --></label>
+        <name>Document_Info_Missing_Initial_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document / Information Missing --></label>
+        <name>Document_Information_Missing__c</name>
+    </fields>
+    <fields>
+        <label><!-- Drinking Water Source --></label>
+        <name>Drinking_Water_Source__c</name>
+        <picklistValues>
+            <masterLabel>Private Water Supply</masterLabel>
+            <translation><!-- Private Water Supply --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Town Water Supply</masterLabel>
+            <translation><!-- Town Water Supply --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Evening, Overnight, Weekend Care --></label>
+        <name>Evening_Overnight_Weekend_Care__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Exits Descriptions --></label>
+        <name>Exits_Descriptions__c</name>
+    </fields>
+    <fields>
+        <help><!-- Experience Caring for Children Qualifications Description --></help>
+        <label><!-- Exp. Caring for Children Qual. Descrip. --></label>
+        <name>Experience_Caring_for_Children_QUalifica__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the FCC Orientation, Module II Evidence has been uploaded. --></help>
+        <label><!-- FCC Orientation, Module II Evidence --></label>
+        <name>FCC_Orientation_Module_II_Evidence__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Orientation, Module I Evidence --></label>
+        <name>FCC_Orientation_Module_I_Evidence__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Residence Description --></label>
+        <name>FCC_Residence_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Fee Paid --></label>
+        <name>Fee_Paid__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the First Aid Certificate has been uploaded. --></help>
+        <label><!-- First Aid Certificate --></label>
+        <name>First_Aid_Certificate__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Aid Certification Issue Date --></label>
+        <name>First_Aid_Certification_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Aid Certified --></label>
+        <name>First_Aid_Certified__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Floors Description --></label>
+        <name>Floors_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- HH Member with CORI Denied --></label>
+        <name>HH_Member_with_CORI_Denied__c</name>
+    </fields>
+    <fields>
+        <label><!-- HH Member with DCF Denied --></label>
+        <name>HH_Member_with_DCF_Denied__c</name>
+    </fields>
+    <fields>
+        <label><!-- Heating Elements --></label>
+        <name>Heating_Elements__c</name>
+        <picklistValues>
+            <masterLabel>Baseboards</masterLabel>
+            <translation><!-- Baseboards --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Coal / Pellet / Wood Burning Stove</masterLabel>
+            <translation><!-- Coal / Pellet / Wood Burning Stove --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fireplaces</masterLabel>
+            <translation><!-- Fireplaces --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Gas on Gas Stove (heating)</masterLabel>
+            <translation><!-- Gas on Gas Stove (heating) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Radiators, Hot Water</masterLabel>
+            <translation><!-- Radiators, Hot Water --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Space Heater</masterLabel>
+            <translation><!-- Space Heater --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Vents / Grates</masterLabel>
+            <translation><!-- Vents / Grates --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Indoor/Outdoor Space Review --></label>
+        <name>Indoor_Outdoor_Space_Review__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Not Blank Submission Date --></label>
+        <name>Is_Not_Blank_Submission_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Not Blank Submitter --></label>
+        <name>Is_Not_Blank_Submitter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Is Renewal Transaction --></label>
+        <name>Is_Renewal_Transaction__c</name>
+    </fields>
+    <fields>
+        <help><!-- Last steps reached by Portal User. --></help>
+        <label><!-- Last Reached Step --></label>
+        <name>Last_Reached_Step__c</name>
+        <picklistValues>
+            <masterLabel>Attachments</masterLabel>
+            <translation><!-- Attachments --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Background Information</masterLabel>
+            <translation><!-- Background Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Daily Routing Activities / Technical Assistance</masterLabel>
+            <translation><!-- Daily Routing Activities / Technical Assistance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>EEC Involvement Experience &amp; Professional Exp.</masterLabel>
+            <translation><!-- EEC Involvement Experience &amp; Professional Exp. --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Household Members</masterLabel>
+            <translation><!-- Household Members --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indoor / Outdoor space information</masterLabel>
+            <translation><!-- Indoor / Outdoor space information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Instructions</masterLabel>
+            <translation><!-- Instructions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>License Status and Capacity / Assistant Information</masterLabel>
+            <translation><!-- License Status and Capacity / Assistant Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review Summary and Submission</masterLabel>
+            <translation><!-- Review Summary and Submission --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Training Information</masterLabel>
+            <translation><!-- Training Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transaction / Provider Information</masterLabel>
+            <translation><!-- Transaction / Provider Information --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- License Expiration Date --></label>
+        <name>License_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Issue Date --></label>
+        <name>License_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Issued --></label>
+        <name>License_Issued__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Requested --></label>
+        <name>License_Requested__c</name>
+        <picklistValues>
+            <masterLabel>Up to 10 Children</masterLabel>
+            <translation><!-- Up to 10 Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Up to 6 Children</masterLabel>
+            <translation><!-- Up to 6 Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Up to 8 Children; 2 School Aged</masterLabel>
+            <translation><!-- Up to 8 Children; 2 School Aged --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- License Type --></label>
+        <name>License_Type__c</name>
+        <picklistValues>
+            <masterLabel>Probationary</masterLabel>
+            <translation><!-- Probationary --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regular</masterLabel>
+            <translation><!-- Regular --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Date the electronic version of Tax Certification Statement was first requested --></help>
+        <label><!-- Licensee BRC Consent Request Date --></label>
+        <name>Licensee_BRC_Consent_Request_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date / Time the BRC consent of the licensee was signed --></help>
+        <label><!-- Licensee BRC Consent Signed Date --></label>
+        <name>Licensee_BRC_Consent_Signed_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Status of the licensee BRC Consent form (if electronic signature is used, this field is updated automatically) --></help>
+        <label><!-- Licensee BRC Consent Status --></label>
+        <name>Licensee_BRC_Consent_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Created</masterLabel>
+            <translation><!-- Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Delivered</masterLabel>
+            <translation><!-- Delivered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Licensee BRC Done --></label>
+        <name>Licensee_BRC_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensee CORI Reception Date --></label>
+        <name>Licensee_CORI_Reception_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensee CORI Result --></label>
+        <name>Licensee_CORI_Result__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved after discretionary review</masterLabel>
+            <translation><!-- Approved after discretionary review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Licensee DCF Reception Date --></label>
+        <name>Licensee_DCF_Reception_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensee DCF Result --></label>
+        <name>Licensee_DCF_Result__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved after discretionary review</masterLabel>
+            <translation><!-- Approved after discretionary review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Live at New Address --></label>
+        <name>Live_at_New_Address__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Medication Administration Training Certificate has been uploaded. --></help>
+        <label><!-- Medication Administration Training Cert --></label>
+        <name>Medication_Administration_Training_Cert__c</name>
+    </fields>
+    <fields>
+        <label><!-- Missing Elements For Closing Part 1 --></label>
+        <name>Missing_Elements_For_Closing_Part_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- List of items that are not met before the transaction can be processed and closed --></help>
+        <label><!-- Missing Elements For Finalizing --></label>
+        <name>Missing_Elements_For_Closing__c</name>
+    </fields>
+    <fields>
+        <help><!-- If not empty, then work remains on this transaction to be ready to be closed or picked up by Admin staff to issue a license / close. --></help>
+        <label><!-- Missing Elements For Licensor --></label>
+        <name>Missing_Elements_For_Licensor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Missing to move to Under Review --></label>
+        <name>Missing_to_move_to_Under_Review__c</name>
+    </fields>
+    <fields>
+        <label><!-- Moving Date --></label>
+        <name>Moving_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nb Hhold Mbr with BRC Consent Complete --></label>
+        <name>Nb_Hhold_Mbr_with_BRC_Consent_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- Nb Hhold Mbr with BRC OK --></label>
+        <name>Nb_Hhold_Mbr_with_BRC_OK__c</name>
+    </fields>
+    <fields>
+        <help><!-- Roll up summary to count the number of HH Member with CORI Reception Date not NULL --></help>
+        <label><!-- Nb Hhold Mbr with CORI Result --></label>
+        <name>Nb_Hhold_Mbr_with_CORI_Result__c</name>
+    </fields>
+    <fields>
+        <help><!-- Roll up summary to count the number of HH members with DCF Reception Date not NULL --></help>
+        <label><!-- Nb Hhold Mbr with DCF Result --></label>
+        <name>Nb_Hhold_Mbr_with_DCF_Result__c</name>
+    </fields>
+    <fields>
+        <label><!-- Need Assist. to Barricade Heating Units? --></label>
+        <name>Need_Assist_to_Barricade_Heating_Units__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- New Address Phone Number --></label>
+        <name>New_Address_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- New City --></label>
+        <name>New_City__c</name>
+        <relationshipLabel><!-- Licensing Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- New first name submitted by provider --></help>
+        <label><!-- New First Name --></label>
+        <name>New_First_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- New last name submitted by provider --></help>
+        <label><!-- New Last Name --></label>
+        <name>New_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Phone Number Unlisted --></label>
+        <name>New_Phone_Number_Unlisted__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- New State --></label>
+        <name>New_State__c</name>
+        <picklistValues>
+            <masterLabel>MA</masterLabel>
+            <translation><!-- MA --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- New Street Address 1 --></label>
+        <name>New_Street_Address_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Street Address 2 --></label>
+        <name>New_Street_Address_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Zip Code --></label>
+        <name>New_Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- No Condition Flag --></label>
+        <name>No_Condition_Flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Household Member with BRC Req --></label>
+        <name>Number_of_Household_Member_with_BRC_Req__c</name>
+    </fields>
+    <fields>
+        <label><!-- Observations / Comments --></label>
+        <name>Observations_Comments__c</name>
+    </fields>
+    <fields>
+        <help><!-- IS checked if a condition &quot;Other&quot; is added to the transaction --></help>
+        <label><!-- Other Condition --></label>
+        <name>Other_Condition__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Info Reviewed --></label>
+        <name>Other_Info_Reviewed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Person BRC Consent Completed --></label>
+        <name>Other_Person_BRC_Consent_Completed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Persons BRC Done --></label>
+        <name>Other_Persons_BRC_Done_Formula__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Persons CORI Received --></label>
+        <name>Other_Persons_CORI_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Other Persons DCF Received --></label>
+        <name>Other_Persons_DCF_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Outdoor Space Changed? --></label>
+        <name>Outdoor_Space_Changed__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Outdoor Space Changes Description --></label>
+        <name>Outdoor_Space_Changes_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- PPM Meeting Attended Date --></label>
+        <name>PPM_Meeting_Attended_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates if there is a pending email communication to provider on account of updates to the transaction. If TRUE, processes can inspect this value and trigger an email alert and then turn this back to FALSE till needed again by another transaction update --></help>
+        <label><!-- Pending Email to Provider Rgd Trans --></label>
+        <name>Pending_Email_to_Provider_Rgd_Trans__c</name>
+    </fields>
+    <fields>
+        <help><!-- Designates a Provider either as a Portal Provider or not, based on Provider -&gt; Electronic Communication Field --></help>
+        <label><!-- Portal Provider (Y/N) --></label>
+        <name>Portal_Provider_Y_N__c</name>
+    </fields>
+    <fields>
+        <help><!-- Previous Application / Certification with Another State Description --></help>
+        <label><!-- Prev App/Certif with Another State Desc. --></label>
+        <name>Prev_App_Certif_with_Another_State_Desc__c</name>
+    </fields>
+    <fields>
+        <help><!-- Previous Application / Certification with Another State --></help>
+        <label><!-- Prev. App. / Certif. with Another State --></label>
+        <name>Prev_App_Certif_with_Another_State__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Previous Application / Certification with EEC Description --></help>
+        <label><!-- Prev. App. / Certif. with EEC Descrip --></label>
+        <name>Prev_App_Certif_with_EEC_Descrip__c</name>
+    </fields>
+    <fields>
+        <help><!-- Previous Application / Certification with EEC --></help>
+        <label><!-- Previous Application / Certif. with EEC --></label>
+        <name>Previous_Application_Certif_with_EEC__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Previous Involvement with EEC for Unlicensed Child Care --></help>
+        <label><!-- Prev. Involv. EEC Unlicensed Child Care --></label>
+        <name>Previous_Involvement_with_EEC_for_Unlice__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- First Name of the applicant prior to change --></help>
+        <label><!-- Prior First Name --></label>
+        <name>Prior_First_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Last Name of the Provider prior submitted change --></help>
+        <label><!-- Prior Last Name --></label>
+        <name>Prior_Last_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Once this transaction is processed, the provider name will be changed to this value --></help>
+        <label><!-- Proposed New Provider Name --></label>
+        <name>Proposed_New_Provider_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Email --></label>
+        <name>Provider_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checks whether the Provider&apos;s Record Type for the Licensing Transaction is Family Child Care --></help>
+        <label><!-- Provider Reord Type Is Family Child Care --></label>
+        <name>Provider_Reord_Type_Is__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Licensing Transactions --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- If checked, transactions can be processed and closed. --></help>
+        <label><!-- Ready for Closing --></label>
+        <name>Ready_for_Closing__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, transactions can be moved to Admin queue for final processing --></help>
+        <label><!-- Ready for Processing By Admin --></label>
+        <name>Ready_for_Procession_By_Admin__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason Transaction Closed / Cancelled --></label>
+        <name>Reason_Closed_Cancelled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason for Request --></label>
+        <name>Reason_for_Request__c</name>
+    </fields>
+    <fields>
+        <help><!-- If record type is one of four types (FCC Renewal, FCC New License, FCC License Upgrade or Change of Address) evaluates to True and will be used to qualify for Scheduling Visit. --></help>
+        <label><!-- Record Type Qualifies to Schedule Visit --></label>
+        <name>Record_Type_Qualifies_to_Schedule_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Registering as Sex Offender --></label>
+        <name>Registering_as_Sex_Offender__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Restraining Order Description --></label>
+        <name>Restraining_Order_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Restraining Order Issued --></label>
+        <name>Restraining_Order_Issued__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Revocation / Suspension / Surrender Reasons --></help>
+        <label><!-- Revocation / Suspen. / Surrender Reas --></label>
+        <name>Revocation_Suspension_Surrender_Reas__c</name>
+    </fields>
+    <fields>
+        <label><!-- S3 Attachments --></label>
+        <name>S3_Attachments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the SIDS Training Certificate has been uploaded. --></help>
+        <label><!-- SIDS Training Cert --></label>
+        <name>SIDS_Training_Cert__c</name>
+    </fields>
+    <fields>
+        <label><!-- SORI Reception Date --></label>
+        <name>SORI_Reception_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- SORI Result --></label>
+        <name>SORI_Result__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved after discretionary review</masterLabel>
+            <translation><!-- Approved after discretionary review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Sex Offender Nature of Incident --></label>
+        <name>Sex_Offender_Nature_of_Incident__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source --></label>
+        <name>Source__c</name>
+        <picklistValues>
+            <masterLabel>Email</masterLabel>
+            <translation><!-- Email --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Fax</masterLabel>
+            <translation><!-- Fax --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Paper</masterLabel>
+            <translation><!-- Paper --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Phone</masterLabel>
+            <translation><!-- Phone --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider Portal</masterLabel>
+            <translation><!-- Provider Portal --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved By Manager</masterLabel>
+            <translation><!-- Approved By Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed (License Issued / Updated)</masterLabel>
+            <translation><!-- Closed (License Issued / Updated) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed (Processed)</masterLabel>
+            <translation><!-- Closed (Processed) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Manager Approval</masterLabel>
+            <translation><!-- Pending Manager Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Submitted</masterLabel>
+            <translation><!-- Submitted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Submit</masterLabel>
+            <translation><!-- To Submit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Under Review</masterLabel>
+            <translation><!-- Under Review --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Stove Meets Requirements Evidence --></label>
+        <name>Stove_Meets_Requirements_Evidence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submission Date --></label>
+        <name>Submission_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitter Email Address --></label>
+        <name>Submitter_Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Submitter --></label>
+        <name>Submitter__c</name>
+        <relationshipLabel><!-- Licensing Transactions (Submitter) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Date / Time the tax certification statement was signed --></help>
+        <label><!-- Tax Certification Statement Signed Date --></label>
+        <name>Tax_Cert_Statement_Signed_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is Tax Certification Statement Status = Completed AND is (record type = FCC License Upgrade or FCC New License or FCC Renewal) --></help>
+        <label><!-- Tax Certification Required and Complete --></label>
+        <name>Tax_Certification_Required_and_Complete__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the electronic version of Tax Certification Statement was first requested --></help>
+        <label><!-- Tax Certification Statement Request Date --></label>
+        <name>Tax_Certification_Statement_Request_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Status of the Tax Certification Statement (Completed means Signed) --></help>
+        <label><!-- Tax Certification Statement Status --></label>
+        <name>Tax_Certification_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Created</masterLabel>
+            <translation><!-- Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Delivered</masterLabel>
+            <translation><!-- Delivered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Technical Assistance --></label>
+        <name>Technical_Assistance__c</name>
+    </fields>
+    <fields>
+        <label><!-- To Process Flag --></label>
+        <name>To_Process_Flag__c</name>
+    </fields>
+    <fields>
+        <help><!-- Determines whether or not a Visit Needs to be Scheduled --></help>
+        <label><!-- To Schedule Visit --></label>
+        <name>To_Schedule_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Took FCC Orientation - Module 1 --></label>
+        <name>Took_FCC_Orientation_Module_1__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took FCC Orientation - Module 2 --></label>
+        <name>Took_FCC_Orientation__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took Medication Administration Training --></label>
+        <name>Took_Medication_Administration_Training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took SIDS Training --></label>
+        <name>Took_SIDS_Training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took Transportation Training --></label>
+        <name>Took_Transportation_Training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took USDA Nutrition Training --></label>
+        <name>Took_USDA_Nutrition_Training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Took Upgrading  Capacity Training --></label>
+        <name>Took_Upgrading_Capacity_Training__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Total Payment Received --></label>
+        <name>Total_Payment_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Training Review --></label>
+        <name>Training_Review__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Transportation Training Certificate has been uploaded. --></help>
+        <label><!-- Transportation Training Cert --></label>
+        <name>Transportation_Training_Cert__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the USDA Nutrition Training Evidence has been uploaded. --></help>
+        <label><!-- USDA Nutrition Training Evidence --></label>
+        <name>USDA_Nutrition_Training_Evidence__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date all documents / fees were received and the transaction was ready for review --></help>
+        <label><!-- Under Review Start Date --></label>
+        <name>Under_Review_Start_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Upgrading Capacity Training Certificate has been uploaded. --></help>
+        <label><!-- Upgrading Capacity Training Cert --></label>
+        <name>Upgrading_Capacity_Training_Cert__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Family Child Care System Descrip. --></label>
+        <name>Use_Family_Child_Care_System_Descrip__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Family Child Care System --></label>
+        <name>Use_Family_Child_Care_System__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Use of Alcoholic Beverages, Narcotics, Drugs --></help>
+        <label><!-- Use of Alcoholic Bev., Narcotics, Drugs --></label>
+        <name>Use_of_Alcoholic_Bev_Narcotics_Drugs__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Checked if the Well Water Test Evidence has been uploaded. --></help>
+        <label><!-- Well Water Test Evidence --></label>
+        <name>Well_Water_Test_Evidence__c</name>
+    </fields>
+    <fields>
+        <label><!-- Which Food Program --></label>
+        <name>Which_Food_Program__c</name>
+    </fields>
+    <fields>
+        <help><!-- Current work phone number --></help>
+        <label><!-- Work Phone Number --></label>
+        <name>Work_Phone_Number__c</name>
+    </fields>
+    <fields>
+        <help><!-- Provider is working with an Assistant(s) or intending to work with an assistant? --></help>
+        <label><!-- Working With Assistant --></label>
+        <name>Working_With_Assistant__c</name>
+        <picklistValues>
+            <masterLabel>No</masterLabel>
+            <translation><!-- No --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Yes</masterLabel>
+            <translation><!-- Yes --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Change of Address</layout>
+        <sections>
+            <label><!-- Associated Fee --></label>
+            <section>Associated Fee</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Indoor Space --></label>
+            <section>Indoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- New Address --></label>
+            <section>New Address</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Close Prior Expiration</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Detail --></label>
+            <section>Transaction Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Change Room / Floor Level</layout>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Indoor Space --></label>
+            <section>Indoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Change of Household</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Change of Name</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Detail --></label>
+            <section>Transaction Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Inactivate</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Detail --></label>
+            <section>Transaction Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC License Upgrade</layout>
+        <sections>
+            <label><!-- Associated Fee --></label>
+            <section>Associated Fee</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Background Information --></label>
+            <section>Background Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Indoor Space --></label>
+            <section>Indoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- License Information --></label>
+            <section>License Information</section>
+        </sections>
+        <sections>
+            <label><!-- License Status and Capacity --></label>
+            <section>License Status and Capacity</section>
+        </sections>
+        <sections>
+            <label><!-- Outdoor Space --></label>
+            <section>Outdoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Training Information --></label>
+            <section>Training Information</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC New License</layout>
+        <sections>
+            <label><!-- Associated Fee --></label>
+            <section>Associated Fee</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Background Information --></label>
+            <section>Background Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Daily Routine &amp; Activities --></label>
+            <section>Daily Routine &amp; Activities</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Involvement / Experience --></label>
+            <section>EEC Involvement / Experience</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Experience Including Employment History --></label>
+            <section>Experience Including Employment History</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Indoor Space --></label>
+            <section>Indoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- License Information --></label>
+            <section>License Information</section>
+        </sections>
+        <sections>
+            <label><!-- License Status and Capacity --></label>
+            <section>License Status and Capacity</section>
+        </sections>
+        <sections>
+            <label><!-- Missing Elements for Processing --></label>
+            <section>Missing Elements for Processing</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Training Information --></label>
+            <section>Training Information</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Re-Active</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Detail --></label>
+            <section>Transaction Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>FCC Renewal</layout>
+        <sections>
+            <label><!-- Associated Fee --></label>
+            <section>Associated Fee</section>
+        </sections>
+        <sections>
+            <label><!-- Attachments --></label>
+            <section>Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Background Information --></label>
+            <section>Background Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Indoor Space --></label>
+            <section>Indoor Space</section>
+        </sections>
+        <sections>
+            <label><!-- License Information --></label>
+            <section>License Information</section>
+        </sections>
+        <sections>
+            <label><!-- License Status and Capacity --></label>
+            <section>License Status and Capacity</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Technical Assistance --></label>
+            <section>Technical Assistance</section>
+        </sections>
+        <sections>
+            <label><!-- Training Information --></label>
+            <section>Training Information</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Re-issuance of License Certificate</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- EEC Review --></label>
+            <section>EEC Review</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+        <sections>
+            <label><!-- Submission --></label>
+            <section>Submission</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Detail --></label>
+            <section>Transaction Detail</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Information --></label>
+            <section>Transaction Information</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Change of Address --></label>
+        <name>Change_of_Address</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Close Prior Expiration --></label>
+        <name>Close_Prior_Expiration</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Change Room / Floor Level --></label>
+        <name>FCC_Change_Room_Floor_Level</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Change of Household --></label>
+        <name>FCC_Change_of_Household</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Change of Name --></label>
+        <name>FCC_Change_of_Name</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Inactivate --></label>
+        <name>FCC_Inactivate</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC License Upgrade --></label>
+        <name>FCC_License_Upgrade</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC New License --></label>
+        <name>FCC_New_License</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Re-Active --></label>
+        <name>FCC_Re_Active</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- FCC Renewal --></label>
+        <name>FCC_Renewal</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Large Group --></label>
+        <name>Large_Group</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Re-issuance of License Certificate --></label>
+        <name>Re_issuance_of_License_Cert</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If Abused or neglected child = &quot;Yes&quot;, Abused or neglected a child Description is mandatory --></errorMessage>
+        <name>Abused_or_neglected_desc_required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Alcoholic Bev., Narcotics, Drugs Desc = &quot;Yes&quot;, Alcoholic beverages, narcotics or other drugs Description is mandatory --></errorMessage>
+        <name>Alcholic_Beverages_Required_Desc</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Previous Application / Certificate with EEC = &quot;Yes&quot;, Previous Application / Certificate with EEC Description is mandatory --></errorMessage>
+        <name>Application_Certificate_with_EEC_Mandato</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Approved Foster Care Provider = &quot;Yes&quot;, Approved Foster Care Provider Description is mandatory --></errorMessage>
+        <name>Approv_Foster_Care_Prov_Des_Mand_If</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Becoming Foster Care Provider = &quot;Yes&quot;, Becoming Foster Care Provider Description is mandatory --></errorMessage>
+        <name>Becoming_Foster_Care_Provider_Descrip_Ma</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Belong to Food Program = &quot;Yes&quot;, Which Food Program is mandatory --></errorMessage>
+        <name>Belong_to_Food_Program</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Business Operated Out of Own Home = &quot;Yes&quot;, Business Operated Out of Own Home Description is mandatory --></errorMessage>
+        <name>Business_Operated_Out_of_Own_Home_Des_Ma</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If CPR Certified = &quot;Yes&quot;, CPR Certified Issue Date is mandatory --></errorMessage>
+        <name>CPR_Certified</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Certificate of License Revoked / Suspended or Surrendered = &quot;Yes&quot;, Certificate of License Revoked / Suspended or Surrendered Description is mandatory --></errorMessage>
+        <name>Cert_of_License_Revok_Suspend_Mand_If</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Charged or Arrested for Crime = &quot;Yes&quot;, Charges Description is mandatory --></errorMessage>
+        <name>Charged_or_Arrested_for_Crime</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Child Emergency / Injury Last 3 Years = &quot;Yes&quot;, Child Emergency / Injury Last 3 Years Description is mandatory --></errorMessage>
+        <name>Child_Emergency_Injury_Last_3_Years</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Children Are Home Schooled = &quot;Yes&quot;, Children Home Schooled Description is mandatory --></errorMessage>
+        <name>Children_Home_School_Description_Mand_If</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Date Activity Ends must be greater than the License Issue Date --></errorMessage>
+        <name>Date_Activity_Ends_License_Issue_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Date Care Resumes must great than Latest Date Activity Ends --></errorMessage>
+        <name>Date_Care_Resumes_Latest_Date_Activity</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took Upgrading Capacity Training = &quot;Yes&quot;, then Date Upgrading Capacity Training Description must be provided --></errorMessage>
+        <name>Date_Upgrading_Capacity_Training_Desc_Ma</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Dealings with Child Protection / Child Welfare Agency = &quot;Yes&quot;, Dealings with Child Protection / Child Welfare Agency Description is mandatory --></errorMessage>
+        <name>Dealings_with_Child_Protection_Child_W</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If First Aid Certified = &quot;Yes&quot;, First Aid Certified Issue Date is mandatory --></errorMessage>
+        <name>First_Aid_Certified</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Provider uses Electronic Communication, Submitter should be a valid portal user. --></errorMessage>
+        <name>If_Elec_Com_Submitter_Should_be_Portal_U</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Licensee CORI Reception Date has been filled, Result is required --></errorMessage>
+        <name>Licensee_CORI_Date_requires_result</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Licensee CORI Result has been selected, Reception Date is required --></errorMessage>
+        <name>Licensee_CORI_Result_requires_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Licensee DCF Reception Date has been filled, Result is required --></errorMessage>
+        <name>Licensee_DCF_Date_requires_result</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Licensee DCF Result has been selected, Reception Date is required --></errorMessage>
+        <name>Licensee_DCF_Result_Reception_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Moving Date must be greater than the License Issue Date --></errorMessage>
+        <name>Moving_Date_License_Issue_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If New Address Phone Number is provided, then a New Phone Number Unlisted value of &quot;Yes&quot; or &quot;No&quot; is mandatory --></errorMessage>
+        <name>New_Address_Phone_Number</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Outdoor Space Changed? = &quot;Yes&quot;, Outdoor Space Changes Description is mandatory --></errorMessage>
+        <name>Outdoor_Space_Changed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Previous Application / Certificate with another State = &quot;Yes&quot;, Previous Application / Certificate with another State Description is mandatory --></errorMessage>
+        <name>Prev_App_Cert_with_another_State_Mand_If</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Reason for cancellation must be entered to cancel a transaction. --></errorMessage>
+        <name>Reason_mandatory_if_Cancelled_after_Subm</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Registering as Sex Offender = &quot;Yes&quot;, Dealings with Sex Offender Nature of Incident Description is mandatory --></errorMessage>
+        <name>Registering_as_Sex_Offender</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Restraining Order Issued = &quot;Yes&quot;, Restraining Order Description is mandatory --></errorMessage>
+        <name>Restraining_Order_Issued</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If SORI Reception Date has been filled, Result is required --></errorMessage>
+        <name>SORI_Date_requires_result</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If SORI Result has been selected, Reception Date is required --></errorMessage>
+        <name>SORI_Result_requires_a_Reception_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Submitter should be filled when the transaction is submitted --></errorMessage>
+        <name>Submitter_Not_Null_if_status_Submit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took FCC Orientation - Module 1 = &quot;Yes&quot;, Date FCC Orientations is mandatory --></errorMessage>
+        <name>Took_FCC_Module_1_Orientation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took FCC Orientation = &quot;Yes&quot;, Date FCC Orientations is mandatory --></errorMessage>
+        <name>Took_FCC_Orientation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took Medication Administration Training = &quot;Yes&quot;, Date Medication Administration Training Taken is mandatory --></errorMessage>
+        <name>Took_Medication_Administration_Training</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took SIDS Training = &quot;Yes&quot;, Date Last SIDS Training Taken is mandatory --></errorMessage>
+        <name>Took_SIDS_Training</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took Transportation Training = &quot;Yes&quot;, Date Transportation Training Taken is mandatory --></errorMessage>
+        <name>Took_Transportation_Training</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Took USDA Nutrition Training = &quot;Yes&quot;, Date USDA Nutrition Training Taken is mandatory --></errorMessage>
+        <name>Took_USDA_Nutrition_Training</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Use Family Child Care System Description Mandatory = &quot;Yes&quot;, Use Family Child Care System Description Mandatory Description is mandatory --></errorMessage>
+        <name>Use_Family_Child_Care_System_Description</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Create_a_licensing_visit --></label>
+        <name>Create_a_licensing_visit</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_License --></label>
+        <name>Generate_License</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Process_Close_Transaction --></label>
+        <name>Process_Close_Transaction</name>
+    </webLinks>
+    <workflowTasks>
+        <name>Close_transaction_after_manager_approval_and_issue_license_if_required</name>
+        <subject><!-- Close transaction after manager approval (and issue license if required) --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Email sent to the Provider 60 days after submission if the status is still pending and there are some missing documents --></description>
+        <name>Email_sent_Notification_to_Provider_60_days_after_transaction_submission_64</name>
+        <subject><!-- Email sent - Notification to Provider 60 days after transaction submission - #64 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Once a license transaction requiring signature of BRC Consent is received, this email is sent to require the licensee to sign a BRC Consent. --></description>
+        <name>Email_sent_Request_signature_of_BRC_consent_67</name>
+        <subject><!-- Email sent - Request signature of BRC consent - #67 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Once a license transaction requiring signature of Tax Certification Statement is received, this email is sent to require the licensee to sign a Tax Certification Statement. --></description>
+        <name>Email_sent_Request_signature_of_Tax_Certification_37</name>
+        <subject><!-- Email sent - Request signature of Tax Certification - #37 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- If a BRC Consent is pending for more than 5 days, then this email is sent to remind the user that the document is pending --></description>
+        <name>Email_sent_Signature_of_BRC_Consent_Pending_Reminder_68</name>
+        <subject><!-- Email sent - Signature of BRC Consent Pending Reminder - #68 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- If a tax certification statement is pending for more than 5 days, then this email is sent to remind the user that the document is pending --></description>
+        <name>Email_sent_Signature_of_Tax_Certification_Pending_Reminder_38</name>
+        <subject><!-- Email sent - Signature of Tax Certification Pending Reminder - #38 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- If a transaction is submitted but remain in status &quot;Submitted&quot; for more than 14 days, this email is sent to the provider to request him/her to send the payment of the fee or sign the BRC Consent / Tax Certificate --></description>
+        <name>Email_sent_Submitted_Transaction_still_pending_after_14_days_76</name>
+        <subject><!-- Email sent - Submitted Transaction still pending after 14 days - #76 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- This transaction has been &quot;Under Review&quot; for 45 days and need to be checked --></description>
+        <name>New_Licensing_Transaction_not_processed_45_days_notice</name>
+        <subject><!-- New Licensing Transaction not processed - 45 days notice --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- This transaction has been &quot;Under Review&quot; for 60 days and need to be checked --></description>
+        <name>New_Licensing_Transaction_not_processed_60_days_notice</name>
+        <subject><!-- New Licensing Transaction not processed - 60 days notice --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- This transaction has been &quot;Under Review&quot; for 90 days and need to be checked --></description>
+        <name>New_Licensing_Transaction_not_processed_90_days_notice</name>
+        <subject><!-- New Licensing Transaction not processed - 90 days notice --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- This transaction still does not have an attached visit &quot;Scheduled&quot;. Please schedule a visit with this provider. --></description>
+        <name>New_Licensing_Transaction_without_scheduled_visit_15_days_notice</name>
+        <subject><!-- New Licensing Transaction without scheduled visit - 15 days notice --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Re_work_required_on_licensing_transaction_following_review_by_manager_and_reject</name>
+        <subject><!-- Re-work required on licensing transaction following review by manager and rejection --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

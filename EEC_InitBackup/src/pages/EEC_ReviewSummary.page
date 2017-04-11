@@ -1,0 +1,3 @@
+<apex:page controller="EEC_TransactionWizardController" showheader="false" sidebar="false">
+Review Summary and Submission
+</apex:page>

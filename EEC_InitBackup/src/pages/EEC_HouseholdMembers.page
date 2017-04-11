@@ -1,0 +1,443 @@
+<apex:page controller="EEC_TransactionWizardController" standardStylesheets="false" showheader="false" sidebar="false">
+  <head>
+    <title>EEC : Transaction - Household Members</title>
+    <c:EEC_Header id="pageHeader" />
+      
+    <style>
+      a.md-button.md-raised.md-eec, .md-button.md-raised.md-eec {
+        color: rgb(250,250,250);
+        background-color: #853F3F; 
+      }
+        
+      a.md-button.md-raised.md-eec:hover, .md-button.md-raised.md-eec:hover {
+        color: rgb(250,250,250);
+        background-color: #703E3E; 
+      }
+        
+      a.md-button.md-raised, .md-button.md-raised {  
+        background-color: #f7f7f7;
+      }  
+        
+      .household-info-container {
+        margin-bottom: 160px; 
+      }
+        
+      .top-level-label {
+        font-weight: 600;
+        margin-right: 15px;
+        line-height: 20px; 
+        color: rgba(0,0,0,0.54);
+      }
+        
+      .commandBtn {
+        -webkit-appearance: none;
+        border: none;
+        box-shadow: none;
+        background: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        font-style: inherit;
+        font-variant: inherit;
+        font-family: inherit;
+        outline: none;
+        letter-spacing: .01em;
+        white-space: normal;
+        margin: 0;
+      }
+        
+      a.md-button span {
+        padding: 6px;
+      }
+        
+      .transaction-info {
+        margin-top: 10px; 
+      }
+        
+      .add-button-container {
+        padding-right: 42px; 
+      }
+       
+      .command-button-container {
+        position: relative;
+        top: -2px; 
+      }
+        
+      .transaction-info-row {
+        margin-left: 20px; 
+      }
+        
+      .eec-subhead {
+        font-size: 1.2em; 
+        font-weight: 600; 
+      }
+        
+      .navigation-buttons {
+        overflow: visible; 
+      }
+      .household-form{
+      	  margin-bottom:15px;
+      } 
+      .error-msg{
+        color: rgb(244,67,54);
+      	-webkit-font-smoothing: antialiased;
+        font-size: 12px;
+        line-height: 24px;  
+      }  
+      label{
+      	color: rgba(0,0,0,0.54); 
+        font-size: 14px; 
+      }  
+      .form-group{
+      	padding-left : 5px;  
+      }  
+        
+      @media only screen and (min-width: 0px) and (max-width: 959px) {
+        .household-form-container {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+        
+        .navigation-buttons .md-button {
+          width: 98%;
+        }
+        
+        .navigation-buttons md-content {
+          width: 100%;
+        }
+        
+        .add-button-container {
+          padding-right: 0;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+    
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />
+      
+    <div class="household-info-container" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="column" layout-padding="true" layout-margin="true" ng-controller="TransactionController as ctrl">
+      <md-content style="margin-top: 20px;" ng-show="ctrl.checkForMessages()" layout="row" flex="100" layout-align="center center">   
+        <md-whiteframe class="md-whiteframe-z2 ng-cloak" layout="column" layout-padding="true" flex="74">
+          <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </md-whiteframe> 
+      </md-content>
+        
+      <div class="household-form-container" layout="column" layout-padding="true" flex="100" flex-lg="75" flex-gt-lg="75">
+        <form id="HouseholdForm" class="household-form" name="HouseholdForm" layout="column" layout-padding="true">
+            <h3 class="md-display-1">Household Members</h3>
+            <md-divider class="ng-cloak" layout-align="center center"></md-divider>  
+          
+            <div class="transaction-info" layout-margin="true">
+              <h3 class="eec-subhead">Transaction Information</h3>
+              <md-content class="transaction-info-row" layout="row">
+                <p class="md-subhead top-level-label">Transaction Type: </p>
+                <apex:outputText value="{!LicenseRecordTypeLabel}" />
+              </md-content>
+            
+              <md-content class="transaction-info-row" layout="row">
+                <p class="md-subhead top-level-label">Transaction Number: </p>
+                <apex:outputText value="{!licenseTransation.Name}" />
+              </md-content>
+            </div>
+            
+            <div class="ng-cloak" layout-wrap="true" layout="row" layout-align-sm="center center" layout-align-md="center center" >
+              <h3 class="eec-subhead" flex="95" layout-margin="true">Household Members and Individuals regularly on the premise </h3>
+              <p class="md-subhead top-level-label" style="margin-left: 8px;margin-bottom: 10px;margin-top: 5px;">Please list (by clicking on "Add") every person living in your household including foster children whether or not they are home during child care hours. Additionally, please list any individuals who are regularly on the premises.</p>
+              <md-card ng-repeat="(index,member) in ctrl.householdMembers" flex="100" flex-lg="45" flex-gt-lg="45">
+                <ng-form name="HouseholdInnerForm">
+                  <md-card-content layout="row" layout-align="center center" layout-wrap="true">
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>First Name <span class="required">*</span></label>
+                        <input name="First_Name" class="form-control" ng-model="member.First_Name" type="text" required="true"/>
+                        <div ng-messages="HouseholdInnerForm.First_Name.$error" ng-show="HouseholdInnerForm.First_Name.$touched || ctrl.isSubmitted">
+                          <div ng-message="required" class="error-msg">This is required.</div>
+                        </div>
+                      </div>
+                  
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Last Name <span class="required">*</span></label>
+                        <input name="Last_Name" class="form-control" ng-model="member.Last_Name" type="text"  required="true"/> 
+                        <div ng-messages="HouseholdInnerForm.Last_Name.$error" ng-show="HouseholdInnerForm.Last_Name.$touched || ctrl.isSubmitted">
+                          <div ng-message="required"  class="error-msg">This is required.</div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Date of Birth <span class="required">*</span></label>
+                        <input name="Date_of_Birth" class="form-control"  ng-model="member.Date_of_Birth" type="date"  required="true"/>
+                        <div ng-messages="HouseholdInnerForm.Date_of_Birth.$error" ng-show="HouseholdInnerForm.Date_of_Birth.$touched || ctrl.isSubmitted">
+                          <div ng-message="required"  class="error-msg">This is required.</div>
+                          <div ng-repeat="errorMessage in errorMessages" ng-show="HouseholdInnerForm.Date_of_Birth.$touched || ctrl.isSubmitted">
+                            <!-- use ng-message-exp for a message whose key is given by an expression -->
+                            <div ng-message-exp="errorMessage.type"  class="error-msg">{{ errorMessage.text }}</div>
+                          </div>
+                        </div>
+                      </div>
+                  
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Relationship to Provider <span class="required">*</span></label>
+                        <input class="form-control"  name="Relationship_to_Provider" ng-model="member.Relationship_to_Provider" type="text"  required="true"/>
+                        <div ng-messages="HouseholdInnerForm.Relationship_to_Provider.$error" ng-show="HouseholdInnerForm.Relationship_to_Provider.$touched || ctrl.isSubmitted">
+                          <div ng-message="required"  class="error-msg">This is required.</div>
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Occupation <span class="required">*</span></label>
+                        <input class="form-control"  name="Occupation" ng-model="member.Occupation" type="text"  required="true"/>
+                        <div ng-messages="HouseholdInnerForm.Occupation.$error" ng-show="HouseholdInnerForm.Occupation.$touched || ctrl.isSubmitted">
+                          <div ng-message="required"  class="error-msg">This is required.</div>
+                        </div>
+                      </div>
+                        
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Email</label>
+                        <input class="form-control" name="Email_Address" ng-model="member.Email_Address" type="email" />
+                        <div ng-messages="HouseholdInnerForm.Email_Address.$error" ng-show="!HouseholdInnerForm.Email_Address.$valid">
+                          <div ng-message="email"  class="error-msg">Must be a vaild email.</div>
+                        </div>
+                      </div>  
+                  
+                      
+                    </div>
+                  
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true"> 
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Current School Grade (if applicable)</label>
+                        <input class="form-control"  ng-model="HouseholdInnerForm.Current_School_Grade" type="text" />
+                      </div>
+                  
+                      <div flex="50" class="form-group" flex-sm="100">
+                        <label>Number of Hours Home During Child Care <span class="required">*</span></label>
+                        <input class="form-control"  name="Number_of_Hours_Home_During_Child_Care" ng-model="member.Number_of_Hours_Home_During_Child_Care" type="number" required="true"/>
+                        <div ng-messages="HouseholdInnerForm.Number_of_Hours_Home_During_Child_Care.$error" ng-show="HouseholdInnerForm.Number_of_Hours_Home_During_Child_Care.$touched || ctrl.isSubmitted">
+                          <div ng-message="required" class="error-msg">This is required.</div>
+                          <div ng-message="number"  class="error-msg">Must be a valid number.</div>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </md-card-content>
+                
+                  <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button type="button" ng-click="ctrl.removeMember(index)">Remove</md-button>    
+                  </div>
+                </ng-form>
+              </md-card>
+              
+              <div class="add-button-container" flex="95" layout="row" layout-lg="column" layout-gt-lg="column" layout-align="center center" layout-align-lg="end end" layout-align-gt-lg="end end" layout-margin="true">
+                <md-button ng-click="ctrl.addMember()" type='button' class="md-raised" flex="97">Add</md-button>    
+              </div>
+            </div>
+        </form>
+          
+        <apex:form html-layout="column" html-layout-padding="true">
+          <apex:actionFunction name="SaveAndNextHH" action="{!SaveAndNextHH}"/>
+          <apex:actionFunction name="SaveAndPreviousHH" action="{!SaveAndPreviousHH}"/>
+          <apex:actionFunction name="SaveAndReturnHH" action="{!SaveAndReturnHH}"/>
+          
+          <apex:actionfunction name="UpdateMembers" action="{!UpdateMembersList}" onComplete="updateMembersComplete();" reRender="showmsg"> 
+            <apex:param name="json" value="" assignTo="{!MembersJson}" /> 
+            <apex:param name="deleteJson" value="" assignTo="{!MembersToDeleteJson}" /> 
+          </apex:actionfunction>  
+          
+          <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+                	<apex:commandLink value="Save and Previous" styleClass="md-raised md-eec"
+                            html-layout-padding="true" html-flex-order-sm="2" html-flex-order-md="2" html-md-button="true" 
+                            onclick="validateForm(2); return false;"/>
+					<apex:commandLink value="Save and Next" styleClass="md-raised md-eec" 
+                            html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true" 
+                            onclick="validateForm(1); return false;" />
+		  </div>
+		  <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+					<apex:commandLink styleClass="md-button md-raised" action="{!CancelTransaction}" value="Cancel {!formattedLicenseRecordTypeLabel} Transaction"  onclick="return confirm('Are you sure to cancel the transaction?');" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+					<apex:commandLink value="Save and Return to Provider" styleClass="md-raised"
+                            html-layout-padding="true" html-flex-order-sm="3" html-flex-order-md="3" html-md-button="true" 
+                            onclick="validateForm(3); return false;"/>
+		  </div>  
+        </apex:form>    
+      </div>  
+        
+      <eec-wizard btn-progress-color="#fff" class="col-lg-3" passed-btn-bg-color="#4CAF50" btn-bg-color="#FAFAFA" active-btn-bg-color="#0288D1" flex="18" hide="true" show-gt-md="true">
+        <eec-wz-step ng-repeat="step in ctrl.wizardElements" title="{{step.label}}" step-img="{{step.icon}}" selected="{{step.selected}}" passed="{{step.icon != 'info_outline'}}"></eec-wz-step>
+      </eec-wizard> 
+    </div>  
+    
+    <c:EEC_Site_Footer id="siteFooter" /> 
+      
+    
+    <script>
+       /**
+        * validateForm
+        *
+        * This function will call the Angular processJson method to verify the forms intritiy and prepare data if valid.
+        * @author Darkis
+        */
+	  var validateForm = function(funcId) { 
+        // Get an instance of the form.
+        var form = angular.element(jQuery('.household-info-container')).scope().HouseholdForm;  
+        // Call the Angular process method from JS.  
+        return angular.element(jQuery('.household-info-container'))
+          .scope()
+          .ctrl.processJson(form.$valid, funcId);
+      }
+      
+      /**
+       * updateMembersComplete
+       * 
+       * This function will call the SaveMembersList ActionFunction if the form is valid. This will only be called 
+       *   if the form had data to submit/prepare and the initial ActionFunction's onComplete was called.
+       * @author Darkis
+       */
+      var updateMembersComplete = function() {
+        if (angular.element(jQuery('.household-info-container')).scope().HouseholdForm.$valid) {
+          var funcId = angular.element(jQuery('.household-info-container')).scope().ctrl.funcId;
+          // If the function Id is available then continue.
+          if (typeof funcId != 'undefined' && funcId > 0) { 
+            switch (funcId) {
+              case 1:
+                console.log("Save and Next");
+                SaveAndNextHH();    
+                break;
+              case 2:
+                console.log("Save and Previous");
+                SaveAndPreviousHH();
+                break;
+              case 3:
+                console.log("Save and Return");
+                SaveAndReturnHH();
+                break;
+            }  
+          }
+        }
+      }
+    </script>
+    
+    <script>
+      app.controller('TransactionController', ['$scope', '$location', 'Util', function($scope, $location, Util) {
+        // Instance of controller.
+        var tranCtrl = this;
+        // Controller level variables.
+        tranCtrl.isSubmitted = false;
+        tranCtrl.funcId = null;
+        tranCtrl.wizardElements = Util.generateWizardElements("{!licenseRecordTypeName}", 'Individuals Regularly on Premise');
+        tranCtrl.selected = [];
+        tranCtrl.householdMembers = [];
+        tranCtrl.householdMembersToDelete = [];
+        tranCtrl.existingHHMembers = {!ihmListJson};
+        // If we have pre-existing members then add them to the list and present them.
+        if (!_.isEmpty(tranCtrl.existingHHMembers)) {
+          // Loop through each member and create a JS equalivent.
+          for (i=0;i<tranCtrl.existingHHMembers.length;i++) {  
+            // Create a new Angular Member based on the data given.
+            var member = {
+              Id: tranCtrl.existingHHMembers[i].Id,
+              First_Name: tranCtrl.existingHHMembers[i].First_Name__c,
+              Last_Name: tranCtrl.existingHHMembers[i].Last_Name__c,
+              Date_of_Birth: new Date(tranCtrl.existingHHMembers[i].Date_of_Birth__c),
+              Relationship_to_Provider: tranCtrl.existingHHMembers[i].Relationship_to_Provider__c,
+              Occupation: tranCtrl.existingHHMembers[i].Occupation__c,
+              Number_of_Hours_Home_During_Child_Care: tranCtrl.existingHHMembers[i].Number_of_Hours_Home_During_Child_Care__c,
+              Current_School_Grade: tranCtrl.existingHHMembers[i].Current_School_Grade__c,
+              Email_Address: tranCtrl.existingHHMembers[i].Email_Address__c
+            };    
+            tranCtrl.householdMembers.push(member);  
+          }
+        }
+        // Add a new member to the list.
+        tranCtrl.addMember = function() {
+          var member = {
+            Id: '',
+            First_Name: '',
+            Last_Name: '',
+            Date_of_Birth: '',
+            Relationship_to_Provider: '',
+            Occupation: '',
+            Number_of_Hours_Home_During_Child_Care: '',
+            Current_School_Grade: '',
+            Email_Address: ''
+          };
+          tranCtrl.householdMembers.push(member);  
+        }
+        // Remove a member from the list.
+        tranCtrl.removeMember = function(index) {
+          // If item was in existing members then we need to flag it for deletion.
+          var member = tranCtrl.householdMembers[index];
+          if (!_.isEmpty(member.Id)) {
+            tranCtrl.householdMembersToDelete.push(member);
+          }
+          tranCtrl.householdMembers.splice(index, 1);   
+        }
+        // Process the JSON and prep it for Apex processing.
+        tranCtrl.processJson = function(isFormValid, funcId) { 
+          // Set the form as submitted to show any error handling.
+          tranCtrl.isSubmitted = true;
+          // Set the function id in the controller for onComplete is Async.
+          tranCtrl.funcId = funcId;
+          // If the form is valid and we have member items them Update them.
+          if (isFormValid && (tranCtrl.householdMembers.length > 0 || tranCtrl.householdMembersToDelete.length > 0)) {  
+            var hhMembersJson = tranCtrl.householdMembers;
+            var hhMembersToDeleteJson = tranCtrl.householdMembersToDelete;
+              
+            if (hhMembersJson.length > 0) {  
+              // Find and remove the hash key variable from the current members. 
+              for (i = 0; i < hhMembersJson.length; i++) {
+                _.each(hhMembersJson[i], function(value, key) {
+                  if (_.includes(key,'hash')) {
+                    delete hhMembersJson[i][key];    
+                  }
+                });      
+              }
+            }
+                
+            if (hhMembersToDeleteJson.length > 0) {
+              // Find and remove the hash key variable from the members to delete. 
+              for (i = 0; i < hhMembersToDeleteJson.length; i++) {
+                _.each(hhMembersToDeleteJson[i], function(value, key) {
+                  if (_.includes(key,'hash')) {
+                    delete hhMembersToDeleteJson[i][key];    
+                  }
+                });      
+              }   
+            }
+            // Turn the json to a string for Apex processing.
+            var json = JSON.stringify(hhMembersJson);
+            var deleteJson = JSON.stringify(hhMembersToDeleteJson);
+            // Call to process the Json.
+            UpdateMembers(json, deleteJson); 
+          } else if (isFormValid && _.isEmpty(tranCtrl.householdMembers)) {
+            // If the form is valid and there are no member items to delete or add then simply continue.
+            switch (funcId) {
+              case 1:
+                SaveAndNextHH();    
+                break;
+              case 2:
+                SaveAndPreviousHH();
+                break;
+              case 3:
+                SaveAndReturnHH();
+                break;
+            }
+          }
+        }
+      
+        // Function to check for messages available due to errors.
+        tranCtrl.checkForMessages = function() {
+          // TODO: Switch this to use Angular and not jQuery.            
+          var ele = jQuery('[id*="showmsg"]');
+          if (ele.children().length > 0) {
+            return true;   
+          }
+          return false;
+        };
+      }]);
+    </script>
+  </body>
+</apex:page>

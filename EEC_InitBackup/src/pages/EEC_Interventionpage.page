@@ -1,0 +1,138 @@
+<apex:page controller="EEC_UpdateInterventionController" standardStylesheets="false" sidebar="false" showHeader="false">
+  <head>
+    <title>EEC : Internal Investigation - Upload Page</title>
+    <c:EEC_Header id="pageHeader" />
+      <style>
+      	.investigation-container{
+         	margin-bottom : 100px; 
+         }
+         .btn-primary {
+            color: #ffffff;
+            background-color: #853F3F;
+            border-color: #853F3F;
+        } 
+        .img-thumbnail{
+        	width:60px;
+        	height : 60px;
+        	border:0px;
+      	}    
+        .doc-list{
+        	margin-bottom: 30px;  
+        }
+        .alert{
+        	margin-top : 15px;  
+        }
+        .not-visible{
+         	display : none; 
+         } 
+      </style>
+
+    <script>
+      j$(document).ready(function() {
+          j$('[id*=attachments]').fileinput({
+                    showRemove: false,
+                    showUpload: false
+          });
+          if(j$('[id*=msg]').is(':empty')){
+          	j$('.alert').addClass('not-visible');
+          }
+      });
+    </script>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+      <apex:form enctype="multipart/form-data">
+          <div class="investigation-container" ng-controller="InvestigationCtrl as ctrl" layout-margin="true" layout-padding="true">
+          <div class="investigation-top-section" layout="column" layout-gt-lg="row" layout-lg="row" flex="100">
+            <div class="investigation-detail-report-container" layout="column" flex="100">
+              <div class="investigation-detail" layout="column" flex="100">
+                <div id="alert" class="alert alert-success fade in" tabindex="1">  
+                	<apex:pageMessages id="msg"/>  
+                </div>
+				<div class="row">
+					<div class="col-lg-12">
+                        <br/>
+                        <h2 class="pull-left">Internal Investigation - Document Upload</h2>
+					</div>
+                </div>
+   
+				<div layout-align-gt-lg="end center" layout-align-lg="end center" layout="row" layout-lg="row" layout-sm="column" layout-md="column" flex="100" layout-gt-lg="row" layout-wrap="true">
+                   <apex:commandButton styleClass="md-button md-raised md-eec" id="edit" value="Submit" action="{!save}"/>    
+                   <apex:commandButton styleClass="md-button md-raised md-eec" value="Cancel and Return to Provider" action="{!cancel}"/>            
+                </div>             
+                 
+                <section class="contact-information">
+                        <h4 class="md-title">Internal Investigation Reference</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Investigation Reference Number: </strong>{!interventionTrans.Investigation__r.Name}</p>
+                                </div>
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Instructions: </strong>{!interventionTrans.Portal_User_Instructions__c}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>To be provided by: </strong><c:EEC_DateFormat date="{!interventionTrans.To_Be_Provided_By__c}"/></p>
+                                </div>
+                            </div>
+                    	</div>
+                </section>
+                <section class="contact-information">
+                        <h4 class="md-title">Your Contact Person</h4>
+                        <md-divider></md-divider><br/>
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Name: </strong>{!interventionTrans.Investigation__r.Leader_Name_Text__c}</p>
+                                </div>
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Email: </strong>{!interventionTrans.Investigation__r.Leader_Email__c}</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><strong>Phone number: </strong>{!interventionTrans.Investigation__r.Leader_Phone__c}</p>
+                                </div>
+                            </div>
+                    	</div>
+                </section>
+                <br/>
+                <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Upload Internal Investigation
+                          </h3>
+                       </div>
+                    <div class="panel-body">
+                    	<b>Choose a file to attach:</b>
+                    	<apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="attachments"/><br/>
+                  
+                    	<div class="contact-buttons right-group" layout-align-gt-lg="end center" layout-align-lg="end center" layout="row" layout-lg="row" layout-sm="column" layout-md="column" flex="100" layout-gt-lg="row" layout-wrap="true">
+                       		<apex:commandButton styleClass="md-button md-raised md-eec"  action="{!upload}" value="Upload"/>                                    
+                        </div>
+                   	</div>
+                    <div class="row col-lg-12 col-md-6 doc-list">
+                    	<apex:repeat value="{!attachlist}" var="attach" rows="5">
+                            <div class="col-lg-2" style="overflow-wrap: break-word;">
+                        	<a href="/servlet/servlet.FileDownload?file={!attach.Id}" target="_blank">
+								<img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Attached File" class="img-thumbnail"/>  
+                            </a><br/>
+                            {!attach.Name} - <c:EEC_DateFormat date="{!attach.CreatedDate}"></c:EEC_DateFormat>
+                            </div>
+                        </apex:repeat>
+                    </div>
+                    <br/>
+                </div>
+          </div>
+          </div>
+          </div>
+          </div>
+          </apex:form>
+      </div>
+      <c:EEC_Site_Footer id="siteFooter" />   
+    </body>
+</apex:page>

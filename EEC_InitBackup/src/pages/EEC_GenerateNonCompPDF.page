@@ -1,0 +1,5 @@
+<apex:page standardController="Inspection__c" extensions="EEC_GenerateNonCompPDFController" action="{!GeneratePDF}">
+<apex:outputText value="{!Inspection__c.Id}" rendered="false" />
+<apex:outputText value="{!Inspection__c.name}" rendered="false" />
+<apex:outputText value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+</apex:page>

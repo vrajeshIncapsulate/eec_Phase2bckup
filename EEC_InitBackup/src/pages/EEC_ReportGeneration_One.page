@@ -1,0 +1,105 @@
+<apex:page standardcontroller="Inspection__c" extensions="EEC_ReportGeneration_OneExtension">
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS0120, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.EEC_FontAwesome, 'font-awesome-4.1.0/css/font-awesome.min.css')}" />
+
+  <apex:outputtext value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Status__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Cover_Letter_Narrative__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.ProviderId__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Inspector_del__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Assigned_To_Id__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Date_of_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Type_of_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Corrective_Action_Deadline__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Cover_Letter_Narrative__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Assigned_To_Email__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Assigned_To_Phone__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.Electronic_Communication__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Checklist_Summary_issue_date__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Cover_Letter_Issue_Date__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Visit_Narrative_Issue_Date__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Created_on_the_Web__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Name}" rendered="false" />
+
+  <style>
+    .button-container {
+      text-align: center;
+    }
+
+    .slds .button-container .slds-button + .slds-button {
+      margin-left: 0px;
+      margin-top: 8px;
+    }
+
+    .slds-spinner-container {
+      display: none;
+      position: relative;
+      top: 40px;
+      margin: auto;
+    }
+
+    .loading-panel {
+      
+    }
+  </style>
+  <script type='text/javascript' src='/canvas/sdk/js/29.0/publisher.js'></script>  
+  <script>
+    Sfdc.canvas.publisher.subscribe({name: "publisher.clearPanelState", onData:function(e) {
+        console.log('publisher.clearPanelState');
+        Sfdc.canvas.publisher.publish({name: "publisher.close", payload:{ refresh:"true"}});
+        Sfdc.canvas.publisher.publish({name: "publisher.refresh", payload:{ refresh:"true"}});
+    }});
+  </script>  
+
+  <!-- Form for ActionFunctions -->
+  <apex:form >
+    <apex:actionfunction name="SetNarrativeDefault" action="{!processNaraitiveDefault}" rerender="message-center, convertSVGComponent, loading-panel"></apex:actionfunction>
+    <apex:actionfunction name="PublishReportOnPortal" action="{!publishReportOnPortal}" rerender="message-center, convertSVGComponent, loading-panel"></apex:actionfunction>
+    <apex:actionfunction name="GenerateAllReports" action="{!generateAllReports}" rerender="message-center, convertSVGComponent, loading-panel">
+      <apex:param name="reportType" value="" />
+    </apex:actionfunction>
+  </apex:form>
+
+  <div class="slds">
+    <div class="slds-grid slds-wrap">
+      <div class="button-container slds-col slds-grid--vertical">
+        <button class="slds-button slds-button--brand slds-size--2-of-3" type="button" onclick="$('.slds-spinner-container').show();SetNarrativeDefault();">Set Narrative Default</button>
+        <hr/>
+        <button class="slds-button slds-button--brand slds-size--2-of-3"  onclick="$('.slds-spinner-container').show();GenerateAllReports('nc');">Generate Statement of Non-Compliance</button>
+        
+        <button class="slds-button slds-button--brand slds-size--2-of-3"  onclick="$('.slds-spinner-container').show();GenerateAllReports('narrative');">Generate Visit Narrative</button>
+        <button class="slds-button slds-button--brand slds-size--2-of-3"  onclick="$('.slds-spinner-container').show();GenerateAllReports('checklist');">Generate Visit Summary</button>
+        <button class="slds-button slds-button--brand slds-size--2-of-3"  onclick="$('.slds-spinner-container').show();GenerateAllReports('coverletter');">Generate Cover Letter</button>
+        <hr />
+        <button class="slds-button slds-button--brand slds-size--2-of-3" onclick="$('.slds-spinner-container').show();PublishReportOnPortal();">Publish Report on Portal</button>
+      </div>
+    </div>
+
+    <apex:outputPanel id="loading-panel" styleClass="loading-panel" layout="block">
+      <div class="slds-spinner-container slds-spinner--large">
+        <apex:image url="{!URLFOR($Resource.SLDS0120, '/assets/images/spinners/slds_spinner_brand.gif')}" alt="Loading..." />
+      </div>
+    </apex:outputPanel>
+
+    <apex:outputPanel id="message-center">
+      <apex:outputPanel styleClass="slds message-center-container" rendered="{!toastType != null && toastMsg != null}">
+        <div class="slds-notify-container">
+          <div class="slds-notify slds-notify--toast slds-theme--{!toastType}" role="alert">
+            <span class="slds-assistive-text">Info</span>
+            <button class="slds-button slds-notify__close" type="button" onclick="$('.message-center-container').hide();">
+              <apex:image url="{!URLFOR($Resource.SLDS0120, '/assets/icons/action/close.svg')}" styleclass="svg svg-button slds-button__icon" />
+              <span class="slds-assistive-text">Close</span>
+            </button>
+            <div class="notify__content">
+              <h2 class="slds-text-heading--small">{!toastMsg}</h2>
+            </div>
+          </div>
+        </div>
+      </apex:outputPanel>
+    </apex:outputPanel>
+
+    <c:ConvertSVGComponent />
+  </div>
+  <apex:includescript value="{!URLFOR($Resource.EEC_Bootstrap, 'EEC_Bootstrap/js/jquery-1.11.2.min.js')}" />
+</apex:page>

@@ -1,0 +1,1257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visit</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visits</value>
+    </caseValues>
+    <fields>
+        <help><!-- Reason a previously selected tool has been abandoned during the visit. This is filled when the tool is abandoned in visit mode --></help>
+        <label><!-- Abandon Tool Reason --></label>
+        <name>Abandon_Tool_Reason__c</name>
+    </fields>
+    <fields>
+        <help><!-- Describe the activity summary that will be used in the visit narrative --></help>
+        <label><!-- Activity Summary --></label>
+        <name>Activity_Summary__c</name>
+    </fields>
+    <fields>
+        <help><!-- Additional EEC Licensor or staff that will be present or was present during the visit. This information will appear in Visit Summary --></help>
+        <label><!-- Additional EEC Staff --></label>
+        <name>Additional_EEC_Staff__c</name>
+        <relationshipLabel><!-- Visits (Additional EEC Staff) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- At creation and if left blank, Address 1 will be populated with Provider address after saving. --></help>
+        <label><!-- Street Address 1 --></label>
+        <name>Address_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- At creation and if left blank, Address 2 will be populated with Provider address after saving --></help>
+        <label><!-- Street Address 2 --></label>
+        <name>Address_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Admin Turnaround Time for Visit (Days) --></label>
+        <name>Admin_Turnaround_Time_for_Visits_Days__c</name>
+    </fields>
+    <fields>
+        <label><!-- Announced Visit Remainder --></label>
+        <name>Announced_Visit_Remainder__c</name>
+    </fields>
+    <fields>
+        <label><!-- Announced --></label>
+        <name>Announced__c</name>
+    </fields>
+    <fields>
+        <help><!-- Type of announcement given to the provider. For announced, the system will automatically email the provider (if email is known) with confirmation and reminders. For semi-announced, the system will create a task for the licensor to announce to the provider --></help>
+        <label><!-- Announcement Type --></label>
+        <name>Announcement_Type__c</name>
+        <picklistValues>
+            <masterLabel>Announced</masterLabel>
+            <translation><!-- Announced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Semi-announced</masterLabel>
+            <translation><!-- Semi-announced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unannounced</masterLabel>
+            <translation><!-- Unannounced --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Email --></label>
+        <name>Assigned_To_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Id --></label>
+        <name>Assigned_To_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Manager Email --></label>
+        <name>Assigned_To_Manager__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checkbox to indicate if the current user has this visit record in his/her role hierarchy --></help>
+        <label><!-- Assigned To Me Or My Subordinates --></label>
+        <name>Assigned_To_Me_Or_My_Subordinates__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Phone --></label>
+        <name>Assigned_To_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To User Is An Investigator --></label>
+        <name>Assigned_To_User_Is_An_Investigator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned to Me --></label>
+        <name>Assigned_to_Me__c</name>
+    </fields>
+    <fields>
+        <label><!-- Can be Edited --></label>
+        <name>Can_be_Edited__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed / Cancellation Reason --></label>
+        <name>Cancellation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Capacity --></label>
+        <name>Capacity__c</name>
+    </fields>
+    <fields>
+        <help><!-- Temp field to check if a qualifying status to update the To Schedule Visit flag exists.....delete after testing --></help>
+        <label><!-- Check Qualify 2Upd To Schedule Visit --></label>
+        <name>Check_Qualify_2Upd_To_Schedule_Visit__c</name>
+    </fields>
+    <fields>
+        <help><!-- Temp field for testing....delete after testing --></help>
+        <label><!-- Check Record Type Name Value --></label>
+        <name>Check_Record_Type_Name_Value__c</name>
+    </fields>
+    <fields>
+        <help><!-- Temp field to check if a Licensing Trans exists.....delete after testing --></help>
+        <label><!-- Check if Licensing Trans Lookup Exists --></label>
+        <name>Check_if_Licensing_Trans_Lookup_Exists__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the checklist summary was issued last. --></help>
+        <label><!-- Tool Summary issue date --></label>
+        <name>Checklist_Summary_issue_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- At creation and if left blank, City will be populated with Provider address after saving --></help>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Closed / Cancellation Date --></label>
+        <name>Closed_Cancellation_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Mention here the additional comments that should be displayed in the visit narrative --></help>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Deadline given to the provider to answer to a visit report with corrective actions --></help>
+        <label><!-- Corrective Action Reception Deadline --></label>
+        <name>Corrective_Action_Deadline__c</name>
+    </fields>
+    <fields>
+        <help><!-- Add here additional comments related to corrective actions that will appear in the visit narrative
+This text comes in addition to the standard text that depends of the result of the visit: include non-compliant items or not. --></help>
+        <label><!-- Corrective Action Required --></label>
+        <name>Corrective_Action_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- Count Visit For Visit Creation Batch --></label>
+        <name>Count_Visit_For_Visit_Creation_Batch__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the cover letter was issued last. --></help>
+        <label><!-- Cover Letter Issue Date --></label>
+        <name>Cover_Letter_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Cover Letter Narrative --></label>
+        <name>Cover_Letter_Narrative__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, non compliant items associated to this visit have been published on portal and are ready to be reviewed. --></help>
+        <label><!-- Published on Portal --></label>
+        <name>Created_on_the_Web__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date and Time of Published on the Portal --></label>
+        <name>Date_and_Time_of_Published_on_the_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date and Time of Visit Completion --></label>
+        <name>Date_and_Time_of_Visit_Completion__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date of Visit --></label>
+        <name>Date_of_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy Compliance Code Description --></label>
+        <name>EEC_Legacy_Compliance_Code_Desc__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Alert Main Recipient --></label>
+        <name>Email_Alert_Main_Recipient__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Alert Secondary Recipient --></label>
+        <name>Email_Alert_Secondary_Recipient__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email Template Switch Tool Justification --></label>
+        <name>Email_Template_Switch_Tool_Justification__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Time --></label>
+        <name>End_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- Estimated Deadline --></label>
+        <name>Estimated_Deadline__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open Word version of Children’s Records Checklist (which also includes instructions to assist you in completing the required children’s records checklist) --></help>
+        <label><!-- FCC - Child Care Record Chart (W) --></label>
+        <name>FCC_Child_Care_Record_Chart__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the initial Visit Tool that was applied to the Visit --></help>
+        <label><!-- First Visit Tool Used --></label>
+        <name>First_Visit_Tool_Used__c</name>
+        <relationshipLabel><!-- Visits (First Visit Tool Used) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Open Word version of Child Records Checklist (which includes instructions to assist you in completing the required children’s records checklist) --></help>
+        <label><!-- GSA - Child Records Checklist (W) --></label>
+        <name>GSA_Child_Records_Checklist__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open Word version of Staff Record Checklist (includes instructions to assist you in completing the required staff records checklist) --></help>
+        <label><!-- GSA - Staff Records Checklist (W) --></label>
+        <name>GSA_Staff_Records_Checklist__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To --></label>
+        <name>Inspector_del__c</name>
+        <relationshipLabel><!-- Visits (Assigned To) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- InvestigationId --></label>
+        <name>InvestigationId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation --></label>
+        <name>Investigation__c</name>
+        <relationshipLabel><!-- Visits --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Upgrade or Renewal Date --></label>
+        <name>Last_Upgrade_or_Renewal_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy FCC LM/Mobile Visit --></label>
+        <name>Legacy_FCC_LM_Mobile_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy System Interaction # --></label>
+        <name>Legacy_System_Interaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Expiration Date --></label>
+        <name>License_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Number --></label>
+        <name>License_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Status / Provider Status --></label>
+        <name>License_Status_Provider_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensing Transaction --></label>
+        <name>Licensing_Transaction__c</name>
+        <relationshipLabel><!-- Visits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Select here the visit that will serve as Primary Visit. Being defined as a &apos;dependent associated&apos; visit, this visit will follow the same process than the Primary for the following steps: visit scheduling, selection of visit checklist, and report creation. --></help>
+        <label><!-- Primary Visit (for Cluster of Visit) --></label>
+        <name>Mater_Visit_for_Res_Cluster_of_Visits__c</name>
+        <relationshipLabel><!-- Dependent Associated Visits (for Res. Cluster of Visits) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Max Assessed Date --></label>
+        <name>Max_Assessed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Min Assessed Date --></label>
+        <name>Min_Assessed_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Birth Mothers Who Made an Adoption Plan for Adoption Agencies --></help>
+        <label><!-- No. Birth Mothers Making Adoption Plan --></label>
+        <name>No_Birth_Mothers_Making_Adoption_Plan__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Birth Mothers Who Received Services for Adoption Agencies --></help>
+        <label><!-- No. Birth Mothers Receiving Services --></label>
+        <name>No_Birth_Mothers_Receiving_Services__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Families Receiving Home Study Service Only for Adoption Agencies --></help>
+        <label><!-- No. Families Rec Home Stdy Serv Only --></label>
+        <name>No_Families_Rec_Home_Stdy_Serv_Only__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Families Receiving Information and Referral for Adoption Agencies --></help>
+        <label><!-- No. Families Receiving Info and Referral --></label>
+        <name>No_Families_Receiving_Info_and_Referral__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Individuals Receiving Search and/or Reunion Services for Adoption Agencies --></help>
+        <label><!-- No. Indiv Rec Search and/or Reunion Serv --></label>
+        <name>No_Indiv_Rec_Search_and_or_Reunion_Serv__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Families Receiving Case Management Services for Adoption Agencies --></help>
+        <label><!-- No. of Families Rec Case Mgmt Services --></label>
+        <name>No_of_Families_Rec_Case_Mgmt_Services__c</name>
+    </fields>
+    <fields>
+        <label><!-- Note to User --></label>
+        <name>Note_to_User__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Children Placed in Care --></label>
+        <name>NumberOfChildrenPlacedInCare__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Adoptive Placements for Adoption Agencies --></help>
+        <label><!-- No. Adoptive Placements --></label>
+        <name>Number_of_Adoptive_Placements__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Child Assessments for Adoption Agencies --></help>
+        <label><!-- Number of Child Assessments --></label>
+        <name>Number_of_Child_Assessments__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Foster Homes for Adoption Agencies --></help>
+        <label><!-- Number of Foster Homes --></label>
+        <name>Number_of_Foster_Homes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Home Study Services for Adoption Agencies --></help>
+        <label><!-- Number of Home Study Services --></label>
+        <name>Number_of_Home_Study_Services__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Items Abandoned --></label>
+        <name>Number_of_Items_Abandoned__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Items with Corrective Actions --></label>
+        <name>Number_of_Items_with_Corrective_Actions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non-Compliant items Accepted --></label>
+        <name>Number_of_Non_Compliant_items_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Not Assessed Items --></label>
+        <name>Number_of_Not_Assessed_Items__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Reunions Facilitated for Adoption Agencies --></help>
+        <label><!-- Number of Reunions Facilitated --></label>
+        <name>Number_of_Reunions_Facilitated__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Waiting Families for Adoption Agencies --></help>
+        <label><!-- Number of Waiting Families --></label>
+        <name>Number_of_Waiting_Families__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Compliant Items --></label>
+        <name>Number_of_compliant_items__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days given to the provider to receive corrective actions plan. --></help>
+        <label><!-- Number of Days to Receive Corr. Actions --></label>
+        <name>Number_of_days_to_receive_response__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Items to Assess --></label>
+        <name>Number_of_items_to_assess__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non-Applicable items --></label>
+        <name>Number_of_non_applicable_items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non-Assessed items --></label>
+        <name>Number_of_non_assessed_items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non-Compliant items --></label>
+        <name>Number_of_non_compliant_items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Visit Items --></label>
+        <name>Number_of_visit_items__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag checked when the visit has been downloaded to be used on the offline app. Edits to such visit are not authorized --></help>
+        <label><!-- Offline Lock --></label>
+        <name>Offline_Lock__c</name>
+    </fields>
+    <fields>
+        <label><!-- Original Visit --></label>
+        <lookupFilter>
+            <errorMessage><!-- Provider of the associated visit must be the provider of the visit --></errorMessage>
+        </lookupFilter>
+        <name>Original_Visit__c</name>
+        <relationshipLabel><!-- Associated Visits (Follow-Ups) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Population Served --></label>
+        <name>Population_Served__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is the previously selected Visit Tool --></help>
+        <label><!-- Previous Visit Tool Used --></label>
+        <name>Previous_Visit_Tool_Used__c</name>
+        <relationshipLabel><!-- Visits (Previous Visit Tool Used) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Program Director / Licensee --></label>
+        <name>Program_Director_Licensee__c</name>
+    </fields>
+    <fields>
+        <label><!-- ProviderId --></label>
+        <name>ProviderId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Address, City --></label>
+        <name>Provider_Address_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Address --></label>
+        <name>Provider_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Name --></label>
+        <name>Provider_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider_No__c</name>
+        <relationshipLabel><!-- Visits --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Provider Owner --></label>
+        <name>Provider_Owner__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Type --></label>
+        <name>Provider_Type__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open Word version of Residential Licensing Facility Transportation Tool --></help>
+        <label><!-- R&amp;P - Facility &amp; Trans Checklist (W) --></label>
+        <name>R_P_Facility_Trans_Checklist_W__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open the Word version of the Personnel Tool (Personnel files for Residential Care and Placement Programs) --></help>
+        <label><!-- R&amp;P - Personnel Checklist (W) --></label>
+        <name>R_P_Personnel_Checklist__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open Word version of Residents record tool --></help>
+        <label><!-- R&amp;P - Residents Record Checklist (W) --></label>
+        <name>R_P_Residents_Record_Checklist_W__c</name>
+    </fields>
+    <fields>
+        <help><!-- Visit toll that was recommended for this visit --></help>
+        <label><!-- Recommended Tool --></label>
+        <name>Recommended_Tool__c</name>
+        <relationshipLabel><!-- Visits (Recommended Tool) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <name>Region__c</name>
+    </fields>
+    <fields>
+        <help><!-- If the Visit is related to an Investigation evaluates to TRUE else FALSE --></help>
+        <label><!-- Related to an Investigation --></label>
+        <name>Related_to_an_Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Remarks and Notes --></label>
+        <name>Remarks_and_Notes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Open DocuSign version of Residential Licensing Facility Transportation Tool --></help>
+        <label><!-- R&amp;P - Facility &amp; Trans Checklist (D) --></label>
+        <name>Res_Licensing_Facility_Transp_DcSign__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the report was sent to the provider. --></help>
+        <label><!-- Sent date --></label>
+        <name>Sent_date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Enter here the specific requirements for this visit (ex: for transportation inspection, visit must be arranged when vans are idle and accessible) --></help>
+        <label><!-- Specific Visit Requirements --></label>
+        <name>Specific_Visit_Requirements__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Time --></label>
+        <name>Start_Time__c</name>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the statement of non-compliance was last generated --></help>
+        <label><!-- Statement of non-compliance Issue Date --></label>
+        <name>Statement_of_non_compliance__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Cancelled</masterLabel>
+            <translation><!-- Cancelled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Feedback received, to review</masterLabel>
+            <translation><!-- Feedback received, to review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Approval</masterLabel>
+            <translation><!-- Pending Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Report Sent to Provider, Awaiting feedback</masterLabel>
+            <translation><!-- Report Sent to Provider, Awaiting feedback --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Report to be sent to Provider</masterLabel>
+            <translation><!-- Report to be sent to Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Scheduled</masterLabel>
+            <translation><!-- Scheduled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To be scheduled</masterLabel>
+            <translation><!-- To be scheduled --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Visit Completed</masterLabel>
+            <translation><!-- Visit Completed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- This field contains a written explanation for switching the recommended Visit Tool for the first time --></help>
+        <label><!-- 1st Switch Tool Justification --></label>
+        <name>Switch_Tool_Justification_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field contains a written explanation for switching the recommended Visit Tool for the second time --></help>
+        <label><!-- 2nd Switch Tool Justification --></label>
+        <name>Switch_Tool_Justification_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- Describe the technical assistance that was provided or need to be provided in addition to the one already captured in the visit items. This will appear in the visit narrative. --></help>
+        <label><!-- Technical Assistance --></label>
+        <name>Tech_Assist_Recommendations_Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Time of visit --></label>
+        <name>Time_of_visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Capacity --></label>
+        <name>Total_Capacity__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non Assessed Items --></label>
+        <name>Total_Number_of_Non_Assessed_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Total Staff --></label>
+        <name>Total_Staff__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason of Visit --></label>
+        <name>Type_of_Visit__c</name>
+        <picklistValues>
+            <masterLabel>Capacity Increase</masterLabel>
+            <translation><!-- Capacity Increase --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Location</masterLabel>
+            <translation><!-- Change of Location --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Change of Space</masterLabel>
+            <translation><!-- Change of Space --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Enhanced Monitoring</masterLabel>
+            <translation><!-- Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Follow-up</masterLabel>
+            <translation><!-- Follow-up --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Investigation</masterLabel>
+            <translation><!-- Investigation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legacy System Import</masterLabel>
+            <translation><!-- Legacy System Import --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>License Upgrade</masterLabel>
+            <translation><!-- License Upgrade --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Monitoring</masterLabel>
+            <translation><!-- Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pre-Licensing</masterLabel>
+            <translation><!-- Pre-Licensing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress</masterLabel>
+            <translation><!-- Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provisional License Renewal</masterLabel>
+            <translation><!-- Provisional License Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Re-Activate Provider</masterLabel>
+            <translation><!-- Re-Activate Provider --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal</masterLabel>
+            <translation><!-- Renewal --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Enhanced Monitoring</masterLabel>
+            <translation><!-- Renewal - Enhanced Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Full Review</masterLabel>
+            <translation><!-- Renewal - Full Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Renewal - Monitoring</masterLabel>
+            <translation><!-- Renewal - Monitoring --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Technical Assistance</masterLabel>
+            <translation><!-- Technical Assistance --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Umbrella Name --></label>
+        <name>Umbrella_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Describe the updates and changes required. This will appear in the visit narrative --></help>
+        <label><!-- Updates and Changes --></label>
+        <name>Updates_Changes__c</name>
+    </fields>
+    <fields>
+        <help><!-- Justification provided by the licensor to use another visit tool than the visit tool proposed by the system. If empty, it means that the tool used was the one proposed by the system --></help>
+        <label><!-- Use Non Recommended Tool Justification --></label>
+        <name>Use_Non_Recommended_Tool_Justification__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Address Full Email --></label>
+        <name>Visit_Address_Full_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Created By Batch --></label>
+        <name>Visit_Created_By_Batch__c</name>
+    </fields>
+    <fields>
+        <help><!-- Duration in minutes of the visit calculated between the first visit item assessed and the last visit item assessed. --></help>
+        <label><!-- Visit Length - Method 1 (in min.) --></label>
+        <name>Visit_Length_Method_1__c</name>
+    </fields>
+    <fields>
+        <help><!-- Duration in minutes of the visit calculated using the &quot;Start timer&quot; and &quot;End timer&quot; buttons found in visit mode --></help>
+        <label><!-- Visit Length - Method 2 (in min.) --></label>
+        <name>Visit_Length_Method_2__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flag checked when the visit mode is accessed by a user and remains locked for other users until its released or unlocked by the user. --></help>
+        <label><!-- Visit Mode Lock --></label>
+        <name>Visit_Mode_Lock__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Mode Locked By --></label>
+        <name>Visit_Mode_Locked_By__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Mode Locked Date --></label>
+        <name>Visit_Mode_Locked_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the Visit Narrative was last issued --></help>
+        <label><!-- Visit Narrative Issue Date --></label>
+        <name>Visit_Narrative_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Visit tool that is used for this visit --></help>
+        <label><!-- Current Visit Tool Used --></label>
+        <name>Visit_Tool_Used__c</name>
+        <relationshipLabel><!-- Visits --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- At creation and if left blank, Zip Code will be populated with Provider zip code after saving --></help>
+        <label><!-- Zip Code --></label>
+        <name>Zip_Code__c</name>
+    </fields>
+    <fields>
+        <label><!-- validAddress --></label>
+        <name>validAddress__c</name>
+    </fields>
+    <fields>
+        <label><!-- visitLatitude --></label>
+        <name>visitLatitude__c</name>
+    </fields>
+    <fields>
+        <label><!-- visitLongitude --></label>
+        <name>visitLongitude__c</name>
+    </fields>
+    <layouts>
+        <layout>FCC Licensing Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Non Compliant Items --></label>
+            <section>Previous Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Provider Profile --></label>
+            <section>Provider Profile</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Narrative Sections --></label>
+            <section>Visit Narrative Sections</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Report information --></label>
+            <section>Visit Report information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Results --></label>
+            <section>Visit Results</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Tool --></label>
+            <section>Visit Tool</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>GSA Licensing Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Non Compliant Items --></label>
+            <section>Previous Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Provider Profile --></label>
+            <section>Provider Profile</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Narrative Sections --></label>
+            <section>Visit Narrative Sections</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Report information --></label>
+            <section>Visit Report information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Results --></label>
+            <section>Visit Results</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Tool --></label>
+            <section>Visit Tool</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Investigation Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Non Compliant Items --></label>
+            <section>Previous Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Legacy System Import Visit / Non Compliance</layout>
+        <sections>
+            <label><!-- FCC Mobile Info --></label>
+            <section>FCC Mobile Info</section>
+        </sections>
+        <sections>
+            <label><!-- LM Data Info --></label>
+            <section>LM Data Info</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Licensing Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- Adoption Agency - DCF Contracted Services --></label>
+            <section>Adoption Agency - DCF Contracted Services</section>
+        </sections>
+        <sections>
+            <label><!-- Adoption Agency - Specifics of Service --></label>
+            <section>Adoption Agency - Specifics of Service</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Visits Non Compliant Items --></label>
+            <section>Previous Visits Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Narrative Sections --></label>
+            <section>Visit Narrative Sections</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Report information --></label>
+            <section>Visit Report information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Result --></label>
+            <section>Visit Result</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Placement Licensing Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- Adoption Agency - DCF Contracted Services --></label>
+            <section>Adoption Agency - DCF Contracted Services</section>
+        </sections>
+        <sections>
+            <label><!-- Adoption Agency - Specifics of Service --></label>
+            <section>Adoption Agency - Specifics of Service</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Non Compliant Items --></label>
+            <section>Previous Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Provider Profile --></label>
+            <section>Provider Profile</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Narrative Sections --></label>
+            <section>Visit Narrative Sections</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Report information --></label>
+            <section>Visit Report information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Results --></label>
+            <section>Visit Results</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Tool --></label>
+            <section>Visit Tool</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Residential Licensing Visit Layout</layout>
+        <sections>
+            <label><!-- Additional Visit Documents --></label>
+            <section>Additional Visit Documents</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Previous Non Compliant Items --></label>
+            <section>Previous Non Compliant Items</section>
+        </sections>
+        <sections>
+            <label><!-- Provider Profile --></label>
+            <section>Provider Profile</section>
+        </sections>
+        <sections>
+            <label><!-- Requirements and Notes --></label>
+            <section>Requirements and Notes</section>
+        </sections>
+        <sections>
+            <label><!-- Scheduling information --></label>
+            <section>Scheduling information</section>
+        </sections>
+        <sections>
+            <label><!-- Status information --></label>
+            <section>Status information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Address --></label>
+            <section>Visit Address</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Narrative Sections --></label>
+            <section>Visit Narrative Sections</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Report information --></label>
+            <section>Visit Report information</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Results --></label>
+            <section>Visit Results</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Tool --></label>
+            <section>Visit Tool</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- Select Visit Tool --></label>
+        <name>Copy_Inspection_Items</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- View Report Tools --></label>
+        <name>Report_Generator</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Switch Visit Tool --></label>
+        <name>Switch_Visit_Tool</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Test Action --></label>
+        <name>Test_Action</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Use With Offline Visit App --></label>
+        <name>Use_With_Offline_Visit_App</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- Visit Mode --></label>
+        <name>Visit_Items</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- FCC Licensing Visit --></label>
+        <name>FCC_Licensing_Visit</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- GSA Licensing Visit --></label>
+        <name>GSA_Licensing_Visit</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Investigation Visits --></label>
+        <name>Investigation_Visits</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Legacy System Import Visit / Non Compliance --></label>
+        <name>Legacy_System_Import_Visit_Non_Compliance</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Licensing Visits --></label>
+        <name>Licensing_Visits</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Placement Licensing Visit --></label>
+        <name>Placement_Licensing_Visit</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Residential Licensing Visit --></label>
+        <name>Residential_Licensing_Visit</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Cancellation Reason cannot be null for Cancelled/Closed Reason. --></errorMessage>
+        <name>Cancellation_reasons_Required</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A visit can not be cancelled if the visit already occurred --></errorMessage>
+        <name>Cancelled_Visit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A visit can not be closed if it didn&apos;t occur. If the visit does not need to happen, you need to cancel it. --></errorMessage>
+        <name>Closed_Visit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action --></errorMessage>
+        <name>Lock_in_RO_Visits</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Provider type does not match your visit type. Please select a provider that matches your licensing visit type --></errorMessage>
+        <name>Match_visit_type_and_provider_type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Primary visit is associated to a provider that does not share the same umbrella than the provider attached to this visit. Cluster of visits should all share the same umbrella. --></errorMessage>
+        <name>Primary_and_Dependent_should_share_umbre</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Primary visit can only be defined for Group Care and Temporary Shelter. --></errorMessage>
+        <name>Primary_shouldnt_be_chosen_if_not_R</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not authorized to change the Visit Assignee, please contact your Supervisor or your Regional Director to make the modification --></errorMessage>
+        <name>Read_only_Assigned_To</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Edits on a Closed or Cancelled visit are not authorized, Visit must first be re-opened by a Supervisor or Director to be edited --></errorMessage>
+        <name>Reopen_Cancelled_Visit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Visit date can not be empty if the visit is scheduled. --></errorMessage>
+        <name>Scheduled_requires_Date_of_visit</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- needs reqs --></errorMessage>
+        <name>Testing_errors_in_offline_app</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Please use the format hh:mm AM/PM(example: 12:43 PM, 9:30 AM) --></errorMessage>
+        <name>Time_of_Visit_formatting_validation_hold</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Visit date must be empty if the visit is not scheduled. --></errorMessage>
+        <name>To_Schedule_requires_Date_of_visit_Blank</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Close_Visit --></label>
+        <name>Close_Visit</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Copy_inspection_items_from_std_checklist --></label>
+        <name>Copy_inspection_items_from_std_checklist</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Corrective_Action_Plan_Report --></label>
+        <name>Corrective_Action_Plan_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Corrective_Action_Review --></label>
+        <name>Corrective_Action_Review</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_Follow_Up --></label>
+        <name>Create_Follow_Up</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- GeneratePDFVersionOfVisitNarrative --></label>
+        <name>GeneratePDFVersionOfVisitNarrative</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_PDF_version_of_Cover_Letter --></label>
+        <name>Generate_PDF_version_of_Cover_Letter</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_PDF_version_of_Statement_of_Non_Compliance --></label>
+        <name>Generate_PDF_version_of_Statement_of_Non_Compliance</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_PDF_version_of_Visit_Checklist_Summary --></label>
+        <name>Generate_PDF_version_of_Visit_Checklist_Summary</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Report --></label>
+        <name>Generate_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Visit_Summary_V2 --></label>
+        <name>Generate_Visit_Summary_V2</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Publish_Report_on_Portal --></label>
+        <name>Publish_Report_on_Portal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Send_with_Docusign --></label>
+        <name>Send_with_Docusign</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Set_Narrative_Default_Values --></label>
+        <name>Set_Narrative_Default_Values</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Switch_Tool --></label>
+        <name>Switch_Tool</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Transfer_Visits --></label>
+        <name>Transfer_Visits</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Use_With_Offline_Visit_App --></label>
+        <name>Use_With_Offline_Visit_App</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Visit_Mode --></label>
+        <name>Visit_Mode</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Visit_Mode_2 --></label>
+        <name>Visit_Mode_2</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Visit_Mode_Lock --></label>
+        <name>Visit_Mode_Lock</name>
+    </webLinks>
+    <workflowTasks>
+        <name>Email_sent_Notification_to_Provider_that_a_visit_has_been_re_scheduled</name>
+        <subject><!-- Email sent - Notification to Provider that a visit has been re-scheduled --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Email_sent_Notification_to_Provider_that_a_visit_has_been_scheduled</name>
+        <subject><!-- Email sent - Notification to Provider that a visit has been scheduled --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Email_sent_Reminder_to_Provider_that_a_visit_has_been_scheduled</name>
+        <subject><!-- Email sent - Reminder to Provider that a visit has been scheduled --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Schedule_visit_Announced</name>
+        <subject><!-- Schedule visit --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Schedule_visit_UnAnnounced</name>
+        <subject><!-- Schedule visit --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

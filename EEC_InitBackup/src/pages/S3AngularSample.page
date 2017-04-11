@@ -1,0 +1,41 @@
+<apex:page controller="S3AngularSampleCtrl" standardStylesheets="false" showheader="false" sidebar="false">
+  <head>
+    <title>EEC : S3 Example Page</title>
+    <c:EEC_Header id="pageHeader" />
+  </head>  
+    
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />  
+      
+    <div id="upload-container" style="margin-top: 50px; margin-bottom: 120px;" layout-margin="true" layout-padding="true" ng-controller="TransactionController as ctrl">
+      <s3-File-Upload 
+        bucket_name="{!bucketName}" 
+        prefix="{!transactionNumber}/"
+        key="{!key}" 
+        acl="{!bucketItemAccess}" 
+        redirect_url="{!portalUrl}" 
+        remote_func_params="{!$RemoteAction.S3AngularSampleCtrl.generateMultiplePolicySignature}"
+        target="{!formTarget}">
+      </s3-File-Upload>  
+        
+      <md-button ng-click="ctrl.upload()" type="button" class="md-raised md-primary">Upload2</md-button>
+    </div>
+      
+    <c:EEC_Site_Footer id="siteFooter" /> 
+      
+    <script>
+      app.controller('TransactionController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+        var ctrl = this;
+          
+        this.upload = function() {
+          $rootScope.$broadcast('upload', {});
+        };
+          
+        // Capture Emit event from Directive for result data.  
+        $scope.$on('uploadComplete', function(event, data) {
+          console.log(data);   
+        });
+      }]);
+    </script>
+  </body>  
+</apex:page>

@@ -1,0 +1,7 @@
+Hello,
+
+A new self-reported incident associated to Provider {!Case.Account} has been submitted from the Provider portal and is ready for your review. 
+
+Please login to Salesforce and review the transaction: https://na16.salesforce.com/{!Case.Id}
+
+LEAD System

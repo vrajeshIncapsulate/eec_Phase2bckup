@@ -1,0 +1,8 @@
+Hello,
+
+Investigation {!Investigation__c.Name} associated to Provider {!Investigation__c.Provider_No__c} has been reviewed and {!Investigation__c.Leader_Manager__c} has requested the assignee to review of the content of the investigation. 
+If you’re the investigation Leader, please review the investigation in LEAD for all details (a task has been created in LEAD in order to review this investigation and once completed submit it again for approval). 
+
+For more information, this investigation can be directly access from this email using the following link: {!Investigation__c.Link}.
+
+LEAD System

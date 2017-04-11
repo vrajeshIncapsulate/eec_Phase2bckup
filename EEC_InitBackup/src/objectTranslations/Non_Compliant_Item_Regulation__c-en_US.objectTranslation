@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Non Compliant Item Regulation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Non Compliant Item Regulations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Non Compliant Item --></label>
+        <name>Non_Compliant_Item__c</name>
+        <relationshipLabel><!-- Associated Regulations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Regulation --></label>
+        <name>Regulation__c</name>
+        <relationshipLabel><!-- Non Compliant Item Regulations --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Non Compliant Item Regulation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Regulation associated with this item does not  match the provider type. Please select another regulation. --></errorMessage>
+        <name>Regulation_match_provider_type</name>
+    </validationRules>
+</CustomObjectTranslation>

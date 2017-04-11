@@ -1,0 +1,142 @@
+<apex:page controller="EEC_ComplaintsProviderController" doctype="html-5.0" showheader="false" sidebar="false" standardstylesheets="false" action="{! noComplaintRedirect }" cache="false">
+    <c:EEC_Complaints_NavBar />
+
+        <div class="complaints-wrapper">
+            <div class="complaints-title-bar">
+                <h3 class="md-headline">
+                    Provider Information
+                </h3>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <span>Use the criteria below to search and select the licensed provider your 
+                        complaint is about. We encourage you to search the provider in the existing 
+                        database to accelerate our review. If you can't find a matching provider, 
+                        please enter as much information as possible regarding the provider so we can 
+                        identify them.</span>
+                </div>
+            </div>
+            <apex:form >    
+                <div class="filter-row search-questions" layout="row">
+                    <apex:repeat value="{! searchQuestions }" var="q">  
+                        <c:EEC_Question question="{! q }" object="{! providerSearch }" /> 
+                    </apex:repeat> 
+                </div>
+                <div class="inline-row" layout="row">
+                    <apex:outputpanel id="unlicensedCheckbox">  
+                        <apex:outputpanel >
+                            <apex:outputlabel value="I can't find the Provider I want to report about" />
+                            <apex:inputcheckbox value="{! showUnlicensed }">
+                                <apex:actionsupport event="onchange" rerender="unlicensedSection, providerList" />
+                            </apex:inputcheckbox>
+                        </apex:outputpanel>
+                    </apex:outputpanel>
+    
+                    <apex:actionstatus id="searchStatus">
+                        <apex:facet name="stop">
+                            <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search"
+                                                html-layout-padding="true"
+                                                html-flex-order-sm="1"
+                                                html-flex-order-md="1"
+                                                html-md-button="true"
+                                                status="searchStatus"
+                                                action="{! search }"
+                                                rerender="providerList, unlicensedSection, unlicensedCheckbox"
+                                                value="Search" />
+                        </apex:facet>
+                        <apex:facet name="start">
+                            <button class="md-button md-raised md-eec complaints-search">
+                                <i class="fa fa-refresh fa-spin"></i>
+                            </button>
+                        </apex:facet>
+                    </apex:actionstatus>
+                </div>
+            </apex:form>
+            <apex:form styleClass="complaints-form">   
+                <apex:outputpanel id="providerList">
+                    <div class="search-message">
+                        <apex:outputlabel rendered="{!providers != NULL && providers.size == 0 && !showUnlicensed }">
+                            <center>No providers found</center>
+                        </apex:outputlabel>
+                    </div> 
+                    <apex:datatable rendered="{! providers != NULL && providers.size > 0 && !showUnlicensed  }" value="{! providers }" var="p" id="theTable" rowclasses="odd,even" styleclass="table table-striped provider-list">
+                        <apex:column headervalue="Provider Name" value="{! p.Name }" />
+                        <apex:column headervalue="Provider Type" value="{! p.RecordType.Name }" />
+                        <apex:column headervalue="Street Address" value="{! p.Provider_Address_1__c }" />
+                        <apex:column headervalue="City" value="{! p.Provider_City__r.Name }" />
+                        <apex:column headervalue="Main Contact Name">
+                            <apex:outputpanel rendered="{! p.Contacts.size > 0 }">
+                                {! p.Contacts[0].Name }
+                            </apex:outputpanel>
+                        </apex:column>
+                        <apex:column styleclass="right-align">
+                            <apex:actionstatus id="tableRowCommand">
+                                <apex:facet name="stop"> 
+                                    <apex:commandbutton value="Select and Continue" action="{! selectAndContinue }" status="tableRowCommand" rerender="hiddenBlock" styleclass="md-button md-raised md-eec table-row-button">
+                                        <apex:param name="selectedProvider" value="{! p.Id }" assignto="{! selectedProvider }" />
+                                    </apex:commandbutton>
+                                </apex:facet>
+                                <apex:facet name="start"> 
+                                    <button class="md-button md-raised md-eec table-row-button">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                    </button>
+                                </apex:facet>
+                            </apex:actionstatus>
+                            <apex:pageblock id="hiddenBlock" rendered="false"></apex:pageblock>
+                        </apex:column>
+                    </apex:datatable>
+                </apex:outputpanel>
+                <apex:outputpanel id="unlicensedSection"> 
+                    <apex:outputpanel rendered="{! showUnlicensed }">
+                        <div class="question-wrapper">
+                            <apex:repeat value="{! questions }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" />
+                            </apex:repeat>
+                        </div>
+                        <div class="inline-row" layout="row"> 
+                            <div></div>
+                            <apex:actionstatus id="continueStatus">
+                                <apex:facet name="stop">
+                                    <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue trigger-validate"
+                                                        html-layout-padding="true"
+                                                        html-flex-order-sm="1"
+                                                        html-flex-order-md="1"
+                                                        html-md-button="true"
+                                                        status="continueStatus"
+                                                        action="{! unlicensedContinue }" 
+                                                        value="Continue" />
+                                </apex:facet>
+                                <apex:facet name="start">
+                                    <button class="md-button md-raised md-eec complaints-search">
+                                        <i class="fa fa-refresh fa-spin"></i>
+                                    </button>
+                                </apex:facet>
+                            </apex:actionstatus>
+                        </div>
+                    </apex:outputpanel>
+                </apex:outputpanel>
+                
+                <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandLink styleclass="md-button md-raised md-button md-default-theme md-eec"
+                                        html-layout-padding="true"
+                                        html-flex-order-sm="1"
+                                        html-flex-order-md="1" 
+                                        html-md-button="true"
+                                        action="{! back }"
+                                        value="Previous" />
+                </md-content> 
+                <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandLink styleclass="md-button md-raised md-button md-default-theme"
+                                        onclick="return confirm('Are you sure you wish to cancel your complaint?');" 
+                                        html-layout-padding="true"
+                                        html-flex-order-sm="1" 
+                                        html-flex-order-md="1"
+                                        html-md-button="true"
+                                        status="searchStatus"
+                                        action="{! cancel }" 
+                                        value="Cancel" />
+                </md-content>
+            </apex:form>
+        </div>
+    <c:EEC_ComplaintsFooter /> 
+</apex:page>

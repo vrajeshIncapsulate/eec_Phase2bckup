@@ -1,0 +1,2000 @@
+<apex:page showheader="false" standardstylesheets="false" sidebar="false" controller="EEC_CasesIncidentsPageController" html-ng-app="eecApp" doctype="html-5.0">
+      <head>
+        <title>EEC : Incident / Injury Reporting Form</title>
+        <c:EEC_Header id="pageHeader" />
+        <style type="text/css">
+          .bPageBlock .requiredInput .requiredBlock {
+            background-color: #c00;
+            position: absolute;
+            left: -4px;
+            width: 3px;
+            top: 1px;
+            bottom: 1px;
+            top: 20px;
+            display: none;
+          }
+          .involvedPersonErrorMessage{
+                display : none;
+                font-weight: bold;
+           } 
+           .visible{
+                 display : block;
+          } 
+
+          thead {
+            background-color: #f5f5f5;
+          }
+
+          .table > thead:first-child > tr:first-child > th {
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+          .table {
+            border: 1px solid #dddddd;
+          }
+
+          .parsley-errors-list {
+            /*position: absolute;*/
+            bottom: -30px;
+            width: auto;
+          }
+
+          .parsley-error {
+            border: 2px solid #c00;
+          }
+
+          .errorMsg {
+            color: #d74c3b;
+          }
+
+          .message[class*='error'] {
+            background-color: #eee;
+            padding: 0 20px 10px;
+            margin-bottom: 25px;
+            border-radius: 3px;
+            -webkit-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+            -moz-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+            box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+          }
+
+            .message[class*='error'] .messageTable {
+              width: 100%;
+            }
+
+            .message[class*='error'] .messageText {
+              border-bottom: 1px solid grey;
+              height: 30px;
+            }
+
+          .form-label {
+            font-weight: bold;
+            font-size: 14px;
+          }
+
+          .form-group {
+            margin-bottom: 20px;
+          }
+
+          .person-form-field.form-group {
+            margin-bottom: 10px;
+          }
+
+          .btn {
+            margin-right: 5px;
+          }
+
+          [id*="mainPanel"] {
+            padding: 50px 50px 50px 50px;
+            margin-bottom: 150px;
+          }
+
+            [id*="mainPanel"] h2 {
+              width: 100%;
+            }
+
+          [id*="introduction"] {
+            margin-top: 10px;
+          }
+
+          .text-disabled {
+            border: none;
+            box-shadow: none;
+          }
+
+          .person {
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            padding-left: 0;
+            padding-right: 0;
+          }
+
+          .person-age, .person-other-role {
+          }
+
+          .attachment-item {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+          }
+
+            .attachment-item p {
+              float: left;
+              margin-right: 15px;
+              align-self: center;
+            }
+
+              .attachment-item p:first-child {
+                flex: 2;
+              }
+
+          .navigation-buttons {
+            overflow: visible;
+          }
+
+          @media only screen and (min-width: 0px) and (max-width: 959px) {
+            .navigation-buttons .md-button {
+              width: 98%;
+            }
+
+            .navigation-buttons md-content {
+              width: 100%;
+            }
+          }
+
+          hr {
+            padding: 0 !important;
+          }
+            
+          .intro-text span {
+            font-size: 1.6rem !important; 
+          }
+        </style>
+        <script>
+          j$(function() {
+                j$(".datepicker").datepicker({ dateFormat: 'mm-dd-yy' });
+          });
+          var personRoles = {};
+
+          /**
+           * togglePersonInputs
+           *
+           * This function will toggle the disabled field for the spcified person section.
+           * @author Darkis
+           * @param ele The element from the onChange event.
+           */
+          function togglePersonInputs(ele) {
+            var person = ele.parent().parent();
+            var ageInput = person.find('.person-age input,textarea');
+            var ageLabel = person.find('.person-label');
+            var otherLabels = person.find('.person-role-others-labels');
+            var roleInput = person.find('.person-role select');
+            var titleInput = person.find('.person-title input');
+            var statusInput = person.find('.person-status input');
+            var otherInput = person.find('.person-other-role input');
+
+            if (ele.val() == 'Adult Involvement') {
+              ageInput.prop('disabled', true);
+              person.find('.person-age').css('display','none');
+              ageInput.fadeOut();
+              ageLabel.fadeOut();
+              otherLabels.fadeIn();
+              roleInput.prop('disabled', false);
+              roleInput.fadeIn();
+              person.find('.person-role').css('display','block');
+              titleInput.prop('disabled', false);
+              titleInput.fadeIn();
+              person.find('.person-title').css('display','block');
+              statusInput.prop('disabled', false);
+              statusInput.fadeIn();
+              person.find('.person-status').css('display','none');
+              otherInput.prop('disabled', false);
+              otherInput.fadeIn();
+              person.find('.person-other-role').css('display','none');
+              ageInput.val('');
+            } else {
+              ageInput.prop('disabled', false);
+              person.find('.person-age').css('display','block');
+              ageInput.fadeIn();
+              ageLabel.fadeIn();
+              otherLabels.fadeOut();
+              roleInput.prop('disabled', true);
+              person.find('.person-role').css('display','none');
+              roleInput.fadeOut();
+              titleInput.prop('disabled', true);
+              person.find('.person-title').css('display','none');
+              titleInput.fadeOut();
+              statusInput.prop('disabled', true);
+              person.find('.person-status').css('display','none');
+              statusInput.fadeOut();
+              otherInput.prop('disabled', true);
+              person.find('.person-other-role').css('display','none');
+              otherInput.fadeOut();
+              roleInput.val('');
+              titleInput.val('');
+              statusInput.val('');
+              otherInput.val('');
+            }
+          }
+
+          /**
+           * checkAllPeopleEntries
+           *
+           * This function will check all current person entries and ensure that specified fields are disabled.
+           * @author Darkis
+           */
+          function checkAllPeopleEntries() {
+            // Get all the people.
+            var people = $('.person');
+            // Loop through the people.
+            for (i = 0; i < people.length; i++) {
+              // Get the person.
+              var person = $(people[i]);
+              var personNumber = person.data('row-num');
+              // Get the select input for type.
+              var selInput = person.find('.person-type select');
+              // Toggle the correct fields.
+              togglePersonInputs(selInput);
+              CheckForOther(person.find('.person-role select'));
+              // Ensure the Role field is set correctly.
+              if (typeof personRoles[personNumber].role != undefined && personRoles[personNumber].role != null && selInput.val() == 'Adult Involvement') {
+                person.find('.person-role select').val(personRoles[personNumber].role);
+              } else {
+                person.find('.person-role select').val('');
+              }
+            }
+            $('#personsTable').css('visibility', 'visible');
+          }
+
+          /**
+           * CheckForOther
+           *
+           * This function will check for the role 'Other' and toggle the other role field accordingly.
+           * @author Darkis
+           * @param ele The element from the onChange event.
+           */
+          function CheckForOther(ele) {
+            var person = ele.parent().parent();
+            var personNumber = person.data('row-num');
+            var parsleyInput1 = person.find('.person-other-role input').parsley();
+            var parsleyInput2 = person.find('.person-status input').parsley();
+            personRoles[personNumber] = {'role': ele.val()};
+            if(ele.val() != null){  
+                if ((ele.val()).toLowerCase() == 'other') {
+                  person.find('.person-other-role').css('display','block');
+                  person.find('.person-other-role input').attr('data-parsley-required', 'true');
+                } else if ((ele.val()).toLowerCase() == 'provider staff people') {
+                  person.find('.person-status').css('display','block');
+                  person.find('.person-status input').attr('data-parsley-required', 'true');
+                } else {
+                  // Re-disable the field and clear it.
+                  person.find('.person-other-role input').val('');
+                  person.find('.person-other-role').css('display','none');
+                  person.find('.person-other-role input').attr('data-parsley-required', 'false');
+                  // Call validate to clear the field of any error labels.
+                  parsleyInput.validate();
+                }
+            }    
+          }
+        </script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.js" type="text/javascript"></script>
+
+      </head>
+      <body>
+        <c:EEC_Nav_Bar id="navBar" />
+        <div class="container">
+          <apex:form id="incident-form" styleclass="incident-parsley-form" html-ng-controller="IncidentsController as ctrl">
+            
+            <apex:outputpanel id="mainPanel" layout="block" styleclass="incidents-attachment-container">
+              <apex:pagemessages id="showmsg" />
+              <apex:outputPanel rendered="{!!editViewMode && !currentStage[3]}">
+                <h2>Report an {!caseTypeLabel}</h2>
+              </apex:outputPanel>
+              <apex:outputPanel rendered="{! currentStage[3] && !editViewMode}">
+                  <h2> 
+                      Incident / Injury Summary and Submission Page
+                  </h2>
+              </apex:outputPanel>  
+              <apex:outputPanel rendered="{!editViewMode}">
+                <h2>View Incident / Injury Summary</h2>
+              </apex:outputPanel>  
+              <br/>  
+              <apex:pageblock id="introduction" rendered="{! currentStage[0] }">
+                <!--<p>
+                  If you are reporting any of the following you must also call your licensor as soon as you finish entering your report (your licensor is
+                  {!a.Licensor_Full_Name__c} - {!a.Licensor_Phone__c}).  Please be sure to connect with someone even if your licensor is not available
+                  (EEC Regional Office number: {!a.Phone}):
+                </p>
+                <ul>
+                  <li>Death</li>
+                  <li>Hospitalization</li>
+                  <li>Medication error (child receiving the wrong medication)</li>
+                  <li>Illness of a child that is a &quot;reportable condition&quot; as defined by the Division of Communicable Disease Control at the Massachusetts Department of Public Health (DPH).</li>
+                  <li>Serious Injury <p>* (Use "Report an injury" button)</p></li>
+                  <li>Any case that resulted in a child receiving emergency treatment by medical personnel <p>** (Use "Report an injury" button)</p></li>
+                  <li>Incident on the child care premises that results in law enforcement activity***</li>
+                  <li>Incident resulting in a response by the Fire Department****</li>
+                </ul>
+                -->
+                <div class="intro-text">
+                  <apex:outputpanel rendered="{!introText != null}">
+                    <apex:outputtext value="{!introText}" escape="false"></apex:outputtext>
+                  </apex:outputpanel>
+                </div>   
+                    
+                <!--<apex:outputpanel layout="block" rendered="{!IF(OR(a.Recordtype.Name == '
+                 Group', a.Recordtype.Name == 'Small Group'),true,false)}">
+                  <p>
+                    * The following are exceptions and DO NOT need to be reported; an injury where medical attention is sought as a precaution and requires no treatment, seizures,
+                    bee stings that do not necessitate a 911 call, nursemaid's elbow, injuries treated with surgical glue, Durabond or Steri-strips, contusions (bruising) and
+                    sprains. Any other injury that requires emergency medical treatment does not also require a phone call to EEC unless it requires an overnight hospitalization,
+                    (when a phone call is necessary).
+                  </p>
+                </apex:outputpanel>
+                  
+                <apex:outputpanel layout="block" rendered="{!IF(OR(a.Recordtype.Name == 'Large Group', a.Recordtype.Name == 'Small Group'),true,false)}">
+                  <p>** Tests used to establish a diagnosis (such as x-rays) are not considered treatment.</p>
+                </apex:outputpanel>
+                  
+                <apex:outputpanel layout="block" rendered="{!a.Is_R_P__c}">
+                  <p>
+                    *** Any incident on the child care premises that results in a report to law enforcement officials that could impact the health, safety and/or wellbeing of
+                    children in care, or in the event of the arrest of an educator or person regularly on the premises must be reported to EEC within twenty-four (24) hours.
+                  </p>
+                </apex:outputpanel>
+                    
+                <apex:outputpanel layout="block" rendered="{!a.Is_R_P__c}">
+                  <p>
+                    ****Any incident on the child care premises (other than a false alarm) that results in a response by the fire department must be reported to EEC within twenty-four (24) hours.
+                  </p>
+                </apex:outputpanel>-->
+                    
+                <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                  <apex:commandbutton id="cancelButton" styleclass="md-button md-raised md-eec" action="{!returnProvider}" value="Cancel" rendered="{!!editMode}" />
+                  <apex:commandbutton id="cancelEditButton" styleclass="md-button md-raised md-eec" action="{!viewIncident}" value="Cancel" rendered="{!editMode}" />
+
+                 <div layout="column" layout-lg="row" layout-gt-lg="row">
+                    <apex:outputPanel >  
+                      <apex:commandbutton id="nextButton" styleclass="md-button md-raised md-eec" action="{!nextStageIncident}" value="{!IF(c.Id != null, 'Continue', 'Report an')} Incident" rerender="mainPanel" rendered="{!IF(c.Id == null || (c.Id != null && caseTypeLabel == 'Incident'), true, false)}"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel >
+                      <!-- <apex:commandbutton id="next51AButton" styleclass="md-button md-raised md-eec" action="{!next51AIncident}" value="{!IF(c.Id != null, 'Continue', 'Report an')} 51A Incident" rerender="mainPanel" rendered="{!IF(c.Id == null || (c.Id != null && caseTypeLabel == '51AIncident'), true, false)}"/> -->
+                    </apex:outputPanel> 
+                    <apex:outputPanel rendered="{!a.Is_GSA__c}">
+                      <apex:commandbutton id="nextInjuryButton" styleclass="md-button md-raised md-eec" action="{!nextStageInjury}" value="{!IF(c.Id != null, 'Continue', 'Report an')} Injury" rerender="mainPanel" rendered="{!IF(c.Id == null || (c.Id != null && caseTypeLabel == 'Injury'), true, false)}"/>
+                    </apex:outputPanel>
+                  </div>
+                </md-content>
+              </apex:pageblock>
+              <apex:pageblock id="collectIncidentInfo" rendered="{! currentStage[1] }">
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                      <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                          <a>
+                            Provider and Reporter
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="incidentDesc" class="panel-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <div class="row">
+                              <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                  <apex:inputhidden value="{!a.Name}" />
+                                    <span class="form-label">Provider Name: </span>&nbsp;{!a.Name}
+                                </div>
+                                <div class="md-subhead" layout="row">
+                                  <apex:inputhidden value="{!ct.Name}" />
+                                    <span class="form-label">Contact Name: </span>&nbsp;{!ct.Name}
+                                </div>
+                              </div>
+                              <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                  <apex:inputhidden value="{!ct.Phone}" />
+                                    <span class="form-label">Contact Number: </span>&nbsp;{!ct.Phone}
+                                </div>
+                                <div class="md-subhead" layout="row">
+                                  <apex:inputhidden value="{!ct.Email}" />
+                                    <span class="form-label">Email Address: </span>&nbsp;{!ct.Email}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                  
+                  <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a>
+                            {!caseTypeLabel} Description
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="incidentDesc" class="panel-group" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                        <div class="col-xs-12 col-lg-4">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Summary / Type of Case<p class="required">*</p></span>
+                              <img style="padding-left: 10px;" src="/img/alohaSkin/help_orange.png" title="In a few words describe the nature of incident (i.e.; supervision concern, potential abuse or neglect, health and safety, etc.)"/>  
+                              <apex:inputfield styleclass="form-control" value="{!c.subject}" label="Subject" html-data-parsley-required="true" />
+                            </div>
+                          </div>    
+                          <apex:outputPanel rendered="{!caseTypeLabel == 'Incident'}">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">What happened? (If applicable, describe any equipment involved including its location and condition)<p class="required">*</p>
+                              <img style="padding-left: 10px;" src="/img/alohaSkin/help_orange.png" title="In a few words describe the nature of incident (i.e.; supervision concern, potential abuse or neglect, health and safety, etc.)"/>  
+                              </span>
+                              <apex:inputtextarea styleclass="form-control" value="{!c.description}" label="Description" html-data-parsley-required="true"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Where did the {!caseTypeLabel} occur?<p class="required">*</p></span>
+                              <apex:inputtextarea styleclass="form-control" value="{!c.Event_Location__c}" label="Event Description" html-data-parsley-required="true" />
+                            </div>
+                          </div>
+                          
+                          
+                          </apex:outputPanel>
+                          <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">When did the {!caseTypeLabel} occur?<p class="required">*</p></span>
+                              <apex:inputField styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Date_Event_Occured__c}"  html-data-parsley-required="true"/>  
+                              <!--<apex:inputfield styleclass="form-control" value="{!c.Date_Event_Occured__c}" label="Date Event Occurred" html-data-parsley-required="true" html-data-provide="datepicker" />-->
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">What time did the {!caseTypeLabel} occur?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Time_Event_Occured__c}" label="Time Event Occurred" html-data-parsley-required="true" />
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                           <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                           <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">What group was the child in when injury occured?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Group_the_child_was_in__c }" html-data-parsley-required="true"/>
+                            </div>
+                          </div>
+                           </apex:outputPanel> 
+                           <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                           <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Number of children in the group<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" type="number" value="{!c.No_children_in_group__c  }" html-data-parsley-required="true"/>
+                            </div>
+                           </div>
+                          </apex:outputPanel>  
+                            
+                        </div>
+
+                         <apex:outputPanel rendered="{!caseTypeLabel == 'Incident'}">
+                          
+                          <div class="form-group">
+                            <div class="input-group col-lg-6">
+                              <span class="form-label">When did the {!caseTypeLabel} occur?(If the date or time of the incident is not known please enter the date and time that you were made aware of the allegation, or report about the incident.)<p class="required">*</p></span>
+                              <apex:inputField styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Date_Event_Occured__c}"  html-data-parsley-required="true"/>  
+                              <!--<apex:inputfield styleclass="form-control" value="{!c.Date_Event_Occured__c}" label="Date Event Occurred" html-data-parsley-required="true" html-data-provide="datepicker" />-->
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group  col-lg-6">
+                              <span class="form-label">What time did the {!caseTypeLabel} occur?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Time_Event_Occured__c}" label="Time Event Occurred" html-data-parsley-required="true" />
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                            <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                          <div class="form-group col-sm-12">
+                            <div class="input-group">
+                              <span class="form-label">What happened? (If applicable, describe any equipment involved including its location and condition)<p class="required">*</p>
+                              <img style="padding-left: 10px;" src="/img/alohaSkin/help_orange.png" title="In a few words describe the nature of incident (i.e.; supervision concern, potential abuse or neglect, health and safety, etc.)"/>  
+                              </span>
+                              <apex:inputtextarea styleclass="form-control" value="{!c.description}" label="Description" html-data-parsley-required="true"/>
+                            </div>
+                          </div>
+                          
+                          <div class="form-group col-sm-12">
+                            <div class="input-group col-sm-12">
+                              <span class="form-label">Where did the {!caseTypeLabel} occur?<p class="required">*</p></span>
+                              <apex:inputtextarea styleclass="form-control" value="{!c.Event_Location__c}" label="Event Description" html-data-parsley-required="true" />
+                            </div>
+                          </div>
+                          </apex:outputPanel>
+                          <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">    
+                          <div class="form-group col-sm-12">
+                            <div class="input-group">
+                              <span class="form-label">Names &amp; qualifications of staff supervising the group when injury occurred?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Name_Qual_of_staff_supervising__c}" html-data-parsley-required="true"/>
+                            </div>
+                          </div>
+                          <div class="form-group col-sm-12">
+                            <div class="input-group">
+                              <span class="form-label">Description of any corrective action taken to prevent similar occurence<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Description_of_corrective_action__c}" html-data-parsley-required="true"/>
+                            </div>
+                          </div>
+                          </apex:outputPanel>  
+                            
+                        
+                      </div>
+                    </div>
+                  </div>
+
+                  <apex:outputpanel id="involved-person-container" styleclass="panel panel-default" layout="block">
+                    <div class="panel-heading" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a>Involved Persons</a>
+                      </h4>
+                    </div>
+                    <div id="involvedPersons" class="panel-group inv-persons">
+                      <div class="panel-body">
+                        <apex:outputText rendered="{!caseTypeLabel == 'Injury'}" value="{!injuryIntroText}"></apex:outputText>  
+                        <apex:outputText rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == '51A Incident'}" value="{!incidentIntroText}"></apex:outputText>  
+                        <br/>
+                        <apex:outputpanel id="personsTable">
+                          <apex:outputpanel layout="block" styleclass="col-xs-12">
+                            <div>
+                                 <p class="errorMsg  involvedPersonErrorMessage">At least, information related to the injured child must be added in this list, please add information related to the injured child.</p>   
+                            </div>
+                            <apex:variable value="{!0}" var="rowNum" />
+                            <apex:repeat value="{!InvolvedPersons}" var="p" id="personsRepeater">
+
+                              <apex:outputpanel layout="block" styleclass="person col-xs-12" html-data-row-num="{!rowNum}">
+                                <div class="person-name person-form-field form-group col-xs-6">
+                                  <apex:outputlabel for="person-name" styleclass="form-label">Name<p class="required">*</p></apex:outputlabel>
+                                  <apex:inputtext styleclass="form-control" value="{!p.Name}" label="Name" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="person-type person-form-field form-group col-xs-6" style="min-height: 60px;">
+                                  <apex:outputlabel for="person-type" styleclass="form-label" escape="false">Type<p class='required'>*</p></apex:outputlabel>
+                                  <apex:selectlist styleclass="form-control" value="{!p.Type}" size="1" label="Type" html-data-parsley-required="true" onchange="togglePersonInputs($(this));">
+                                    <apex:selectoptions value="{!PersonTypes}" />
+                                  </apex:selectlist>
+                                </div>
+
+                                <apex:outputpanel id="personChildBirthDatePanel" styleclass="person-age form-group col-xs-6" style="clear:both;" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Birth Date" styleclass="form-label person-label" for="person-birth-date" />
+                                  <apex:input styleclass="form-control" value="{!p.ChildBirthDate}" html-data-provide="datepicker" label="Birth Date" />
+                                </apex:outputpanel>
+
+                                <apex:outputpanel id="personGuardianName" styleclass="person-age form-group col-xs-6" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Guardian Name" styleclass="form-label person-label" />
+                                  <apex:inputtext styleclass="form-control" value="{!p.GuardianName}" label="Guardian Name" />
+                                </apex:outputpanel>
+
+                                <apex:outputpanel id="personGuardianPhone" styleclass="person-age form-group col-xs-6" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Guardian Phone" styleclass="form-label person-label"  />
+                                  <apex:inputtext styleclass="form-control" value="{!p.GuardianPhone}" label="Guardian Phone" />
+                                </apex:outputpanel>
+
+                                <apex:outputpanel id="personGuardianAddress" styleclass="person-age form-group col-xs-6" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Guardian Address" styleclass="form-label person-label"/>
+                                  <apex:inputtextarea styleclass="form-control" value="{!p.GuardianAddress}" label="Guardian Address" />
+                                </apex:outputpanel>
+
+                                <div class="person-title person-form-field form-group col-xs-6" style="float:right;" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Title" styleclass="form-label person-role-others-labels" for="person-title" />
+                                  <apex:inputtext styleclass="form-control" value="{!p.Title}" label="Title" />
+                                </div>
+
+                                <div class="person-role person-form-field form-group col-xs-6">
+                                  <apex:outputlabel value="Role" styleclass="form-label person-role-others-labels" for="person-role" />
+                                  <apex:selectlist styleclass="form-control" size="1" value="{!p.Role}" label="Role" onchange="CheckForOther($(this));">
+                                    <apex:selectoptions value="{!PersonRoles}" />
+                                  </apex:selectlist>
+                                </div>
+                                
+                                <apex:outputPanel rendered="{!p.Role == 'Provider Staff People'}">
+                                    <div class="person-title person-form-field form-group col-xs-12" style="float:right;" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                        <apex:outputlabel value="Status of Staff" styleclass="form-label person-role-others-labels" />
+                                        <apex:inputtext styleclass="form-control" value="{!p.Status_of_Staff }" label="Status of Staff" html-data-parsley-required="true"/>
+                                    </div>
+                                </apex:outputPanel>
+                                   
+                                <div class="person-other-role person-form-field form-group col-xs-6" style="float:right;" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Other Role" styleclass="form-label person-role-others-labels" for="person-other-role" />
+                                  <apex:inputtext styleclass="form-control" value="{!p.OtherRole}" label="Other Role" html-data-parsley-required="false" />
+                                </div>
+                                  
+                                <div class="person-status person-form-field form-group col-xs-6" style="float:right;" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel value="Status of Staff" styleclass="form-label person-status-labels" for="person-status" />
+                                  <apex:inputtext styleclass="form-control" value="{!p.Status_of_staff}" label="Status of Staff" />
+                                </div>
+
+                                <div class="person-description person-form-field form-group col-xs-12" rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}">
+                                  <apex:outputlabel styleclass="form-label" value="Description of Involvement" for="person-description" />
+                                  <apex:inputtext styleclass="form-control" value="{!p.Description_of_Involvement}" label="Description of Involvement" />
+                                </div>
+
+                                <div class="form-group col-xs-12">
+                                  <apex:commandlink action="{!delPerson}" value="Remove" styleclass="md-button md-raised md-eec" oncomplete="checkAllPeopleEntries();" rerender="personsTable">
+                                    <apex:param name="index" value="{!rowNum}"></apex:param>
+                                  </apex:commandlink>
+                                </div>
+                              </apex:outputpanel>
+
+                              <apex:variable var="rowNum" value="{!rowNum + 1}" />
+                            </apex:repeat>
+
+                            <apex:commandlink styleclass="md-button md-raised md-ecc" onclick="$('#personsTable').css('visibility', 'hidden');" action="{!addPerson}" oncomplete="checkAllPeopleEntries();" value="Add" rerender="personsTable" />
+                          </apex:outputpanel>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+                  </apex:outputpanel>
+                  <apex:outputPanel rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == 'Injury'}"> 
+                  <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a>First Aid / CPR</a>
+                      </h4>
+                    </div>
+                    <div id="firstaidCPR" class="panel-group">
+                        <div class="panel-body">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">Was first aid provided?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.First_Aid_or_CPR_Provided__c}" html-data-parsley-required="true">
+                                            <apex:actionsupport event="onchange" rerender="PanelFirstAidCPR" />
+                                          </apex:inputfield>
+                                    </div>
+                                    <apex:outputpanel id="PanelFirstAidCPR">
+                                      <apex:outputpanel rendered="{!blnFirstAidCPR}">
+                                        <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">When?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.First_Aid_When__c}" html-data-parsley-required="true" />
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">By Whom?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.First_Aid_By_whom__c}" html-data-parsley-required="true" />
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">What was provided?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.First_Aid_What__c}" html-data-parsley-required="true" />
+                                        </div>  
+                                      </apex:outputpanel>
+                                    </apex:outputpanel>
+                                </div>
+                                <hr class="col-xs-12" />
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-lg-4">
+                                      <span class="form-label">CPR provided?<p class="required">*</p></span>
+                                      <apex:inputfield styleclass="form-control" value="{!c.CPR_Provided__c}" html-data-parsley-required="true">
+                                        <apex:actionsupport event="onchange" rerender="summaryPanelCPR" />
+                                      </apex:inputfield>
+                                    </div>
+                                    <apex:outputpanel id="summaryPanelCPR">
+                                      <apex:outputpanel rendered="{!blnCPR}">
+                                        <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">When?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.CPR_When__c}" html-data-parsley-required="true" />
+                                        </div>
+                                        <div class="col-xs-12 col-lg-4">
+                                          <span class="form-label">By Whom?<p class="required">*</p></span>
+                                          <apex:inputfield styleclass="form-control" value="{!c.CPR_By_Whom__c}" html-data-parsley-required="true" />
+                                        </div>
+                                      </apex:outputpanel>
+                                    </apex:outputpanel>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a>911 Contacted</a>
+                      </h4>
+                    </div>
+                    <div id="911Contacted" class="panel-group">
+                      <div class="panel-body">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <div class="col-xs-12 col-lg-4">
+                              <span class="form-label">Was 911 called?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.X911_Called__c}" html-data-parsley-required="true">
+                                <apex:actionsupport event="onchange" rerender="Panel911" />
+                              </apex:inputfield>
+                            </div>
+
+                            <apex:outputpanel id="Panel911">
+                              <apex:outputpanel rendered="{!blnCalled911}">
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">When?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.X911_called_when__c}" html-data-parsley-required="true" />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">By Whom?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.X911_By_whom__c}" html-data-parsley-required="true" />
+                                </div>
+                              </apex:outputpanel>
+                            </apex:outputpanel>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a>Medical Attention</a>
+                      </h4>
+                    </div>
+                    <div id="medicalAttn" class="panel-group">
+                      <div class="panel-body">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <div class="col-xs-12 col-lg-6">
+                              <span class="form-label">Was the child transported for medical attention?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Child_Transported_for_Medical_Attention__c}" label="Child Transported for Medical Attention" html-data-parsley-required="true">
+                                <apex:actionsupport event="onchange" rerender="PanelMedical" />
+                              </apex:inputfield>
+                            </div>
+                            <apex:outputpanel id="PanelMedical">
+                              <apex:outputpanel rendered="{!blnChildTransport}">
+                                <div class="col-xs-12 col-lg-3">
+                                  <span class="form-label">Where?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Med_AttentionWhere__c}" html-data-parsley-required="true" />
+                                </div>
+                                <div class="col-xs-12 col-lg-3">
+                                  <span class="form-label">By whom?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Med_Attention_By_whom__c}" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                  <span class="form-label">What medical treatment was provided? (be specific)<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Medical_Treatment_Provided__c}" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                  <span class="form-label">What diagnosis resulted from any medical intervention?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Diagnosis_Resulted__c}" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                  <span class="form-label">Did the child return to your program?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Child_return_to_Program__c}" html-data-parsley-required="true">
+                                    <apex:actionsupport event="onchange" rerender="PanelChildReturn" />
+                                  </apex:inputfield>
+                                </div>
+
+                                <apex:outputpanel id="PanelChildReturn">
+                                  <apex:outputpanel rendered="{!blnChildReturned}">
+                                    <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                      <span class="form-label">When?<p class="required">*</p></span>
+                                      <apex:inputfield styleclass="form-control" value="{!c.When_Child_Return__c}" html-data-parsley-required="true" />
+                                    </div>
+                                  </apex:outputpanel>
+                                </apex:outputpanel>
+                              </apex:outputpanel>
+                            </apex:outputpanel>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                
+                  
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a>Information Shared with Parents / Guardians</a>
+                      </h4>
+                    </div>
+                    <div id="infoShared" class="panel-group">
+                      <div class="panel-body">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            
+                            <div class="col-xs-12 col-lg-5">
+                              <span class="form-label">Was this information shared with the child's parent/guardian?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Shared_with_Parents__c}" html-data-parsley-required="true">
+                                <apex:actionsupport event="onchange" rerender="PanelSharedParents" />
+                              </apex:inputfield>
+                            </div>
+
+                            <apex:outputpanel id="PanelSharedParents">
+                              <apex:outputpanel rendered="{!blnSharedParents}">
+
+                                <div class="col-xs-12 col-lg-3">
+                                  <span class="form-label">When was this information shared?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.When_Shared_Info__c}" html-data-parsley-required="true" />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">Provide the name of the parent/guardian who was contacted?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.With_who__c}" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                  <div class="col-xs-12 col-lg-4">
+                                    <span class="form-label">Who shared the information with the parent/guardian?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.Who_Shared_Info__c}" html-data-parsley-required="true" />
+                                  </div>
+                                  <div class="col-xs-12 col-lg-8">
+                                    <span class="form-label">How was this information shared?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.How_What_Shared_Info__c}" html-data-parsley-required="true" />
+                                  </div>
+                                </div>
+                              </apex:outputpanel>
+                            </apex:outputpanel>
+                     
+                          </div>
+                        </div>
+                        <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                        <div class="col-lg-12">
+                          <div class="form-group">
+                            <div class="col-xs-12 col-lg-5">
+                              <span class="form-label">Was anyone else notified?<p class="required">*</p></span>
+                              <apex:inputfield styleclass="form-control" value="{!c.Other_Person_Notified__c }" html-data-parsley-required="true">
+                                <apex:actionsupport event="onchange" rerender="PanelOtherPersons" />
+                              </apex:inputfield>
+                            </div>
+                            <apex:outputpanel id="PanelOtherPersons">
+                              <apex:outputpanel rendered="{!blnOtherParents}">
+
+                                <div class="col-xs-12 col-lg-3">
+                                  <span class="form-label">Who else was notified?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Other_Person_Notified_Who__c }" html-data-parsley-required="true" />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">How was this other person notified?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Other_Person_Notified_How__c }" html-data-parsley-required="true" />
+                                </div>
+
+                                <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                  <div class="col-xs-12 col-lg-4">
+                                    <span class="form-label">When was this other person notified?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.Other_Person_Notified_When__c }" html-data-parsley-required="true" />
+                                  </div>
+                                </div>
+                              </apex:outputpanel>
+                            </apex:outputpanel>  
+                          </div>
+                        </div>
+                       </apex:outputPanel>    
+                      </div>
+                    </div>
+                  </div>
+                    </apex:outputPanel>
+                  <apex:outputPanel rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == '51A Incident'}">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                            <a>Filed Reports</a>
+                            </h4>
+                        </div>
+                        <div id="otherInformation" class="panel-group">
+                            <div class="panel-body"> 
+                                <div class="col-lg-12">
+                                    <div class="col-xs-12 col-lg-6">
+                                        <span class="form-label">Was a report filed with the Massachusetts Department of Children and Families (DCF)(51A)?<p class="required">*</p></span>
+                                        <apex:inputfield styleclass="form-control" value="{!c.Filed_with_DCF__c}" html-data-parsley-required="true">
+                                          <apex:actionsupport event="onchange" rerender="PanelFiledDCF,PanelLegalReport" />
+                                        </apex:inputfield>
+                                    </div>
+                          
+                          <apex:outputpanel id="PanelFiledDCF">
+                            <apex:outputpanel rendered="{!blnFiledDCF}">
+                              <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                                <span class="form-label">By whom?<p class="required">*</p></span>
+                                <apex:inputfield styleclass="form-control" value="{!c.DCF_Filer__c}" html-data-parsley-required="true" />
+                              </div>
+
+                              <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                                <span class="form-label">When was it reported?<p class="required">*</p></span>
+                                <apex:inputfield styleclass="form-control" value="{!c.DCF_File_Submission_Date__c}" html-data-parsley-required="true" html-data-provide="datepicker" />
+                              </div>
+                              
+                              <div class="col-xs-12 col-lg-4" style="margin-top: 20px;">
+                                    <span class="form-label">Screening Status<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.DCF_Screening_Status__c}" html-data-parsley-required="true">
+                                    </apex:inputfield>
+                              </div>
+                              
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                          <apex:outputpanel rendered="{!a.Is_R_P__c}">  
+                                <div class="col-xs-12 col-lg-8" style="margin-top: 20px;">
+                                    <span class="form-label">Was a report filed with the Disabled Persons Protection Commission (DPPC)(19C)?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.Filed_with_DPPC__c}" html-data-parsley-required="true">
+                                        <apex:actionsupport event="onchange" rerender="PanelFiledDPPC,PanelLegalReport"/>
+                                    </apex:inputfield>
+                                </div> 
+                              </apex:outputpanel>    
+                              
+                          <apex:outputpanel id="PanelFiledDPPC">
+                                <apex:outputpanel rendered="{!blnFiledDPPC}">
+                                  <div class="col-xs-12 col-lg-6" style="margin-top: 20px;">
+                                    <span class="form-label">By whom?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.DPPC_Filer__c}" html-data-parsley-required="true" />
+                                  </div>
+    
+                                  <div class="col-xs-12 col-lg-6" style="margin-top: 20px;">
+                                    <span class="form-label">When was it reported?<p class="required">*</p></span>
+                                    <apex:inputfield styleclass="form-control" value="{!c.DPPC_File_Submission_Date__c}" html-data-parsley-required="true" html-data-provide="datepicker" />
+                                  </div>
+    
+                              
+                                </apex:outputpanel>
+                          </apex:outputpanel>
+                            
+                          <apex:outputpanel id="PanelLegalReport">
+                             <apex:outputpanel rendered="{!blnFiledDPPC || blnFiledDCF}">
+                                <div style="margin-top: 10px; padding: 0;" class="col-xs-12">
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">Does your report involves legal proceedings?<p class="required">*</p></span>
+                                  <apex:inputfield styleclass="form-control" value="{!c.Incident_involves_legal_proceedings__c}" html-data-parsley-required="true">
+                                    <apex:actionsupport event="onchange" rerender="PanelInvolvesLegal" />
+                                  </apex:inputfield>
+                                </div>
+
+                                <apex:outputpanel id="PanelInvolvesLegal">
+                                  <apex:outputpanel rendered="{!blnLegal}">
+                                    <div class="col-xs-12 col-lg-8">
+                                      <span class="form-label">Describe the nature of legal proceedings and explain who is involved<p class="required">*</p></span>
+                                      <apex:inputfield styleclass="form-control" value="{!c.Legal_Proceeding_Description__c}" html-data-parsley-required="true" />
+                                    </div>
+                                  </apex:outputpanel>
+                                </apex:outputpanel>
+                                 </div>    
+                          
+                          </apex:outputpanel>
+                         </apex:outputpanel>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+                  </apex:outputPanel>       
+                  <apex:outputPanel rendered="{!caseTypeLabel == 'Incident' && accountTypeBool}">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a>Other Information</a>
+                      </h4>
+                    </div>
+                    <div id="otherInformation" class="panel-group">
+                      <div class="panel-body">
+                        <div class="col-lg-12">
+                           
+                          <apex:outputPanel rendered="{!caseTypeLabel == '51A Incident'}">
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Dates of contact with Homefinder within last 6 months?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Homefinder_Contact_Last_6_Months__c}" html-data-parsley-required="true" />
+                            
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Last social worker home visit date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Last_Social_Worker_Home_Visit__c}" html-data-parsley-required="true"/>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Most recent re-evaluation date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Most_Recent_Reevaluation__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Concerns identified if any?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Concerns_Identified__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Original Home Study date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Original_Home_Study__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">List of restrictions?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.List_of_Restrictions__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">MAPP training date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.MAPP_Training_Date__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Home type (Regular/Restricted)?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Home_Type__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          </apex:outputPanel>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                 
+                  </apex:outputPanel>     
+                  <apex:outputPanel rendered="{!caseTypeLabel == '51A Incident' && accountTypeBool}">
+                  
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a>Other Information</a>
+                      </h4>
+                    </div>
+                    <div id="otherInformation" class="panel-group">
+                      <div class="panel-body">
+                        <div class="col-lg-12">
+                           
+                          <apex:outputPanel rendered="{!caseTypeLabel == '51A Incident'}">
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Dates of contact with Homefinder within last 6 months?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Homefinder_Contact_Last_6_Months__c}" html-data-parsley-required="true" />
+                            
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Last social worker home visit date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Last_Social_Worker_Home_Visit__c}" html-data-parsley-required="true"/>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Most recent re-evaluation date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Most_Recent_Reevaluation__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Concerns identified if any?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Concerns_Identified__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Original Home Study date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.Original_Home_Study__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">List of restrictions?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.List_of_Restrictions__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">MAPP training date?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control datepicker" html-data-provide="datepicker" value="{!c.MAPP_Training_Date__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Home type (Regular/Restricted)?<p class="required">*</p></span>
+                            <apex:inputfield styleclass="form-control" value="{!c.Home_Type__c}" html-data-parsley-required="true">
+                            </apex:inputfield>
+                          </div>
+                          
+                          </apex:outputPanel>
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  </apex:outputPanel>                 
+                  <br />
+                  <apex:inputhidden id="IsGSA" value="{!caseTypeLabel}" />
+                  <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandlink id="prevButton" styleclass="md-button md-raised md-eec" action="{!save}" onclick="if(validateInjuryPersons() == false){return false;}" value="Save and Previous">
+                      <apex:param assignto="{!saveButtonType}" value="previous" name="Previous" />
+                    </apex:commandlink>
+                    <apex:commandlink id="nextButton" styleclass="md-button md-raised md-eec" action="{!save}" onclick="if(validateInjuryPersons() == false){return false;}" value="Save and Next">
+                      <apex:param assignto="{!saveButtonType}" value="next" name="Next" />
+                    </apex:commandlink>
+                  </div>
+
+                  <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandlink id="cancelButton" styleclass="md-button md-raised" action="{!returnProvider}" value="Cancel Current Changes and Go back to Provider" onclick="confirm('Are you sure? All changes will be lost!');" />
+                    <apex:commandlink id="returnButton" styleclass="md-button md-raised" action="{!save}" onclick="if(validateInjuryPersons() == false){return false;}" value="Save and Return to Provider">
+                      <apex:param assignto="{!saveButtonType}" value="return" name="Return" />
+                    </apex:commandlink>
+                  </div>
+
+                  <!--<apex:commandLink id="deleteButton" style="width: 98%;" styleClass="md-button md-raised md-eec" action="{!deleteReturn}" value="Delete" onclick="confirm('Are you sure? This case will be deleted!');" />-->
+
+                  <br />
+                  <br />
+                  <br />
+
+                </div>
+
+                <script type="text/javascript">
+                  var form = $(".incident-parsley-form").parsley({
+                    errorsWrapper: '<div class="parsley-errors-list"></div>',
+                    errorTemplate: '<p class="errorMsg"></p>'
+                  });
+                  
+                  $(document).ready(function() {
+                    checkAllPeopleEntries();
+                  });
+                  
+                  function validateInjuryPersons(formVal){
+                     var isGSA = $('[id*=IsGSA]').val();
+                     var selected = []; 
+                     var flag = false;
+                     if(isGSA == 'Injury'){
+                        if($('.inv-persons select').val() !== "undefined"){ 
+                            $('.inv-persons select').each(function() {
+                                selected.push($(this).val());
+                                if($(this).val() === 'Child Involvement'){
+                                    flag = true;
+                                }
+                            });
+                            if(!flag){
+                                form.validate();
+                                $('.involvedPersonErrorMessage').addClass("visible");
+                                return false;
+                            }
+                            else{
+                                $('.involvedPersonErrorMessage').removeClass("visible"); 
+                                return form.validate();
+                            }
+                        }
+                        else{
+                            form.validate();
+                            $('.involvedPersonErrorMessage').addClass("visible");
+                            return false;
+                        } 
+                     }
+                     else{
+                        $('.involvedPersonErrorMessage').removeClass("visible"); 
+                        return form.validate();
+                     }
+                     return true; 
+                  }
+                </script>
+              </apex:pageblock>
+              <apex:pageblock id="attachment-container" rendered="{!currentStage[2]}">
+                <apex:outputpanel >
+                  <h4>Attachments - {!caseType}</h4>
+                  <hr />
+
+                  <apex:outputpanel id="fileAttachmentContainer" styleclass="fileAttachmentContainer" style="width: 100%;">
+                    <apex:outputpanel id="fileListContainer">
+                      <!-- Incident Attachments -->
+                      <apex:outputpanel rendered="{!attachments.size > 0}">
+                        <apex:repeat value="{!attachments}" var="attachment">
+                          <div class="attachment-item">
+                            <p>{!attachment.Filename__c}</p>
+                            <p>{!attachment.CreatedDate}</p>
+                            <p>
+                              <apex:commandlink action="{!deleteAttachment}" value="" rerender="script-existing-items, fileAttachmentContainer" style="color: #000;">
+                                <apex:param name="attachmentName" assignto="{!fileToDelete}" value="{!attachment.Id}" />
+                                <i class="material-icons">&#xE872;</i>
+                              </apex:commandlink>
+                            </p>
+                          </div>
+                        </apex:repeat>
+                      </apex:outputpanel>
+                      <!-- No Attachments -->
+                      <apex:outputpanel rendered="{!attachments.size == 0}">
+                        <p>No attachments for this Incident.</p>
+                      </apex:outputpanel>
+                    </apex:outputpanel>
+                  </apex:outputpanel>
+
+                  <s3-file-upload button-text="Add an Attachment"
+                                  endpoint_url="{!$Setup.AWS_Config__c.S3_Endpoint_Url__c}"
+                                  bucket-name="{!$Setup.AWS_Config__c.S3_Bucket_Name__c}"
+                                  acl="{!$Setup.AWS_Config__c.S3_Access_Control_Level__c}"
+                                  prefix="{!c.Id}/"
+                                  key="{!accessKey}"
+                                  remote-func-params="{!$RemoteAction.EEC_CasesIncidentsPageController.generateMultiplePolicySignature}"
+                                  multiple-enabled="true"
+                                  timestamp-enabled="true"
+                                  keep-files-enabled="true">
+                  </s3-file-upload>
+                  <button type="button" class="clear-button md-button md-eec md-raised" ng-click="ctrl.clear()">Clear</button>
+                  <p style="margin-top: 10px;"><b>Note:</b> If you wish to upload multiple files then select all desired files in the file explorer window OR you may select each file one by one.</p>
+
+                  <apex:actionfunction name="UpdateIncidentAttachments" action="{!saveAttachmentsFromJson}" oncomplete="saveAttachmentsFromJsonComplete();" rerender="showmsg, fileAttachmentContainer">
+                    <apex:param name="json" value="" assignto="{!attachmentsJson}" />
+                  </apex:actionfunction>
+
+                  <apex:actionfunction name="refreshAttachmentsJson" rerender="script-existing-items, fileAttachmentContainer" />
+
+                  <apex:actionfunction action="{!nextStage}" name="SaveAndNext">
+                    <apex:param assignto="{!saveButtonType}" value="next" name="Next" />
+                  </apex:actionfunction>
+                  <apex:actionfunction action="{!prevStage}" name="SaveAndPrevious">
+                    <apex:param assignto="{!saveButtonType}" value="previous" name="Previous" />
+                  </apex:actionfunction>
+                  <apex:actionfunction action="{!returnProvider}" name="SaveAndReturn">
+                    <apex:param assignto="{!saveButtonType}" value="return" name="Return" />
+                  </apex:actionfunction>
+
+                  <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandlink value="Save and Previous" styleclass="md-button md-raised md-eec"
+                                      html-layout-padding="true"
+                                      onclick="uploadAttachments(2); return false;" html-role="button" />
+                    <apex:commandlink value="Save and Next" styleclass="md-button md-raised md-eec"
+                                      html-layout-padding="true"
+                                      onclick="uploadAttachments(1); return false;" html-role="button" />
+                  </md-content>
+
+                  <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandlink id="cancelButton" styleclass="md-button md-raised" action="{!returnProvider}" value="Cancel Current Changes and Go back to Provider" onclick="confirm('Are you sure? All changes will be lost!');" />
+                    <apex:commandlink value="Save and Return to Provider" styleclass="md-button md-raised"
+                                      html-layout-padding="true"
+                                      onclick="uploadAttachments(3); return false;" html-role="button" />
+                  </md-content>
+                </apex:outputpanel>
+              </apex:pageblock>
+
+              <apex:pageblock id="summarySubmission" rendered="{! currentStage[3] }">
+                <br />
+                <apex:pagemessages />
+                <section>
+                  <div class="panel panel-default">
+                  <div class="panel-heading" id="headingTwo">
+                    <h4 class="panel-title">
+                      <a>
+                        Provider and Reporter
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="incidentDesc" class="panel-group" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Provider Name: </span>&nbsp;{!a.Name}
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Contact Name: </span>&nbsp;{!ct.Name}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Contact Number: </span>&nbsp;{!ct.Phone}
+                          </div>
+                      </div>  
+                      <div class="form-group">
+                          <div class="input-group">  
+                            <span class="form-label">Email Address: </span>&nbsp;{!ct.Email}
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <!--<div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Status: </span>&nbsp;{!c.Status}
+                          </div>
+                      </div>-->
+                      <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Date Opened: </span>&nbsp;<c:EEC_DateFormat date="{!c.CreatedDate}" style="margin-left: 5px;" />
+                          </div>
+                      </div>    
+                      <!--<div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Date Closed: </span>&nbsp;<c:EEC_DateFormat date="{!c.ClosedDate}" style="margin-left: 5px;" />
+                          </div>
+                      </div>--> 
+                    </div>
+                    </div>
+                    </div>
+                   </div>
+                  </div>
+                </section>
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="headingTwo">
+                    <h4 class="panel-title">
+                      <a>
+                        {!caseTypeLabel} Description
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="incidentDesc" class="panel-group" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Summary / Type of Case </span><br />
+                            <apex:outputtext value="{!c.subject}" label="Subject" />
+                          </div>
+                        </div>
+                        <apex:outputPanel rendered="{!caseTypeLabel == 'Injury' || caseTypeLabel == 'Incident'}"> 
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">When did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Date_Event_Occured__c}" />
+                            </apex:outputtext>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">What time did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{!c.Time_Event_Occured__c}" label="Time Event Occurred" />
+                          </div>
+                        </div>
+                        </apex:outputPanel>
+                      </div>
+                      <div class="col-lg-8">
+                        <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}"> 
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Number of children in the group</span><br />
+                              <apex:outputtext value="{!c.No_children_in_group__c  }" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">What group was the child in when injury occured?</span><br />
+                              <apex:outputtext value="{!c.Group_the_child_was_in__c  }" />
+                            </div>
+                          </div>   
+                          <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">What happened? (If applicable, describe any equipment involved including its location and condition)
+                            </span><br />
+                            <apex:outputtext value="{!c.description}" label="Description" />
+                          </div>
+                         </div> 
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span class="form-label">Where did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{!c.Event_Location__c}" label="Event Description" />
+                          </div>
+                        </div>  
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Names &amp; qualifications of staff supervising the group when injury occurred?</span><br />
+                              <apex:outputtext value="{!c.Name_Qual_of_staff_supervising__c}" />
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span class="form-label">Description of any corrective action taken to prevent similar occurence</span><br />
+                              <apex:outputtext value="{!c.Description_of_corrective_action__c}" />
+                            </div>
+                          </div>
+                        </apex:outputPanel>    
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">
+                        Involved Persons
+                      </h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="no-more-tables">
+                        <apex:outputlabel styleclass="form-label" value="Involved Children"></apex:outputlabel>
+                        <table class="table table-hover">
+                          <thead>
+                          <td>Name</td>
+                          <td>Type</td>
+                          <td>Birth Date</td>
+                          <td>Guardian Name</td>
+                          <td>Guardian Phone</td>
+                          <td>Guardian Address</td>
+                          <td>Description of Involvement</td>
+                          </thead>
+                          <apex:repeat value="{!InvolvedPersons}" var="p" id="personsRepeaters">
+                            <apex:outputpanel rendered="{!p.TypeName = 'Child Involvement'}">
+                              <tr>
+                                <td data-title="Name">
+                                  <apex:outputtext value="{!p.Name}" />
+                                </td>
+                                <td data-title="Type">
+                                  <apex:outputtext value="{!p.TypeName}" />
+                                </td>
+                                <td data-title="Birthdate">
+                                  <c:EEC_DateFormat date="{!p.ChildBirthDate}" />
+                                </td>
+                                <td data-title="Name">
+                                  <apex:outputtext value="{!p.GuardianName}" />
+                                </td>
+                                <td data-title="Phone">
+                                  <apex:outputtext value="{!p.GuardianPhone}" />
+                                </td>
+                                <td data-title="Address">
+                                  <apex:outputtext value="{!p.GuardianAddress}" />
+                                </td>
+                                <td data-title="Description">
+                                  <apex:outputtext value="{!p.Description_of_Involvement}" />
+                                </td>
+                              </tr>
+                            </apex:outputpanel>
+                          </apex:repeat>
+                        </table>
+                      </div>
+                      <div id="no-more-tables">
+                        <apex:outputlabel styleclass="form-label" value="Involved Adults"></apex:outputlabel>
+                        <table class="table table-hover">
+                          <thead>
+                            <tr>
+                              <td>Name</td>
+                              <td>Type</td>
+                              <td>Role</td>
+                              <td>Other Role</td>
+                              <td>Title</td>
+                              <td>Description of Involvement</td>
+                            </tr>
+                          </thead>
+                          <apex:repeat value="{!InvolvedPersons}" var="p" id="personsRepeater">
+                            <apex:outputpanel rendered="{!p.TypeName = 'Adult Involvement'}">
+                              <tr>
+                                <td data-title="Name">
+                                  <apex:outputtext value="{!p.Name}" />
+                                </td>
+                                <td data-title="Type">
+                                  <apex:outputtext value="{!p.TypeName}" />
+                                </td>
+                                <td data-title="Role">
+                                  <apex:outputtext value="{!p.Role}" />
+                                </td>
+                                <td data-title="Other Role">
+                                  <apex:outputtext value="{!p.OtherRole}" />
+                                </td>
+                                <td dat-title="Title">
+                                  <apex:outputtext value="{!p.Title}" />
+                                </td>
+                                <td data-title="Description">
+                                  <apex:outputtext value="{!p.Description_of_Involvement}" />
+                                </td>
+                              </tr>
+                            </apex:outputpanel>
+                          </apex:repeat>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <apex:outputPanel rendered="{!caseTypeLabel == 'Injury' || caseTypeLabel == 'Incident'}"> 
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="headingTwo">
+                    <h4 class="panel-title">
+                      <a>First Aid / CPR</a>
+                    </h4>
+                  </div>
+                  <div id="firstaidCPR" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span class="form-label">Was first aid provided?</span><br />
+                            <apex:outputtext value="{!c.First_Aid_or_CPR_Provided__c}" />
+                          </div>
+                          <apex:outputpanel id="PanelFirstAidCPR">
+                            <apex:outputpanel rendered="{!blnFirstAidCPR}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">When?</span><br />
+                                <apex:outputtext value="{!c.First_Aid_When__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">By Whom?</span><br />
+                                <apex:outputtext value="{!c.First_Aid_By_whom__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">What was provided?</span><br />
+                                  <apex:outputtext value="{!c.First_Aid_What__c}" />
+                              </div>   
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+
+                        <hr class="col-xs-12" />
+
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span class="form-label">CPR provided?</span><br />
+                            <apex:outputtext value="{!c.CPR_Provided__c}" />
+                          </div>
+
+                          <apex:outputpanel id="summaryPanelCPR">
+                            <apex:outputpanel rendered="{!blnCPR}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">When?</span><br />
+                                <apex:outputtext value="{!c.CPR_When__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">By Whom?</span><br />
+                                <apex:outputtext value="{!c.CPR_By_Whom__c}" />
+                              </div>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a>911 Contacted</a>
+                    </h4>
+                  </div>
+                  <div id="911Contacted" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span class="form-label">Was 911 called?</span><br />
+                            <apex:outputtext value="{!c.X911_Called__c}" />
+                          </div>
+
+                          <apex:outputpanel id="Panel911">
+                            <apex:outputpanel rendered="{!blnCalled911}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">When?</span><br />
+                                <apex:outputtext value="{!c.X911_called_when__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">By Whom?</span><br />
+                                <apex:outputtext value="{!c.X911_By_whom__c}" />
+                              </div>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a>Medical Attention</a>
+                    </h4>
+                  </div>
+                  <div id="medicalAttn" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-6">
+                            <span class="form-label">Was the child transported for medical attention?</span><br />
+                            <apex:outputtext value="{!c.Child_Transported_for_Medical_Attention__c}" label="Child Transported for Medical Attention">
+                            </apex:outputtext>
+                          </div>
+
+                          <apex:outputpanel id="PanelMedical">
+                            <apex:outputpanel rendered="{!blnChildTransport}">
+                              <div class="col-xs-12 col-lg-3">
+                                <span class="form-label">Where?</span><br />
+                                <apex:outputtext value="{!c.Med_AttentionWhere__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-3">
+                                <span class="form-label">By whom?</span><br />
+                                <apex:outputtext value="{!c.Med_Attention_By_whom__c}" />
+                              </div>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span class="form-label">What medical treatment was provided? (be specific)</span><br />
+                                <apex:outputtext value="{!c.Medical_Treatment_Provided__c}" />
+                              </div>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span class="form-label">What diagnosis resulted from any medical intervention?</span><br />
+                                <apex:outputtext value="{!c.Diagnosis_Resulted__c}" />
+                              </div>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span class="form-label">Did the child return to your program?</span><br />
+                                <apex:outputtext value="{!c.Child_return_to_Program__c}">
+                                </apex:outputtext>
+                              </div>
+
+                              <apex:outputpanel id="PanelChildReturn">
+                                <apex:outputpanel rendered="{!blnChildReturned}">
+                                  <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                    <span class="form-label">When?</span><br />
+                                    <apex:outputtext value="{!c.When_Child_Return__c}" />
+                                  </div>
+                                </apex:outputpanel>
+                              </apex:outputpanel>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a>Information Shared with Parents / Guardians</a>
+                    </h4>
+                  </div>
+                  <div id="infoShared" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+
+                          <div class="col-xs-12 col-lg-5">
+                            <span class="form-label">Was this information shared with the child's parent/guardian?</span><br />
+                            <apex:outputtext value="{!c.Shared_with_Parents__c}">
+                            </apex:outputtext>
+                          </div>
+
+                          <apex:outputpanel id="PanelSharedParents">
+                            <apex:outputpanel rendered="{!blnSharedParents}">
+
+                              <div class="col-xs-12 col-lg-3">
+                                <span class="form-label">When was this information shared?</span><br />
+                                <apex:outputtext value="{!c.When_Shared_Info__c}" />
+                              </div>
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">Provide the name of the parent/guardian who was contacted?</span><br />
+                                <apex:outputtext value="{!c.With_who__c}" />
+                              </div>
+
+                              <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">Who shared the information with the parent/guardian?</span><br />
+                                  <apex:outputtext value="{!c.Who_Shared_Info__c}" />
+                                </div>
+                                <div class="col-xs-12 col-lg-8">
+                                  <span class="form-label">How was this information shared?</span><br />
+                                  <apex:outputtext value="{!c.How_What_Shared_Info__c}" />
+                                </div>
+                              </div>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                          <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                          <div class="col-xs-12 col-lg-5">
+                              <span class="form-label">Was anyone else notified?</span><br />
+                              <apex:outputtext value="{!c.Other_Person_Notified__c }">
+                              </apex:outputtext>
+                            </div>
+                            <apex:outputpanel id="PanelOtherPersons">
+                              <apex:outputpanel rendered="{!blnOtherParents}">
+                                <div class="col-xs-12 col-lg-3">
+                                  <span class="form-label">Who else was notified?</span><br />
+                                  <apex:outputtext value="{!c.Other_Person_Notified_Who__c }" />
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                  <span class="form-label">How was this other person notified?</span><br />
+                                  <apex:outputtext value="{!c.Other_Person_Notified_How__c }" />
+                                </div>
+
+                                <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                  <div class="col-xs-12 col-lg-4">
+                                    <span class="form-label">When was this other person notified?</span><br />
+                                    <apex:outputtext value="{!c.Other_Person_Notified_When__c }" />
+                                  </div>
+                                </div>
+                              </apex:outputpanel>
+                            </apex:outputpanel> 
+                            </apex:outputPanel>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == '51A Incident'}">  
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a>Other Information</a>
+                    </h4>
+                  </div>
+                  <div id="otherInformation" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Was a report filed with the Massachusetts Department of Children and Families (DCF)(51A)?</span><br />
+                          <apex:outputtext value="{!c.Filed_with_DCF__c}">
+                          </apex:outputtext>
+                        </div>
+                       <apex:outputPanel rendered="{!caseTypeLabel == '51A Incident'}">
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Dates of contact with Homefinder within last 6 months?</span><br />
+                            <apex:outputtext value="{!c.Homefinder_Contact_Last_6_Months__c}" >
+                            </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">    
+                          <span class="form-label">Last social worker home visit date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Last_Social_Worker_Home_Visit__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Most recent re-evaluation date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Most_Recent_Reevaluation__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Original Home Study date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Original_Home_Study__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Concerns identified if any?</span><br />
+                          <apex:outputtext value="{!c.Concerns_Identified__c}">
+                          </apex:outputtext>
+                        </div>
+                         <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">MAPP training date?</span><br />
+                           <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.MAPP_Training_Date__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">Home type (Regular/Restricted)?</span><br />
+                          <apex:outputtext value="{!c.Home_Type__c}">
+                          </apex:outputtext>
+                        </div>
+                        <div class="col-xs-12 col-lg-6">
+                          <span class="form-label">List of restrictions?</span><br />
+                          <apex:outputtext value="{!c.List_of_Restrictions__c}">
+                          </apex:outputtext>
+                        </div>
+                        </apex:outputPanel>
+                        <apex:outputpanel id="PanelFiledDCF">
+                          <apex:outputpanel rendered="{!blnFiledDCF}">
+                            <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                              <span class="form-label">By whom?</span><br />
+                              <apex:outputtext value="{!c.DCF_Filer__c}" />
+                            </div>
+
+                            <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                              <span class="form-label">When was it reported?</span><br />
+                              <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                                <apex:param value="{!c.DCF_File_Submission_Date__c}" />
+                              </apex:outputtext>
+                            </div>
+
+                            <div style="margin-top: 10px; padding: 0;" class="col-xs-12">
+                              <div class="col-xs-12 col-lg-4">
+                                <span class="form-label">Does your report involves legal proceedings?</span><br />
+                                <apex:outputtext value="{!c.Incident_involves_legal_proceedings__c}">
+                                </apex:outputtext>
+                              </div>
+
+                              <apex:outputpanel id="PanelInvolvesLegal">
+                                <apex:outputpanel rendered="{!blnLegal}">
+                                  <div class="col-xs-12 col-lg-8">
+                                    <span class="form-label">Describe the nature of legal proceedings and explain who is involved</span><br />
+                                    <apex:outputtext value="{!c.Legal_Proceeding_Description__c}" />
+                                  </div>
+                                </apex:outputpanel>
+                              </apex:outputpanel>
+                            </div>
+                          </apex:outputpanel>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                </apex:outputPanel>
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Attachments</h3>
+                    </div>
+
+                    <div class="panel-body">
+                      <apex:outputpanel id="fileAttachmentContainer" styleclass="fileAttachmentContainer" style="width: 100%;">
+                        <apex:outputpanel id="fileListContainer">
+                          <!-- Incident Attachments -->
+                          <apex:outputpanel rendered="{!attachments.size > 0}">
+                            <apex:repeat value="{!attachments}" var="attachment">
+                              <div class="attachment-item">
+                                <p>{!attachment.Filename__c}</p>
+                                <p><apex:outputtext value="{0, date, MMMM d','  yyyy}"><apex:param value="{!attachment.CreatedDate}" /></apex:outputtext></p>
+                                <p>
+                                  <apex:commandlink action="{!deleteAttachment}" value="" rerender="script-existing-items, fileAttachmentContainer" style="color: #000;">
+                                    <apex:param name="attachmentName" assignto="{!fileToDelete}" value="{!attachment.Id}" />
+                                    <i class="material-icons">&#xE872;</i>
+                                  </apex:commandlink>
+                                </p>
+                              </div>
+                            </apex:repeat>
+                          </apex:outputpanel>
+                          <!-- No Attachments -->
+                          <apex:outputpanel rendered="{!attachments.size == 0}">
+                            <p>No attachments for this Incident.</p>
+                          </apex:outputpanel>
+                        </apex:outputpanel>
+                      </apex:outputpanel>
+                    </div>
+                  </div>
+                </div>
+                <br />
+                <apex:outputpanel layout="block" rendered="{!!editViewMode}">
+                  <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandbutton id="prevButton" styleclass="md-button md-raised md-eec" action="{!prevStage}" value="Previous" />
+                    <apex:commandbutton id="submitButton" styleclass="md-button md-raised md-eec" action="{!submitReturn}" value="Submit" />
+                  </div>
+
+                  <div class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandlink id="cancelButton" styleclass="md-button md-raised" action="{!returnProvider}" value="Cancel Current Changes and Go back to Provider" onclick="confirm('Are you sure? All changes will be lost!');" />
+                    <apex:commandbutton id="submitLaterButton" styleclass="md-button md-raised" action="{!returnProvider}" value="Save and Return to Provider" />
+                  </div>
+                </apex:outputpanel>
+                <apex:outputpanel rendered="{!editViewMode}">
+                  <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                    <apex:commandbutton id="editBackButton" styleclass="md-button md-raised" action="{!returnProvider}" value="Return to Provider" />
+                    <apex:outputpanel layout="column" rendered="{!IF(c.Status == 'Not Submitted', true, false)}" style="float: right;">
+                      <apex:commandbutton id="editEditButton" styleclass="md-button md-raised md-eec" action="{!editIncident}" value="Edit" />
+                    </apex:outputpanel>
+                  </md-content>
+                </apex:outputpanel>
+                <br />
+                <br />
+                <br />
+
+              </apex:pageblock>
+            </apex:outputpanel>
+          </apex:form>
+        </div>
+         
+        <c:EEC_LightningProcessingWidget />  
+          
+        <c:EEC_Site_Footer id="siteFooter" />
+
+        <script>
+        app.controller('IncidentsController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+          $scope.funcId = '';
+          $scope.numUploadComponents = 0;
+          $scope.timesUploadComplete = 0;
+          $scope.bucketName = '{!bucketName}';
+          $scope.exisitingFiles = '{!attachmentsJson}';
+
+          var ctrl = this;
+          // Call this function to broadcast to the directive to process the upload.
+          this.upload = function(id) {
+            // Set the callback function ID for later.
+            $scope.funcId = id;
+            $scope.numUploadComponents = jQuery('s3-file-upload').length;
+            // Call all upload directives to process files.
+            $rootScope.$broadcast('upload', {});
+          };
+
+          this.clear = function(clearIndex) {
+            if (!angular.isUndefined(clearIndex)) {
+              $rootScope.$broadcast('clearFiles_' + clearIndex, {});
+            } else {
+              $rootScope.$broadcast('clearFiles',{});
+            }
+          }
+
+          // Capture Emit event from Directive for result data.
+          $scope.$on('uploadComplete', function(event, data) {
+            $scope.timesUploadComplete++;
+
+            if (angular.isArray(data)) {
+              var json = [];
+
+              for (var i = 0; i < data.length; i++) {
+                if (!data[i].status) {
+                  console.log("----> Error: File not successfully uploaded.");
+                  break;
+                }
+                console.log(data[i].data);
+                var attachment = data[i].data;
+                // Split the filename to get the prefix.
+                var splitFilename = attachment.key.split('/');
+                // Create the JSON needed for the S3_File__c objects.
+                var file = {
+                  "Filename__c": splitFilename[1],
+                  "Prefix__c": splitFilename[0],
+                  "Content_Type__c": attachment['Content-Type'],
+                  "Acl__c": attachment.acl,
+                  "Bucket__c": $scope.bucketName
+                };
+
+                if (!angular.isUndefined($scope.exisitingFiles) && $scope.exisitingFiles !== '') {
+                  var exisitingFilesJson = JSON.parse($scope.exisitingFiles);
+                  // Loop through the results.
+                  angular.forEach(exisitingFilesJson, function(value, key) {
+                    // Get the short names of the files without the file extensions.
+                    var exisitingShortName = value.Filename__c.split('.')[0];
+                    var shortName = file.Filename__c.split('.')[0];
+                    // If the short name of the file is the same as the existing then set the id for upsert.
+                    if (exisitingShortName == shortName) {
+                      file.Id = value.Id;
+                    }
+                  });
+                }
+                // Push the file into the json object to send.
+                json.push(file);
+              }
+              console.log("Files Uploaded Successfully!");
+              // Call the action function to create the S3 Object entries in Sforce.
+              UpdateIncidentAttachments(JSON.stringify(json));
+            } else if ($scope.timesUploadComplete == $scope.numUploadComponents) {
+              console.log("Error: " + data.error);
+
+              if (data.error.indexOf('No files') > -1) {
+                console.log("No files to upload. Continue to next page.");
+                switch($scope.funcId) {
+                  case 1:
+                    SaveAndNext();
+                    break;
+                  case 2:
+                    SaveAndPrevious();
+                    break;
+                  case 3:
+                    SaveAndReturn();
+                    break;
+                }
+              }
+            }
+          });
+        }]);
+        </script>
+
+        <script>
+        var inProgress = false;
+
+        var uploadAttachments = function(functionId) {
+          j$('body').scrollTop(0);
+          j$('body').css('height', '100%');
+          j$('body').css('overflow', 'hidden');
+          j$('.lpw-widget').show();
+          // Call the Angular process method from JS.
+          return angular.element(jQuery('.incidents-attachment-container'))
+            .scope()
+            .ctrl.upload(functionId);
+        }
+
+        var saveAttachmentsFromJsonComplete = function() {
+          refreshAttachmentsJson();
+          var timesComplete = angular.element(jQuery('.incidents-attachment-container')).scope().timesUploadComplete;
+          var numUploadComponents = angular.element(jQuery('.incidents-attachment-container')).scope().numUploadComponents;
+
+          if (!inProgress && timesComplete == numUploadComponents) {
+            inProgress = true;
+            console.log("----> On Complete for saving attachments");
+            // Call action function for specified button.
+            switch(angular.element(jQuery('.incidents-attachment-container')).scope().funcId) {
+              case 1:
+                SaveAndNext();
+                break;
+              case 2:
+                SaveAndPrevious();
+                break;
+              case 3:
+                SaveAndReturn();
+                break;
+            }
+          }
+        }
+        </script>
+
+        <apex:outputpanel id="script-existing-items">
+          <script>
+          jQuery(window).load(function() {
+            var scope = angular.element(jQuery('.incidents-attachment-container')).scope();
+            scope.$apply(function() {
+              scope.exisitingFiles = '{!attachmentsJson}';
+            });
+          });
+          </script>
+        </apex:outputpanel>
+      </body>
+    </apex:page>

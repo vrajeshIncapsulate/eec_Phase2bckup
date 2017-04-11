@@ -1,0 +1,7 @@
+Hello,
+
+For your information, the injury associated to Provider {!Case.Provider_Name_For_Email_Merge__c} has been reviewed by {!Case.Triage_Responsible__c} and has been closed as no non-compliance item has been identified. 
+
+If you need more information related to this injury, please login to Salesforce and review the case: https://na16.salesforce.com/{!Case.Id}
+
+LEAD System

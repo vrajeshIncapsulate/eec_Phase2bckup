@@ -1,0 +1,2 @@
+<apex:page standardController="Inspection__c" extensions="EEC_AttachGeneratedNarrativePDF" action="{! savePDF }">
+</apex:page>

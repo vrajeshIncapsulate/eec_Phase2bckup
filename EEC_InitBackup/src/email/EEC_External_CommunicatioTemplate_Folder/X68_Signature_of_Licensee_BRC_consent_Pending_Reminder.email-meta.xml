@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>If a licensee BRC consent is pending for more than 5 days, then this email is sent to remind the user that the document is pending</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>68 - Signature of Licensee BRC consent Pending Reminder</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - Your BRC Consent Form is ready for signature - Reminder</subject>
+    <type>html</type>
+</EmailTemplate>

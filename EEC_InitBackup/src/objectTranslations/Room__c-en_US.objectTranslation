@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Rooms</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Rooms</value>
+    </caseValues>
+    <fields>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension - Length (feet) --></label>
+        <name>Dimension_Length_feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension - Square Feet --></label>
+        <name>Dimension_Square_Feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Dimension - Width (feet) --></label>
+        <name>Dimension_Width_feet__c</name>
+    </fields>
+    <fields>
+        <label><!-- Floor Level --></label>
+        <name>Floor_Level__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Name --></label>
+        <name>Provider_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Source Transaction --></label>
+        <name>Source_Transaction__c</name>
+        <relationshipLabel><!-- Rooms --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Use --></label>
+        <name>Use__c</name>
+    </fields>
+    <layouts>
+        <layout>Room Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Room Detail --></label>
+            <section>Room Detail</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

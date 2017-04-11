@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Payments Received</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Payments Received</value>
+    </caseValues>
+    <fields>
+        <label><!-- Amount --></label>
+        <name>Amount__c</name>
+    </fields>
+    <fields>
+        <label><!-- Associated Transactions --></label>
+        <name>Associated_Transactions__c</name>
+        <relationshipLabel><!-- Payments Received --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Credit Card # (Last 4 Digits) --></label>
+        <name>Credit_Card_Last_4_Digits__c</name>
+    </fields>
+    <fields>
+        <label><!-- Deposit Date --></label>
+        <name>Deposit_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- If error, please provide the description of the resolution (transfer, erroneous entry). If it has been associated with another Transaction, please enter the transaction # it&apos;s associated with. --></help>
+        <label><!-- Error Description --></label>
+        <name>Error_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Check/Money Order # --></label>
+        <name>Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Payment Status --></label>
+        <name>Payment_Status__c</name>
+        <picklistValues>
+            <masterLabel>Bounced</masterLabel>
+            <translation><!-- Bounced --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deposited</masterLabel>
+            <translation><!-- Deposited --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Erroneously Entered</masterLabel>
+            <translation><!-- Erroneously Entered --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Provider Email --></label>
+        <name>Provider_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- Provider will be added automatically by the system (it can be let empty), else make sure you use the provider associated with the transaction. --></help>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Payments Received --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Received Date --></label>
+        <name>Received_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Region --></label>
+        <lookupFilter>
+            <errorMessage><!-- Only licensing region can be chosen. --></errorMessage>
+        </lookupFilter>
+        <name>Region__c</name>
+        <relationshipLabel><!-- Payments Received --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Type of Payment --></label>
+        <name>Type_of_Payment__c</name>
+        <picklistValues>
+            <masterLabel>Check</masterLabel>
+            <translation><!-- Check --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Credit Card</masterLabel>
+            <translation><!-- Credit Card --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Money Order</masterLabel>
+            <translation><!-- Money Order --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Payments Recieved Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Payment Information --></label>
+            <section>Payment Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If Payment Status is &quot;Erroneously Entered&quot;, then Error Description must be filled out --></errorMessage>
+        <name>Error_Description_mandatory_for_Error_En</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Provider selected should be the same provider than the one associated to the Licensing Transaction --></errorMessage>
+        <name>Provider_should_be_the_same_than_Transac</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Received Date must be superior or equal to Deposit Date --></errorMessage>
+        <name>Received_data_greater_or_equal_to_deposi</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,604 @@
+<apex:page controller="EEC_TransactionWizardController" standardStylesheets="false" showheader="false" sidebar="false">
+  <head>
+    <title>EEC : Transaction - Indoor/Outdoor Information</title>
+    <c:EEC_Header id="pageHeader" />
+      
+    <style>
+      a.md-button.md-raised.md-eec, .md-button.md-raised.md-eec {
+        color: rgb(250,250,250);
+        background-color: #853F3F; 
+      }
+        
+      a.md-button.md-raised.md-eec:hover, .md-button.md-raised.md-eec:hover {
+        color: rgb(250,250,250);
+        background-color: #703E3E; 
+      }
+        
+      a.md-button.md-raised, .md-button.md-raised {  
+        background-color: #f7f7f7;
+      }  
+        
+      .indoor-top-container {
+        margin-bottom: 160px; 
+      }
+        
+      .top-level-label {
+        font-weight: 600;
+        margin-right: 15px;
+        line-height: 20px; 
+        color: rgba(0,0,0,0.54);
+      }
+        
+      .commandBtn {
+        -webkit-appearance: none;
+        border: none;
+        box-shadow: none;
+        background: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        font-style: inherit;
+        font-variant: inherit;
+        font-family: inherit;
+        outline: none;
+        letter-spacing: .01em;
+        white-space: normal;
+      }
+        
+      a.md-button span {
+        padding: 6px;
+      }
+        
+      .transaction-info {
+        margin-top: 10px; 
+      }
+        
+      .add-button-container {
+        padding-right: 42px; 
+      }
+       
+      .command-button-container {
+        position: relative;
+        top: -2px; 
+      }
+        
+      .transaction-info-row {
+        margin-left: 20px; 
+      }
+        
+      .eec-subhead {
+        font-size: 1.2em; 
+        font-weight: 600; 
+      }
+        
+      .navigation-buttons {
+        overflow: visible; 
+      }
+        
+      @media only screen and (min-width: 0px) and (max-width: 959px) {
+        .navigation-buttons .md-button {
+          width: 98%;
+        }
+        
+        .navigation-buttons md-content {
+          width: 100%;
+        }
+        
+        .add-button-container {
+          padding-right: 0;
+          width: 100%;
+        }
+      }
+    </style>
+  </head>  
+      
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />  
+    
+    <div class="indoor-top-container" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="column" layout-padding="true" layout-margin="true" ng-controller="TransactionController as ctrl">
+      <md-content style="margin-top: 20px;" ng-show="ctrl.checkForMessages()" layout="row" flex="100" layout-align="center center">   
+        <md-whiteframe class="md-whiteframe-z2 ng-cloak" layout="column" layout-padding="true" flex="74">
+          <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </md-whiteframe> 
+      </md-content>  
+     
+      <div class="indoor-form-container" layout="column" layout-padding="true" flex="100" flex-lg="75" flex-gt-lg="75">    
+        
+        <h3 class="md-display-1">Indoor / Outdoor Information</h3>
+        <md-divider class="ng-cloak" layout-align="center center"></md-divider>  
+          
+        <div class="transaction-info" layout-margin="true">
+          <h3 class="eec-subhead">Transaction Information</h3>
+          <md-content class="transaction-info-row" layout="row">
+            <p class="md-subhead top-level-label">Transaction Type: </p>
+            <apex:outputText value="{!LicenseRecordTypeLabel}" />
+          </md-content>
+           
+          <md-content class="transaction-info-row" layout="row">
+            <p class="md-subhead top-level-label">Transaction Number: </p>
+            <apex:outputText value="{!licenseTransation.Name}" />
+          </md-content>
+        </div>
+          
+        <form id="indoorForm" name="indoorForm">          
+          <div class="indoor-additional-info-container" layout-margin="true">
+            <!-- Additional Form Information Here --> 
+            <h3 class="eec-subhead">Addition Indoor Space Information</h3>  
+            <md-content class="transaction-info-row">
+              <label class="md-subhead top-level-label">Are there at least two exits from your home?</label>
+              <md-input-container>
+                <md-radio-group name="At_Least_2_Exits__c" ng-model="ctrl.data.At_Least_2_Exits__c" layout="row" required="true">
+                  <md-radio-button value="Yes" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="No">No</md-radio-button>
+                </md-radio-group> 
+                <div ng-messages="indoorForm.At_Least_2_Exits__c.$error" ng-show="indoorForm.At_Least_2_Exits__c.$touched || ctrl.isSubmitted">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>  
+            </md-content>
+              
+            <md-content class="transaction-info-row">
+              <label class="md-subhead top-level-label">Please describe your exits. If you are using a basement space, there must be two exits from the basement level of the home</label>  
+              <md-input-container>
+                <textarea name="Exits_Descriptions__c" ng-model="ctrl.data.Exits_Descriptions__c" columns="3" required="true"></textarea>
+                <div ng-messages="indoorForm.Exits_Descriptions__c.$error" ng-show="indoorForm.Exits_Descriptions__c.$touched || ctrl.isSubmitted">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+            </md-content>    
+              
+            <md-content class="transaction-info-row">
+              <label class="md-subhead top-level-label">What types of heating elements do you have? (Check all that apply)</label>
+              <div layout="row" layout-wrap="true">
+                <div flex="50" flex-lg="33" flex-gt-lg="33" ng-repeat="item in ctrl.heatingElements.types">
+                  <md-checkbox ng-checked="exists(item, ctrl.data.selected)" ng-click="toggle(item, ctrl.data.selected);ctrl.validateCheckboxes();">
+                    {{ item }}
+                  </md-checkbox>
+                </div>
+                <md-input-container flex="100">
+                  <div ng-messages="ctrl.heatingElements.$error" ng-show="ctrl.heatingElements.$touched || ctrl.isSubmitted">
+                    <div ng-message="required">You must select at lease 1 checkbox.</div>    
+                  </div>
+                </md-input-container>
+              </div>
+            </md-content>  
+              
+            <md-content class="transaction-info-row" ng-if="ctrl.heatingOther">
+              <label class="md-subhead top-level-label">If you have anything other than baseboard or vents/grates, EEC Regulations require that the heating unit be barricaded in a way that keeps children safe. Do you need technical assistance on how to appropriately barricade heating units?</label>
+              <md-input-container>
+                <md-radio-group name="groupHeating" ng-model="ctrl.data.groupHeating" layout="row" ng-required="ctrl.heatingOther">
+                  <md-radio-button value="Yes" class="md-primary">Yes</md-radio-button>
+                  <md-radio-button value="No">No</md-radio-button>
+                </md-radio-group>   
+                <div ng-messages="indoorForm.groupHeating.$error" ng-show="indoorForm.groupHeating.$touched || ctrl.isSubmitted">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>  
+            </md-content>
+              
+            <md-content class="transaction-info-row" layout="row" layout-wrap="true" layout-align="start center">
+              <p class="md-subhead top-level-label" flex="true">Is the drinking water in your home from</p>
+              <md-select name="drinkingWater" placeholder="None" ng-model="ctrl.data.drinkingWater" required="true" flex="true">
+                <md-option ng-repeat="supply in ctrl.waterSupply" value="{{supply}}">{{supply}}</md-option>
+              </md-select> 
+                
+              <md-input-container flex="100">
+                <div ng-messages="indoorForm.drinkingWater.$error" ng-show="indoorForm.drinkingWater.$touched || ctrl.isSubmitted">
+                  <div ng-message="required">This is required.</div>
+                </div>
+              </md-input-container>
+            </md-content>
+          </div>
+            
+          <div class="indoor-description-container" layout-margin="true">
+            <!-- Indoor Description Container -->  
+            <h3 class="eec-subhead">Indoor Space Description</h3>  
+            <md-content class="transaction-info-row">
+              <label class="md-subhead top-level-label">Please describe the family child care residence: (e.g. single family, duplex, apartment, etc.)</label>  
+              <md-input-container>
+                <textarea name="descriptionResidence" ng-model="ctrl.data.descriptionResidence" columns="3" required="true"></textarea>
+                <div ng-messages="indoorForm.descriptionResidence.$error" ng-show="indoorForm.descriptionResidence.$touched || ctrl.isSubmitted">
+                  <div ng-message="required">This is required.</div>
+                </div>  
+              </md-input-container>
+            </md-content>    
+            <!-- Cards/Table for Rooms -->
+            <md-content class="transaction-info-row ng-cloak" layout-wrap="true" layout="row" layout-align-sm="center center" layout-align-md="center center">
+              <label class="md-subhead top-level-label" flex="100">Rooms Available</label>  
+              <!-- Card List of Rooms-->
+              <md-card ng-repeat="(key, room) in ctrl.data.rooms" flex="95" flex-lg="45" flex-gt-lg="45">
+                <ng-form name="RoomCardForm">
+                  <md-card-content layout="row" layout-align="center center" layout-wrap="true">
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <md-input-container flex="50" flex-sm="100">
+                        <label>Room Name</label>
+                        <input name="Name" ng-model="room.Name" type="text" required="true"/>
+                        <div ng-messages="RoomCardForm.Name.$error" ng-show="RoomCardForm.Name.$touched || ctrl.isSubmitted">
+                          <div ng-message="required">This is required.</div>
+                        </div>
+                      </md-input-container>
+                  
+                      <md-input-container flex="50" flex-sm="100">
+                        <label>Use</label>
+                        <input name="Use" ng-model="room.Use" type="text"  required="true"/> 
+                        <div ng-messages="RoomCardForm.Use.$error" ng-show="RoomCardForm.Use.$touched || ctrl.isSubmitted">
+                          <div ng-message="required">This is required.</div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                      
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <md-input-container flex="50" flex-sm="100">
+                        <label>Dimension - Length</label>
+                        <input name="Dimention_Length_feet" ng-model="room.Dimention_Length_feet" type="text" required="true"/>
+                        <div ng-messages="RoomCardForm.Dimention_Length_feet.$error" ng-show="RoomCardForm.Dimention_Length_feet.$touched || ctrl.isSubmitted">
+                          <div ng-message="required">This is required.</div>
+                        </div>
+                      </md-input-container>
+                  
+                      <md-input-container flex="50" flex-sm="100">
+                        <label>Dimension - Width</label>
+                        <input name="Dimention_Width_feet" ng-model="room.Dimention_Width_feet" type="text"  required="true"/> 
+                        <div ng-messages="RoomCardForm.Dimention_Width_feet.$error" ng-show="RoomCardForm.Dimention_Width_feet.$touched || ctrl.isSubmitted">
+                          <div ng-message="required">This is required.</div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                      
+                    <div class="card-row" flex="100" layout="row" layout-wrap="true">
+                      <md-input-container flex="50" flex-sm="100">
+                        <label>Floor Level</label>
+                        <input name="Floor_Level" ng-model="room.Floor_Level" type="text" required="true"/>
+                        <div ng-messages="RoomCardForm.Floor_Level.$error" ng-show="RoomCardForm.Floor_Level.$touched || ctrl.isSubmitted">
+                          <div ng-message="required">This is required.</div>
+                        </div>
+                      </md-input-container>
+                    </div>
+                  </md-card-content>
+                    
+                   <div class="md-actions" layout="row" layout-align="end center">
+                    <md-button type="button" ng-click="ctrl.removeCard(key, ctrl.data.rooms, ctrl.data.roomsToDelete)">Remove</md-button>    
+                  </div>
+                </ng-form>
+              </md-card>
+                
+              <div class="add-button-container" flex="95" layout="row" layout-lg="column" layout-gt-lg="column" layout-align="center center" layout-align-lg="end end" layout-align-gt-lg="end end" layout-margin="true">
+                <md-button ng-click="ctrl.addCard(ctrl.data.rooms, 'Room')" type='button' class="md-raised" flex="97">Add</md-button>    
+              </div>
+            </md-content>
+          </div>
+        </form>
+          
+        <apex:form id="IndoorOutdoorForm" html-layout="column" html-layout-padding="true">
+          <apex:actionFunction name="SaveAndNextRoom" action="{!SaveAndNextRoom}"/>
+          <apex:actionFunction name="SaveAndPreviousRoom" action="{!SaveAndPreviousRoom}"/>
+          <apex:actionFunction name="SaveAndReturnRoom" action="{!SaveAndReturnRoom}"/>
+          
+          <apex:actionfunction name="UpdateMembers" action="{!UpdateMembersList}" onComplete="updateMembersComplete();" reRender="showmsg"> 
+            <apex:param name="json" value="" assignTo="{!MembersJson}" /> 
+            <apex:param name="deleteJson" value="" assignTo="{!MembersToDeleteJson}" /> 
+          </apex:actionfunction>  
+          
+          <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+            <md-content flex-order-sm="4" flex-order-md="4" md-ink-ripple="true" class="command-button-container md-raised md-button md-clickable">  
+              <apex:commandButton styleClass="commandBtn" action="{!CancelTransaction}" value="Cancel Transaction"  onclick="return confirm('Are you sure to cancel the transaction?');"/>
+            </md-content>
+                
+            <apex:commandLink value="Save and Next" styleClass="md-raised md-eec" 
+                            html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true" 
+                            onclick="validateForm(1); return false;" />
+            <apex:commandLink value="Save and Previous" styleClass="md-raised md-eec"
+                            html-layout-padding="true" html-flex-order-sm="2" html-flex-order-md="2" html-md-button="true" 
+                            onclick="validateForm(2); return false;"/>
+            <apex:commandLink value="Save and Return to Provider" styleClass="md-raised md-eec"
+                            html-layout-padding="true" html-flex-order-sm="3" html-flex-order-md="3" html-md-button="true" 
+                            onclick="validateForm(3); return false;"/>
+          </md-content>
+        </apex:form>      
+          <!--<apex:commandButton value="Add Row" action="{!addRowRoom}" reRender="ioPageBlock"/>
+          <apex:commandButton value="Cancel Current Changes and Go back to Provider" action="{!cancelInstruction}" onclick="return confirm('Are you sure you want to cancel changes to this transaction?');"/>-->
+      </div>
+    
+      <eec-wizard btn-progress-color="#D8D8D8"  btn-bg-color="#FAFAFA" active-btn-bg-color="#E9E9E9" flex="20" hide="true" show-gt-md="true">
+        <eec-wz-step ng-repeat="step in ctrl.wizardElements" title="{{step.label}}" step-img="info_outline" selected="{{step.selected}}"></eec-wz-step>
+      </eec-wizard>   
+  
+    </div>  
+    
+    <c:EEC_Site_Footer id="siteFooter" />
+      
+    <!-- Models -->  
+    <script>
+      function Room () {
+        this.Id = '';
+        this.Name = '';
+        this.Use = '';
+        this.Dimension_Length_feet = '';
+        this.Dimention_Width_feet = '';
+        this.Floor_Level = '';
+      }
+    </script>
+      
+    <!-- Functions -->
+    <script>
+       /**
+        * validateForm
+        *
+        * This function will call the Angular processJson method to verify the forms intritiy and prepare data if valid.
+        * @author Darkis
+        */
+	  var validateForm = function(funcId) { 
+        // Get an instance of the form.
+        var form = angular.element(jQuery('.indoor-form-container')).scope().indoorForm;  
+        // Call the Angular process method from JS.  
+        return angular.element(jQuery('.indoor-form-container'))
+          .scope()
+          .ctrl.processJson(form.$valid, funcId);
+      }
+      
+      /**
+       * updateMembersComplete
+       * 
+       * This function will call the SaveMembersList ActionFunction if the form is valid. This will only be called 
+       *   if the form had data to submit/prepare and the initial ActionFunction's onComplete was called.
+       * @author Darkis
+       */
+      var updateMembersComplete = function() {
+        if (angular.element(jQuery('.indoor-form-container')).scope().indoorForm.$valid) {
+          var funcId = angular.element(jQuery('.indoor-form-container')).scope().ctrl.funcId;
+          // If the function Id is available then continue.
+          if (typeof funcId != 'undefined' && funcId > 0) { 
+            switch (funcId) {
+              case 1:
+                console.log("Save and Next");
+                SaveAndNextHH();    
+                break;
+              case 2:
+                console.log("Save and Previous");
+                SaveAndPreviousHH();
+                break;
+              case 3:
+                console.log("Save and Return");
+                SaveAndReturnHH();
+                break;
+            }  
+          }
+        }
+      }
+    </script>
+    
+    <!-- Angular Controller -->  
+    <script>
+      app.controller('TransactionController', ['$scope', '$location', function($scope, $location) {
+        // Instance of controller.
+        var tranCtrl = this;
+        // Controller level variables.
+        tranCtrl.isSubmitted = false;
+        tranCtrl.funcId = null;
+        tranCtrl.heatingOther = false;
+        // Form Data
+        tranCtrl.data = {};
+        tranCtrl.data.selected = [];
+        tranCtrl.data.rooms = [];
+        tranCtrl.data.roomsToDelete = [];
+       
+        // Wizard  
+        tranCtrl.wizardElements = [];  
+          
+        // General
+        tranCtrl.exisitingRooms = {};
+        tranCtrl.heatingElements = {
+          $error: {
+            required: false  
+          },
+          $touched: false,
+          "types": [
+            'Radiators, Hot Water',
+            'Baseboards',
+            'Gas on Gas Stove (heating)',
+            'Space Heater',
+            'Vents/Grates',
+            'Fireplaces',
+            'Coal/Pellet/Wood Burning Stove'
+          ]
+        };
+        tranCtrl.waterSupply = [
+          'Town Water Supply',
+          'Private Water Supply'
+        ];
+        // Watch the checkbox array and ensure one element is selected.
+        $scope.$watch('ctrl.data.selected', function(newVal, oldVal) {
+          // If the selected array is greater than 0 and has been touched.
+          if (tranCtrl.data.selected.length == 0 && tranCtrl.heatingElements.$touched) {
+            tranCtrl.heatingElements.$error.required = true;   
+          } else {
+            tranCtrl.heatingElements.$error.required = false;   
+          }
+        }, true);
+        
+        // If we have pre-existing rooms then add them to the list and present them.
+        if (!_.isEmpty(tranCtrl.existingRooms)) {
+          // Loop through each room and create a JS equalivent.
+          for (i=0;i<tranCtrl.existingRooms.length;i++) {  
+            // Create a new Angular Member based on the data given.
+            var room = new Room();
+            room.Id = tranCtrl.existingRooms[i].Id;
+            room.Name = tranCtrl.existingRooms[i].Name;
+            room.Use = tranCtrl.existingRooms[i].Use__c;
+            room.Dimension_Length_feet = tranCtrl.existingRooms[i].Dimension_Length_feet__c;
+            room.Dimention_Width_feet = tranCtrl.existingRooms[i].Dimention_Width_feet__c;
+            room.Floor_Level = tranCtrl.existingRooms[i].Floor_Level__c;
+            tranCtrl.data.rooms.push(room);  
+          }
+        }
+          
+        // Checkbox functions
+        $scope.toggle = function (item, list) {
+          var idx = list.indexOf(item);
+            
+          if (idx > -1) {
+            list.splice(idx, 1); 
+          } else {
+            list.push(item);
+          }
+        };
+          
+        $scope.exists = function (item, list) {
+          return list.indexOf(item) > -1;
+        };
+          
+        tranCtrl.validateCheckboxes = function() {
+          tranCtrl.heatingElements.$touched = true;
+            
+          if (_.indexOf(tranCtrl.data.selected, 'Baseboards') > -1 || _.indexOf(tranCtrl.data.selected, 'Vents/Grates') > -1) {
+            tranCtrl.heatingOther = false;   
+          } else {
+            tranCtrl.heatingOther = true;
+          }
+        };
+          
+        // Add a new obj to the list.
+        tranCtrl.addCard = function(arr, modelName) {
+          var model = new window[modelName]();
+          arr.push(model);      
+        }
+        // Remove a obj from the list.
+        tranCtrl.removeCard = function(index, arrToSave, arrToDelete) {
+          // If item was in existing list then we need to flag it for deletion.
+          var obj = arrToSave[index];
+          if (!_.isEmpty(obj.Id)) {
+            arrToDelete.push(obj);
+          }
+          arrToSave.splice(index, 1);   
+        }
+        // Process the JSON and prep it for Apex processing.
+        tranCtrl.processJson = function(isFormValid, funcId) { 
+          // Set the form as submitted to show any error handling.
+          tranCtrl.isSubmitted = true;
+          // Ensure that we have a selected heating element.
+          if (tranCtrl.data.selected.length == 0) {
+            isFormValid = false;
+            tranCtrl.heatingElements.$error.required = true;
+          }
+          // Set the function id in the controller for onComplete is Async.
+          tranCtrl.funcId = funcId;
+          // If the form is valid and we have member items them Update them.
+          if (isFormValid && (tranCtrl.householdMembers.length > 0 || tranCtrl.householdMembersToDelete.length > 0)) {  
+            var hhMembersJson = tranCtrl.householdMembers;
+            var hhMembersToDeleteJson = tranCtrl.householdMembersToDelete;
+              
+            if (hhMembersJson.length > 0) {  
+              // Find and remove the hash key variable from the current members. 
+              for (i = 0; i < hhMembersJson.length; i++) {
+                _.each(hhMembersJson[i], function(value, key) {
+                  if (_.includes(key,'hash')) {
+                    delete hhMembersJson[i][key];    
+                  }
+                });      
+              }
+            }
+                
+            if (hhMembersToDeleteJson.length > 0) {
+              // Find and remove the hash key variable from the members to delete. 
+              for (i = 0; i < hhMembersToDeleteJson.length; i++) {
+                _.each(hhMembersToDeleteJson[i], function(value, key) {
+                  if (_.includes(key,'hash')) {
+                    delete hhMembersToDeleteJson[i][key];    
+                  }
+                });      
+              }   
+            }
+            // Turn the json to a string for Apex processing.
+            var json = JSON.stringify(hhMembersJson);
+            var deleteJson = JSON.stringify(hhMembersToDeleteJson);
+            // Call to process the Json.
+            //UpdateMembers(json, deleteJson); 
+          } else if (isFormValid && _.isEmpty(tranCtrl.householdMembers)) {
+            // If the form is valid and there are no member items to delete or add then simply continue.
+            switch (funcId) {
+              case 1:
+                    //SaveAndNextHH();    
+                break;
+              case 2:
+                    //SaveAndPreviousHH();
+                break;
+              case 3:
+                    //SaveAndReturnHH();
+                break;
+            }
+          }
+        }
+      
+        // Function to check for messages available due to errors.
+        tranCtrl.checkForMessages = function() {
+          // TODO: Switch this to use Angular and not jQuery.            
+          var ele = jQuery('[id*="showmsg"]');
+          if (ele.children().length > 0) {
+            return true;   
+          }
+          return false;
+        };
+         
+        // Get the license type and set the wizard accordingly.  
+        var licenseType = "{!licenseRecordTypeName}";
+        if (licenseType.toLowerCase() === "fcc_new_license") {
+        // New License Steps
+        tranCtrl.wizardElements = [
+          {"label": "Instruction", "selected": false},
+          {"label": "Transaction/Provider Info", "selected": false},  
+          {"label": "Household Members", "selected": false},
+          {"label": "Status & Capacity/Assistant Info", "selected": false},
+          {"label": "Involvement & Professional Experience", "selected": false},
+          {"label": "Background Information", "selected": false},  
+          {"label": "Training Informaiton", "selected": false},
+          {"label": "Indoor/Outdoor Space Info", "selected": true},
+          {"label": "Daily Routine/Tech Assistance", "selected": false},
+          {"label": "Attachments", "selected": false},
+          {"label": "Review & Submission", "selected": false},
+        ];
+        } else if (licenseType.toLowerCase() === "fcc_license_upgrade") {
+        // License Upgrade Steps
+        tranCtrl.wizardElements = [
+          {"label": "Instruction", "selected": false},
+          {"label": "Transaction/Provider Info", "selected": false},  
+          {"label": "Household Members", "selected": false},
+          {"label": "Status & Capacity/Assistant Info", "selected": false},
+          {"label": "Background Information", "selected": false},  
+          {"label": "Training Informaiton", "selected": false},
+          {"label": "Daily Routine/Tech Assistance", "selected": false},
+          {"label": "Attachments", "selected": false},
+          {"label": "Review & Submission", "selected": false},
+        ];
+        } else if (licenseType.toLowerCase() === "change_of_address") {
+        // Change of Address Steps
+        tranCtrl.wizardElements = [
+          {"label": "Instruction", "selected": false},
+          {"label": "Transaction/Provider Info", "selected": false},  
+          {"label": "Household Members", "selected": false},
+          {"label": "Indoor/Outdoor Space Info", "selected": true},
+          {"label": "Daily Routine/Tech Assistance", "selected": false},
+          {"label": "Review & Submission", "selected": false},
+        ];
+        } else if (licenseType.toLowerCase() === "fcc_change_room_floor_level") {
+        // Change of Room Steps
+        tranCtrl.wizardElements = [
+          {"label": "Instruction", "selected": false},
+          {"label": "Transaction/Provider Info", "selected": false},  
+          {"label": "Indoor/Outdoor Space Info", "selected": true},
+          {"label": "Daily Routine/Tech Assistance", "selected": false},
+          {"label": "Review & Submission", "selected": false},
+        ];    
+        } else if (licenseType.toLowerCase() === "fcc_change_of_household") {
+        // Change of Household Steps
+        tranCtrl.wizardElements = [
+          {"label": "Instruction", "selected": false},
+          {"label": "Transaction/Provider Info", "selected": false},  
+          {"label": "Household Members", "selected": true},
+          {"label": "Daily Routine/Tech Assistance", "selected": false},
+          {"label": "Review & Submission", "selected": false},
+        ];
+        }
+      }]);
+    </script>
+  </body>
+</apex:page>

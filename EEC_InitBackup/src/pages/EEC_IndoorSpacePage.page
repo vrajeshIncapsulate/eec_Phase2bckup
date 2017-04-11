@@ -1,0 +1,852 @@
+<apex:page controller="EEC_TransactionWizardController" showheader="false" sidebar="false" html-ng-app="eecApp" standardStylesheets="false" docType="html-5.0">
+  <head>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <title>EEC: Transaction - Indoor/Outdoor Information</title>    
+  </head>
+    
+  <c:EEC_Header id="pageHeader" />     
+    
+  <style>
+    html, body, md-content {
+      background-color: transparent; 
+    }
+        
+    .attachment-item {
+      width: 100%; 
+      display: flex;
+      flex-direction: row; 
+    }
+      
+    .attachment-item p {
+      float: left; 
+      margin-right: 15px;
+      align-self: center;
+    }
+      
+    .attachment-item p:first-child {
+      flex: 2; 
+    }
+      
+    .indoorspace-container {
+      padding: 15px; 
+    }
+      
+    .btn {
+      margin-right: 5px; 
+    }
+    .heating-select-container td{
+    	width : auto;  
+    }
+    .heating-select-container tr{
+      	vertical-align: text-top;
+    }
+      
+    .radio-container {
+      margin-left: 15px;
+    } 
+      
+    .radio-container td label {
+      margin-right: 15px;
+      margin-left: 10px;
+    }
+      
+    .top-level-label {
+      font-weight: 600;
+      margin-right: 3px;
+      line-height: 20px; 
+      color: rgba(0,0,0,0.54);
+    }
+    .tertiaryPalette h3{
+    	margin-top:0px;  
+    }  
+      
+    label {
+      font-weight: normal; 
+      margin-right: 15px;
+    }
+      
+    .checkbox-container {
+      
+    }
+      
+    .bottom-element-offset {
+      padding-bottom: 15px; 
+    }
+      
+    .hidden-table-header {
+      display: none; 
+    }
+      
+    .error-container {
+      margin-top: 50px;
+    }
+      
+    .navigation-buttons {
+        overflow: visible; 
+      }
+        
+    @media only screen and (min-width: 0px) and (max-width: 959px) {
+      .navigation-buttons .md-button {
+        width: 98%;
+      }
+        
+      .navigation-buttons md-content {
+        width: 100%;
+      }
+    }
+      
+    .table-header-after-required:after {
+      content: "*";
+      color: red;
+      width: 1px;
+      height: 1px;
+      position: relative;
+      left: 3px;
+    }
+      
+    .table-header-after-required div {
+      float: left; 
+    }
+      
+    .errorMessage {
+      color: red; 
+      display: none;
+      margin-top: -10px;
+      margin-bottom: 4px;
+    }
+      
+    .fileErrorMessage, .roomErrorMessage, .roomNumErrorMessage {
+      display: none;
+      color: red;
+    }
+        
+    .errorMessage {
+      white-space: nowrap; 
+      height: 20px;
+    }
+      
+    .heatingCheckError {
+      display: none;
+      color: red;
+    }
+    .changeCheckError{
+      display: none;
+      color: red;
+    }  
+      
+    @-webkit-keyframes opacity {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+    @-moz-keyframes opacity {
+        0% { opacity: 1; }
+        100% { opacity: 0; }
+    }
+    
+    .loading-container {
+        text-align: center; 
+        margin: 25px 0 0 0;
+    }
+    
+    .loading-container span {
+        -webkit-animation-name: opacity;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-iteration-count: infinite;
+        
+        -moz-animation-name: opacity;
+        -moz-animation-duration: 1s;
+        -moz-animation-iteration-count: infinite;
+    }
+    
+    .loading-container span:nth-child(2) {
+        -webkit-animation-delay: 100ms;
+        -moz-animation-delay: 100ms;
+    }
+    
+    .loading-container span:nth-child(3) {
+        -webkit-animation-delay: 300ms;
+        -moz-animation-delay: 300ms;
+    }
+  </style>  
+    
+  <c:EEC_Nav_Bar id="navBar" />   
+    
+  <apex:messages id="showmsg" styleClass="error-container" style="color: #FF0000; font-weight: bold;"/>
+  <div class="main-content-container" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="column" layout-padding="true" layout-margin="true" ng-controller="TransactionController as ctrl">
+  <apex:form id="IndoorOutdoorForm" style="margin-top: 25px; margin-bottom: 100px;" styleClass="indoorspace-container col-lg-8 col-md-8 col-sm-12" html-layout="column" html-layout-padding="true" html-flex="100" html-flex-lg="70" html-flex-gt-lg="70">
+    <apex:actionFunction action="{!showWaterUpload}" reRender="waterTestEvidenceUpload, waterFileErrorMessageContainer" oncomplete="uploadVisibility()" immediate="true" name="showWater" status="loading">
+      <apex:param assignTo="{!selectedWaterStr}" value="" name="selectedWaterStr"/>
+    </apex:actionFunction>  
+      
+    <apex:actionStatus id="loading" onstart="loading(true)" onstop="loading(false)" />
+      
+   <div class="indoor-form-container" layout="column" layout-padding="true">      
+  	<apex:pageBlock title="Indoor / Outdoor Information" id="ioPageBlock">
+        <hr />
+        
+        <apex:pageBlockSection title="Transaction Information" columns="1">
+				<apex:pageBlockSectionItem dataStyle="padding-left: 20px;">
+					<apex:outputLabel styleClass="top-level-label" value="Transaction Type" for="transactionTypeTA" />
+					<apex:outputText value="{!LicenseRecordTypeLabel}" id="transactionTypeTA" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem dataStyle="padding-left: 20px;">
+					<apex:outputLabel styleClass="top-level-label" value="Transaction Number" for="transactionNumberTA" />
+					<apex:outputText value="{!licenseTransation.Name}" id="transactionNumberTA" />
+				</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+        
+		<apex:outputpanel id="roomLPanel">
+	        <apex:pageBlockSection title="Additional Indoor Space Information" columns="1">
+				<apex:pageBlockSectionItem >
+					<p class="top-level-label">Are there at least two exits from your home? <span class="required" style="margin-left: 3px;">*</span></p>
+                </apex:pageBlockSectionItem>   
+                
+                <apex:pageBlockSectionItem dataStyleClass="bottom-element-offset">
+					<apex:actionRegion >
+						<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+							<apex:selectRadio value="{!licenseTransation.At_Least_2_Exits__c}"  styleClass="radio-container">
+			            		<apex:selectOptions value="{!items}"/>
+		            		</apex:selectRadio>
+		            	</div>
+					</apex:actionRegion>
+				</apex:pageBlockSectionItem>
+                
+				<apex:pageBlockSectionItem >
+                    <p class="top-level-label">Please describe your exits. If you are using a basement space, there must be two exits from the basement level of the home <span class="required" style="margin-left: 3px;">*</span></p>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyleClass="bottom-element-offset exits-description-input">
+					<apex:inputField value="{!licenseTransation.Exits_Descriptions__c}" styleClass="form-control"   style="width:60%;"/>
+				</apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem dataStyleClass="exits-description-error">
+                  <div class="errorMessage" data-input-class="exits-description-input">This field is required.</div>
+                </apex:pageBlockSectionItem>
+                
+                <!-- Heating Elements Section -->
+                  
+				<apex:pageBlockSectionItem >
+                    <p class="top-level-label">What types of heating elements do you have? (Check all that apply) <span class="required" style="margin-left: 3px;">*</span></p>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyleClass="bottom-element-offset">
+					<apex:actionRegion > 
+						<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+                            <div id="check-box-tables">
+							<apex:selectcheckboxes value="{!selectedHestElems}"  Id="HeatingElements" styleClass="checkbox-container heating-select-container"> 
+								<apex:actionSupport event="onchange" action="{!showCBDesc}" reRender="nabhDesc, stoveEvidenceUpload, heatingFileErrorMessageContainer" oncomplete="uploadVisibility(); verifyHeatingSelected(); "/>
+								<apex:selectoptions value="{!heatingElements}" /> 
+							</apex:selectcheckboxes>
+                            </div>    
+                            <div class="heatingCheckError">This field is required.</div>
+						</div>
+                </apex:actionRegion>
+                </apex:pageBlockSectionItem>
+					<!-- <apex:inputField value="{!licenseTransation.Heating_Elements__c}"  required="true"/>-->
+				
+				<apex:outputpanel layout="block" id="nabhDesc" styleClass="radio-container bottom-element-offset" style="margin-left:0px;">
+					<apex:pageBlockSectionItem dataStyleClass="bottom-element-offset" rendered="{!heatingIsBarricaded}">
+                        <p class="top-level-label">If you have anything other than baseboard or vents/grates, EEC Regulations require that the heating unit be barricaded in a way that keeps children safe. Do you need technical assistance on how to appropriately barricade heating units? <span class="required" style="margin-left: 3px;">*</span></p>
+						<apex:actionRegion >
+							<div class="requiredInput">
+	                    		<div class="requiredBlock"></div>
+								<apex:selectRadio value="{!licenseTransation.Need_Assist_to_Barricade_Heating_Units__c}"  styleClass="radio-container heating-radio">
+				            		<apex:selectOptions value="{!items}"/>
+			            		</apex:selectRadio>
+			            	</div>
+						</apex:actionRegion>
+					</apex:pageBlockSectionItem>
+                    <p class="errorMessage heatingErrorMessage" style="display: none;">This field is required.</p>
+				</apex:outputpanel>
+                <div class="heating-attachments-container attachments-container">
+                  <apex:outputPanel id="stoveEvidenceUpload" styleClass="stoveEvidenceUpload" style="width: 100%;" html-data-visible="{!heatingEvidenceRequired}">
+                    
+                    <apex:outputPanel rendered="{!heatingEvidenceRequired}">
+                        <label class="top-level-label">If fuel burning stoves are used during child care hours, you must submit evidence that the stove meets all applicable local and state codes. <span class="required" style="margin-left: 3px;">*</span></label><br/>
+                      <label class="top-level-label">
+                        <apex:outputPanel rendered="{!!renderExistingHeatingAttachment}">Please upload the evidence: </apex:outputPanel>
+                        <apex:outputPanel rendered="{!renderExistingHeatingAttachment}">If a new file is desired then please upload it below:</apex:outputPanel>  
+                      </label>
+                      <apex:outputPanel id="fileListContainerHeat">
+                          <apex:outputPanel rendered="{!renderExistingHeatingAttachment}"><br/>
+                          <label class="top-level-label">Current File:</label>
+                          <div class="attachment-item">
+                            <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['evidence_stove_meets_requirements']['FileMap_Id']]}">{!transactionAttachmentsMap['evidence_stove_meets_requirements']['Filename__c']}</a></p>
+                            <p>{!transactionAttachmentsMap['evidence_stove_meets_requirements']['Content_Type__c']}</p>
+                            <p>
+                              <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="stoveEvidenceUpload, script-existing-items" style="color: #000;">
+                                <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['evidence_stove_meets_requirements']['Filename__c']}"/>  
+                                <i class="material-icons">&#xE872;</i>
+                              </apex:commandLink>  
+                            </p>
+                          </div>
+                        </apex:outputPanel>
+                      </apex:outputPanel>
+                    </apex:outputPanel>
+                  </apex:outputPanel>
+                    
+                  <s3-File-Upload ng-show="uploadVisible"
+                    filename="evidence_stove_meets_requirements"
+                    bucket_name="{!bucketName}" 
+                    prefix="{!licenseTransation.Id}/"
+                    key="{!accessKey}" 
+                    acl="{!bucketItemAccess}" 
+                    redirect_url="{!portalUrl}" 
+                    remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+      			    target="" 
+                    directive-index="1">
+    			  </s3-File-Upload>
+                    
+                  <apex:outputPanel id="heatingFileErrorMessageContainer" styleClass="heatingFileErrorMessageContainer">
+                    <apex:outputPanel rendered="{!heatingEvidenceRequired}">
+                      <p class="fileErrorMessage">If heating element is 'Coal / Pellet / Wood Burning Stove', you must upload certificate/evidence. </p>
+                    </apex:outputPanel>
+                  </apex:outputPanel> 
+                </div>
+                
+                <!-- Water Dropdown Section -->
+				<apex:pageBlockSectionItem >
+                    <p class="top-level-label">Is the drinking water in your home from: <span class="required" style="margin-left: 3px;">*</span></p>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem dataStyleClass="water-source-input bottom-element-offset">
+                    <apex:inputField value="{!licenseTransation.Drinking_Water_Source__c}" styleClass="water-input-field form-control" style="width: auto;" onchange="waterSourceChanged(jQuery(this));"></apex:inputField>
+				</apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem dataStyleClass="water-source-error">
+                  <div class="errorMessage" data-input-class="water-source-input">This field is required.</div>
+                </apex:pageBlockSectionItem>
+                
+              <apex:pageBlockSectionItem >
+              <apex:outputPanel layout="block" styleClass="water-attachments-container attachments-container">
+                <p class="loading-container">Loading<span>.</span><span>.</span><span>.</span></p>
+                <apex:outputPanel id="waterTestEvidenceUpload" styleClass="waterTestEvidenceUpload" style="width: 100%;" html-data-visible="{!waterIsPrivate}">
+                <apex:outputPanel rendered="{!waterIsPrivate}">
+                  <label class="top-level-label">If you have a private well, you must submit evidence of a well water test from a Massachusetts Dept. of Environmental Protection approved lab indicating that your water meets Drinking Water Standards. <span class="required" style="margin-left: 3px;">*</span></label>
+                  <label class="top-level-label">
+                    <apex:outputPanel rendered="{!!renderExistingWaterAttachment}">Please upload the evidence:</apex:outputPanel>
+                    <apex:outputPanel rendered="{!renderExistingWaterAttachment}">If a new file is desired then please upload it below:</apex:outputPanel>  
+                  </label>
+                  <apex:outputPanel id="fileListContainerWater">
+                      <apex:outputPanel rendered="{!renderExistingWaterAttachment}"><br/>
+                      <label class="top-level-label">Current File:</label>
+                      <div class="attachment-item">
+                        <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['evidence_of_well_water_test']['FileMap_Id']]}">{!transactionAttachmentsMap['evidence_of_well_water_test']['Filename__c']}</a></p>
+                        <p>{!transactionAttachmentsMap['evidence_of_well_water_test']['Content_Type__c']}</p>
+                        <p>
+                          <apex:commandLink action="{!deleteAttachment}" immediate="true" value="" reRender="waterTestEvidenceUpload, script-existing-items" style="color: #000;">
+                            <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['evidence_of_well_water_test']['Filename__c']}"/>  
+                            <i class="material-icons">&#xE872;</i>
+                          </apex:commandLink>  
+                        </p>
+                      </div>
+                    </apex:outputPanel>
+                  </apex:outputPanel>
+                </apex:outputPanel>
+                </apex:outputPanel>
+                  
+                <s3-File-Upload ng-show="waterUploadVisible"
+                  filename="evidence_of_well_water_test"
+                  bucket_name="{!bucketName}" 
+                  prefix="{!licenseTransation.Id}/"
+                  key="{!accessKey}" 
+                  acl="{!bucketItemAccess}" 
+                  redirect_url="{!portalUrl}" 
+                  remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+      			  target=""
+                  directive-index="2">
+    		    </s3-File-Upload> 
+                  
+                <apex:outputPanel id="waterFileErrorMessageContainer" styleClass="waterFileErrorMessageContainer">
+                  <apex:outputPanel rendered="{!waterIsPrivate}">
+                    <p class="fileErrorMessage">If your drinking water is 'Private', you must upload evidence.</p>
+                  </apex:outputPanel>
+                </apex:outputPanel> 
+              </apex:outputPanel>
+              </apex:pageBlockSectionItem>  
+			
+			<apex:outputPanel rendered="{!LicenseRecordTypeName=='FCC_License_Upgrade'}">
+                <h3 class="eec-subhead" style="margin-top:5px;">Outdoor Space Description</h3>
+                <div>
+                  <p class="top-level-label">Have there been any changes since your last application in what you are using for outdoor play space? <span class="required" style="margin-left: 3px;">*</span></p>
+                </div>
+				<div>
+					<apex:actionRegion >
+						<div class="requiredInput" data-class="change-input">
+                    		<div class="requiredBlock"></div>
+							<apex:selectRadio value="{!licenseTransation.Outdoor_Space_Changed__c}" styleClass="radio-container change-radio">
+								<apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="oscDesc" />
+			            		<apex:selectOptions value="{!items}" />
+		            		</apex:selectRadio>
+		            	</div>
+                        <p class="changeErrorMessage" style="display: none;color: red;">This field is required.</p>
+					</apex:actionRegion>
+                </div>
+				<apex:outputpanel id="oscDesc" styleClass="change-description-input">&nbsp;
+                    <apex:outputpanel rendered="{!licenseTransation.Outdoor_Space_Changed__c == 'Yes'}">
+                      <label class="top-level-label" style="font-weight: bold !important;padding-right:20px">Please explain <span class="required" style="margin-left: 3px;">*</span></label>
+                      	<apex:pageBlockSectionItem dataStyleClass="bottom-element-offset change-description-input">  
+					  		<apex:InputField styleClass="form-control" value="{!licenseTransation.Outdoor_Space_Changes_Description__c}"  style="width:55%;" />
+                        </apex:pageBlockSectionItem>
+                        <apex:pageBlockSectionItem dataStyleClass="change-description-error">
+                  			<div class="errorMessage" style="margin-top: 0;" data-input-class="change-description-input">This field is required.</div>
+                		</apex:pageBlockSectionItem>
+                    </apex:outputpanel>
+				</apex:outputpanel>
+            </apex:outputPanel>
+			</apex:pageBlockSection>
+            <apex:outputPanel id="roomTableContainer" styleClass="margin-top: 0px;">
+			  <apex:variable var="rowNum" value="{!0}"  />              
+	          <apex:pageblockSection title="Indoor Space Description" columns="1">
+	        	<apex:pageBlockSectionItem rendered="{!LicenseRecordTypeName!='FCC_Renewal' && LicenseRecordTypeName!='FCC_License_Upgrade' }">
+                  <p class="top-level-label">Please describe the family child care residence: (e.g. single family, duplex, apartment, etc.) <span class="required" style="margin-left: 3px;">*</span></p>
+				</apex:pageBlockSectionItem>
+                  
+                <apex:pageBlockSectionItem rendered="{!LicenseRecordTypeName!='FCC_Renewal' && LicenseRecordTypeName!='FCC_License_Upgrade' }" dataStyleClass="indoor-description-input">
+                  <apex:InputField value="{!licenseTransation.FCC_Residence_Description__c}" styleClass="form-control" style="width:60%; margin-bottom:10px;"/>  
+                </apex:pageBlockSectionItem> 
+                  
+                <apex:pageBlockSectionItem rendered="{!LicenseRecordTypeName!='FCC_Renewal' && LicenseRecordTypeName!='FCC_License_Upgrade' }" dataStyleClass="indoor-description-error">
+                  <div class="errorMessage" data-input-class="indoor-description-input">This field is required.</div>
+                </apex:pageBlockSectionItem>
+                  
+				<p class="md-subhead top-level-label" style="margin-top: 4px;margin-bottom: 10px;">Please identify all the rooms to be used by family child care children including the kitchen. Only measure floor space which can be used by children.</p>
+				<apex:pageBlockTable styleClass="roomTableContainer" value="{!roomList}" var="rm" width="100%" rendered="{!roomTableVisibility}" headerClass="top-level-label">
+                    <apex:column headerValue="Room Name" headerClass="table-header-after-required">
+	                    <apex:inputField value="{!rm.Name}" styleClass="form-control"/>
+	                </apex:column>           
+	                <apex:column headerValue="Use" headerClass="table-header-after-required">
+	                    <apex:inputField value="{!rm.Use__c}" styleClass="form-control" style="max-height: 32px;"/>
+	                </apex:column>
+	                <apex:column headerValue="Dimension - Length (feet)" headerClass="table-header-after-required">
+	                    <apex:inputField value="{!rm.Dimension_Length_feet__c}" styleClass="form-control" html-data-number="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Dimension - Width (feet)" headerClass="table-header-after-required">
+	                    <apex:inputField value="{!rm.Dimension_Width_feet__c}" styleClass="form-control" html-data-number="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Floor Level" headerClass="table-header-after-required">
+	                    <apex:inputField value="{!rm.Floor_Level__c}" styleClass="form-control"/>
+	                </apex:column>
+	                <apex:column headerValue="Delete" style="text-align: center;" headerClass="text-center">
+	                    <apex:commandLink action="{!delRowRoom}" immediate="true" reRender="roomTableContainer" style="color: #000;">
+	                        <apex:param value="{!rowNum}" name="index" />
+	                        <i class="material-icons">&#xE872;</i>
+	                    </apex:commandLink>
+	                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+	                </apex:column>  
+	            </apex:pageBlockTable>  
+                  
+                <apex:outputLabel rendered="{!!roomTableVisibility}" style="padding-left: 15px;">No rooms currently added.</apex:outputLabel>
+                  
+                <apex:pageBlockSectionItem id="roomErrorContainer" dataStyleClass="roomErrorContainer">
+                  <div class="roomErrorMessage">Please ensure all room data is entered.</div>
+                  <div class="roomNumErrorMessage">For dimensions, only numbers are allowed.</div>
+                </apex:pageBlockSectionItem>
+	          </apex:pageblockSection>
+	        </apex:outputPanel>
+				
+            <!-- Action Functions -->
+            <apex:actionFunction action="{!SaveAndNextRoom}" name="SaveAndNextRoom" />
+            <apex:actionFunction action="{!SaveAndPreviousRoom}" name="SaveAndPreviousRoom" />
+            <apex:actionFunction action="{!SaveAndReturnRoom}" name="SaveAndReturnRoom" />
+            <apex:actionfunction name="UpdateTransactionAttachments" action="{!saveAttachmentsFromJson}" onComplete="saveAttachmentsFromJsonComplete();" reRender="showmsg"> 
+              <apex:param name="json" value="" assignTo="{!indoorAttachmentsJson}" /> 
+            </apex:actionfunction>  
+            <!-- Table Button -->
+        	<apex:commandButton value="Add Room" action="{!addRowRoom}" reRender="roomTableContainer" immediate="true" styleClass="md-button md-raised md-eec" style="background: #853F3F;"/>
+            <!-- Command buttons -->
+            <!--<apex:commandButton value="Cancel Current Changes and Go back to Provider" action="{!cancelInstruction}" onclick="return confirm('Are you sure you want to cancel changes to this transaction?');" styleClass="md-button md-raised" style="background: rgb(250,250,250);"/>-->
+            <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center"> 
+              <apex:commandLink value="Save and Previous" styleClass="md-button md-raised md-eec" html-layout-padding="true" onclick="uploadAttachments(2); return false;" html-role="button"/>
+              <apex:commandLink value="Save and Next" styleClass="md-button md-raised md-eec" html-layout-padding="true" onclick="uploadAttachments(1); return false;" html-role="button"/>
+            </md-content>
+            
+            <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+              <apex:commandButton value="Cancel {!formattedLicenseRecordTypeLabel} Transaction" action="{!CancelTransaction}" onclick="return confirm('Are you sure to cancel the transaction?');" styleClass="md-button md-raised" style="background: rgb(250,250,250);"/>     
+              <apex:commandLink value="Save and Return to Provider" styleClass="md-button md-raised" html-layout-padding="true" onclick="uploadAttachments(3); return false;" html-role="button"/>
+            </md-content>
+        	<!--<apex:commandLink value="Save and Next" action="{!SaveAndNextRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+        	<apex:commandLink value="Save and Previous" action="{!SaveAndPreviousRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+        	<apex:commandLink value="Save and Return to Provider" action="{!SaveAndReturnRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>-->
+        </apex:outputpanel>
+	</apex:pageBlock>
+    </div>
+  </apex:form>
+      
+    <eec-wizard btn-progress-color="#fff" class="col-lg-3" flex="20" passed-btn-bg-color="#4CAF50" btn-bg-color="#FAFAFA" active-btn-bg-color="#0288D1" hide="true" show-gt-md="true">
+      <eec-wz-step ng-repeat="step in wizardElements" title="{{step.label}}" step-img="{{step.icon}}" selected="{{step.selected}}" passed="{{step.icon != 'info_outline'}}"></eec-wz-step>
+    </eec-wizard>  
+  </div>
+  <c:EEC_Site_Footer id="siteFooter" />    
+    
+  <script>
+    var form = j$(".indoorspace-container").parsley({
+                        errorsWrapper: '<div class="parsley-errors-list"></div>',
+                        errorTemplate: '<p class="errorMsg"></p>'    
+      });
+    
+    app.controller('TransactionController', ['$scope', '$rootScope', '$location', 'Util', function($scope, $rootScope, $location, Util) {
+      $scope.funcId = ''; 
+      $scope.numUploadComponents = 0;
+      $scope.timesUploadComplete = 0;
+      $scope.bucketName = '{!bucketName}';
+      $scope.exisitingFiles = '{!indoorAttachmentsJson}';
+      $scope.uploadVisible={!heatingEvidenceRequired};
+      $scope.waterUploadVisible={!waterIsPrivate};
+      $scope.wizardElements = Util.generateWizardElements("{!licenseRecordTypeName}", "Indoor/Outdoor Space Info");
+      $scope.selected = [];
+      $scope.heatingElementSelected = false;
+      $scope.validInput = false;
+      $scope.validFiles = false;
+      $scope.validRooms = false;
+        
+      var ctrl = this;
+      // Call this function to broadcast to the directive to process the upload.  
+      this.upload = function(id) {  
+        console.log('----> Angular Upload Func: Start');
+        // Set the callback function ID for later.
+        $scope.funcId = id;  
+        $scope.numUploadComponents = jQuery('s3-file-upload').length;
+        // Verify what upload elements need to be uploaded vs cleared.
+        if (!$scope.waterUploadVisible) {
+          this.clear(2);   
+        }  
+        // Check for the 'Coal / Pellet / Wood Burning Stove' checkbox and ensure that it is checked. Otherwise clear.
+        var heatUploadCheckVerification = false;
+        var checkboxes = jQuery('.checkbox-container input');
+        _.each(checkboxes, function(key, value) {
+          var checkbox = jQuery(key);
+          if (checkbox.val() === 'Coal / Pellet / Wood Burning Stove') {
+            // If on the correct checkbox then set the verification equal to its checked status.
+            heatUploadCheckVerification = checkbox.prop('checked');
+          }
+        });
+        // If the heat upload section is not visible or the checkbox is unchecked clear the files.  
+        if (!$scope.uploadVisible || !heatUploadCheckVerification) {
+          this.clear(1);  
+        }
+          
+        // Verify that the heating radio is checked. If not show error message on client side.
+        jQuery('.heatingErrorMessage').hide();
+        var heatingInput = jQuery('.heating-radio input');
+        var validRadio = true;  
+        if (heatingInput.length > 1) {
+          var uncheckedCount = 0;
+          _.each(heatingInput, function(value, key) {
+            var input = jQuery(value);  
+            if (!input.prop('checked')) {
+              uncheckedCount++;
+            }; 
+          });
+          if (uncheckedCount == heatingInput.length) {
+            jQuery('.heatingErrorMessage').show();
+            validRadio = false;
+          }
+        } else {
+          if (heatingInput.length > 0 && !heatingInput.prop('checked')) {
+            jQuery('.heatingErrorMessage').show();
+            validRadio = false;
+          };   
+        }
+        jQuery('.changeErrorMessage').hide();
+        var changeInput = jQuery('.change-radio input');
+        var validChangeRadio = true;  
+        if (changeInput.length > 1) {
+          var uncheckedCount = 0;
+          _.each(changeInput, function(value, key) {
+            var input = jQuery(value);  
+            if (!input.prop('checked')) {
+              uncheckedCount++;
+            }; 
+          });
+          if (uncheckedCount === changeInput.length) {
+            jQuery('.changeErrorMessage').show();
+            validChangeRadio = false;
+          }
+        } 
+        // Validate all remaining fields.
+        verifyHeatingSelected();
+        validateInput();
+        validateFileUploads();
+        validateRooms();
+        // If everything is valid then submit the file upload.
+        if (validRadio && validChangeRadio && $scope.heatingElementSelected && $scope.validInput && $scope.validFiles && $scope.validRooms) {
+          console.log('----> Angular Upload Func: $broadcast => upload');
+          // Call all upload directives to process files.  
+          $rootScope.$broadcast('upload', {});
+        }
+        console.log('----> Angular Upload Func: End');
+      };
+        
+      this.clear = function(clearIndex) {
+        if (!angular.isUndefined(clearIndex)) {
+          $rootScope.$broadcast('clearFiles_' + clearIndex, {});   
+        } else {
+          $rootScope.$broadcast('clearFiles',{});   
+        }
+      }
+          
+      // Capture Emit event from Directive for result data.  
+      $scope.$on('uploadComplete', function(event, data) {
+        $scope.timesUploadComplete++;  
+          
+        if (angular.isArray(data)) {
+          var json = [];
+            
+          for (var i = 0; i < data.length; i++) {
+            if (!data[i].status) {
+              console.log("----> Error: File not successfully uploaded.");
+              break;
+            }
+            console.log(data[i].data);
+            var attachment = data[i].data;
+            // Split the filename to get the prefix.  
+            var splitFilename = attachment.key.split('/');
+            // Create the JSON needed for the S3_File__c objects.  
+            var file = {
+              "Filename__c": splitFilename[1],
+              "Prefix__c": splitFilename[0],
+              "Content_Type__c": attachment['Content-Type'],
+              "Acl__c": attachment.acl,
+              "Bucket__c": $scope.bucketName
+            };
+              
+            if (!angular.isUndefined($scope.exisitingFiles) && $scope.exisitingFiles !== '') {
+              var exisitingFilesJson = JSON.parse($scope.exisitingFiles);
+              // Loop through the results.
+              angular.forEach(exisitingFilesJson, function(value, key) {
+                // Get the short names of the files without the file extensions. 
+                var exisitingShortName = value.Filename__c.split('.')[0];
+                var shortName = file.Filename__c.split('.')[0];
+                // If the short name of the file is the same as the existing then set the id for upsert.
+                if (exisitingShortName == shortName) {
+                  file.Id = value.Id;
+                }
+              });
+            }
+            // Push the file into the json object to send.
+            json.push(file);
+          }
+          console.log("Files Uploaded Successfully!");
+          // Call the action function to create the S3 Object entries in Sforce.
+          UpdateTransactionAttachments(JSON.stringify(json));
+        } else if ($scope.timesUploadComplete == $scope.numUploadComponents) {
+          console.log("Error: " + data.error);   
+            
+          if (data.error.indexOf('No files') > -1) {
+            console.log("No files to upload. Continue to next page.");
+            switch($scope.funcId) {
+              case 1:
+                SaveAndNextRoom();    
+                break;
+              case 2:
+                SaveAndPreviousRoom();   
+                break;
+              case 3:
+                SaveAndReturnRoom();    
+                break;
+            }
+          }
+        }
+      });
+    }]);
+  </script>
+      
+  <script>
+    var inProgress = false;  
+      
+    var uploadAttachments = function(functionId) {
+      console.log("----> Upload Begin.");
+      // Call the Angular process method from JS.  
+      return angular.element(jQuery('.indoorspace-container'))
+        .scope()
+        .ctrl.upload(functionId);
+    };
+    
+    var saveAttachmentsFromJsonComplete = function() {
+      var timesComplete = angular.element(jQuery('.indoorspace-container')).scope().timesUploadComplete;
+      var numUploadComponents = angular.element(jQuery('.indoorspace-container')).scope().numUploadComponents;
+        
+      if (!inProgress && timesComplete == numUploadComponents) {
+        inProgress = true;  
+        console.log("----> On Complete for saving attachments");  
+        // Call action function for specified button.
+        switch(angular.element(jQuery('.indoorspace-container')).scope().funcId) {
+          case 1:
+            SaveAndNextRoom();    
+            break;
+          case 2:
+            SaveAndPreviousRoom();   
+            break;
+          case 3:
+            SaveAndReturnRoom();    
+            break;
+        }
+      }
+    };
+    
+    var uploadVisibility = function() { 
+      var status = jQuery('.stoveEvidenceUpload').data('visible');
+      var waterStatus = jQuery('.waterTestEvidenceUpload').data('visible');                                               
+      var scope = angular.element(jQuery('.indoorspace-container')).scope();
+      scope.$apply(function() {
+        scope.uploadVisible = status;   
+        scope.waterUploadVisible = waterStatus;
+      });
+    };
+    
+    var verifyHeatingSelected = function() {
+      var heatingSelect = jQuery('.heating-select-container input');
+      var isHeatingSelected = false;  
+      jQuery('.heatingCheckError').hide();
+      _.each(heatingSelect, function(value, key) {
+        var input = jQuery(value);
+          
+        if (input.prop('checked')) {
+          isHeatingSelected = true;  
+        }    
+      });
+        
+      if (!isHeatingSelected) {
+        jQuery('[id*=nabhDesc]').hide()
+        jQuery('.heatingCheckError').show();
+      }  
+        
+      var scope = angular.element(jQuery('.indoorspace-container')).scope();
+      scope.$apply(function() {
+        scope.heatingElementSelected = isHeatingSelected;
+      });
+    };
+    
+    var waterSourceChanged = function(ele) {
+      console.log(ele.val());
+      showWater(ele.val());
+    };
+    
+    var validateInput = function() {
+      jQuery('.errorMessage:not(.heatingErrorMessage,.changeErrorMessage)').hide();
+      var isNotInputValid = false;
+      var errors = jQuery('.errorMessage:not(.heatingErrorMessage, .changeErrorMessage)');
+        
+      _.each(errors, function(value, key) {
+        var error = jQuery(value);
+        var input = jQuery('.' + error.data('input-class')).find('input, select, textarea');
+        // If the input doesn't have a value then input is invalid.
+        if (typeof input.val() == 'undefined' || input.val() == '') {
+          error.show();  
+          isNotInputValid = true;
+        }
+      });
+        
+      var scope = angular.element(jQuery('.indoorspace-container')).scope();
+      scope.$apply(function() {
+        scope.validInput = !isNotInputValid;
+      });
+    };
+    
+    var validateFileUploads = function() {
+      // Clear all error messages.
+      jQuery('.fileErrorMessage').hide();
+      // Get all the S3 File Upload Directives.
+      var uploadDirectiveElements = jQuery('s3-file-upload');
+      // Reset the file error.
+      var missingFileError = false;
+      // Loop through all directive elements.     
+      for (i=0; i < uploadDirectiveElements.length; i++) {
+        // Check for filename labels in the directive elements. If the directive is visible and has less than or one label then no files present. 
+        var filenameLabels = jQuery(uploadDirectiveElements[i]).find('.s3-input-container-labels label');
+        var checkForExisitingItem = '';
+        var fileErrorEle = '';
+        // Check if the element is heat or water.
+        if (jQuery(uploadDirectiveElements[i]).attr('filename').indexOf('stove') > -1) {
+          checkForExisitingItem = jQuery('.stoveEvidenceUpload');  
+          fileErrorEle = jQuery('.heatingFileErrorMessageContainer');
+        } else {
+          checkForExisitingItem = jQuery('.waterTestEvidenceUpload');  
+          fileErrorEle = jQuery('.waterFileErrorMessageContainer');
+        }
+        // Check for visiblity and label length.  
+        if (checkForExisitingItem.data('visible') && !checkForExisitingItem.data('additional') && filenameLabels.length <= 1) {
+          // If attachment item exists then we have an exisiting item so allow no upload.
+           if (jQuery(checkForExisitingItem.find('.attachment-item')).length <= 0) {
+             missingFileError = true;  
+             fileErrorEle.find('.fileErrorMessage').css('display','block');
+           }
+         }
+      }
+        
+      var scope = angular.element(jQuery('.indoorspace-container')).scope();
+      scope.$apply(function() {
+        scope.validFiles = !missingFileError;
+      });
+     };
+    
+    var validateRooms = function() {
+      var roomsInvalid = false;
+      var roomTable = jQuery('.roomTableContainer');
+      var roomErrorMsg = jQuery('.roomErrorMessage');
+      var roomNumErrorMsg = jQuery('.roomNumErrorMessage');
+      roomErrorMsg.hide();
+      roomNumErrorMsg.hide();
+        
+      if (typeof roomTable != 'undefined' && roomTable.length > 0) {
+        var rooms = roomTable.find('tbody tr');    
+        for (var i = 0; i < rooms.length; i++) {
+          var room = jQuery(rooms[i]);
+          var roomInput = jQuery(room.find('input, select, textarea'));
+          
+          for (var z = 0; z < roomInput.length; z++) {
+            var input = jQuery(roomInput[z]);
+            console.log(input);
+            if (typeof input.val() == 'undefined' || input.val() == '') {
+              roomsInvalid = true;
+              roomErrorMsg.show();  
+              break;
+            }
+              
+            if (input.data('number') && isNaN(input.val())) {
+              roomsInvalid = true;
+              roomNumErrorMsg.show();  
+              break;   
+            }
+          }
+            
+          if (roomsInvalid) {
+            break;   
+          }
+        } 
+          
+        var scope = angular.element(jQuery('.indoorspace-container')).scope();
+        scope.$apply(function() {
+          scope.validRooms = !roomsInvalid;
+        });
+      } else {
+        roomsInvalid = false;   
+        var scope = angular.element(jQuery('.indoorspace-container')).scope();
+        scope.$apply(function() {
+          scope.validRooms = !roomsInvalid;
+        });
+      }
+    };
+    
+    var loading = function(active) {
+      if (active) {
+        jQuery('.loading-container').show();    
+      } else {
+        jQuery('.loading-container').hide();      
+      }
+    }
+    
+    jQuery(document).ready(function() {
+      waterSourceChanged(jQuery('.water-input-field'));   
+    });
+  </script>  
+    
+  <apex:outputPanel id="script-existing-items">
+    <script>
+      var scope = angular.element(jQuery('.indoorspace-container')).scope();
+      scope.$apply(function() {
+        scope.exisitingFiles = '{!indoorAttachmentsJson}';
+      });    
+    </script>
+  </apex:outputPanel>
+</apex:page>

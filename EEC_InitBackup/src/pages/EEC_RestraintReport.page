@@ -1,0 +1,466 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="EEC_RestraintReport">
+  <head>
+    <title>EEC : Restraint Report</title>
+    <c:EEC_Header id="pageHeader" />
+     <style>
+         .calendar-year{
+            width : auto;
+            display : inline;
+         }
+        thead{
+                background-color : #f5f5f5;
+        }
+        .table > thead:first-child > tr:first-child > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table {
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+         .table-group-one .table > thead:first-child > tr:first-child > th{
+            width: 369px;
+         }
+         .restraint-report{
+            margin-top : 30px
+         }
+         .header{
+            margin-bottom : 40px         
+         }
+         .button-group{
+            margin-bottom: 100px;
+         }
+         .td-header{
+            font-weight: bold;
+            font-size: 14px;
+         }
+         input[type="text"] {
+          margin-bottom: 0px;
+          border-bottom-left-radius: 1;
+          border-bottom-right-radius: 1;
+        }
+    </style> 
+
+    <script>
+            function save(){
+                    var valChanged = 0;
+                    var errorFlag = 0;
+                    var numberField = 0;
+                    var selectedQuarter = 0;
+                    var today = new Date();
+                    var currentQuarter = parseInt(today.getMonth()/3 + 1);
+                    var quarterVar = j$('[id*=quarter]').val();
+                    var calenderYear = j$('[id*=calendarYear]').val();
+                    if(quarterVar == 'First Quarter')
+                      selectedQuarter = 1;
+                    else if(quarterVar == 'Second Quarter')
+                      selectedQuarter = 2;
+                    else if(quarterVar == 'Third Quarter')
+                      selectedQuarter = 3;
+                    else if(quarterVar == 'Fourth Quarter')
+                      selectedQuarter = 4;
+                    for(var i=1; i < 57; i++)
+                    {
+                       numberField = j$('[id*=inputText'+i+']').val();
+                       
+                       if((i != 55) && (parseInt(numberField) < 0 || parseInt(numberField) > 999 || (numberField != null && isNaN(numberField)) || (numberField != null && numberField.indexOf('.') != -1))){
+                            errorFlag = 1; 
+                       }
+                       else if((i == 55)  && (parseInt(numberField) < 0 || parseInt(numberField) > 9999999 || (numberField != null && isNaN(numberField)) || (numberField != null && numberField.indexOf('.') != -1))){
+                            errorFlag = 2;
+                       }
+                       if(numberField > 0 ){
+                          valChanged = 1;
+                       } 
+                    }
+                    if(errorFlag == 1 || (j$('[id*=unDuplicatedCount]').val() != null && isNaN(j$('[id*=unDuplicatedCount]').val())) || j$('[id*=unDuplicatedCount]').val() < 0 || j$('[id*=unDuplicatedCount]').val() > 999 || (j$('[id*=unDuplicatedCount]').val() != null && j$('[id*=unDuplicatedCount]').val().indexOf('.') != -1))
+                    {
+                        j$('#successAlert').hide();
+                        j$('#alert').html('<strong>Error!</strong> Input value for Position/Minutes, Injury Information, and Other Restraints must be a whole number between 0-999.');
+                        j$('#alert').show();
+                        j$('#alert').focus();
+                    }
+                    else if(errorFlag == 2 || (j$('[id*=unDuplicatedCount]').val() != null && isNaN(j$('[id*=unDuplicatedCount]').val())) || j$('[id*=unDuplicatedCount]').val() < 0 || j$('[id*=unDuplicatedCount]').val() > 999 || (j$('[id*=unDuplicatedCount]').val() != null && j$('[id*=unDuplicatedCount]').val().indexOf('.') != -1))
+                    {
+                        j$('#successAlert').hide();
+                        j$('#alert').html('<strong>Error!</strong> Input value for Total Bed Days Utilized must be a whole number between 0-9999999.');
+                        j$('#alert').show();
+                        j$('#alert').focus();
+                    }
+                    else if(valChanged == 1 && j$('[id*=unDuplicatedCount]').val() == 0){
+                        j$('#successAlert').hide();
+                        j$('#alert').html('<strong>Error!</strong> A problem has occurred while submitting your data (Unduplicated Count of Residents Restrained cannot be 0).');
+                        j$('#alert').show();
+                        j$('#alert').focus();
+                    }
+                    else if(calenderYear < 1980 || calenderYear > 2199 || calenderYear == '' || !calenderYear.match(/^\d+$/))
+                    {
+                        j$('#successAlert').hide();
+                        j$('#alert').show();
+                        j$('#alert').html('<strong>Error!</strong> A problem has occurred while submitting your data (Please enter a valid year between 1980 - 2199).');
+                        j$('#alert').focus();
+                    }
+                    else if(parseInt(calenderYear) > today.getFullYear() || (parseInt(calenderYear) == today.getFullYear() && selectedQuarter > currentQuarter))
+                    {
+                        j$('#successAlert').hide();
+                        j$('#alert').show();
+                        j$('#alert').html('<strong>Error!</strong> Calendar Year / Quarter cannot be in the future.');
+                        j$('#alert').focus();
+                    }
+                    else{
+                        saveForm();
+                   }
+                }
+                function onCompleteHandler()
+                {
+                   j$('#alert').hide();
+                   j$('#successAlert').show();
+                   j$('#successAlert').focus();
+                }
+                function toggleForm(){
+                    var today = new Date();
+                    j$('[id*=calendarYear]').val(today.getFullYear());
+                    var currentQuarter = parseInt(today.getMonth()/3 + 1);
+                    if(currentQuarter == 1)
+                        j$('[id*=quarter]').val('First Quarter');
+                    if(currentQuarter == 2)
+                        j$('[id*=quarter]').val('Second Quarter');
+                    if(currentQuarter == 3)
+                        j$('[id*=quarter]').val('Third Quarter');
+                    if(currentQuarter == 4)
+                        j$('[id*=quarter]').val('Fourth Quarter');
+                } 
+                j$( document ).ready(function() {
+                    j$('#alert').hide();
+                    j$('#successAlert').hide();
+                    toggleForm();
+                });
+    </script>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+        <br/>
+        <apex:form >  
+        <apex:actionFunction name="saveForm" oncomplete="onCompleteHandler()"  action="{!save}" rerender="restraintReportView">
+        </apex:actionFunction>
+        
+            <div class="header">
+                <br/>
+                <apex:pageMessages id="showmsg" ></apex:pageMessages>
+                <br/>
+                <h2 class="pull-left">New Restraint Report</h2>
+                <br/>
+                    <apex:commandButton id="newReportBtn" styleClass="md-button md-raised md-eec pull-right" value="Back to Provider" action="{!returnProvider}"> </apex:commandButton>   
+                <br/>
+            </div>
+
+              <apex:outputPanel id="restraintReportView">   
+                    <div id="successAlert" class="restraint-report alert {!IF(count != 0 , 'alert-danger', 'alert-success')} fade in" tabindex="1">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                           <apex:outputLabel escape="false" Value="{!actionResult}" ></apex:outputLabel>
+                    </div>
+               </apex:outputPanel>      
+                
+                <div class="newReportDiv" id="newReportDiv">
+                     <div id="alert" class="alert alert-danger fade in" tabindex="1">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    </div>
+                    
+                    <section class="contact-information">
+                        <h4 class="md-title">Restraint Report</h4>
+                        <md-divider></md-divider><br/>
+                        <div class="row">
+                        <div class="col-lg-6">
+                            <div class="md-subhead" layout="row">
+                                <p flex-sm="80" flex="90" ><span class="td-header">Provider: </span>{!account.Name}</p>
+                            </div>
+                            <div class="md-subhead" layout="row">
+                                <p flex-sm="80" flex="90"><span class="td-header">Restraint Method: </span>{!account.Restraint_Method__c}</p>
+                            </div>
+                        </div>
+                            <div class="col-lg-6">
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><span class="td-header">Calendar Year: </span><apex:inputText styleClass="form-control calendar-year" id="calendarYear" value="{!Calendar_Year}" style="width: 42.6%;"/></p>
+                                </div> 
+                                <div class="md-subhead" layout="row">
+                                    <p flex-sm="80" flex="90"><span class="td-header" style="margin-right: 40px;">Quarter: </span><apex:selectList value="{!Quarter}" styleClass="form-control" style="width:42.6%;display:inline;" id="quarter" size="1">
+                                                         <apex:selectOption itemValue="First Quarter" itemLabel="First Quarter"/>
+                                                         <apex:selectOption itemValue="Second Quarter" itemLabel="Second Quarter"/>
+                                                         <apex:selectOption itemValue="Third Quarter" itemLabel="Third Quarter"/>
+                                                         <apex:selectOption itemValue="Fourth Quarter" itemLabel="Fourth Quarter"/>
+                                                   </apex:selectList></p>
+                                </div> 
+                            </div>
+                        </div>
+                        </section><br/>
+                        <!--position -->
+                        <div class="panel panel-default" >
+                       <div class="panel-heading">
+                          <h3 class="panel-title">
+                              Position / Minutes
+                          </h3>
+                       </div>
+                          <div class="panel-body">
+                                <div class="col-lg-12">
+                                       <div class="form-group" id="no-more-tables">
+                                           <table class="table table-hover">
+                                              <thead>
+                                              <tr>
+                                                <th></th>  
+                                                <th>0-5</th>
+                                                <th>6-10</th>
+                                                <th>11-20</th>
+                                                <th>21-30</th>
+                                                <th>31-40</th>
+                                                <th>41-50</th>  
+                                                <th>51-60</th>
+                                                <th>>60</th>  
+                                              </tr>
+                                              </thead>
+                                              <apex:panelGroup rendered="{!IF(account.Restraint_Method__c != 'DYS' , true, false)}">
+                                              <tr>
+                                                  <td class="td-header">Standing</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Standing_0_5}" id="inputText1" />
+                                                  </td>
+                                                  <td data-title="0-5"><apex:inputText styleClass="form-control"  value="{!Standing_6_10}" id="inputText2" />
+                                               </td>
+                                                  <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Standing_11_20}" id="inputText3" />
+                                                      
+                                                   </td>
+                                                  <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Standing_21_30}" id="inputText4" />
+                                                      
+                                                   </td>
+                                                  <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Standing_31_40}" id="inputText5" />
+                                               </td>
+                                                  <td data-title="41-50"><apex:inputText styleClass="form-control"  value="{!Standing_41_50}" id="inputText6" />
+                                               </td>
+                                                  <td data-title="51-60"><apex:inputText styleClass="form-control"  value="{!Standing_51_60}" id="inputText7" />
+                                                      
+                                                   </td>
+                                                  <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Standing_60}" id="inputText8" />
+                                                      
+                                                   </td>
+                                              </tr>
+                                               <tr>
+                                                  <td class="td-header">Sitting</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Sitting_0_5}" id="inputText9" />
+                                                  </td>
+                                                   <td data-title="6-10"><apex:inputText styleClass="form-control"  value="{!Sitting_6_10}" id="inputText10" />
+                                               </td>
+                                                   <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Sitting_11_20}" id="inputText11" />
+                                                      
+                                                   </td>
+                                                   <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Sitting_21_30}" id="inputText12" />
+                                                      
+                                                   </td>
+                                                   <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Sitting_31_40}" id="inputText13" />
+                                               </td>
+                                                   <td data-title="41-50"><apex:inputText styleClass="form-control"  value="{!Sitting_41_50}" id="inputText14" />
+                                               </td>
+                                                   <td data-title="51-60"><apex:inputText styleClass="form-control"  value="{!Sitting_51_60}" id="inputText15" />
+                                                      
+                                                   </td>
+                                                   <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Sitting_60}" id="inputText16" />
+                                                      
+                                                   </td>
+                                              </tr> 
+                                               <tr>
+                                                  <td class="td-header">Floor (Supine)</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Floor_Supine_0_5}" id="inputText17" />
+                                                  </td>
+                                                   <td data-title="6-10"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_6_10}" id="inputText18" />
+                                               </td>
+                                                   <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_11_20}" id="inputText19" />
+                                                   </td>
+                                                   <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_21_30}" id="inputText20" />
+                                                      
+                                                   </td>
+                                                   <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_31_40}" id="inputText21" />
+                                               </td>
+                                                   <td data-title="41-50"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_41_50}" id="inputText22" />
+                                               </td>
+                                                   <td data-title="51-60"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_51_60}" id="inputText23" />
+                                                      
+                                                   </td>
+                                                   <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Floor_Supine_60}" id="inputText24" />
+                                                      
+                                                   </td>
+                                              </tr> 
+                                               <tr>
+                                                  <td class="td-header">Floor (Prone)</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Floor_Prone_0_5}" id="inputText25" />
+                                                  </td>
+                                                   <td data-title="6-10"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_6_10}" id="inputText26" />
+                                                  </td>
+                                                   <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_11_20}" id="inputText27" />
+                                                   </td>
+                                                   <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_21_30}" id="inputText28" />
+                                                   </td>
+                                                   <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_31_40}" id="inputText29" />
+                                                  </td>
+                                                   <td data-title="41-50"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_41_50}" id="inputText30" />
+                                                 </td>
+                                                   <td data-title="51-60"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_51_60}" id="inputText31" />
+                                                   </td>
+                                                   <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Floor_Prone_60}" id="inputText32" />
+                                                   </td>
+                                              </tr>
+                                               <tr>
+                                                  <td class="td-header">Floor (Both Prone and Supine)</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_0_5}" id="inputText33" />
+                                                  </td>
+                                                   <td data-title="6-10"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_6_10}" id="inputText34" />
+                                                  </td>
+                                                   <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_11_20}" id="inputText35" />
+                                                   </td>
+                                                   <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_21_30}" id="inputText36" />
+                                                   </td>
+                                                   <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_31_40}" id="inputText37" />
+                                                  </td>
+                                                   <td data-title="41-50"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_41_50}" id="inputText38" />
+                                                  </td>
+                                                   <td data-title="51-60"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_51_60}" id="inputText39" />
+                                                   </td>
+                                                   <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Floor_Both_Prone_and_Supine_60}" id="inputText40" />
+                                                   </td>
+                                              </tr>
+                                              </apex:panelGroup> 
+                                               <apex:panelGroup rendered="{!IF((account.Restraint_Method__c = 'DYS' || account.Restraint_Method__c = 'Varied'), true, false)}">
+                                               <tr>
+                                                  <td class="td-header">Physical and Mechanical</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_0_5}" id="inputText57" />
+                                                  </td>
+                                                   <td data-title="6-10"><apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_6_10}" id="inputText58" />
+                                                  </td>
+                                                   <td data-title="11-20"><apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_11_20}" id="inputText59" />
+                                                   </td>
+                                                   <td data-title="21-30"><apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_21_30}" id="inputText60" />
+                                                   </td>
+                                                   <td data-title="31-40"><apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_31_40}" id="inputText61" />
+                                                  </td>
+                                                   <td data-title="41-50">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_41_50}" id="inputText62" />
+                                                   </td>
+                                                   <td data-title="51-60">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_51_60}" id="inputText63" />
+                                                   </td>
+                                                   <td data-title=">60">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_Mechanical_60}" id="inputText64" />
+                                                   </td>
+                                              </tr>    
+                                               <tr>
+                                                  <td class="td-header">Physical holds Only</td>
+                                                  <td data-title="0-5">
+                                                      <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_0_5}" id="inputText41" />
+                                                  </td>
+                                                   <td data-title="6-10">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_6_10}" id="inputText42"/>
+                                                   </td>
+                                                   <td data-title="11-20">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_11_20}" id="inputText43" />
+                                                   </td>
+                                                   <td data-title="21-30">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_21_30}" id="inputText44"/>
+                                                   </td>
+                                                   <td data-title="31-40">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_31_40}" id="inputText45" />
+                                                   </td>
+                                                   <td data-title="41-50">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_41_50}" id="inputText46"/>
+                                                   </td>
+                                                   <td data-title="51-60">
+                                                       <apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_51_60}" id="inputText47" />
+                                                   </td>
+                                                   <td data-title=">60"><apex:inputText styleClass="form-control"  value="{!Physical_holds_Only_60}" id="inputText48" />
+                                                   </td>
+                                              </tr>
+                                             </apex:panelGroup>      
+                                            </table>
+                                       </div>
+                                 </div>
+                          </div>
+                        </div>
+
+                       <!-- Injury Info -->
+                        <div class="panel panel-default" >
+                           <div class="panel-heading">
+                              <h3 class="panel-title">
+                                  Injury Information
+                              </h3>
+                           </div>
+                          <div class="panel-body">
+                                <div class="col-lg-6">
+                                       <div class="form-group">
+                                            <span class="td-header">Injured Residents (Minor Injury): &nbsp;</span>
+                                            <apex:inputText styleClass="form-control"  value="{!Injured_Residents_Minor_Injury}" id="inputText49" />
+                                       </div>
+                                       <div class="form-group">
+                                             <span class="td-header">Injured Residents (Serious Injury):  &nbsp;</span>
+                                             <apex:inputText styleClass="form-control"  value="{!Injured_Residents_Serious_Injury}" id="inputText50" />
+                                       </div> 
+                                  </div>
+                                  <div class="col-lg-6">
+                                       <div class="form-group">
+                                              <span class="td-header">Injured Staff (Minor Injury): &nbsp;</span>
+                                              <apex:inputText styleClass="form-control"  value="{!Injured_Staff_Minor_Injury}" id="inputText51" />
+                                       </div>
+                                       <div class="form-group">
+                                               <span class="td-header">Injured Staff (Serious Injury): &nbsp;</span>
+                                               <apex:inputText styleClass="form-control"  value="{!Injured_Staff_Serious_Injury}" id="inputText52"/>
+                                       </div> 
+                                  </div>
+                            </div>
+                        </div>
+                        
+                        <!--Others-->
+                       <div class="panel panel-default" >
+                           <div class="panel-heading">
+                              <h3 class="panel-title">
+                                  Other Restraints Information
+                              </h3>
+                           </div>
+                          <div class="panel-body">
+                                <div class="col-lg-6">
+                                       <div class="form-group">
+                                            <span class="td-header">Number of Restraints Leading to Resident Injury: &nbsp;</span>
+                                            <apex:inputText styleClass="form-control"  value="{!No_Restraints_Leading_to_Res_Injury}" id="inputText53" />
+                                       </div>
+                                       <div class="form-group">
+                                             <span class="td-header">Number of Restraints Leading to Staff Injury: &nbsp;</span>
+                                             <apex:inputText styleClass="form-control"  value="{!No_Restraints_Leading_to_Staff_Injury}" id="inputText54" />
+                                       </div>
+                                       <div class="form-group">
+                                             <span class="td-header">Total Bed Days Utilized this Quarter: &nbsp;</span>
+                                             <apex:inputText styleClass="form-control"  value="{!Total_Bed_Days_Utilized_this_Quarter}" id="inputText55" />
+                                       </div> 
+                                  </div>
+                                  <div class="col-lg-6">
+                                      <div class="form-group">
+                                             <span class="td-header">Unduplicated Count of Residents Restrained: &nbsp;</span>
+                                             <apex:inputText styleClass="form-control"  value="{!Unduplicated_Count_of_Residents_Restraind}" id="unDuplicatedCount"/>
+                                       </div>
+                                       <div class="form-group">
+                                              <span class="td-header">Unduplicated Count of Residents Served: &nbsp;</span>
+                                              <apex:inputText styleClass="form-control"  value="{!Unduplicated_Count_of_Residents_Served}" id="inputText56"/>
+                                       </div>
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-group right-group" layout-align-gt-lg="end center" layout-align-lg="end center" layout="row" layout-lg="row" layout-sm="column" layout-md="column" flex="100" layout-gt-lg="row" layout-wrap="true">
+                            <button type="button" id="saveBtn" onclick="save();" layout-fill-sm="true" class="md-button md-raised md-eec" layout-margin="true" layout-padding="true">Save</button>  
+                        </div>
+            </apex:form>
+      </div>
+ </body>
+</apex:page>

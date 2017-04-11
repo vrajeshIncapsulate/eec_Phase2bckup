@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email communication sent to the original injury owner to inform that the responsible of triage has reviewed and decided to send the injury to triage for investigation</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>16 - SLGSA case with no noncompliance Rejected and go to Triage</name>
+    <style>none</style>
+    <subject>Case sent to triage</subject>
+    <type>text</type>
+</EmailTemplate>

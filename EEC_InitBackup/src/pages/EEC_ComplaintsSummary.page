@@ -1,0 +1,239 @@
+<apex:page controller="EEC_ComplaintsSummaryController" doctype="html-5.0" showheader="false" sidebar="false" standardstylesheets="false" action="{! noComplaintRedirect }" cache="false"> 
+    <c:EEC_Complaints_NavBar /> 
+    <div class="complaints-wrapper">
+        <div class="complaints-title-bar">
+            <h3 class="md-headline">
+                Summary
+            </h3>
+        </div> 
+        <apex:form id="questionRefreshSection" styleClass="complaints-form">
+        
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Provider Information
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body summary-flow inline-label">  
+                            <apex:repeat value="{! ProviderInformationQuestions }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readOnly="true" /> 
+                            </apex:repeat> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Reporter Information
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body summary-flow inline-label">  
+                            <apex:repeat value="{! ReporterQuestions }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readonly="true" />
+                            </apex:repeat> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Complaint Description
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body summary-flow">  
+                            <apex:repeat value="{! ComplaintQuestions }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readonly="true" />
+                            </apex:repeat> 
+                
+                            <div class="form-group eec-question read-only" layout="column">
+                                <apex:outputLabel rendered="{! complaint.DateEventOccuredAsDate != NULL && complaint.DateEventOccuredAsDate < OneMonthAgo }" styleClass="base-label">What is prompting you to contact EEC at this time: </apex:outputLabel>
+                                <apex:outputLabel rendered="{! complaint.DateEventOccuredAsDate != NULL && complaint.DateEventOccuredAsDate < OneMonthAgo }" value="{! complaint.Reason_to_Report_Now }" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                  
+            <div class="panel-group read-only" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Involved Persons
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body no-more-tables">  
+                            <label class="form-label table-label">Involved Children</label>
+                            <apex:dataTable value="{! childInvolvedPersons }" styleClass="table table-hover" var="cip"> 
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">First and Last Name</apex:facet> 
+                                    <apex:outputText value="{!cip.name}"/> 
+                                </apex:column> 
+                                <apex:column width="25%"> 
+                                    <apex:facet name="header">Description of involvement</apex:facet> 
+                                    <apex:outputText value="{!cip.Description_of_involvement__c}"/> 
+                                </apex:column>
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">Parent/Guardian's name</apex:facet> 
+                                    <apex:outputText value="{!cip.Parent_Guardian_Name__c}"/> 
+                                </apex:column>
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">Parent/Guardian's Address</apex:facet> 
+                                    <apex:outputText value="{!cip.Parent_Guardian_Address__c}"/> 
+                                </apex:column>
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">Parent/Guardian's Telephone Number</apex:facet> 
+                                    <apex:outputText value="{!cip.Parent_Guardian_Telephone_Number__c}"/> 
+                                </apex:column>
+                                <apex:column width="10%" rendered="{! displayDOBCol }"> 
+                                    <apex:facet name="header">Child's birth date</apex:facet> 
+                                    <apex:outputText value="{0,date,MM/dd/yyyy}">
+                                        <apex:param value="{! cip.Child_birth_date__c}" />
+                                    </apex:outputText> 
+                                </apex:column>
+                                <apex:column width="10%" rendered="{! displayAgeCol }"> 
+                                    <apex:facet name="header">Child's Age</apex:facet> 
+                                    <apex:outputText value="{!cip.Age__c}"/> 
+                                </apex:column>
+                            </apex:dataTable> 
+                            <label class="form-label table-label">Involved Adults</label>
+                            <apex:dataTable value="{! adultInvolvedPersons }" styleClass="table table-hover" var="cip"> 
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">First and Last Name</apex:facet> 
+                                    <apex:outputText value="{!cip.name}"/> 
+                                </apex:column> 
+                                <apex:column width="25%"> 
+                                    <apex:facet name="header">Description of involvement</apex:facet> 
+                                    <apex:outputText value="{!cip.Description_of_involvement__c}"/> 
+                                </apex:column>
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">Role</apex:facet> 
+                                    <apex:outputText value="{!cip.Role__c}"/> 
+                                </apex:column>  
+                                <apex:column width="10%"> 
+                                    <apex:facet name="header">Other Role</apex:facet> 
+                                    <apex:outputText value="{!cip.Other_Role__c}"/> 
+                                </apex:column>  
+                            </apex:dataTable> 
+                        </div> 
+                    </div>
+                </div>
+            </div>   
+            
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Information Shared with Provider
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body summary-flow">  
+                            <apex:repeat value="{! ComplaintShared }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readonly="true" />
+                            </apex:repeat> 
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Filing with DCF
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body summary-flow">  
+                            <apex:repeat value="{! ComplaintFilling }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readonly="true" />
+                            </apex:repeat> 
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a>
+                                Other Information
+                            </a>
+                        </h4>
+                    </div>
+                    <div class="panel-group sub-group" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">  
+                            <apex:repeat value="{! ComplaintOther }" var="q">
+                                <c:EEC_Question question="{! q }" object="{! complaint }" readonly="true" />
+                            </apex:repeat> 
+                        </div>
+                    </div>
+                </div>
+            </div>  
+            
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandLink styleclass="md-button md-raised md-button md-default-theme md-eec"
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1"
+                                    html-flex-order-md="1" 
+                                    html-md-button="true"
+                                    action="{! back }"
+                                    value="Previous" />
+                <apex:actionstatus id="nextStatus">
+                    <apex:facet name="stop">
+                        <apex:commandbutton styleclass="md-button md-raised md-eec complaints-search unlicenced-continue trigger-validate"
+                                            html-layout-padding="true"
+                                            html-flex-order-sm="1"
+                                            html-flex-order-md="1"
+                                            html-md-button="true"
+                                            status="nextStatus"
+                                            action="{! submit }"  
+                                            value="Submit" />
+                    </apex:facet>
+                    <apex:facet name="start">
+                        <button class="md-button md-raised md-eec complaints-search">
+                            <i class="fa fa-refresh fa-spin"></i>
+                        </button>
+                    </apex:facet>
+                </apex:actionstatus> 
+            </md-content> 
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandLink styleclass="md-button md-raised md-button md-default-theme"
+                                    onclick="return confirm('Are you sure you wish to cancel your complaint?');" 
+                                    html-layout-padding="true"
+                                    html-flex-order-sm="1" 
+                                    html-flex-order-md="1"
+                                    html-md-button="true"
+                                    status="searchStatus"
+                                    action="{! cancel }" 
+                                    value="Cancel" />
+            </md-content>
+             
+        </apex:form>
+    </div>
+</apex:page>

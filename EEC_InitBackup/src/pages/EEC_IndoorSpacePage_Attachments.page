@@ -1,0 +1,170 @@
+<apex:page controller="EEC_TransactionWizardController" showheader="false" sidebar="false" html-ng-app="eecApp">
+  <head>
+    <c:EEC_Header id="pageHeader" />    
+      
+    <style>
+      html, body, md-content {
+        background-color: transparent; 
+      }
+    </style>
+  </head>  
+    
+  <body>
+  <c:EEC_Nav_Bar id="navBar" />      
+      
+  <apex:messages style="color: #FF0000; font-weight: bold;"/>
+  <apex:form id="IndoorOutdoorForm" html-layout-padding="true" style="margin-top: 25px; margin-bottom: 100px;">
+  	<apex:pageBlock title="Indoor / Outdoor Information" id="ioPageBlock" html-ng-controller="TransactionController as ctrl">
+		<apex:pageBlockButtons location="bottom">
+        	<apex:commandButton value="Add Row" action="{!addRowRoom}" reRender="ioPageBlock"/>
+        	<apex:commandButton value="Cancel Current Changes and Go back to Provider" action="{!cancelInstruction}" onclick="return confirm('Are you sure you want to cancel changes to this transaction?');"/>
+        	<apex:commandButton value="Cancel Transaction" action="{!CancelTransaction}" onclick="return confirm('Are you sure to cancel the transaction?');"/>
+        	<apex:commandLink value="Save and Next" action="{!SaveAndNextRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+        	<apex:commandLink value="Save and Previous" action="{!SaveAndPreviousRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+        	<apex:commandLink value="Save and Return to Provider" action="{!SaveAndReturnRoom}" styleClass="btn" style="text-decoration:none;padding:4px;"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Transaction Information" columns="2">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Transaction Type" for="transactionTypeTA" />
+					<apex:outputText value="{!LicenseRecordTypeLabel}" id="transactionTypeTA" />
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Transaction Number" for="transactionNumberTA" />
+					<apex:outputText value="{!licenseTransation.Name}" id="transactionNumberTA" />
+				</apex:pageBlockSectionItem>
+		</apex:pageBlockSection>
+		<apex:outputpanel id="roomLPanel">
+		
+	        <apex:pageBlockSection title="Additional Indoor Space Information" columns="1">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Are there at least two exits from your home?"/>
+					<apex:actionRegion >
+						<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+							<apex:selectRadio value="{!licenseTransation.At_Least_2_Exits__c}" required="true">
+			            		<apex:selectOptions value="{!items}"/>
+		            		</apex:selectRadio>
+		            	</div>
+					</apex:actionRegion>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Please describe your exits. If you are using a basement space, there must be two exits from the basement level of the home"/>
+					<apex:inputField value="{!licenseTransation.Exits_Descriptions__c}"  required="true" style="width:55%;"/>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="What types of heating elements do you have? (Check all that apply)"/>
+					<apex:actionRegion >
+						<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+							<apex:selectcheckboxes value="{!selectedHestElems}" required="true" Id="HeatingElements"> 
+								<apex:actionSupport event="onchange" action="{!showCBDesc}" reRender="nabhDesc" />
+								<apex:selectoptions value="{!heatingElements}" /> 
+							</apex:selectcheckboxes>
+						</div>
+					</apex:actionRegion>
+					<!-- <apex:inputField value="{!licenseTransation.Heating_Elements__c}"  required="true"/>-->
+				</apex:pageBlockSectionItem>
+				<apex:outputpanel id="nabhDesc">
+					<apex:pageBlockSectionItem rendered="{!IF(((selectedHestStr =='Baseboards,') || (selectedHestStr == 'Vents / Grates,') || (selectedHestStr == 'Baseboards,Vents / Grates,')),false,true)}">
+						<apex:outputLabel value="If you have anything other than baseboard or vents/grates, EEC Regulations require that the heating unit be barricaded in a way that keeps children safe. Do you need technical assistance on how to appropriately barricade heating units?"/>
+						<apex:actionRegion >
+							<div class="requiredInput">
+	                    		<div class="requiredBlock"></div>
+								<apex:selectRadio value="{!licenseTransation.Need_Assist_to_Barricade_Heating_Units__c}" required="true">
+				            		<apex:selectOptions value="{!items}"/>
+			            		</apex:selectRadio>
+			            	</div>
+						</apex:actionRegion>
+					</apex:pageBlockSectionItem>
+				</apex:outputpanel>
+                
+                <apex:outputPanel id="stoveEvidenceUpload" style="width: 100%;">
+                  <c:EEC_FileUploadComponent />
+                </apex:outputPanel>
+                
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Is the drinking water in your home from"/>
+					<apex:inputField value="{!licenseTransation.Drinking_Water_Source__c}"  required="true"/>
+				</apex:pageBlockSectionItem>
+                
+                <apex:outputPanel id="waterTestEvidenceUpload" style="width: 100%;">
+                  <!--<c:eec_fileuploadcomponent />-->
+                </apex:outputPanel>
+                
+			</apex:pageBlockSection>
+			<apex:pageBlockSection title="Outdoor Space Description" columns="1"  rendered="{!LicenseRecordTypeName=='FCC_License_Upgrade'}">
+				<apex:pageBlockSectionItem >
+					<apex:outputLabel value="Have there been any changes since your last application in what you are using for outdoor play space?"/>
+					<apex:actionRegion >
+						<div class="requiredInput">
+                    		<div class="requiredBlock"></div>
+							<apex:selectRadio value="{!licenseTransation.Outdoor_Space_Changed__c}" required="true">
+								<apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="oscDesc" />
+			            		<apex:selectOptions value="{!items}"/>
+		            		</apex:selectRadio>
+		            	</div>
+					</apex:actionRegion>
+				</apex:pageBlockSectionItem>
+				<apex:outputpanel id="oscDesc">&nbsp;
+					<apex:pageBlockSectionItem rendered="{!licenseTransation.Outdoor_Space_Changed__c == 'Yes'}">
+						<apex:outputText value="Please explain" style="font-weight: bold !important;padding-right:20px" />
+						<apex:InputField value="{!licenseTransation.Outdoor_Space_Changes_Description__c}" required="true" style="width:55%;"/>
+					</apex:pageBlockSectionItem>
+				</apex:outputpanel>
+				
+			</apex:pageBlockSection>
+			
+			<apex:variable var="rowNum" value="{!0}"  />              
+	        <apex:pageblockSection title="Indoor Space Description" columns="1">
+	        	<apex:pageBlockSectionItem rendered="{!LicenseRecordTypeName!='FCC_Renewal' && LicenseRecordTypeName!='FCC_License_Upgrade' }">
+					<apex:outputLabel value="Please describe the family child care residence: (e.g. single family, duplex, apartment, etc.)"/>
+					<apex:InputField value="{!licenseTransation.FCC_Residence_Description__c}" required="true" style="width:60%;"/>
+				</apex:pageBlockSectionItem>
+				
+	            <apex:pageBlockTable value="{!roomList}" var="rm" width="100%">
+	            	<apex:column headerValue="Room Name">
+	                    <apex:inputField value="{!rm.Name}"  required="true"/>
+	                </apex:column>           
+	                <apex:column headerValue="Use">
+	                    <apex:inputField value="{!rm.Use__c}"  required="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Dimension - Length (feet)" >
+	                    <apex:inputField value="{!rm.Dimension_Length_feet__c}"  required="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Dimension - Width (feet)">
+	                    <apex:inputField value="{!rm.Dimension_Width_feet__c}"  required="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Floor Level">
+	                    <apex:inputField value="{!rm.Floor_Level__c}"  required="true"/>
+	                </apex:column>
+	                <apex:column headerValue="Delete" >
+	                    <apex:commandLink action="{!delRowRoom}" reRender="roomLPanel">
+	                        <apex:param value="{!rowNum}" name="index" />
+	                        <apex:image url="{!URLFOR($Resource.DeleteIcon)}" width="20px" height="20px"/>
+	                    </apex:commandLink>
+	                    <apex:variable var="rowNum" value="{!rowNum+1}"/>
+	                </apex:column>  
+	            </apex:pageBlockTable>                   
+	        </apex:pageblockSection>
+        </apex:outputpanel>
+	</apex:pageBlock>
+  </apex:form>
+      
+  <c:EEC_Site_Footer id="siteFooter" /> 
+      
+  <script>
+    app.controller('TransactionController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+      var ctrl = this;
+      // Call this function to broadcast to the directive to process the upload.  
+      this.upload = function() {
+        $rootScope.$broadcast('upload', {});
+      };
+          
+      // Capture Emit event from Directive for result data.  
+      $scope.$on('uploadComplete', function(event, data) {
+        console.log(data);   
+      });
+    }]);
+  </script>
+  </body>
+</apex:page>

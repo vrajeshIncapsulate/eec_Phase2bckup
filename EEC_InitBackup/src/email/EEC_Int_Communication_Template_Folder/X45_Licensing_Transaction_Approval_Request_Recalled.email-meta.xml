@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Supervisor of the Licensor assigned to the transaction indicating that the Transaction approval request has been Recalled.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>45 - Licensing Transaction Approval Request Recalled</name>
+    <style>none</style>
+    <subject>Licensing Transaction Approval Request Recalled</subject>
+    <type>text</type>
+</EmailTemplate>

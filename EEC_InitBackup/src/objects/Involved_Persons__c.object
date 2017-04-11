@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will be used to capture the involved persons in a Complaint or a Incident.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Age__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>If child, please provide the (estimated) age of the child.</inlineHelpText>
+        <label>Age</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Child_birth_date__c</fullName>
+        <externalId>false</externalId>
+        <label>Child&apos;s birth date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Description_of_involvement__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe briefly the involvement of this person in the complaint / incident</inlineHelpText>
+        <label>Description of involvement</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Involved_In__c</fullName>
+        <description>Case this person is involved in</description>
+        <externalId>false</externalId>
+        <label>Involved In</label>
+        <referenceTo>Case</referenceTo>
+        <relationshipLabel>Involved Persons</relationshipLabel>
+        <relationshipName>Involved_Persons</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Other_Role__c</fullName>
+        <description>To be filled if the chosen role is &quot;Other&quot;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Please detail the role of this person in case you chose &quot;Other&quot;</inlineHelpText>
+        <label>Other Role</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Guardian_Address__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent/Guardian&apos;s Address</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Parent_Guardian_Name__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent/Guardian&apos;s Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Parent_Guardian_Telephone_Number__c</fullName>
+        <externalId>false</externalId>
+        <label>Parent/Guardian&apos;s Telephone Number</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Role__c</fullName>
+        <externalId>false</externalId>
+        <label>Role</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Educator</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provider Staff People</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Witness</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Members of a Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Family Members of another Child</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Police Department</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Hospital</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Medical Staff</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation Company</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Resource and Referral Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Community Agency</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Status_of_Staff__c</fullName>
+        <externalId>false</externalId>
+        <label>Status of Staff</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Title__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Title of this person</inlineHelpText>
+        <label>Title</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Involved Person</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>First and Last Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Involved Persons</pluralLabel>
+    <recordTypes>
+        <fullName>Adult_Involvement</fullName>
+        <active>true</active>
+        <description>Use this type to add an involved adult</description>
+        <label>Adult Involvement</label>
+        <picklistValues>
+            <picklist>Role__c</picklist>
+            <values>
+                <fullName>Community Agency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Educator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Members of a Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Members of another Child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Police Department</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider Staff People</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resource and Referral Agency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation Company</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Witness</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Child_Involvement</fullName>
+        <active>true</active>
+        <description>Use this type to add an involved child</description>
+        <label>Child Involvement</label>
+        <picklistValues>
+            <picklist>Role__c</picklist>
+            <values>
+                <fullName>Community Agency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Educator</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Members of a Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Family Members of another Child</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hospital</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Medical Staff</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Other</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Police Department</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provider Staff People</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Resource and Referral Agency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Transportation Company</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Creation_Updates_on_Closed_Case</fullName>
+        <active>true</active>
+        <description>Block creation and updates on Closed case</description>
+        <errorConditionFormula>ISPICKVAL(Involved_In__r.Status,&apos;Closed&apos;) &amp;&amp; !ISBLANK($UserRole.Name) &amp;&amp; !CONTAINS($UserRole.Name,&apos;Director&apos;) &amp;&amp; !CONTAINS($UserRole.Name,&apos;Supervisor&apos;)</errorConditionFormula>
+        <errorMessage>Involved Persons can&apos;t be created or updated on &apos;Closed&apos; Cases.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Other_role_requires_role</fullName>
+        <active>true</active>
+        <description>If &quot;Other&quot; is chosen in the list of roles, then detail of the role must be entered</description>
+        <errorConditionFormula>AND(ISPICKVAL(Role__c, &quot;Other&quot;), OR( Other_Role__c =&quot;&quot;, ISNULL( Other_Role__c), ISBLANK(Other_Role__c)))</errorConditionFormula>
+        <errorDisplayField>Other_Role__c</errorDisplayField>
+        <errorMessage>Please fill this field as you chose &quot;Other&quot; in the roles.</errorMessage>
+    </validationRules>
+</CustomObject>

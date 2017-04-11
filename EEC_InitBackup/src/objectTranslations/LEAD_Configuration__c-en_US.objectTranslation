@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LEAD Configuration</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LEAD Configurations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Admin Queue Assignment --></label>
+        <name>Admin_Queue_Assignment__c</name>
+        <relationshipLabel><!-- LEAD Configurations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Change of Address Fee --></label>
+        <name>Change_of_Address_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Change of Address Instruction --></label>
+        <name>Change_of_Address_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Close Prior Expiration Instruction --></label>
+        <name>Close_Prior_Expiration_Instruction__c</name>
+    </fields>
+    <fields>
+        <help><!-- Web page to redirect the user once the complaint is submitted or abandoned. --></help>
+        <label><!-- Complaint Form Redirect --></label>
+        <name>Complaint_Form_Redirect__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text that will be used on the Complaints Web Form confirmation page. --></help>
+        <label><!-- Complaints Confirmation --></label>
+        <name>Complaints_Confirmation__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text that will be used on the Complaints Web Form introduction page. --></help>
+        <label><!-- Complaints Introduction --></label>
+        <name>Complaints_Introduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Change Room / Floor Level Intruction --></label>
+        <name>FCC_Change_Room_Floor_Level_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Change of Household Instruction --></label>
+        <name>FCC_Change_of_Household_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Inactivate Instruction --></label>
+        <name>FCC_Inactivate_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC License Upgrade Instruction --></label>
+        <name>FCC_License_Upgrade_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC New License Instruction --></label>
+        <name>FCC_New_License_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Re-Active Instruction --></label>
+        <name>FCC_Re_Active_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Renewal Instruction --></label>
+        <name>FCC_Renewal_Instruction__c</name>
+    </fields>
+    <fields>
+        <help><!-- This number represents the number of days after expiration date that a renewal should be processed without manager approval. If this number of days after expiration date is passed, the system will require manager approval --></help>
+        <label><!-- FCC - Renewal Significant Delay --></label>
+        <name>FCC_Renewal_Significant_Delay__c</name>
+    </fields>
+    <fields>
+        <label><!-- Follow-up Visit Estimated Deadline --></label>
+        <name>Follow_up_Visit_Estimated_Deadline__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incident - Involved Person Intro --></label>
+        <name>Incident_Involved_Person_Intro__c</name>
+    </fields>
+    <fields>
+        <label><!-- Incidents Intro --></label>
+        <name>Incidents_Intro__c</name>
+    </fields>
+    <fields>
+        <label><!-- Injury - Involved Person Intro --></label>
+        <name>Injury_Involved_Person_Intro__c</name>
+    </fields>
+    <fields>
+        <help><!-- This text will be used as default on Investigation Non-Compliance narrative text in case there is at least one non-compliance item identified on this investigation. --></help>
+        <label><!-- Investig. Non-comp. Default if Any --></label>
+        <name>Investig_Non_comp_Default_if_Any__c</name>
+    </fields>
+    <fields>
+        <help><!-- This text will be used as default on Investigation Non-Compliance narrative text in case there is no non-compliance identified on this investigation. --></help>
+        <label><!-- Investig. Non-comp. Default if None --></label>
+        <name>Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Large Group Instruction --></label>
+        <name>Large_Group_Instruction__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days used to calculate the visit estimated deadline for visits automatically created by the system for Monitoring Visits / Progress Visits / Mid-Cycle Review Visits / Provisional Visits --></help>
+        <label><!-- Lic Anniversary Visit Estimated Deadline --></label>
+        <name>Lic_Anniversary_Visit_Estimated_Deadline__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Renewal Fee --></label>
+        <name>License_Renewal_Fee__c</name>
+    </fields>
+    <fields>
+        <label><!-- License Upgrade Fee --></label>
+        <name>License_Upgrade_Fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is only used on the &quot;Home Page Message &amp; Alerts&quot; record. If you are attempting to edit this field on a different record type (i.e. Family Child Care, Small Group, etc.) there will be no impact on the homepage. --></help>
+        <label><!-- Messages &amp; Alerts - Known Issues --></label>
+        <name>Messages_Alerts_Known_Issues__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days prior to the window start date the system will create a monitoring / mid-cycle / progress visit automatically so that the licensor knows that a visit should be scheduled --></help>
+        <label><!-- Nb Days Prior to Window to Create Vis --></label>
+        <name>Nb_Days_Prior_to_Lic_Anniv_to_Create_Vis__c</name>
+    </fields>
+    <fields>
+        <label><!-- New License Fee --></label>
+        <name>New_License_Fee__c</name>
+    </fields>
+    <fields>
+        <help><!-- Default number of days for an internal investigation to be received. When an internal investigation is created this number of days is added to the current date to determine the default value of &quot;To Be Provider By&quot; field --></help>
+        <label><!-- No. of Days For Int. Investig. Due Date --></label>
+        <name>No_of_Days_For_Internal_Investig_Due_Da__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days that will be used as default to set the investigation due date. --></help>
+        <label><!-- No. of Days For Investigation Due Date --></label>
+        <name>No_of_Days_For_Investigation_Due_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days prior to the corrective action plan reception deadline the email reminder (template #6) should be sent. If NULL, the reminder will not be sent. --></help>
+        <label><!-- No. of Days Prior Corr Action Deadline --></label>
+        <name>No_of_Days_Prior_Corr_Action_Deadline__c</name>
+    </fields>
+    <fields>
+        <help><!-- Max Number of non-compliance in the last 14 months before the system proposed a longer visit tool. For example, if we want to use a longer visit tool if there are 2 or more substantiated citations, the value here should 1 (max 1 before longer visit) --></help>
+        <label><!-- Number of Non-Comp. before longer visit --></label>
+        <name>Number_of_Non_Comp_before_longer_visit__c</name>
+    </fields>
+    <fields>
+        <help><!-- Set the number of days that will be used to set by default the Estimated Deadline when creating a new visit for an Investigation: Estimated Deadline = Date of Creation of this visit + this number of day --></help>
+        <label><!-- Number of days for Investigation Visit --></label>
+        <name>Number_of_days_for_Investigation_Visit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Home Latest News --></label>
+        <name>Portal_Home_Latest_News__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Home Useful Links --></label>
+        <name>Portal_Home_Useful_Links__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Home Welcome --></label>
+        <name>Portal_Home_Welcome__c</name>
+    </fields>
+    <fields>
+        <label><!-- Portal Transaction Introduction --></label>
+        <name>Portal_Transaction_Introduction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Re-issuance of License Cert Instruction --></label>
+        <name>Re_issuance_of_License_Cert_Instruction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Attachments New --></label>
+        <name>Transaction_Attachments_New__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Attachments Renewal --></label>
+        <name>Transaction_Attachments_Renewal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Transaction Attachments Upgrade --></label>
+        <name>Transaction_Attachments_Upgrade__c</name>
+    </fields>
+    <fields>
+        <help><!-- Text that will be used as default for the visit narrative summary text. Note that the tags #Visit_Date# and #Visit_Reason# will be replaced by the values from the visit object when the text is used. --></help>
+        <label><!-- Visit Narrative Summary Default --></label>
+        <name>Visit_Narrative_Summary_Default__c</name>
+    </fields>
+    <layouts>
+        <layout>LEAD  Configuration Layout - Global</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Web Complaint Form Configuration --></label>
+            <section>Web Complaint Form Configuration</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>LEAD Configuration Layout</layout>
+        <sections>
+            <label><!-- Admin Queue --></label>
+            <section>Admin Queue</section>
+        </sections>
+        <sections>
+            <label><!-- Cases and Investigations related configuration --></label>
+            <section>Cases and Investigations related configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Home Page --></label>
+            <section>Portal Home Page</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Incidents Page Configuration --></label>
+            <section>Portal Incidents Page Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Transaction Attachments Page Configuration --></label>
+            <section>Portal Transaction Attachments Page Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Transaction Pages Configuration --></label>
+            <section>Portal Transaction Pages Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Fees --></label>
+            <section>Transaction Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Related Configuration --></label>
+            <section>Transaction Related Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Related Configuration --></label>
+            <section>Visit Related Configuration</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>LEAD Configuration Layout - Messages and Alerts</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Fields --></label>
+            <section>Fields</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>LEAD Configuration Layout - Per Provider Type</layout>
+        <sections>
+            <label><!-- Admin Queue --></label>
+            <section>Admin Queue</section>
+        </sections>
+        <sections>
+            <label><!-- Cases and Investigations related configuration --></label>
+            <section>Cases and Investigations related configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Home Page --></label>
+            <section>Portal Home Page</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Incidents Page Configuration --></label>
+            <section>Portal Incidents Page Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Transaction Attachments Page Configuration --></label>
+            <section>Portal Transaction Attachments Page Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Portal Transaction Pages Configuration --></label>
+            <section>Portal Transaction Pages Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Fees --></label>
+            <section>Transaction Fees</section>
+        </sections>
+        <sections>
+            <label><!-- Transaction Related Configuration --></label>
+            <section>Transaction Related Configuration</section>
+        </sections>
+        <sections>
+            <label><!-- Visit Related Configuration --></label>
+            <section>Visit Related Configuration</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- All Settings --></label>
+        <name>All_Settings</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Global Settings --></label>
+        <name>Global_Settings</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Messages and Alerts --></label>
+        <name>Messages_and_Alerts</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Per Provider Type --></label>
+        <name>Per_Provider_Type</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

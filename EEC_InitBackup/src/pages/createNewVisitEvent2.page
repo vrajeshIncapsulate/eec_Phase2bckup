@@ -1,0 +1,124 @@
+<apex:page standardController="task" extensions="CreateVisitEvent" tabStyle="event"  docType="html-5.0" standardStylesheets="false">
+    <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.EEC_FontAwesome, 'font-awesome-4.1.0/css/font-awesome.min.css')}" />
+   <apex:includescript value="{!URLFOR($Resource.EEC_Bootstrap, 'EEC_Bootstrap/js/jquery-1.11.2.min.js')}" />
+   <script src="/soap/ajax/32.0/connection.js" type="text/javascript"/>
+    <script src="/soap/ajax/32.0/apex.js" type="text/javascript"/>
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    
+    <div class="slds">
+    <apex:form styleclass="visitToolForm" >
+    <h2 style="margin-bottom: 5px; font-size: 1.4em;"><strong>Create a New VisitEvent</strong></h2>
+    <apex:messages styleclass="slds-box slds-theme--error slds-theme--inverse-text" />
+            <div class="tool-option slds-col slds-size--1-of-1">
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin: 0 30px 10px 0;"><strong>Subject</strong></h4>
+                  <input class="pull-right" type="text" name="Subject" value="{!evt.Subject}"  data-parsley-required="true" data-parsley-required-message="Please Specify the Subject."/>
+                </div>
+                
+                <div class="other-justification-container slds-grid slds-wrap">
+                    <h4 style="margin: 0 47px 10px 0;"><strong>Start</strong></h4>
+                  <apex:inputField value="{!evt.StartDateTime}" styleClass="slds-col slds-size--3-of-4" html-data-parsley-required="true" html-data-parsley-required-message="Please Specify the Start Date."/>
+                  <!--    <apex:input value="{!evt.StartDateTime}" styleClass="slds-col slds-size--3-of-4" html-data-parsley-required="true" html-data-parsley-required-message="Please Specify the Start Date."/>-->
+                </div>
+                
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin: 0 53px 10px 0;"><strong>End</strong></h4>
+                  <apex:inputField value="{!evt.EndDateTime}" styleClass="slds-col slds-size--3-of-4" html-data-parsley-required="true" html-data-parsley-required-message="Please Specify the End Date."/>
+                  <!--<input class="pull-left" type="Date" name="End" value="{!evt.EndDateTime}" data-parsley-required="true" data-parsley-required-message="Please Specify the End Date."/>-->
+                </div>
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin: 0 20px 10px 0;"><strong>AllDayEvent</strong></h4>
+                  <input class="pull-left" type="checkbox" name="AllDayEvent" value="{!evt.IsAllDayEvent}"/>
+                </div>
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin-bottom: 5px;"><strong>Name</strong></h4>
+                  <apex:inputField value="{!evt.WhoId}" styleClass="pull-right"/>
+                </div>
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin: 0 2px 1px 0;"><strong>Related to</strong></h4>
+                  <apex:inputField value="{!evt.WhatId}" styleClass="pull-right"/>
+                </div>
+                <div class="other-justification-container slds-grid slds-wrap">
+                  <h4 style="margin-bottom: 5px;"><strong>Owner</strong></h4>
+                  <apex:inputField value="{!evt.OwnerId}" styleClass="pull-right"/>
+                </div>
+            </div>
+            <div class="buttons-container" style="margin-top: 25px;">
+          <a href="/{!taskId}" class="slds-button slds-button--neutral slds-button--small" style="float: left;">Cancel</a>
+          <apex:commandButton styleClass="slds-button slds-button--brand slds-button--small" style="float: right;" onclick="if(!checkForm()){return false;}" value="Save" />    
+          <apex:actionFunction name="saveDetail" action="{!Save}"/>
+        </div>
+        <b>sample</b>
+       </apex:form>
+    </div>
+ <style> 
+    .radio-label {
+      /*float: left;*/
+      margin-left: 30px !important;
+      line-height: 12px;
+    }
+
+    .pull-left {
+      /*float: left;*/
+    }
+
+    .tool-option {
+      padding: 5px 0px 5px 15px;
+    }
+
+    .other-justification-container {
+      margin-top: 15px;
+    }
+
+    .other-justification-container .parsley-errors-list {
+      width: 100%;
+      text-align: right;
+    }
+
+    .parsley-errors-list {
+      margin-left: 15px;
+    }
+ 
+    .parsley-error {
+      border: 2px solid #c00;
+    }
+
+    .errorMsg {
+      color: #d74c3b;
+    }
+  </style>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.js" type="text/javascript"></script>
+  <script>
+  
+          
+    $j = jQuery.noConflict();
+    var submitted = false;
+
+    var form = $j(".visitToolForm").parsley({
+      errorsWrapper: '<div class="parsley-errors-list slds-size--1-of-1"></div>',
+      errorTemplate: '<p class="errorMsg"></p>'
+    });
+
+    function changeValue(input, textid) {
+      document.getElementById(textid).value = input.value;
+    }
+
+    $j('#submit').on('click', function() {
+      submitted = true;
+      if (form.validate()) {
+        console.log('----> Form is valid!');
+      } else {
+        console.log('----> Form is NOT valid!');
+      }
+    });
+    
+    function checkForm() {
+        if (form.validate()) {
+            alert('value of date:{!evt.StartDateTime}');
+            saveDetail();
+        }
+      
+    }
+  </script>
+</apex:page>

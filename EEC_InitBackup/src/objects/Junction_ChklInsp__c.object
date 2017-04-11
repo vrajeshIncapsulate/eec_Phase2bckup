@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Junction object that manages the N:N relationship between the Standard Checklist Reference and Standard Visit Items objects</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>External_TVI_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>External TVI ID</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Non_Assessed_Item__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked, it means that this visit item is only for information and does not need to be assessed during the visit</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, this visit item is only for information and does not need to be assessed during the visit</inlineHelpText>
+        <label>Non-Assessed Item</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Random_Item_Domain__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Domain name that is used in case of Random Items. These can vary as most random items are associated to standard items in longer visit tools which contains more detailed domains.</inlineHelpText>
+        <label>Random Item Domain</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Administration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adoptive Children Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Adoptive Parent Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Behavior Support</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Birth Parent Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Care of Children</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Emergency Preparedness</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Executive Administration</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Children Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Foster Parent Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Health</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Interactions</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical Plant</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Physical Space (Indoor &amp; Outdoor)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Records</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Routine &amp; Activities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Transportation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Random_Item__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if this item will be only added if picked as random by the system when using this tool.</inlineHelpText>
+        <label>Random Item</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Standard_Checklist_Reference__c</fullName>
+        <description>This field implements the master-detail relationship between the master Standard Tool Reference object and the detail JunctionChklInsp object</description>
+        <externalId>false</externalId>
+        <label>Tool</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Associated Visit Items</relationshipLabel>
+        <relationshipName>Junction_ChklInsps</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Standard_Inspection_Item__c</fullName>
+        <description>This field implements the master-detail relationship between the master Standard Inspection Item object and the detail JunctionChklInsp object</description>
+        <externalId>false</externalId>
+        <label>Standard Visit Item</label>
+        <referenceTo>Standard_Inspection_Item__c</referenceTo>
+        <relationshipLabel>Tool Assignments</relationshipLabel>
+        <relationshipName>Junction_ChklInsps</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Visit_Mode_Ranking__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Allows you to sort visit items as they will be displayed in visit mode and on visit summary. Lowest ranking will be displayed first. Ranking should be set for each item. Items with empty rank will be displayed last.</inlineHelpText>
+        <label>Visit Mode Ranking</label>
+        <precision>10</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Tools Visit Items</label>
+    <listViews>
+        <fullName>All</fullName>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>JunctCI# {000000}</displayFormat>
+        <label>JunctCINo</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Tools Visit Items</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Standard_Checklist_Reference__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Standard_Inspection_Item__c</lookupDialogsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Disallow_Random_Item_Domain_if_NotRandom</fullName>
+        <active>true</active>
+        <description>Prohibits a value in Random Item Domain when Random Item is FALSE.</description>
+        <errorConditionFormula>NOT(Random_Item__c) &amp;&amp; NOT(ISBLANK( TEXT(Random_Item_Domain__c) ))</errorConditionFormula>
+        <errorMessage>A Random Item Domain is not permitted when Random Item is not checked.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Require_Random_Item_Domain_if_Random</fullName>
+        <active>true</active>
+        <description>Requires a value in Random Item Domain when Random Item is TRUE.</description>
+        <errorConditionFormula>Random_Item__c &amp;&amp; ISBLANK( TEXT(Random_Item_Domain__c) )</errorConditionFormula>
+        <errorDisplayField>Random_Item_Domain__c</errorDisplayField>
+        <errorMessage>A Random Item Domain is required when Random Item is checked.</errorMessage>
+    </validationRules>
+</CustomObject>

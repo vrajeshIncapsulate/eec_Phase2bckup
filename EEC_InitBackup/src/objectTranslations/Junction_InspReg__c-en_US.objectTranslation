@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visit Items Regulation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visit Items Regulation</value>
+    </caseValues>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- External VIR ID --></label>
+        <name>External_VIR_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Regulation --></label>
+        <name>Regulation__c</name>
+        <relationshipLabel><!-- Associated Standard Visit Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Standard Visit Item --></label>
+        <name>Standard_Inspection_Item__c</name>
+        <relationshipLabel><!-- Visit Items Regulation --></relationshipLabel>
+    </fields>
+    <startsWith>Vowel</startsWith>
+</CustomObjectTranslation>

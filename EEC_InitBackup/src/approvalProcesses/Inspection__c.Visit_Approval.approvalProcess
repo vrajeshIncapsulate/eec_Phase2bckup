@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApprovalProcess xmlns="http://soap.sforce.com/2006/04/metadata">
+    <active>true</active>
+    <allowRecall>true</allowRecall>
+    <allowedSubmitters>
+        <submitter>Executive_and_Directors</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Investigator</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Licensor</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>R_P_Licensor</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>SLGSA_Licensor</submitter>
+        <type>role</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Admin</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>FCC_Supervisor</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>R_P_Supervisor</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>Regional_Director</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <allowedSubmitters>
+        <submitter>SLGSA_Supervisor</submitter>
+        <type>roleSubordinates</type>
+    </allowedSubmitters>
+    <approvalPageFields>
+        <field>Name</field>
+        <field>Type_of_Visit__c</field>
+        <field>Provider_No__c</field>
+        <field>Inspector_del__c</field>
+        <field>Date_of_Visit__c</field>
+        <field>Number_of_non_compliant_items__c</field>
+    </approvalPageFields>
+    <approvalStep>
+        <allowDelegate>true</allowDelegate>
+        <assignedApprover>
+            <approver>
+                <type>userHierarchyField</type>
+            </approver>
+        </assignedApprover>
+        <description>Request approval from submitter manager</description>
+        <label>Supervisor Approval</label>
+        <name>Request_Approval_from_Submitter_Manager</name>
+    </approvalStep>
+    <description>This process will allow a Licensor to request approval from his/her manager before sending a Visit report to the Provider. This process is facultative, which means that an approval is not mandatory to generate the report.</description>
+    <emailTemplate>EEC_Int_Communication_Template_Folder/X9_New_Licensing_Visit_to_Review_and_Approve</emailTemplate>
+    <enableMobileDeviceAccess>false</enableMobileDeviceAccess>
+    <entryCriteria>
+        <formula>AND (
+ RecordType.Name &lt;&gt; &quot;Investigation&quot;,
+ OR( ISPICKVAL(Status__c, &quot;Visit Completed&quot;) ,        ISPICKVAL(Status__c, &quot;Report to be sent to Provider&quot;))
+,
+Inspector_del__r.Id  =  $User.Id )</formula>
+    </entryCriteria>
+    <finalApprovalActions>
+        <action>
+            <name>Change_Status_to_send_Report</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Email_Licensor_that_the_report_is_Approved</name>
+            <type>Alert</type>
+        </action>
+    </finalApprovalActions>
+    <finalApprovalRecordLock>false</finalApprovalRecordLock>
+    <finalRejectionActions>
+        <action>
+            <name>Change_Status_to_Visit_Completed</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Email_the_Licensor_that_the_Visit_is_Rejected</name>
+            <type>Alert</type>
+        </action>
+    </finalRejectionActions>
+    <finalRejectionRecordLock>false</finalRejectionRecordLock>
+    <initialSubmissionActions>
+        <action>
+            <name>Change_Status_to_Pending_Approval</name>
+            <type>FieldUpdate</type>
+        </action>
+    </initialSubmissionActions>
+    <label>Visit Approval</label>
+    <nextAutomatedApprover>
+        <useApproverFieldOfRecordOwner>false</useApproverFieldOfRecordOwner>
+        <userHierarchyField>Manager</userHierarchyField>
+    </nextAutomatedApprover>
+    <recallActions>
+        <action>
+            <name>Change_Status_to_Visit_Completed</name>
+            <type>FieldUpdate</type>
+        </action>
+        <action>
+            <name>Email_the_Licensor_that_the</name>
+            <type>Alert</type>
+        </action>
+    </recallActions>
+    <recordEditability>AdminOrCurrentApprover</recordEditability>
+    <showApprovalHistory>true</showApprovalHistory>
+</ApprovalProcess>

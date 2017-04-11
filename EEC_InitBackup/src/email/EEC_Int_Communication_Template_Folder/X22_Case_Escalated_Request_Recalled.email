@@ -1,0 +1,7 @@
+Hello,
+
+Case associated to Provider {!Case.Provider_Name_For_Email_Merge__c}  which was sent for your approval has been recalled by {!Case.OwnerFullName} and does not need your review anymore. 
+
+If you need more information related to this case, please login to Salesforce and review the case: https://na16.salesforce.com/{!Case.Id}
+
+LEAD System
