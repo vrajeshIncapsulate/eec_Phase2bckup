@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Investigation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Investigations</value>
+    </caseValues>
+    <fields>
+        <help><!-- Checked if all interventions associated with this investigation are done --></help>
+        <label><!-- All Interventions Done --></label>
+        <name>All_Interventions_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- Approval Task Creation --></label>
+        <name>Approval_Task_Creation__c</name>
+        <picklistValues>
+            <masterLabel>Escalated Approved</masterLabel>
+            <translation><!-- Escalated Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Escalated Rejected</masterLabel>
+            <translation><!-- Escalated Rejected --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NonEscalated Approved</masterLabel>
+            <translation><!-- NonEscalated Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>NonEscalated Rejected</masterLabel>
+            <translation><!-- NonEscalated Rejected --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- If the current user is assigned as a backup to the Investigation this formula will evaluate to TRUE, else FALSE --></help>
+        <label><!-- Assigned As a Backup --></label>
+        <name>Assigned_As_a_Backup__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the Investigation was assigned to an investigator --></help>
+        <label><!-- Assigned Date --></label>
+        <name>Assigned_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Id --></label>
+        <name>Assigned_To_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned To Me Or My Subordinates --></label>
+        <name>Assigned_To_Me_Or_My_Subordinates__c</name>
+    </fields>
+    <fields>
+        <help><!-- User who will take the lead on the investigation. --></help>
+        <label><!-- Leader --></label>
+        <name>Assigned_To__c</name>
+        <relationshipLabel><!-- Investigations (Leader) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Assigned to Me --></label>
+        <name>Assigned_to_Me__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assignment --></label>
+        <name>Assignment__c</name>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- User that will be used as backup on this case. This user will receive / have the same access than the lead. --></help>
+        <label><!-- Backup --></label>
+        <name>Backup__c</name>
+        <relationshipLabel><!-- Investigations (Backup) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Closed Date --></label>
+        <name>Closed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Completed Date --></label>
+        <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Corrective Actions Reminder Date --></label>
+        <name>Corrective_Actions_Reminder_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the cover letter was created in the system --></help>
+        <label><!-- Cover Letter Issue Date --></label>
+        <name>Cover_Letter_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- This text will compose the cover letter. Salutations and signatures will be added by the system and does not need to be added here. To get the default text, please click on &quot;Set Narrative Default Values&quot; button. --></help>
+        <label><!-- Cover Letter Narrative --></label>
+        <name>Cover_Letter_Narrative__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this box if you wish to deploy this Investigation to the Web Portal. --></help>
+        <label><!-- Publish Report on Portal --></label>
+        <name>Created_on_the_Web__c</name>
+    </fields>
+    <fields>
+        <label><!-- Determinations --></label>
+        <name>Determinations__c</name>
+    </fields>
+    <fields>
+        <label><!-- Due Date --></label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- If this field is checked, it means that the investigation has been reviewed by Deputy Commissioner and has most likely been assigned to an Investigator. It will need to go through a full approval process of findings. --></help>
+        <label><!-- Escalated Investigation --></label>
+        <name>Escalated_Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Description --></label>
+        <name>Facility_Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Follow-up Actions Recommendations --></label>
+        <name>Follow_up_Actions_Recommendations__c</name>
+    </fields>
+    <fields>
+        <label><!-- InterventionsDoneAndCancelled --></label>
+        <name>InterventionsDoneAndCancelled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation Activities --></label>
+        <name>Investigation_Activities__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation Findings --></label>
+        <name>Investigation_Findings__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Investigation_Status__c</name>
+        <picklistValues>
+            <masterLabel>Approved - Report to send</masterLabel>
+            <translation><!-- Approved - Report to send --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Assigned - In Progress</masterLabel>
+            <translation><!-- Assigned - In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed</masterLabel>
+            <translation><!-- Closed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Closed (Legacy Investigation)</masterLabel>
+            <translation><!-- Closed (Legacy Investigation) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>New</masterLabel>
+            <translation><!-- New --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending Approval</masterLabel>
+            <translation><!-- Pending Approval --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Ready to Publish/Send to Provider</masterLabel>
+            <translation><!-- Ready to Publish/Send to Provider --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Investigation Type --></label>
+        <name>Investigation_Type__c</name>
+        <picklistValues>
+            <masterLabel>High Risk</masterLabel>
+            <translation><!-- High Risk --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Issue Resolved by Licensee</masterLabel>
+            <translation><!-- Issue Resolved by Licensee --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Regulatory Issue</masterLabel>
+            <translation><!-- Regulatory Issue --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Is In My Region --></label>
+        <name>Is_In_My_Region__c</name>
+    </fields>
+    <fields>
+        <label><!-- Escalated Inv - First Approver --></label>
+        <name>Leader_Deputy_Commisioner__c</name>
+        <relationshipLabel><!-- Investigations (Escalated Inv - First Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Escalated Inv - Second Approver --></label>
+        <name>Leader_Director_Supervisor__c</name>
+        <relationshipLabel><!-- Investigations (Escalated Inv - Second Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Leader Email --></label>
+        <name>Leader_Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- If the Leader assigned to the investigation is an Investigator, this formula will evaluate to TRUE, else will be FALSE --></help>
+        <label><!-- Leader Is An Investigator --></label>
+        <name>Leader_Is_An_Investigator__c</name>
+    </fields>
+    <fields>
+        <label><!-- Leader Manager --></label>
+        <name>Leader_Manager__c</name>
+        <relationshipLabel><!-- Investigations (Leader Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Leader_Name --></label>
+        <name>Leader_Name_Text__c</name>
+    </fields>
+    <fields>
+        <label><!-- Leader Phone --></label>
+        <name>Leader_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- Leader Title --></label>
+        <name>Leader_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy_FCC_LM_Mobile_Investigation --></label>
+        <name>Legacy_FCC_LM_Mobile_Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy IntakeID --></label>
+        <name>Legacy_IntakeID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Legacy_System_Interaction --></label>
+        <name>Legacy_System_Interaction__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensor Manager --></label>
+        <name>Licensor_Manager__c</name>
+        <relationshipLabel><!-- Investigations (Licensor Manager) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Lock Investigation --></label>
+        <name>Lock_Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non-compliances --></label>
+        <name>Non_compliances__c</name>
+    </fields>
+    <fields>
+        <label><!-- Note to User --></label>
+        <name>Note_to_User__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of days given to the provider to receive corrective actions plan. --></help>
+        <label><!-- Number of Days to Receive Response --></label>
+        <name>Number_of_Days_to_Receive_Response__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Interventions Done --></label>
+        <name>Number_of_Interventions_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Interventions --></label>
+        <name>Number_of_Interventions__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number of Non-Compliant items Accepted --></label>
+        <name>Number_of_Non_Compliant_items_Accepted__c</name>
+    </fields>
+    <fields>
+        <help><!-- Number of Non Compliant items identified during the investigation, other than the ones from Visit --></help>
+        <label><!-- Number of Other Non-Compliant Items --></label>
+        <name>Number_of_Other_Non_Compliant_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Email --></label>
+        <name>Provider_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Id --></label>
+        <name>Provider_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider_No__c</name>
+        <relationshipLabel><!-- Investigations --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Reason for Investigation --></label>
+        <name>Reason_for_Investigation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Related To Complaint Case --></label>
+        <name>Related_To_Complaint_Case__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check if this investigation is associated to a 51A Report. --></help>
+        <label><!-- Related to 51A Report --></label>
+        <name>Related_to_51A__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the report narrative was issued last --></help>
+        <label><!-- Report Narrative Issue Date --></label>
+        <name>Report_Narrative_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this field if an email is required to be sent to the Provider to request a review of non-compliant items --></help>
+        <label><!-- Require Portal Feedback --></label>
+        <name>Require_Portal_Feedback__c</name>
+    </fields>
+    <fields>
+        <label><!-- Sent Date --></label>
+        <name>Sent_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the statement of non-compliance was last generated --></help>
+        <label><!-- Statement of non-compliance Issue Date --></label>
+        <name>Statement_of_non_compliance_Issue_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email address of 1st escalation approver on the case. used as an email field when email alerts have to be sent to 1st escalation owner upon approved or rejected escalated investigations --></help>
+        <label><!-- 1st Escalation Approver Email Address --></label>
+        <name>X1st_Escalation_Approver_Email_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- This is to indicate that this is a legacy investigation. --></help>
+        <label><!-- isLegacyInvestigation --></label>
+        <name>isLegacyInvestigation__c</name>
+    </fields>
+    <layouts>
+        <layout>Investigation Layout</layout>
+        <sections>
+            <label><!-- Cover Letter Narrative --></label>
+            <section>Cover Letter Narrative</section>
+        </sections>
+        <sections>
+            <label><!-- Follow-Up --></label>
+            <section>Follow-Up</section>
+        </sections>
+        <sections>
+            <label><!-- Investigation Assignment --></label>
+            <section>Investigation Assignment</section>
+        </sections>
+        <sections>
+            <label><!-- Investigation Narrative --></label>
+            <section>Investigation Narrative</section>
+        </sections>
+        <sections>
+            <label><!-- PDF Document Generation --></label>
+            <section>PDF Document Generation</section>
+        </sections>
+        <sections>
+            <label><!-- Report Information --></label>
+            <section>Report Information</section>
+        </sections>
+        <sections>
+            <label><!-- Status Information --></label>
+            <section>Status Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- You&apos;re not authorized to change this investigation assignment, please contact your supervisor. --></errorMessage>
+        <name>Allow_Assigned_To_Backup_Change</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- An investigation can not be closed if at least one intervention is not done or cancelled. Review the status of your intervention before trying to close --></errorMessage>
+        <name>At_least_one_intervetion_must_be_done</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A backup investigator can not be defined if the lead investigator is unknown. Fill the lead investigator user before saving. --></errorMessage>
+        <name>Backup_with_Leader</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- An investigation cannot go from &apos;New&apos;, &apos;Assigned - In Progress&apos;, or &apos;Pending Approval&apos; to closed. --></errorMessage>
+        <name>Cant_go_from_new_to_closed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- An investigation can not be closed if the report has not been generated and sent --></errorMessage>
+        <name>Must_have_cover_letter_issue_date_to_clo</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- You are not authorized to close this investigation, please check with your Supervisor / Director. --></errorMessage>
+        <name>Only_leader_backup_may_close</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Edits on a closed investigation are not authorized, Investigation must first be re-opened by a Supervisor or Director to be edited. --></errorMessage>
+        <name>Update_Closed_Investigations</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_Follow_up_Actions --></label>
+        <name>Add_Follow_up_Actions</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Corrective_Action_Plan_Report --></label>
+        <name>Corrective_Action_Plan_Report</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Create_an_investigation_visit --></label>
+        <name>Create_an_investigation_visit</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Cover_Letter --></label>
+        <name>Generate_Cover_Letter</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Report_Narrative --></label>
+        <name>Generate_Report_Narrative</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Generate_Statement_of_Non_Compliance --></label>
+        <name>Generate_Statement_of_Non_Compliance</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Publish_Report_on_Portal --></label>
+        <name>Publish_Report_on_Portal</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Set_Narrative_Default_Values --></label>
+        <name>Set_Narrative_Default_Values</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Transfer_Investigations --></label>
+        <name>Transfer_Investigations</name>
+    </webLinks>
+    <workflowTasks>
+        <name>Email_sent_Internal_Investigation_Requested_39</name>
+        <subject><!-- Email sent - Internal Investigation Requested - #39 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Creates a closed task to document the fact that an email was sent to Provider to notify that report is published on Web --></description>
+        <name>Email_sent_Notification_to_Provider_after_Investigation_35</name>
+        <subject><!-- Email sent - Notification to Provider after Investigation - #35 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Email sent to the provider 5 days after first email to remind  that new non-compliant items are ready for review on portal and must be completed --></description>
+        <name>Reminder_to_provider_for_new_corrective_actions_to_fill_after_investigation_32</name>
+        <subject><!-- Reminder to provider for new corrective actions to fill after investigation - #32 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <name>Review_Non_Compliant_Items_Corrective_Actions</name>
+        <subject><!-- Review Non-Compliant Items Corrective Actions --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

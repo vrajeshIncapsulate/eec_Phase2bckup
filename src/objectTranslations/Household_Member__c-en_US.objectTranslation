@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Household Member</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Household Member</value>
+    </caseValues>
+    <fields>
+        <label><!-- Age At Submission --></label>
+        <name>Age_At_Submission__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned Licensor Email --></label>
+        <name>Assigned_Licensor_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned Licensor Name --></label>
+        <name>Assigned_Licensor_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assigned Licensor Phone --></label>
+        <name>Assigned_Licensor_Phone__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 1 --></label>
+        <name>BRC_City_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 2 --></label>
+        <name>BRC_City_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 3 --></label>
+        <name>BRC_City_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC City 4 --></label>
+        <name>BRC_City_4__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the BRC Consent was requested by email --></help>
+        <label><!-- BRC Consent Request Date --></label>
+        <name>BRC_Consent_Request_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the BRC Consent was signed electronically. --></help>
+        <label><!-- BRC Consent Signed Date --></label>
+        <name>BRC_Consent_Signed_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Status of the electronic version of the document (DocuSign) --></help>
+        <label><!-- BRC Consent Status --></label>
+        <name>BRC_Consent_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Created</masterLabel>
+            <translation><!-- Created --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Delivered</masterLabel>
+            <translation><!-- Delivered --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sent</masterLabel>
+            <translation><!-- Sent --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BRC Current Mailing Address --></label>
+        <name>BRC_Current_Mailing_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 1 --></label>
+        <name>BRC_Date_From_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 2 --></label>
+        <name>BRC_Date_From_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 3 --></label>
+        <name>BRC_Date_From_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date From 4 --></label>
+        <name>BRC_Date_From_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 1 --></label>
+        <name>BRC_Date_To_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 2 --></label>
+        <name>BRC_Date_To_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 3 --></label>
+        <name>BRC_Date_To_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Date To 4 --></label>
+        <name>BRC_Date_To_4__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check this box if the BRC was received and result is OK. --></help>
+        <label><!-- BRC Done --></label>
+        <name>BRC_Done__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Father First Name --></label>
+        <name>BRC_Father_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Father Last Name --></label>
+        <name>BRC_Father_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Gender --></label>
+        <name>BRC_Gender__c</name>
+        <picklistValues>
+            <masterLabel>Female</masterLabel>
+            <translation><!-- Female --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Male</masterLabel>
+            <translation><!-- Male --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- BRC Maiden Name --></label>
+        <name>BRC_Maiden_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Middle Name --></label>
+        <name>BRC_Middle_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother First Name --></label>
+        <name>BRC_Mother_First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother Last Name --></label>
+        <name>BRC_Mother_Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Mother Maiden Name --></label>
+        <name>BRC_Mother_Maiden_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Never Had SSN --></label>
+        <name>BRC_Never_Had_SSN__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Not Renewal Flag For DocuSign --></label>
+        <name>BRC_Not_Renewal_Flag_For_DocuSign__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 1 --></label>
+        <name>BRC_Number_Street_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 2 --></label>
+        <name>BRC_Number_Street_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 3 --></label>
+        <name>BRC_Number_Street_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Number Street 4 --></label>
+        <name>BRC_Number_Street_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Other Addresses --></label>
+        <name>BRC_Other_Addresses__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Place of Birth --></label>
+        <name>BRC_Place_of_Birth__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Renewal Flag For DocuSign --></label>
+        <name>BRC_Renewal_Flag_For_DocuSign__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Renewal --></label>
+        <name>BRC_Renewal__c</name>
+    </fields>
+    <fields>
+        <help><!-- Is checked if a BRC was required at submission for this household member. --></help>
+        <label><!-- BRC Required --></label>
+        <name>BRC_Required__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC SSN Last Six Digits (2) --></label>
+        <name>BRC_SSN_Last_Six_Digits_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC SSN Last Six Digits (4) --></label>
+        <name>BRC_SSN_Last_Six_Digits_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 1 --></label>
+        <name>BRC_State_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 2 --></label>
+        <name>BRC_State_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 3 --></label>
+        <name>BRC_State_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC State 4 --></label>
+        <name>BRC_State_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Suffix --></label>
+        <name>BRC_Suffix__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 1 --></label>
+        <name>BRC_Zip_1__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 2 --></label>
+        <name>BRC_Zip_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 3 --></label>
+        <name>BRC_Zip_3__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Zip 4 --></label>
+        <name>BRC_Zip_4__c</name>
+    </fields>
+    <fields>
+        <label><!-- CORI Reception Date --></label>
+        <name>CORI_Reception_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- CORI Result --></label>
+        <name>CORI_Result__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved after discretionary review</masterLabel>
+            <translation><!-- Approved after discretionary review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Current School Grade --></label>
+        <name>Current_School_Grade__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- DCF Reception Date --></label>
+        <name>DCF_Reception_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- DCF Result --></label>
+        <name>DCF_Result__c</name>
+        <picklistValues>
+            <masterLabel>Approved</masterLabel>
+            <translation><!-- Approved --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Approved after discretionary review</masterLabel>
+            <translation><!-- Approved after discretionary review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Denied</masterLabel>
+            <translation><!-- Denied --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Date of Birth --></label>
+        <name>Date_of_Birth__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email address will be used in order to send BRC authorization eletronically. --></help>
+        <label><!-- Email Address --></label>
+        <name>Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- BRC Household / Ind On Premise --></label>
+        <name>Household_Ind_On_Premise__c</name>
+        <picklistValues>
+            <masterLabel>Household Member</masterLabel>
+            <translation><!-- Household Member --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Individual on Premise</masterLabel>
+            <translation><!-- Individual on Premise --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensing Transactions --></label>
+        <name>Licensing_Transactions__c</name>
+        <relationshipLabel><!-- Household Members and Regular Persons on Premise --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number of Hours Home During Child Care --></label>
+        <name>Number_of_Hours_Home_During_Child_Care__c</name>
+    </fields>
+    <fields>
+        <label><!-- Occupation --></label>
+        <name>Occupation__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Email Address --></label>
+        <name>Provider_Email_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Full Address --></label>
+        <name>Provider_Full_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Name --></label>
+        <name>Provider_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Household Members and Regular Persons on Premise --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Relationship to Provider --></label>
+        <name>Relationship_to_Provider__c</name>
+    </fields>
+    <layouts>
+        <layout>Household Member Layout</layout>
+        <sections>
+            <label><!-- Additional Information --></label>
+            <section>Additional Information</section>
+        </sections>
+        <sections>
+            <label><!-- Associations --></label>
+            <section>Associations</section>
+        </sections>
+        <sections>
+            <label><!-- BRC Information --></label>
+            <section>BRC Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If CORI Result has been selected, Reception Date is required --></errorMessage>
+        <name>CORI_Result_requires_a_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Result must be selected if date is not empty. --></errorMessage>
+        <name>CORI_Status_Not_Null_If_Date_Filled</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If DCF Result has been selected, Reception Date is required --></errorMessage>
+        <name>DCF_Result_requires_a_date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Result must be selected if date is not empty. --></errorMessage>
+        <name>DCF_Status_Not_Null_If_Date_Filled</name>
+    </validationRules>
+    <workflowTasks>
+        <description><!-- Once a licensing transaction requiring signature of BRC Consent by one of the household member is submitted, this email is sent to require the household member / person on premise to sign a BRC consent. --></description>
+        <name>Email_sent_Reques_signature_of_Household_Member_BRC_consent_69</name>
+        <subject><!-- Email sent - Request signature of Household Member BRC consent (&gt;=18yo) - #69a --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Once a licensing transaction requiring signature of BRC Consent by one of the household member is submitted, this email is sent to require the household member / person on premise to sign a BRC consent. --></description>
+        <name>Email_sent_Request_signature_of_Household_Member_BRC_consent_18yo_69b</name>
+        <subject><!-- Email sent - Request signature of Household Member BRC consent (&lt;18yo) - #69b --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- Once a licensing transaction requiring signature of BRC Consent by one of the household member is submitted, this email is sent to require the household member / person on premise to sign a BRC consent. --></description>
+        <name>Email_sent_Request_signature_of_Household_Member_BRC_consent_69</name>
+        <subject><!-- Email sent - Request signature of Household Member BRC consent - #69 --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- If a household member / individual on premise BRC consent is pending for more than 5 days, then this email is sent to remind the user that the document is pending --></description>
+        <name>Email_sent_Signature_of_Household_Member_BRC_consent_Pending_Reminder_18_yo_70b</name>
+        <subject><!-- Email sent - Signature of Household Member BRC consent Pending Reminder (&lt;18 yo) - #70b --></subject>
+    </workflowTasks>
+    <workflowTasks>
+        <description><!-- If a household member / individual on premise BRC consent is pending for more than 5 days, then this email is sent to remind the user that the document is pending --></description>
+        <name>Email_sent_Signature_of_Household_Member_BRC_consent_Pending_Reminder_70</name>
+        <subject><!-- Email sent - Signature of Household Member BRC consent Pending Reminder (&gt;=18 yo) - #70a --></subject>
+    </workflowTasks>
+</CustomObjectTranslation>

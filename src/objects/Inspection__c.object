@@ -1,0 +1,4113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>Visit_with_Description</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>Visit_with_Description</fullName>
+        <fields>Name</fields>
+        <fields>Provider_No__c</fields>
+        <fields>Inspector_del__c</fields>
+        <fields>Date_of_Visit__c</fields>
+        <label>Visit with Description</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Manages Inspection records for license, site, violation and other inspection types</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Abandon_Tool_Reason__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Reason a previously selected tool has been abandoned during the visit. This is filled when the tool is abandoned in visit mode</inlineHelpText>
+        <label>Abandon Tool Reason</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Activity_Summary__c</fullName>
+        <description>Describe the activity summary that will be used in the visit narrative</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe the activity summary that will be used in the visit narrative</inlineHelpText>
+        <label>Activity Summary</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Additional_EEC_Staff__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Additional EEC Licensor or staff that will be present or was present during the visit. This information will appear in Visit Summary</inlineHelpText>
+        <label>Additional EEC Staff</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Visit_Additional_Staff</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Address_1__c</fullName>
+        <description>Address 1</description>
+        <externalId>false</externalId>
+        <inlineHelpText>At creation and if left blank, Address 1 will be populated with Provider address after saving.</inlineHelpText>
+        <label>Street Address 1</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Address_2__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>At creation and if left blank, Address 2 will be populated with Provider address after saving</inlineHelpText>
+        <label>Street Address 2</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Admin_Turnaround_Time_for_Visits_Days__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( 
+
+(ISBLANK(Date_and_Time_of_Published_on_the_Portal__c)  ||  ISBLANK(Date_and_Time_of_Visit_Completion__c)),
+
+NULL,
+
+(Date_and_Time_of_Published_on_the_Portal__c - Date_and_Time_of_Visit_Completion__c)
+
+)</formula>
+        <label>Admin Turnaround Time for Visit (Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Announced_Visit_Remainder__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field is used to determine if the email was sent or not.</description>
+        <externalId>false</externalId>
+        <label>Announced Visit Remainder</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Announced__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Announced</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Announcement_Type__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Type of announcement given to the provider. For announced, the system will automatically email the provider (if email is known) with confirmation and reminders. For semi-announced, the system will create a task for the licensor to announce to the provider</inlineHelpText>
+        <label>Announcement Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Inspector_del__r.Email</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Inspector_del__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Manager__c</fullName>
+        <description>Assigned to person manager email address. This is field is used to identify the manager email on the visit object directly (used in some workflow / approval process). It&apos;s not displayed to users and automatically updated by a workflow rule.</description>
+        <externalId>false</externalId>
+        <label>Assigned To Manager Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Me_Or_My_Subordinates__c</fullName>
+        <description>Checkbox to indicate if the current user has this visit record in his/her role hierarchy</description>
+        <externalId>false</externalId>
+        <formula>OR(  Assigned_to_Me__c, 
+Inspector_del__r.ManagerId = $User.Id,
+Inspector_del__r.Manager.ManagerId = $User.Id)</formula>
+        <inlineHelpText>Checkbox to indicate if the current user has this visit record in his/her role hierarchy</inlineHelpText>
+        <label>Assigned To Me Or My Subordinates</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Inspector_del__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_User_Is_An_Investigator__c</fullName>
+        <externalId>false</externalId>
+        <formula>CONTAINS(Inspector_del__r.Title, &quot;Investigator&quot;)</formula>
+        <label>Assigned To User Is An Investigator</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Me__c</fullName>
+        <description>This field is used in reports to filter on Visits assigned to &quot;me&quot;</description>
+        <externalId>false</externalId>
+        <formula>$User.Id =  Inspector_del__c</formula>
+        <label>Assigned to Me</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Can_be_Edited__c</fullName>
+        <externalId>false</externalId>
+        <formula>!AND(OR(ISPICKVAL(Status__c,&apos;Cancelled&apos;), ISPICKVAL(Status__c,&apos;Closed&apos;)),!ISBLANK($UserRole.Name),$UserRole.Name !=&apos;Executive_and_Directors&apos;,$UserRole.Name!=&apos;Regional_Director&apos;,OR(NOT(OR(CONTAINS($UserRole.DeveloperName,&apos;Director&apos;),CONTAINS($UserRole.DeveloperName,&apos;Supervisor&apos;))),AND($UserRole.DeveloperName==&apos;FCC_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Family Child Care&apos;), AND($UserRole.DeveloperName==&apos;SLGSA_Supervisor&apos;,Provider_No__r.RecordType.Name != &apos;Large Group&apos;,Provider_No__r.RecordType.Name != &apos;Small Group&apos;), AND($UserRole.DeveloperName==&apos;R_P_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Group Care&apos;,Provider_No__r.RecordType.Name != &apos;Temporary Shelter&apos;,Provider_No__r.RecordType.Name != &apos;Adoption Agency&apos;,Provider_No__r.RecordType.Name != &apos;Foster Care Agency&apos;)))</formula>
+        <label>Can be Edited</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Cancellation__c</fullName>
+        <description>If status is changed to Cancel, then Cancellation reason must be provided.</description>
+        <externalId>false</externalId>
+        <label>Closed / Cancellation Reason</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Capacity__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Capacity__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Capacity</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_Qualify_2Upd_To_Schedule_Visit__c</fullName>
+        <description>Temp field to check if a qualifying status to update the To Schedule Visit flag exists.....delete after testing</description>
+        <externalId>false</externalId>
+        <formula>OR( ISPICKVAL(Status__c,&quot;Scheduled&quot;),  ISPICKVAL(Status__c, &quot;Visit Completed&quot;),  ISPICKVAL(Status__c, &quot;Pending Approval&quot;))</formula>
+        <inlineHelpText>Temp field to check if a qualifying status to update the To Schedule Visit flag exists.....delete after testing</inlineHelpText>
+        <label>Check Qualify 2Upd To Schedule Visit</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Check_Record_Type_Name_Value__c</fullName>
+        <description>Temp field for testing....delete after testing</description>
+        <externalId>false</externalId>
+        <formula>RecordType.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Temp field for testing....delete after testing</inlineHelpText>
+        <label>Check Record Type Name Value</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_if_Licensing_Trans_Lookup_Exists__c</fullName>
+        <description>Temp field to check if a Licensing Trans exists.....delete after testing</description>
+        <externalId>false</externalId>
+        <formula>NOT(ISBLANK( Licensing_Transaction__c ))</formula>
+        <inlineHelpText>Temp field to check if a Licensing Trans exists.....delete after testing</inlineHelpText>
+        <label>Check if Licensing Trans Lookup Exists</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Checklist_Summary_issue_date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the checklist summary was issued last.</inlineHelpText>
+        <label>Tool Summary issue date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>At creation and if left blank, City will be populated with Provider address after saving</inlineHelpText>
+        <label>City</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Closed_Cancellation_Date__c</fullName>
+        <description>Save the date when the visit was closed or cancelled</description>
+        <externalId>false</externalId>
+        <label>Closed / Cancellation Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <description>Mention here the additional comments that should be displayed in the visit narrative</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Mention here the additional comments that should be displayed in the visit narrative</inlineHelpText>
+        <label>Comments</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Corrective_Action_Deadline__c</fullName>
+        <description>This field contains the deadline given to the provider to answer to a visit report with corrective actions</description>
+        <externalId>false</externalId>
+        <formula>IF( OR(ISPICKVAL(Status__c, &quot;Closed&quot;),  ISPICKVAL(Status__c, &quot;Cancelled&quot;), ISPICKVAL(Status__c, &quot;Feedback received, to review&quot;), Number_of_non_compliant_items__c=0,  RecordType.Name = &quot;Investigation Visits&quot;),NULL, TODAY() +  Number_of_days_to_receive_response__c)</formula>
+        <inlineHelpText>Deadline given to the provider to answer to a visit report with corrective actions</inlineHelpText>
+        <label>Corrective Action Reception Deadline</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Corrective_Action_Required__c</fullName>
+        <description>Describe the corrective actions that will be added to the visit narrative</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Add here additional comments related to corrective actions that will appear in the visit narrative
+This text comes in addition to the standard text that depends of the result of the visit: include non-compliant items or not.</inlineHelpText>
+        <label>Corrective Action Required</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Count_Visit_For_Visit_Creation_Batch__c</fullName>
+        <description>If checked, it means that this visit counts as a visit that can be taken into account during the automated visit creation batch, which would mean that a new visit would not be created by the system</description>
+        <externalId>false</externalId>
+        <formula>(ISBLANK( Date_of_Visit__c ) &amp;&amp;
+
+CONTAINS(RecordType.Name, &quot;Licensing&quot;) &amp;&amp;
+
+(ISPICKVAL(Type_of_Visit__c , &quot;Monitoring&quot;) || ISPICKVAL(Type_of_Visit__c , &quot;Enhanced Monitoring&quot;) || ISPICKVAL(Type_of_Visit__c , &quot;Provisional License Renewal&quot;) || ISPICKVAL(Type_of_Visit__c , &quot;Progress&quot;) )  &amp;&amp;
+
+NOT(ISPICKVAL(Status__c , &quot;Cancelled&quot;)))
+
+||
+
+(DATEVALUE(CreatedDate) &gt;= TODAY() - 5 &amp;&amp;  Visit_Created_By_Batch__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Count Visit For Visit Creation Batch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Cover_Letter_Issue_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the cover letter was issued last.</inlineHelpText>
+        <label>Cover Letter Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cover_Letter_Narrative__c</fullName>
+        <externalId>false</externalId>
+        <label>Cover Letter Narrative</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Created_on_the_Web__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Note that all licensing visits with the following statuses will be available on portal:  &quot;Scheduled&quot; (if Announced flag is checked)  / &quot;Closed&quot; / &quot;Report Sent to Provider, Awaiting Feedback&quot; / &quot;Feedback received, to review&quot;</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If checked, non compliant items associated to this visit have been published on portal and are ready to be reviewed.</inlineHelpText>
+        <label>Published on Portal</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Date_and_Time_of_Published_on_the_Portal__c</fullName>
+        <description>This field is used with the process flow Visit_Field_Calculations_for_Turnaround_Time to calculate administrative turnaround time for visits</description>
+        <externalId>false</externalId>
+        <label>Date and Time of Published on the Portal</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Date_and_Time_of_Visit_Completion__c</fullName>
+        <description>This field is used with the process flow Visit_Field_Calculations_for_Turnaround_Time to calculate administrative turnaround time</description>
+        <externalId>false</externalId>
+        <label>Date and Time of Visit Completion</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Date_of_Visit__c</fullName>
+        <description>Date of site inspection visit</description>
+        <externalId>false</externalId>
+        <label>Date of Visit</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>EEC_Legacy_Compliance_Code_Desc__c</fullName>
+        <externalId>false</externalId>
+        <label>Legacy Compliance Code Description</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Alert_Main_Recipient__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Alert Main Recipient</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Alert_Secondary_Recipient__c</fullName>
+        <externalId>false</externalId>
+        <label>Email Alert Secondary Recipient</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Email_Template_Switch_Tool_Justification__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK( Switch_Tool_Justification_2__c ), Switch_Tool_Justification_1__c, Switch_Tool_Justification_2__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Email Template Switch Tool Justification</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>End_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>End Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>Estimated_Deadline__c</fullName>
+        <externalId>false</externalId>
+        <label>Estimated Deadline</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>FCC_Child_Care_Record_Chart__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; ,
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wDx&quot;, &quot;Child Care Record Chart (Word)&quot;)
+
+,
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000XdnZ&quot;, &quot;Child Care Record Chart (Word)&quot;)
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open Word version of Children’s Records Checklist (which also includes instructions to assist you in completing the required children’s records checklist)</inlineHelpText>
+        <label>FCC - Child Care Record Chart (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Visit_Tool_Used__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The first visit tool that was applied to the Visit</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the initial Visit Tool that was applied to the Visit</inlineHelpText>
+        <label>First Visit Tool Used</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visits (First Visit Tool Used)</relationshipLabel>
+        <relationshipName>Visits3</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>GSA_Child_Records_Checklist__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; ,
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wEM&quot;, &quot;Child Records Checklist (Word)&quot;)
+
+,
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000Xdno&quot;, &quot;Child Records Checklist (Word)&quot;)
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open Word version of Child Records Checklist (which includes instructions to assist you in completing the required children’s records checklist)</inlineHelpText>
+        <label>GSA - Child Records Checklist (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>GSA_Staff_Records_Checklist__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; ,
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wER&quot;, &quot;Staff Records Checklist (Word)&quot;)
+
+,
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000Xdny&quot;, &quot;Staff Records Checklist (Word)&quot;)
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open Word version of Staff Record Checklist (includes instructions to assist you in completing the required staff records checklist)</inlineHelpText>
+        <label>GSA - Staff Records Checklist (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Inspector_del__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Licensor or investigator who performs the inspection</description>
+        <externalId>false</externalId>
+        <label>Assigned To</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Inspections_del</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>InvestigationId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Investigation__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>InvestigationId</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Investigation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>An Investigation may have one or more related Inspections</description>
+        <externalId>false</externalId>
+        <label>Investigation</label>
+        <referenceTo>Investigation__c</referenceTo>
+        <relationshipName>Inspections</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Last_Upgrade_or_Renewal_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Last_Issue_Date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Last Upgrade or Renewal Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Legacy_FCC_LM_Mobile_Visit__c</fullName>
+        <externalId>false</externalId>
+        <label>Legacy FCC LM/Mobile Visit</label>
+        <length>150</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_System_Interaction__c</fullName>
+        <externalId>false</externalId>
+        <label>Legacy System Interaction #</label>
+        <length>50</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>License_Expiration_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Renewal_date__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>License Expiration Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>License_Number__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Current_License_Number__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>License Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>License_Status_Provider_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Provider_No__r.License_Status__c ) &amp; &quot; / &quot; &amp;  TEXT( Provider_No__r.Provider_Status__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>License Status / Provider Status</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Licensing_Transaction__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Licensing Transaction</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Licensing_Transaction__c.Provider__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.Provider_No__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Licensing_Transaction__c</referenceTo>
+        <relationshipLabel>Visits</relationshipLabel>
+        <relationshipName>Visits</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Mater_Visit_for_Res_Cluster_of_Visits__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Select here the visit that will serve as Primary Visit. Being defined as a &apos;dependent associated&apos; visit, this visit will follow the same process than the Primary for the following steps: visit scheduling, selection of visit checklist, and report creation.</inlineHelpText>
+        <label>Primary Visit (for Cluster of Visit)</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>$Source.Inspector_del__c</field>
+                <operation>equals</operation>
+                <valueField>Inspection__c.Inspector_del__c</valueField>
+            </filterItems>
+            <filterItems>
+                <field>Inspection__c.RecordType.Name</field>
+                <operation>contains</operation>
+                <value>Licensing</value>
+            </filterItems>
+            <filterItems>
+                <field>Inspection__c.Provider_No__r.Is_Residential__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <filterItems>
+                <field>Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c</field>
+                <operation>equals</operation>
+                <value></value>
+            </filterItems>
+            <filterItems>
+                <field>Inspection__c.Provider_No__r.Umbrella_Members__c</field>
+                <operation>notEqual</operation>
+                <value></value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Inspection__c</referenceTo>
+        <relationshipLabel>Dependent Associated Visits (for Res. Cluster of Visits)</relationshipLabel>
+        <relationshipName>Slave_Visits</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Max_Assessed_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Max Assessed Date</label>
+        <summarizedField>Inspection_Item__c.Assessed_Date__c</summarizedField>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>max</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Min_Assessed_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Min Assessed Date</label>
+        <summarizedField>Inspection_Item__c.Assessed_Date__c</summarizedField>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>min</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>No_Birth_Mothers_Making_Adoption_Plan__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Birth Mothers Who Made an Adoption Plan for Adoption Agencies</inlineHelpText>
+        <label>No. Birth Mothers Making Adoption Plan</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Birth_Mothers_Receiving_Services__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Birth Mothers Who Received Services for Adoption Agencies</inlineHelpText>
+        <label>No. Birth Mothers Receiving Services</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Families_Rec_Home_Stdy_Serv_Only__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Families Receiving Home Study Service Only for Adoption Agencies</inlineHelpText>
+        <label>No. Families Rec Home Stdy Serv Only</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Families_Receiving_Info_and_Referral__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Families Receiving Information and Referral for Adoption Agencies</inlineHelpText>
+        <label>No. Families Receiving Info and Referral</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Indiv_Rec_Search_and_or_Reunion_Serv__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Individuals Receiving Search and/or Reunion Services for Adoption Agencies</inlineHelpText>
+        <label>No. Indiv Rec Search and/or Reunion Serv</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Families_Rec_Case_Mgmt_Services__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Families Receiving Case Management Services for Adoption Agencies</inlineHelpText>
+        <label>No. of Families Rec Case Mgmt Services</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Note_to_User__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;Legacy Visit, please be aware that some Visit Items might appear to be duplicates.&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Note to User</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>NumberOfChildrenPlacedInCare__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Children Placed in Care</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Adoptive_Placements__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Adoptive Placements for Adoption Agencies</inlineHelpText>
+        <label>No. Adoptive Placements</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Child_Assessments__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Child Assessments for Adoption Agencies</inlineHelpText>
+        <label>Number of Child Assessments</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Foster_Homes__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Foster Homes for Adoption Agencies</inlineHelpText>
+        <label>Number of Foster Homes</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Home_Study_Services__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Home Study Services for Adoption Agencies</inlineHelpText>
+        <label>Number of Home Study Services</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Items_Abandoned__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Items Abandoned</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Non Assessed (tool abandoned)</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Items_with_Corrective_Actions__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Items with Corrective Actions</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Non-Compliant</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Date_Implemented__c</field>
+            <operation>notEqual</operation>
+            <value></value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Non_Compliant_items_Accepted__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Non-Compliant items Accepted</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Correction_Plan_Status__c</field>
+            <operation>equals</operation>
+            <value>EEC Accepted</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Non-Compliant</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Not_Assessed_Items__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Not Assessed Items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Not Assessed</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Reunions_Facilitated__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Reunions Facilitated for Adoption Agencies</inlineHelpText>
+        <label>Number of Reunions Facilitated</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Waiting_Families__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Waiting Families for Adoption Agencies</inlineHelpText>
+        <label>Number of Waiting Families</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_compliant_items__c</fullName>
+        <description>Provide the number of inspection items that are compliant</description>
+        <externalId>false</externalId>
+        <label>Number of Compliant Items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Compliant</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_days_to_receive_response__c</fullName>
+        <description>Number of days to receive response</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days given to the provider to receive corrective actions plan.</inlineHelpText>
+        <label>Number of Days to Receive Corr. Actions</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_items_to_assess__c</fullName>
+        <description>Provide the number of items that has not been reviewed yet</description>
+        <externalId>false</externalId>
+        <label>Number of Items to Assess</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>&quot;&quot;</value>
+        </summaryFilterItems>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Non_Assessed_Item__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_non_applicable_items__c</fullName>
+        <description>Provide the number of non applicable inspection items</description>
+        <externalId>false</externalId>
+        <label>Number of Non-Applicable items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Not Applicable</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_non_assessed_items__c</fullName>
+        <description>Provide the number of non-assessed items from a visit</description>
+        <externalId>false</externalId>
+        <label>Number of Non-Assessed items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Non_Assessed_Item__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_non_compliant_items__c</fullName>
+        <description>Provide the number of non-compliant items from an inspection</description>
+        <externalId>false</externalId>
+        <label>Number of Non-Compliant items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Inspection_Result__c</field>
+            <operation>equals</operation>
+            <value>Non-Compliant</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_visit_items__c</fullName>
+        <description>Provide the total number of visit items</description>
+        <externalId>false</externalId>
+        <label>Number of Visit Items</label>
+        <summaryFilterItems>
+            <field>Inspection_Item__c.Non_Assessed_Item__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Inspection_Item__c.Inspection_No__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Offline_Lock__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag checked when the visit has been downloaded to be used on the offline app. Edits to such visit are not authorized</inlineHelpText>
+        <label>Offline Lock</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Original_Visit__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Original Visit</label>
+        <lookupFilter>
+            <active>true</active>
+            <errorMessage>Provider of the associated visit must be the provider of the visit</errorMessage>
+            <filterItems>
+                <field>$Source.Provider_No__c</field>
+                <operation>equals</operation>
+                <valueField>Inspection__c.Provider_No__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Inspection__c</referenceTo>
+        <relationshipLabel>Associated Visits (Follow-Ups)</relationshipLabel>
+        <relationshipName>Visits</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Phone</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Population_Served__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Characteristics_of_Children_Served__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Population Served</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Previous_Visit_Tool_Used__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>The Previous visit tool that was selected by the user</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is the previously selected Visit Tool</inlineHelpText>
+        <label>Previous Visit Tool Used</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visits (Previous Visit Tool Used)</relationshipLabel>
+        <relationshipName>Visits2</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Program_Director_Licensee__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Most_Recent_Program_Director_Licensee__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Program Director / Licensee</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ProviderId__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>ProviderId</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_Address_City__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Provider_Address_1__c &amp; &quot;,&quot; &amp; Provider_No__r.Provider_City__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Provider Address, City</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_Address__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Provider_Address_1__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Provider Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Provider Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_No__c</fullName>
+        <description>Provider.Provider No links the parent Provider (Account) record to the child Inspection record</description>
+        <externalId>false</externalId>
+        <label>Provider</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Account.RecordTypeId</field>
+                <operation>notEqual</operation>
+                <value>Umbrella</value>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Visits</relationshipLabel>
+        <relationshipName>Inspections</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Provider_Owner__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.OwnerId</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Provider Owner</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.RecordType.Name</formula>
+        <label>Provider Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>R_P_Facility_Trans_Checklist_W__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; , 
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wIJ&quot;, &quot;Facility and Transportation Checklist (Word)&quot;) 
+
+, 
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000gSgt&quot;, &quot;Facility and Transportation Checklist (Word)&quot;) 
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open Word version of Residential Licensing Facility Transportation Tool</inlineHelpText>
+        <label>R&amp;P - Facility &amp; Trans Checklist (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>R_P_Personnel_Checklist__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; , 
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wI4&quot;, &quot;Personnel Checklist (Word)&quot;) 
+
+, 
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000gSgo&quot;, &quot;Personnel Checklist (Word)&quot;) 
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open the Word version of the Personnel Tool (Personnel files for Residential Care and Placement Programs)</inlineHelpText>
+        <label>R&amp;P - Personnel Checklist (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>R_P_Residents_Record_Checklist_W__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF( $Organization.Id = &quot;00D170000000PUw&quot; , 
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=015j00000016wIE&quot;, &quot;Residents record checklist (Word)&quot;) 
+
+, 
+
+
+HYPERLINK(&quot;/servlet/servlet.FileDownload?file=01511000000gSgy&quot;, &quot;Residents record checklist (Word)&quot;) 
+
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open Word version of Residents record tool</inlineHelpText>
+        <label>R&amp;P - Residents Record Checklist (W)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Recommended_Tool__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Visit toll that was recommended for this visit</inlineHelpText>
+        <label>Recommended Tool</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visits (Recommended Tool)</relationshipLabel>
+        <relationshipName>Visits1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Region__r.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Region</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Related_to_an_Investigation__c</fullName>
+        <description>If the Visit is related to an Investigation evaluates to TRUE else FALSE</description>
+        <externalId>false</externalId>
+        <formula>IF(NOT( ISNULL( Investigation__c )), TRUE, FALSE)</formula>
+        <inlineHelpText>If the Visit is related to an Investigation evaluates to TRUE else FALSE</inlineHelpText>
+        <label>Related to an Investigation</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Remarks_and_Notes__c</fullName>
+        <externalId>false</externalId>
+        <label>Remarks and Notes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Res_Licensing_Facility_Transp_DcSign__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(&quot;https://na2.docusign.net/Member/PowerFormSigning.aspx?PowerFormId=a1232a56-63f2-4881-83a1-e5be1c7f5a78&amp;Provider=&quot; &amp;  Provider_No__r.Name &amp; &quot;&amp;Reviewer_Email=&quot; &amp; Assigned_To_Email__c &amp; &quot;&amp;Reviewer_UserName=&quot; &amp;  Inspector_del__r.FirstName &amp; &quot; &quot; &amp;  Inspector_del__r.LastName  &amp; &quot;&amp;EnvelopeField_SalesforceRecordID=&quot; &amp;  Id &amp; &quot;&amp;EnvelopeField_DocType=Residential%20Licensing%20Facility%20Transportation%20Checklist&quot; , &quot;Facility and Transportation Checklist (DocuSign)&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Open DocuSign version of Residential Licensing Facility Transportation Tool</inlineHelpText>
+        <label>R&amp;P - Facility &amp; Trans Checklist (D)</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sent_date__c</fullName>
+        <description>Date the report was sent to the provider</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the report was sent to the provider.</inlineHelpText>
+        <label>Sent date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Specific_Visit_Requirements__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Enter here the specific requirements for this visit (ex: for transportation inspection, visit must be arranged when vans are idle and accessible)</inlineHelpText>
+        <label>Specific Visit Requirements</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Start_Time__c</fullName>
+        <externalId>false</externalId>
+        <label>Start Time</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <externalId>false</externalId>
+        <formula>&quot;MA&quot;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>State</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Statement_of_non_compliance__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the statement of non-compliance was last generated</inlineHelpText>
+        <label>Statement of non-compliance Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <description>Provide the different stage of an inspection</description>
+        <externalId>false</externalId>
+        <label>Visit Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Report Sent to Provider, Awaiting feedback</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Feedback received, to review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Switch_Tool_Justification_1__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This field contains a written explanation for switching the recommended Visit Tool for the first time</inlineHelpText>
+        <label>1st Switch Tool Justification</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Switch_Tool_Justification_2__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This field contains a written explanation for switching the recommended Visit Tool for the second time</inlineHelpText>
+        <label>2nd Switch Tool Justification</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Tech_Assist_Recommendations_Comments__c</fullName>
+        <description>Describe the additional technical assistance that was provided during the visit.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe the technical assistance that was provided or need to be provided in addition to the one already captured in the visit items. This will appear in the visit narrative.</inlineHelpText>
+        <label>Technical Assistance</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Time_of_visit__c</fullName>
+        <externalId>false</externalId>
+        <label>Time of visit</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Capacity__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Total_License_Capacity__c</formula>
+        <label>Total Capacity</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Number_of_Non_Assessed_Items__c</fullName>
+        <externalId>false</externalId>
+        <formula>Number_of_non_assessed_items__c + Number_of_Items_Abandoned__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Number of Non Assessed Items</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Staff__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Total_Staff__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Staff</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type_of_Visit__c</fullName>
+        <description>Reason of Visit</description>
+        <externalId>false</externalId>
+        <label>Reason of Visit</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Pre-Licensing</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Umbrella_Name__c</fullName>
+        <description>Umbrella name used in the filter rule in the visit master / slave relationship</description>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Umbrella_Members__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Umbrella Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Updates_Changes__c</fullName>
+        <description>Describe the updates and changes required. This will appear in the narrative</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Describe the updates and changes required. This will appear in the visit narrative</inlineHelpText>
+        <label>Updates and Changes</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Use_Non_Recommended_Tool_Justification__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Justification provided by the licensor to use another visit tool than the visit tool proposed by the system. If empty, it means that the tool used was the one proposed by the system</inlineHelpText>
+        <label>Use Non Recommended Tool Justification</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Address_Full_Email__c</fullName>
+        <description>Consolidated Visit Address to consolidate for there being no Address 2 and other blank spaces</description>
+        <externalId>false</externalId>
+        <formula>Address_1__c &amp; &quot;, &quot; &amp; IF( OR(ISNULL(Address_2__c),ISBLANK(Address_2__c)),&quot;&quot;, Address_2__c&amp;&quot;, &quot;) &amp; City__c &amp; &quot;, &quot; &amp; State__c &amp; &quot; &quot; &amp; Zip_Code__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Address Full Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Created_By_Batch__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This flag is used to identify if the visit has been created by the batch which create visits automatically for visits not associated to a licensing transaction.</description>
+        <externalId>false</externalId>
+        <label>Visit Created By Batch</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Visit_Length_Method_1__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND((Max_Assessed_Date__c -  Min_Assessed_Date__c ) * 1440,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Duration in minutes of the visit calculated between the first visit item assessed and the last visit item assessed.</inlineHelpText>
+        <label>Visit Length - Method 1 (in min.)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Length_Method_2__c</fullName>
+        <externalId>false</externalId>
+        <formula>ROUND(( End_Time__c -  Start_Time__c ) * 1440,0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>Duration in minutes of the visit calculated using the &quot;Start timer&quot; and &quot;End timer&quot; buttons found in visit mode</inlineHelpText>
+        <label>Visit Length - Method 2 (in min.)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Mode_Lock__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This flag checked when the visit mode is accessed by a user and remains locked for other users until its released or unlocked by the user.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This flag checked when the visit mode is accessed by a user and remains locked for other users until its released or unlocked by the user.</inlineHelpText>
+        <label>Visit Mode Lock</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Visit_Mode_Locked_By__c</fullName>
+        <externalId>false</externalId>
+        <label>Visit Mode Locked By</label>
+        <length>100</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Mode_Locked_Date__c</fullName>
+        <description>Date when the Visit Mode was locked</description>
+        <externalId>false</externalId>
+        <formula>If(Visit_Mode_Lock__c == true,TODAY(),NULL)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Mode Locked Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Visit_Narrative_Issue_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the Visit Narrative was last issued</inlineHelpText>
+        <label>Visit Narrative Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Visit_Tool_Used__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Visit tool that is used for this visit</inlineHelpText>
+        <label>Current Visit Tool Used</label>
+        <referenceTo>Standard_Checklist_Reference__c</referenceTo>
+        <relationshipLabel>Visits</relationshipLabel>
+        <relationshipName>Visits</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Zip_Code__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>At creation and if left blank, Zip Code will be populated with Provider zip code after saving</inlineHelpText>
+        <label>Zip Code</label>
+        <length>10</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>validAddress__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Unchecked if no coordinates found using geocoding API</description>
+        <externalId>false</externalId>
+        <label>validAddress</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>visitLatitude__c</fullName>
+        <description>Latitude part of geo-coordinates of the visit address</description>
+        <externalId>false</externalId>
+        <label>visitLatitude</label>
+        <length>64</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>visitLongitude__c</fullName>
+        <description>Longitude part of geo-coordinates of the visit address</description>
+        <externalId>false</externalId>
+        <label>visitLongitude</label>
+        <length>64</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Visit</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Visits - All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Closed_Cancelled</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Inspector_del__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <label>Closed / Cancelled</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Closed_or_Cancelled</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Inspector_del__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <label>Visits - Closed or Cancelled</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Completed_Not_Closed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled,To be scheduled,Scheduled</value>
+        </filters>
+        <label>Visits - Completed Not Closed</label>
+    </listViews>
+    <listViews>
+        <fullName>All_In_Progress</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <label>Visits - In Progress</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Investigation</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Investigation__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Inspection__c.Investigation_Visits</value>
+        </filters>
+        <label>Investigation Visits</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Licensing</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Inspector_del__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Inspection__c.Licensing_Visits</value>
+        </filters>
+        <label>Licensing Visits</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Inspector_del__c</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Visits</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_In_Progress</fullName>
+        <booleanFilter>(1 OR 2 OR 3)</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_applicable_items__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>To be scheduled,Scheduled,Visit Completed,Pending Approval</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Report to be sent to Provider,&quot;Report Sent to Provider, Awaiting feedback&quot;</value>
+        </filters>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>&quot;Feedback received, to review&quot;</value>
+        </filters>
+        <label>My In Progress Visits</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_Visit_For_7_days1</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Address_1__c</columns>
+        <columns>Address_2__c</columns>
+        <columns>City__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Date_of_Visit__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>Date_of_Visit__c</field>
+            <operation>equals</operation>
+            <value>NEXT_N_DAYS:6</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Visits - For Next 7 Days</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_Visit_For_Today</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Address_1__c</columns>
+        <columns>Address_2__c</columns>
+        <columns>City__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Date_of_Visit__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <label>My Visits For Today</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Not_Completed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>To be scheduled,Scheduled</value>
+        </filters>
+        <label>Visits - Not Completed</label>
+    </listViews>
+    <listViews>
+        <fullName>My_All</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Visits - All</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Closed_or_Cancelled</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <columns>Inspector_del__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Visits - Closed or Cancelled</label>
+    </listViews>
+    <listViews>
+        <fullName>My_In_Progress</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Visits - In Progress</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Not_Completed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>To be scheduled,Scheduled</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Visits - Not Completed</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Not_To_Me_In_Progress</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>notEqual</operation>
+            <value>1</value>
+        </filters>
+        <label>My Prov Visits Not Assigned To Me</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_Completed_Not_Closed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled,To be scheduled,Scheduled</value>
+        </filters>
+        <filters>
+            <field>Assigned_To_Me_Or_My_Subordinates__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Team Visits - Completed Not Closed</label>
+        <sharedTo>
+            <role>Executive_and_Directors</role>
+            <role>FCC_Supervisor</role>
+            <role>R_P_Supervisor</role>
+            <role>Regional_Director</role>
+            <role>SLGSA_Supervisor</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_In_Progress</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <columns>Number_of_non_compliant_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed,Cancelled</value>
+        </filters>
+        <filters>
+            <field>Assigned_To_Me_Or_My_Subordinates__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Team Visits - In Progress</label>
+        <sharedTo>
+            <role>Executive_and_Directors</role>
+            <role>FCC_Supervisor</role>
+            <role>Investigator</role>
+            <role>R_P_Supervisor</role>
+            <role>Regional_Director</role>
+            <role>SLGSA_Supervisor</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_Not_Completed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>City__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Status__c</columns>
+        <columns>Estimated_Deadline__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Number_of_visit_items__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>To be scheduled,Scheduled</value>
+        </filters>
+        <filters>
+            <field>Assigned_To_Me_Or_My_Subordinates__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Team Visits - Not Completed</label>
+        <sharedTo>
+            <role>Executive_and_Directors</role>
+            <role>FCC_Supervisor</role>
+            <role>Investigator</role>
+            <role>R_P_Supervisor</role>
+            <role>Regional_Director</role>
+            <role>SLGSA_Supervisor</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_Visit_For_7_days</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Type_of_Visit__c</columns>
+        <columns>Date_of_Visit__c</columns>
+        <columns>Address_1__c</columns>
+        <columns>Address_2__c</columns>
+        <columns>City__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Date_of_Visit__c</field>
+            <operation>equals</operation>
+            <value>TODAY</value>
+        </filters>
+        <filters>
+            <field>Date_of_Visit__c</field>
+            <operation>equals</operation>
+            <value>NEXT_N_DAYS:6</value>
+        </filters>
+        <filters>
+            <field>Assigned_To_Me_Or_My_Subordinates__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Team Visits - For Next 7 Days</label>
+        <sharedTo>
+            <role>Executive_and_Directors</role>
+            <role>FCC_Supervisor</role>
+            <role>Investigator</role>
+            <role>R_P_Supervisor</role>
+            <role>Regional_Director</role>
+            <role>SLGSA_Supervisor</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>View_visit_transfer</fullName>
+        <columns>NAME</columns>
+        <columns>Inspector_del__c</columns>
+        <columns>Status__c</columns>
+        <columns>Offline_Lock__c</columns>
+        <columns>Visit_Mode_Lock__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Status__c</field>
+            <operation>equals</operation>
+            <value>To be scheduled,Scheduled</value>
+        </filters>
+        <filters>
+            <field>Offline_Lock__c</field>
+            <operation>notEqual</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Visit_Mode_Lock__c</field>
+            <operation>notEqual</operation>
+            <value>1</value>
+        </filters>
+        <label>-- View visit transfer</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Visit# {000000}</displayFormat>
+        <label>Visit No</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Visits</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>FCC_Licensing_Visit</fullName>
+        <active>true</active>
+        <description>Visits associated to Family Child Care provider done in the scope of licensing activities and differential licensing activities.</description>
+        <label>FCC Licensing Visit</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>GSA_Licensing_Visit</fullName>
+        <active>true</active>
+        <description>Visits associated to Large and Small Group and School Age provider done in the scope of licensing activities and differential licensing activities.</description>
+        <label>GSA Licensing Visit</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Investigation_Visits</fullName>
+        <active>true</active>
+        <description>Visits done in the scope of an investigation, these visits will not generate a specific report as the visit report will be included in the investigation report</description>
+        <label>Investigation Visits</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Legacy_System_Import_Visit_Non_Compliance</fullName>
+        <active>true</active>
+        <description>This record type is used to import legacy system past non-compliance (Licensing Manager)</description>
+        <label>Legacy System Import Visit / Non Compliance</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Licensing_Visits</fullName>
+        <active>true</active>
+        <description>Visits done in the scope of licensing activities (initial license, renewal, additional control, follow-up visit). These visits will trigger a specific report.</description>
+        <label>Licensing Visits</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Placement_Licensing_Visit</fullName>
+        <active>true</active>
+        <description>Visits associated to Foster Care Agency and Adoption Agency provider done in the scope of licensing activities and differential licensing activities.</description>
+        <label>Placement Licensing Visit</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Residential_Licensing_Visit</fullName>
+        <active>true</active>
+        <description>Visits associated to Temporary Shelter and Group Care provider done in the scope of licensing activities and differential licensing activities.</description>
+        <label>Residential Licensing Visit</label>
+        <picklistValues>
+            <picklist>Announcement_Type__c</picklist>
+            <values>
+                <fullName>Announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Semi-announced</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Unannounced</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Cancelled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Feedback received%2C to review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report Sent to Provider%2C Awaiting feedback</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Report to be sent to Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Scheduled</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>To be scheduled</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Visit Completed</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type_of_Visit__c</picklist>
+            <values>
+                <fullName>Capacity Increase</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Change of Space</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Follow-up</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Investigation</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Legacy System Import</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>License Upgrade</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Pre-Licensing</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Progress</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Provisional License Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Re-Activate Provider</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Enhanced Monitoring</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Renewal - Full Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Technical Assistance</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Provider_No__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Type_of_Visit__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Date_of_Visit__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Inspector_del__c</customTabListAdditionalFields>
+        <listViewButtons>Transfer_Visits</listViewButtons>
+        <lookupDialogsAdditionalFields>Provider_No__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>City__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Type_of_Visit__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Date_of_Visit__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Inspector_del__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Provider_No__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Inspector_del__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Date_of_Visit__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Provider_No__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>City__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type_of_Visit__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Date_of_Visit__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Inspector_del__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Cancellation_reasons_Required</fullName>
+        <active>true</active>
+        <description>Cancellation reasons are required for &quot;Closed&quot; or &quot;Cancellation&quot; status</description>
+        <errorConditionFormula>AND(ISPICKVAL(Status__c,&apos;Cancelled&apos;),ISBLANK(Cancellation__c))</errorConditionFormula>
+        <errorMessage>Cancellation Reason cannot be null for Cancelled/Closed Reason.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cancelled_Visit</fullName>
+        <active>true</active>
+        <description>Canceling a visit</description>
+        <errorConditionFormula>AND(ISCHANGED(Status__c),ISPICKVAL(Status__c,&apos;Cancelled&apos;), AND(NOT(ISPICKVAL(PRIORVALUE(Status__c),&apos;To be scheduled&apos;)), NOT(ISPICKVAL(PRIORVALUE(Status__c),&apos;Scheduled&apos;))))</errorConditionFormula>
+        <errorDisplayField>Status__c</errorDisplayField>
+        <errorMessage>A visit can not be cancelled if the visit already occurred</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Closed_Visit</fullName>
+        <active>true</active>
+        <description>Not possible to close if the status is &quot;To be scheduled&quot;, &quot;Scheduled&quot; =&gt; error message should be displayed: &quot;A visit can not be closed if it didn&apos;t occur. If the visit does not need to happen, you need to cancel it.&quot;</description>
+        <errorConditionFormula>AND(ISCHANGED(Status__c),ISPICKVAL(Status__c,&apos;Closed&apos;), OR(ISPICKVAL(PRIORVALUE(Status__c),&apos;To be scheduled&apos;), ISPICKVAL(PRIORVALUE(Status__c),&apos;Scheduled&apos;)))</errorConditionFormula>
+        <errorDisplayField>Status__c</errorDisplayField>
+        <errorMessage>A visit can not be closed if it didn&apos;t occur. If the visit does not need to happen, you need to cancel it.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Lock_in_RO_Visits</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF( Offline_Lock__c , true, false) &amp;&amp; 
+NOT(ISCHANGED(Offline_Lock__c))</errorConditionFormula>
+        <errorMessage>This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Match_visit_type_and_provider_type</fullName>
+        <active>true</active>
+        <description>Provider Master / Detail relationship of visit to prevent user to use a Provider not matching the type of visit</description>
+        <errorConditionFormula>NOT(OR(AND(RecordType.DeveloperName = &apos;GSA_Licensing_Visit&apos;, Provider_No__r.Is_GSA__c),
+AND((RecordType.DeveloperName = &apos;Placement_Licensing_Visit&apos;), AND(Provider_No__r.Is_R_P__c, NOT(Provider_No__r.Is_Residential__c))),
+AND((RecordType.DeveloperName = &apos;Residential_Licensing_Visit&apos;) ,AND(Provider_No__r.Is_R_P__c, Provider_No__r.Is_Residential__c)),
+AND((RecordType.DeveloperName = &apos;FCC_Licensing_Visit&apos;), AND(NOT(Provider_No__r.Is_GSA__c),NOT(Provider_No__r.Is_R_P__c))),RecordType.DeveloperName = &apos;Investigation_Visits&apos;, RecordType.DeveloperName = &apos;Legacy_System_Import_Visit_Non_Compliance&apos;))</errorConditionFormula>
+        <errorDisplayField>Provider_No__c</errorDisplayField>
+        <errorMessage>Provider type does not match your visit type. Please select a provider that matches your licensing visit type</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Primary_and_Dependent_should_share_umbre</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF(NOT(ISBLANK( Mater_Visit_for_Res_Cluster_of_Visits__c )), NOT(Provider_No__r.Umbrella_Members__c =  Mater_Visit_for_Res_Cluster_of_Visits__r.Provider_No__r.Umbrella_Members__c) , FALSE)</errorConditionFormula>
+        <errorDisplayField>Mater_Visit_for_Res_Cluster_of_Visits__c</errorDisplayField>
+        <errorMessage>Primary visit is associated to a provider that does not share the same umbrella than the provider attached to this visit. Cluster of visits should all share the same umbrella.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Primary_shouldnt_be_chosen_if_not_R</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(NOT(ISBLANK( Mater_Visit_for_Res_Cluster_of_Visits__c )), 
+NOT(Provider_No__r.RecordType.Name = &quot;Group Care&quot;), NOT(Provider_No__r.RecordType.Name = &quot;Temporary Shelter&quot;))</errorConditionFormula>
+        <errorDisplayField>Mater_Visit_for_Res_Cluster_of_Visits__c</errorDisplayField>
+        <errorMessage>Primary visit can only be defined for Group Care and Temporary Shelter.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Read_only_Assigned_To</fullName>
+        <active>true</active>
+        <description>Only let some roles edit &quot;Assigned To&quot;</description>
+        <errorConditionFormula>AND(!ISNEW(),ISCHANGED(Inspector_del__c),!ISBLANK($UserRole.Name),$UserRole.Name !=&apos;Executive_and_Directors&apos;,$UserRole.Name!=&apos;Regional_Director&apos;,OR(NOT(OR(CONTAINS($UserRole.DeveloperName,&apos;Director&apos;),CONTAINS($UserRole.DeveloperName,&apos;Supervisor&apos;))),AND($UserRole.DeveloperName==&apos;FCC_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Family Child Care&apos;), AND($UserRole.DeveloperName==&apos;SLGSA_Supervisor&apos;,AND(Provider_No__r.RecordType.Name != &apos;Large Group&apos;, Provider_No__r.RecordType.Name != &apos;Small Group&apos;)) ,AND($UserRole.DeveloperName==&apos;R_P_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Group Care&apos;,Provider_No__r.RecordType.Name != &apos;Temporary Shelter&apos;,Provider_No__r.RecordType.Name != &apos;Adoption Agency&apos;,Provider_No__r.RecordType.Name != &apos;Foster Care Agency&apos;)))</errorConditionFormula>
+        <errorMessage>You are not authorized to change the Visit Assignee, please contact your Supervisor or your Regional Director to make the modification</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Reopen_Cancelled_Visit</fullName>
+        <active>true</active>
+        <description>Visit can be reopend only by specific user roles</description>
+        <errorConditionFormula>AND(!ISNEW(),ISCHANGED(Status__c),OR(ISPICKVAL(PRIORVALUE(Status__c),&apos;Cancelled&apos;), ISPICKVAL(PRIORVALUE(Status__c),&apos;Closed&apos;)), !ISBLANK($UserRole.Name),$UserRole.Name !=&apos;Executive_and_Directors&apos;,$UserRole.Name!=&apos;Regional_Director&apos;,OR(NOT(OR(CONTAINS($UserRole.DeveloperName,&apos;Director&apos;),CONTAINS($UserRole.DeveloperName,&apos;Supervisor&apos;))),AND($UserRole.DeveloperName==&apos;FCC_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Family Child Care&apos;), AND($UserRole.DeveloperName==&apos;SLGSA_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Large Group&apos;, Provider_No__r.RecordType.Name != &apos;Small Group&apos;), AND($UserRole.DeveloperName==&apos;R_P_Supervisor&apos;, Provider_No__r.RecordType.Name != &apos;Group Care&apos;,Provider_No__r.RecordType.Name != &apos;Temporary Shelter&apos;,Provider_No__r.RecordType.Name != &apos;Adoption Agency&apos;,Provider_No__r.RecordType.Name != &apos;Foster Care Agency&apos;)))</errorConditionFormula>
+        <errorMessage>Edits on a Closed or Cancelled visit are not authorized, Visit must first be re-opened by a Supervisor or Director to be edited</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Scheduled_requires_Date_of_visit</fullName>
+        <active>true</active>
+        <description>If the status is &quot;Scheduled&quot; then Date of visit should be filled</description>
+        <errorConditionFormula>AND(ISPICKVAL( Status__c , &quot;Scheduled&quot;), OR( ISNULL(Date_of_Visit__c), ISBLANK(Date_of_Visit__c), TEXT(Date_of_Visit__c)=&quot;&quot;))</errorConditionFormula>
+        <errorDisplayField>Date_of_Visit__c</errorDisplayField>
+        <errorMessage>Visit date can not be empty if the visit is scheduled.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Testing_errors_in_offline_app</fullName>
+        <active>false</active>
+        <errorConditionFormula>ISBLANK( Specific_Visit_Requirements__c )</errorConditionFormula>
+        <errorMessage>needs reqs</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Time_of_Visit_formatting_validation_hold</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(OR( 
+REGEX( Time_of_visit__c , &quot; *(1[0-2]|[1-9]):[0-5][0-9] *(a|p|A|P)(m|M) *&quot;) 
+, 
+ISBLANK(Time_of_visit__c) 
+))</errorConditionFormula>
+        <errorDisplayField>Time_of_visit__c</errorDisplayField>
+        <errorMessage>Please use the format hh:mm AM/PM(example: 12:43 PM, 9:30 AM)</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>To_Schedule_requires_Date_of_visit_Blank</fullName>
+        <active>true</active>
+        <description>If the status is &quot;To Schedule&quot; then Date of visit should be empty</description>
+        <errorConditionFormula>AND(ISPICKVAL( Status__c , &quot;To be scheduled&quot;), NOT(OR( ISNULL(Date_of_Visit__c), ISBLANK(Date_of_Visit__c), TEXT(Date_of_Visit__c)=&quot;&quot;)))</errorConditionFormula>
+        <errorDisplayField>Date_of_Visit__c</errorDisplayField>
+        <errorMessage>Visit date must be empty if the visit is not scheduled.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Close_Visit</fullName>
+        <availability>online</availability>
+        <description>Closes a visit, verifying all the required rules</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Close Visit</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)}{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)}
+
+sforce.connection.sessionId = &quot;{!$Api.Session_ID}}&quot;;
+var cUser = sforce.connection.getUserInfo();
+var cUserRoleRecords = sforce.connection.query(&apos;
+  SELECT name 
+  FROM UserRole 
+  WHERE ID=\&apos;&apos;+cUser.getUserRoleId() +&apos;\&apos;&apos;
+).getArray(&quot;records&quot;);
+var cUserRoleName = cUserRoleRecords.length &gt; 0 ? cUserRoleRecords[0].Name : &apos;&apos;;
+
+if(cUserRoleName !== &apos;Supervisor&apos;||cUserRoleName  !== &apos;Regional Director&apos; ||cUserRoleName !== &apos;Executive&apos;){
+  alert(&apos;You are not authorized to close this investigation, please check with your Supervisor / Director&apos;)
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Copy_inspection_items_from_std_checklist</fullName>
+        <availability>online</availability>
+        <description>Allow the user to copy standard visit items from an existing standard checklist.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Select Visit Tool</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>/*if ({!IF(Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c != null, false, true)}) { */ 
+if({!IF(Inspection__c.Visit_Tool_Used__c != null, true,false)}){ 
+alert(&apos;A Visit Tool has already been used for this visit.&apos;); 
+} 
+else if({!Inspection__c.Offline_Lock__c}){ 
+alert(&apos;Offline Lock&quot; is checked, then display error message: &quot;This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action.&apos;); 
+} 
+else{ 
+window.location.href = &apos;/apex/EEC_VisitToolSelection?id={!Inspection__c.Id }&apos;; 
+} 
+/*} else { 
+alert(&apos;This visit has a master, please use the master to set the checklist to be used.&apos;); 
+}*/</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Corrective_Action_Plan_Report</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Corrective Action Plan Report</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+	if(&apos;{!Inspection__c.Number_of_Non_Compliant_items_Accepted__c}&apos; == &apos;{!Inspection__c.Number_of_non_compliant_items__c}&apos;){
+		if(&apos;{!Inspection__c.Number_of_non_compliant_items__c}&apos;==0){
+			alert(&apos;This feature is only available for visits with at least one non compliance&apos;);
+		}else if(&apos;{!Inspection__c.Number_of_non_compliant_items__c}&apos;&gt;0){
+			var url = parent.location.href; 
+			if(&apos;{!Inspection__c.Can_be_Edited__c}&apos; == 1){
+				if(&apos;{!Inspection__c.Status__c}&apos; == &apos;Visit completed, Report to Prepare&apos; || &apos;{!Inspection__c.Status__c}&apos;==&apos;Report to be approved&apos; ||&apos;{!Inspection__c.Status__c}&apos;==&apos;Report sent for approval&apos;){
+				alert(&apos;This Inspection status is not allowed to generate a PDF&apos;);
+				}
+			else{
+				var iItems = sforce.connection.query(&quot;select Id from Inspection_Item__c where Inspection_No__c = &apos;{!Inspection__c.Id}&apos; AND Inspection_Result__c = &apos;Non-Compliant&apos;&quot;); 
+				iiList = iItems.getArray(&quot;records&quot;);
+				if(iiList.length &gt; 0){
+				parent.location.href = &apos;/apex/EEC_GenerateNonCompPDF?id={!Inspection__c.Id}&amp;Corrective_Action_Plan_Report=true&apos;;
+				}
+				else{
+				alert(&apos;There are no &quot;Non-Compliant&quot; items attached to the Inspection&apos;);
+				}
+			}
+			}
+			else{
+			alert(&apos;This functionality is not available for a Closed or Cancelled Visit, Visit must first be re-opened by a Supervisor or Director&apos;);
+			}
+		}
+	}else{
+	alert(&apos;Corrective action plan must be approved for all non-compliance items.&apos;);
+	}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Corrective_Action_Review</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Corrective Action Review</masterLabel>
+        <openType>noSidebar</openType>
+        <page>EEC_CorrectiveActionReview</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_Follow_Up</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create Follow-Up</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)} 
+var url = parent.location.href; 
+
+var iItems = sforce.connection.query(&quot;select Id,RecordTypeId,Associated_regulation__c,Observations__c, Standard_Inspection_Item__c,Additional_Inspection_Item_Name__c, Technical_Assistance__c, Inspection_No__c,Inspection_No__r.Date_of_Visit__c,Discussed__c,Correction_Plan__c,Date_Corrective_Actions_Received__c from Inspection_Item__c where Inspection_No__c = &apos;{!Inspection__c.Id}&apos; AND Inspection_Result__c = &apos;Non-Compliant&apos;&quot;); 
+
+iiList = iItems.getArray(&quot;records&quot;); 
+
+if(iiList.length &gt; 0){ 
+
+var lvRType = sforce.connection.query(&quot;select Id from recordType where DeveloperName = &apos;Licensing_Visits&apos; and sobjectType = &apos;Inspection__c&apos;&quot;); 
+
+lvrList = lvRType.getArray(&quot;records&quot;); 
+var insp = new sforce.SObject(&quot;Inspection__c&quot;); 
+
+insp.Status__c = &apos;To be Scheduled&apos;; 
+insp.Provider_No__c = &apos;{!Inspection__c.ProviderId__c}&apos;; 
+insp.Investigation__c = &apos;{!Inspection__c.InvestigationId__c}&apos;; 
+insp.Original_Visit__c = &apos;{!Inspection__c.Id}&apos;; 
+insp.Type_of_Visit__c = &apos;Follow-Up&apos;; 
+insp.RecordTypeId = &apos;{!Inspection__c.RecordTypeId}&apos;; 
+
+if(&apos;{!Inspection__c.Assigned_To_Id__c}&apos; != &apos;&apos;){ 
+insp.Inspector_del__c = &apos;{!Inspection__c.Assigned_To_Id__c}&apos;; 
+} 
+else{ 
+insp.Inspector_del__c = &apos;{!Inspection__c.Provider_Owner__c}&apos;; 
+} 
+
+
+if(&apos;{!Inspection__c.Date_of_Visit__c}&apos; != null &amp;&amp; &apos;{!Inspection__c.Date_of_Visit__c}&apos; != &apos;&apos;){ 
+
+var provider = sforce.connection.query(&quot;select Id, RecordTypeId,RecordType.Name from Account where Id = &apos;{!Inspection__c.Provider_NoId__c}&apos;&quot;); 
+var rtypeName = provider.records.RecordType.Name; 
+var leadConf = sforce.connection.query(&quot;select Id,name, Follow_up_Visit_Estimated_Deadline__c from LEAD_Configuration__c where name = \&apos;&quot;+rtypeName+&quot;\&apos;&quot;); 
+
+if(leadConf != null &amp;&amp;leadConf.records != null){ 
+var dt = new Date(&apos;{!Inspection__c.Date_of_Visit__c}&apos;); 
+dt.setDate(dt.getDate()+parseInt(leadConf.records.Follow_up_Visit_Estimated_Deadline__c)); 
+var date1 =((dt.getMonth()+1)+&quot;/&quot;+dt.getDate()+&quot;/&quot;+dt.getFullYear()); 
+insp.Estimated_Deadline__c = new Date(date1); 
+} 
+
+} 
+var result=sforce.connection.create([insp]); 
+
+if (result[0].getBoolean(&quot;success&quot;) == false ) 
+{ 
+
+alert(&quot;An error occurred creating a Follow up Visit.&quot;+result[0].get(&quot;errors&quot;)); 
+} 
+else{ 
+
+iiList = iItems.getArray(&quot;records&quot;); 
+var insertII = []; 
+
+for (var i=0; i&lt; iiList.length; i++) { 
+var tiItem = iiList[i]; 
+var iItem = new sforce.SObject(&quot;Inspection_Item__c&quot;); 
+iItem.RecordTypeId = tiItem.RecordTypeId; 
+iItem.Associated_regulation__c = tiItem.Associated_regulation__c; 
+iItem.Standard_Inspection_Item__c = tiItem.Standard_Inspection_Item__c; 
+iItem.Additional_Inspection_Item_Name__c=tiItem.Additional_Inspection_Item_Name__c; 
+iItem.Observations__c = &quot;Observations from original visit on &quot;+tiItem.Inspection_No__r.Date_of_Visit__c; 
+if(tiItem.Observations__c!=&apos;&apos;){ 
+iItem.Observations__c = iItem.Observations__c +&quot;: &quot;+tiItem.Observations__c;
+} 
+if(tiItem.Correction_Plan__c!=&apos;&apos;){ 
+iItem.Observations__c = iItem.Observations__c + &quot;\n&quot; +&quot;Corrective Plan received on &quot;+tiItem.Date_Corrective_Actions_Received__c+&quot;: &quot;+tiItem.Correction_Plan__c; 
+} 
+iItem.Technical_Assistance__c = tiItem.Technical_Assistance__c; 
+iItem.Inspection_No__c = result[0].id; 
+iItem.Discussed__c = tiItem.Discussed__c; 
+
+
+insertII.push(iItem); 
+} 
+
+var result1=sforce.connection.create(insertII); 
+if (result1[0].getBoolean(&quot;success&quot;) == false ) 
+{ 
+alert(&quot;Testhere&quot;); 
+alert(&quot;An error occurred creating a Follow up Visit1.&quot;+result1[0].get(&quot;errors&quot;)); 
+}else{ 
+window.location = &apos;/&apos;+result[0].id; 
+} 
+} 
+
+
+} 
+else{ 
+alert(&quot;Cannot create a Follow-up as there are no &apos;Non-Complaint&apos; items for this Visit&quot;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>GeneratePDFVersionOfVisitNarrative</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Visit Narrative</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(&apos;{!Inspection__c.Status__c}&apos; == &apos;Visit Completed&apos; || &apos;{!Inspection__c.Status__c}&apos; == &apos;Report to be sent to Provider&apos; || &apos;{!Inspection__c.Status__c}&apos; == &apos;Pending Approval&apos;){ 
+parent.location.href = &apos;/apex/EEC_AttachGeneratedNarrativePDF?id={!Inspection__c.Id}&apos;; 
+} 
+else{ 
+alert(&apos;Report Narrative can only be generated if the Visit is Completed, and not Closed&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_PDF_version_of_Cover_Letter</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Cover Letter (last step)</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(&apos;{!Inspection__c.Status__c}&apos; == &apos;Visit Completed&apos; || &apos;{!Inspection__c.Status__c}&apos; == &apos;Report to be sent to Provider&apos;){ 
+    parent.location.href = &apos;/apex/EEC_AttachGeneratedCoverLetterPDF?id={!Inspection__c.Id}&apos;; 
+} 
+else{ 
+    alert(&apos;Report Narrative can only be generated if the Visit is Completed, and not Closed&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_PDF_version_of_Statement_of_Non_Compliance</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Statement of Non-Compliance</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+var url = parent.location.href; 
+
+if(&apos;{!Inspection__c.Can_be_Edited__c}&apos; == 1){
+if(&apos;{!Inspection__c.Status__c}&apos; == &apos;Visit completed, Report to Prepare&apos; || &apos;{!Inspection__c.Status__c}&apos;==&apos;Report to be approved&apos; ||&apos;{!Inspection__c.Status__c}&apos;==&apos;Report sent for approval&apos;){
+   alert(&apos;This Inspection status is not allowed to generate a PDF&apos;);
+}
+else{
+
+var iItems = sforce.connection.query(&quot;select Id from Inspection_Item__c where Inspection_No__c = &apos;{!Inspection__c.Id}&apos; AND Inspection_Result__c = &apos;Non-Compliant&apos;&quot;); 
+
+iiList = iItems.getArray(&quot;records&quot;);
+
+  if(iiList.length &gt; 0){
+    parent.location.href = &apos;/apex/EEC_GenerateNonCompPDF?id={!Inspection__c.Id}&apos;;
+  }
+  else{
+    alert(&apos;There are no &quot;Non-Compliant&quot; items attached to the Inspection&apos;);
+  }
+}
+}
+else{
+alert(&apos;This functionality is not available for a Closed or Cancelled Visit, Visit must first be re-opened by a Supervisor or Director&apos;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_PDF_version_of_Visit_Checklist_Summary</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Visit Summary</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(&apos;{!Inspection__c.Status__c}&apos; === &apos;Visit Completed&apos; || &apos;{!Inspection__c.Status__c}&apos; === &apos;Report to be sent to Provider&apos; || &apos;{!Inspection__c.Status__c}&apos; === &apos;Pending Approval&apos;){
+    parent.location.href = &apos;/apex/EEC_AttachGeneratedVisitChecklistPDF?id={!Inspection__c.Id}&apos;;
+}
+else{
+   alert(&apos;Report Narrative can only be generated if the Visit is Completed, and not Closed&apos;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_Report</fullName>
+        <availability>online</availability>
+        <description>Generate report for offline mode.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Offline Report</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>window.open(&apos;/apex/EEC_ExportReportCSV?id=00Oj0000004KSLQ&amp;pv0={!Inspection__c.Id}&amp;export=1&amp;enc=ISO-8859-1&amp;xf=csv&amp;fileName={! URLENCODE( URLENCODE( SUBSTITUTE(TRIM(SUBSTITUTE(Account.Name,&quot;,&quot;,&quot;_&quot;)), &quot; &quot;, &quot;_&quot;)) + &quot;_&quot; + TEXT( Inspection__c.Date_of_Visit__c ) )}.csv&apos;);</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_Visit_Summary_V2</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Visit Summary V2</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if((&apos;{!Inspection__c.End_Time__c}&apos; == null || &apos;{!Inspection__c.End_Time__c}&apos; == &apos;&apos;) &amp;&amp; (&apos;{!Inspection__c.Start_Time__c}&apos; != null &amp;&amp; &apos;{!Inspection__c.Start_Time__c}&apos; != &apos;&apos;)){ 
+alert(&apos;End Timer button has not yet been clicked. If your visit is finished, go to Visit Mode and click on &quot;End Timer.&apos;); 
+} 
+if(&apos;{!Inspection__c.Status__c}&apos; === &apos;Visit Completed&apos; || &apos;{!Inspection__c.Status__c}&apos; === &apos;Report to be sent to Provider&apos; || &apos;{!Inspection__c.Status__c}&apos; === &apos;Pending Approval&apos;){ 
+parent.location.href = &apos;/apex/EEC_GenerateVisitChecklistPDF_V2?id={!Inspection__c.Id}&apos;; 
+} 
+else{ 
+alert(&apos;Report Narrative can only be generated if the Visit is Completed, and not Closed&apos;); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Publish_Report_on_Portal</fullName>
+        <availability>online</availability>
+        <description>This button will set the created_on_the_web flag for a visit based on some criteria.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Publish Report on Portal</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)};
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)};
+
+try {
+  if (!{!Account.Electronic_Communication__c}) {
+    throw &quot;This provider does not use electronic communication&quot;;
+  }
+
+  if ({!ISBLANK(Inspection__c.Checklist_Summary_issue_date__c)} &amp;&amp; {!ISBLANK(Inspection__c.Visit_Narrative_Issue_Date__c)}) {
+    throw &quot;Checklist Summary or Visit Narrative has not been issued. Please generate one of these reports before publishing.&quot;;
+  }
+
+  if ({!ISBLANK( Inspection__c.Cover_Letter_Issue_Date__c )}) {
+    throw &quot;Cover Letter has not been issued. Please generate the letter before publishing.&quot;;
+  }
+
+  if ({!Inspection__c.Created_on_the_Web__c}) {
+    throw &quot;This visit has already been published.&quot;;
+  }
+
+  var insp = new sforce.SObject(&quot;Inspection__c&quot;); 
+  insp.id = &quot;{!Inspection__c.Id}&quot;; 
+  insp.Created_on_the_Web__c = true; 
+  result = sforce.connection.update([insp]); 
+  console.log(result);
+
+  if (!result) {
+    throw &quot;Could not update record.&quot;;
+  }
+  window.location.reload();
+
+} catch (e){
+  alert(e);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Send_with_Docusign</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Send with Docusign</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/apex/dsfs__DocuSign_JavaScript&quot;)}
+DocuSign_CreateEnvelope();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Set_Narrative_Default_Values</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Set Narrative Default Values</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+var url = parent.location.href;
+
+var visitObj = new sforce.SObject(&quot;Inspection__c&quot;);
+visitObj.Id = &apos;{!Inspection__c.Id}&apos;;
+
+var isMasterVisit = {!IF(Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c != null, false, true)};
+
+if(isMasterVisit) {
+  if(&apos;{!Inspection__c.Status__c}&apos; == &apos;Visit Completed&apos; || &apos;{!Inspection__c.Status__c}&apos; == &apos;Report to be sent to Provider&apos;){ 
+     if(&apos;{!JSENCODE(Inspection__c.Cover_Letter_Narrative__c)}&apos; == null || &apos;{!JSENCODE(Inspection__c.Cover_Letter_Narrative__c)}&apos; == &apos;&apos;){
+       var provider = sforce.connection.query(&quot;select Id, Name, RecordTypeId,RecordType.DeveloperName,RecordType.Name, Provider_City__r.Name,ShippingStreet,ShippingCity,ShippingState,ShippingPostalCode,Provider_Address_1__c,State__c,Provider_Zip_Code__c,OwnerId, Owner.FirstName, Owner.LastName, Owner.Phone, Umbrella_Members__c, Umbrella_Members__r.Name, Umbrella_Members__r.ShippingStreet,Umbrella_Members__r.ShippingState,Umbrella_Members__r.ShippingPostalCode,Umbrella_Members__r.ShippingCity  from Account where Id = &apos;{!Inspection__c.ProviderId__c}&apos;&quot;); 
+       var rtypeName = provider.records.RecordType.DeveloperName; 
+       var rtypeLabel = provider.records.RecordType.Name; 
+       var director, mainContact = null;
+       if (provider.records.Umbrella_Members__c) {
+         director = sforce.connection.query(&quot;SELECT Salutation, FirstName, LastName FROM Contact WHERE AccountID = \&apos;&quot;+provider.records.Umbrella_Members__c+&quot;\&apos; AND Role__c = \&apos;Director\&apos; LIMIT 1&quot;);
+         mainContact = sforce.connection.query(&quot;SELECT Salutation, FirstName, LastName FROM Contact WHERE AccountID = \&apos;&quot;+provider.records.Umbrella_Members__c+&quot;\&apos; AND Role__c = \&apos;Main Contact / Licensee\&apos; LIMIT 1&quot;);   
+       }
+       var vList = sforce.connection.query(&quot;select Id, Number_of_non_compliant_items__c from Inspection__c where Id = &apos;{!Inspection__c.Id}&apos; and Number_of_non_compliant_items__c &gt; 0 order by createddate desc&quot;); 
+       var numOfChildVisits = sforce.connection.query(&quot;Select Count() From Inspection__c Where Mater_Visit_for_Res_Cluster_of_Visits__c = \&apos;&quot; + visitObj.Id + &quot;\&apos;&quot;);
+       var assignedTo;
+      
+       if(&apos;{!Inspection__c.Inspector_del__c}&apos; != null){
+         assignedTo = sforce.connection.query(&quot;select FirstName, LastName, Title from User where Id = &apos;{!Inspection__c.Assigned_To_Id__c}&apos;&quot;);
+       }
+       
+       var directorFullName, mainContactFullName
+       // Setup director and main contact name variables.
+       if (director != null &amp;&amp; director.size &gt; 0) {
+         directorFullName = director.Salutation + &apos; &apos; + director.FirstName + &apos; &apos; + director.LastName;
+       }
+       
+       if (mainContact != null &amp;&amp; mainContact.size &gt; 0) {
+         mainContactFullName = mainContact.Salutation + &apos; &apos; + mainContact.FirstName + &apos; &apos; + mainContact.LastName;
+       }
+       
+       var cln = &apos;&apos;;
+       
+       if (director != null &amp;&amp; director.size &gt; 0 &amp;&amp; rtypeName != &apos;FCC&apos; &amp;&amp; numOfChildVisits.size &gt; 0 ) {
+         if (typeof directorFullName != &quot;undefined&quot; &amp;&amp; directorFullName != null) {
+           cln += directorFullName + &apos;&lt;br/&gt;&apos;;
+         } else {
+           cln += provider.records.Umbrella_Members__r.Name != null ? provider.records.Umbrella_Members__r.Name + &apos;&lt;br/&gt;&apos; : &apos;&apos;; 
+         }
+       }
+       
+       if (mainContact != null &amp;&amp; mainContact.size &gt; 0 &amp;&amp; rtypeName != &apos;FCC&apos; &amp;&amp; numOfChildVisits.size == 0) {
+         if (typeof mainContactFullName != &quot;undefined&quot; &amp;&amp; mainContactFullName != null) {
+           cln += mainContactFullName + &apos;&lt;br/&gt;&apos;;
+         } else {
+           cln += provider.records.Name != null ? provider.records.Name + &apos;&lt;br/&gt;&apos; : &apos;&apos;;
+         }
+       }
+      
+       if (rtypeName == &apos;FCC&apos;) {
+         cln += provider.records.Name + &apos;&lt;br/&gt;&apos;;
+       }
+    
+       if (numOfChildVisits.size == 0) {
+         cln = cln + (provider.records.ShippingStreet != null ? provider.records.ShippingStreet : provider.records.Provider_Address_1__c) + &apos;&lt;br/&gt;&apos;;
+         cln = cln + (
+           provider.records.ShippingStreet != null 
+             ? (provider.records.ShippingCity + &apos;, &apos; + provider.records.ShippingState + &apos;, &apos; + provider.records.ShippingPostalCode) 
+             : (provider.records.Provider_City__r.Name + &apos;, &apos; + provider.records.State__c + &apos;, &apos; + provider.records.Provider_Zip_Code__c)
+         ) + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;   
+       } else {
+         cln = cln + (provider.records.Umbrella_Members__c != null &amp;&amp; provider.records.Umbrella_Members__r.ShippingStreet != null ? provider.records.Umbrella_Members__r.ShippingStreet : provider.records.Provider_Address_1__c) + &apos;&lt;br/&gt;&apos;;
+         cln = cln + (
+           provider.records.Umbrella_Members__c != null &amp;&amp; provider.records.Umbrella_Members__r.ShippingStreet != null 
+             ? (provider.records.Umbrella_Members__r.ShippingCity + &apos;, &apos; + provider.records.Umbrella_Members__r.ShippingState + &apos;, &apos; + provider.records.Umbrella_Members__r.ShippingPostalCode) 
+             : (provider.records.Provider_City__r.Name + &apos;, &apos; + provider.records.State__c + &apos;, &apos; + provider.records.Provider_Zip_Code__c)
+         ) + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+       }
+       
+       cln += &apos;&lt;div&gt;Re: Visit conducted &apos;;
+      
+       var dateStr = &apos;{!Inspection__c.Date_of_Visit__c}&apos;;
+       if (typeof dateStr != &apos;undefined&apos; &amp;&amp; dateStr != &apos;&apos;) {
+         cln += &apos;on&amp;nbsp;{!Inspection__c.Date_of_Visit__c}&apos;;  
+       }
+      
+       if (rtypeName != &apos;FCC&apos;) {
+         cln += &apos; for &apos; + provider.records.Name + &apos;&lt;/div&gt;&lt;br/&gt;&apos;;   
+       } else {
+         cln += &apos;&lt;/div&gt;&lt;br/&gt;&apos;
+       }
+    
+       if(rtypeName == &apos;FCC&apos;){
+         cln += &apos;Dear &apos;+provider.records.Name + &apos;,&lt;br/&gt;&lt;br/&gt;&apos;; 
+       } else {
+         if (numOfChildVisits.size &gt; 0) {
+           cln += (typeof directorFullName != &apos;undefined&apos; &amp;&amp; directorFullName != &apos;&apos; ? &apos;Dear &apos; + directorFullName : &apos;Dear Provider&apos;) + &apos;,&lt;br/&gt;&lt;br/&gt;&apos;;
+         } else {
+           cln += (typeof mainContactFullName != &apos;undefined&apos; &amp;&amp; mainContactFullName != &apos;&apos; ? &apos;Dear &apos; + mainContactFullName : &apos;Dear Provider&apos;) + &apos;,&lt;br/&gt;&lt;br/&gt;&apos;;
+         }
+       }
+      
+       if(rtypeName == &apos;FCC&apos;){
+           cln = cln + &apos;Attached please find the results from my recent {!Inspection__c.Type_of_Visit__c} visit to your &apos;+rtypeLabel+&apos; program.&lt;br/&gt;&lt;br/&gt;&apos;;
+       } else {
+          cln = cln + &apos;Attached please find the report resulting from my recent {!Inspection__c.Type_of_Visit__c} visit to your &apos;+rtypeLabel+&apos; program.&lt;br/&gt;&lt;br/&gt;&apos;;
+       }
+ 
+       if(vList != null &amp;&amp; vList.size&gt;0){
+          cln = cln +&apos;As you will note, there are non-compliances which must be corrected. Therefore please read carefully the attached report and submit required corrective action by &apos;+ &apos;{!Inspection__c.Corrective_Action_Deadline__c}&apos;+&apos;.&lt;br/&gt;&apos;;
+          if(&apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Pre-Licensing&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Provisional License Renewal&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Renewal&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Change of Location&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;License Upgrade&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Capacity Increase&apos;){
+             cln = cln + &apos;Following receipt of an acceptable corrective action plan and assuming all other required documentation has been received, your new license will be issued.&lt;br/&gt;&lt;br/&gt;&apos;;
+          }
+       } else {
+         cln = cln + &apos;There are no non-compliances which need to be corrected.&apos;;
+         if(&apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Pre-Licensing&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Provisional License Renewal&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Renewal&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Change of Location&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;License Upgrade&apos; || &apos;{!Inspection__c.Type_of_Visit__c}&apos; == &apos;Capacity Increase&apos;){
+           cln = cln + &apos;Therefore assuming all required documentation has been received, your new license will be issued and sent via U.S Mail.&apos;;
+         }
+         cln = cln + &apos; Please keep this report for your records.&lt;br/&gt;&lt;br/&gt;&apos;;
+       }
+ 
+       cln = cln + &apos;If you have any questions regarding this report, please feel free to contact me at the address: {!Inspection__c.Assigned_To_Email__c} or by phone: {!Inspection__c.Assigned_To_Phone__c}.&lt;br/&gt;&lt;br/&gt;Respectfully,&lt;br/&gt;&apos;;
+       if(assignedTo != null){
+         cln = cln + assignedTo.records.FirstName+&apos; &apos;+assignedTo.records.LastName+&apos;&lt;br/&gt;&apos;;
+         cln = cln + (assignedTo.records.Title != null?assignedTo.records.Title:&apos;&apos;)+&apos;&lt;br/&gt;&apos;;
+       }
+       visitObj.Cover_Letter_Narrative__c = cln;
+       var result = sforce.connection.update([visitObj]);
+       window.location.reload();
+     } else {
+       alert(&apos;Cover Letter Narrative is not empty. If you want to use this functionality, empty the field prior clicking on this button&apos;);
+     }
+  }else {
+    alert(&apos;This functionality is only available if the visit is in status &quot;Visit Completed&quot; or &quot;Report to be sent to Provider&quot;&apos;);
+  }
+} else {
+  alert(&apos;This visit has a master, please use the master to set the defaults&apos;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Switch_Tool</fullName>
+        <availability>online</availability>
+        <description>This button will allow the user to switch their Visit Tool</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Switch Tool</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>try { 
+// If the current visit tool is null. 
+if({!Inspection__c.Offline_Lock__c}){ 
+throw &quot;This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action.&quot;; 
+} 
+if (&apos;{!Inspection__c.Visit_Tool_Used__c}&apos; == &apos;&apos;) { 
+throw &quot;A visit tool must be selected before you can switch to another tool.&quot;; 
+} 
+if(&apos;{!Inspection__c.Abandon_Tool_Reason__c}&apos; != &apos;&apos;){ 
+throw &quot;Visit tool switch is not available if a visit tool has been previously abandoned&quot;; 
+} 
+var visitStatus = &apos;{!Inspection__c.Status__c}&apos;; 
+visitStatus = visitStatus.toLowerCase(); 
+console.log(&apos;Visit Status: &apos; + visitStatus); 
+// If the visit has been scheduled or completed. 
+if (visitStatus == &apos;to be scheduled&apos; || visitStatus == &apos;scheduled&apos; || visitStatus == &apos;visit completed&apos;) { 
+
+// If the maximum number of switches has been hit. 
+var userroleName = &apos;{!$UserRole.Name}&apos;; 
+userroleName = userroleName.toLowerCase(); 
+if (&apos;{!Inspection__c.Switch_Tool_Justification_1__c}&apos; != &apos;&apos; &amp;&amp; &apos;{!Inspection__c.Switch_Tool_Justification_2__c}&apos; != &apos;&apos; &amp;&amp; userroleName.indexOf(&apos;director&apos;) &lt; 0 &amp;&amp; userroleName.indexOf(&apos;supervisor&apos;) &lt; 0){ 
+throw &quot;Tool has already been switched twice and cannot be switched again. Contact your supervisor if you need to switch the tool again.&quot;; 
+} 
+
+// Success flow. =&gt; Go to page with Visit ID and flag to inform of display type. 
+window.location.href = &apos;/apex/EEC_VisitToolSwitchSelection?id={!Inspection__c.Id }&amp;mode=1&apos;; 
+} else { 
+throw &quot;Visit has already been conducted. Tool used cannot be switched.&quot;; 
+} 
+} catch(e) { 
+// Alert the custom error message. 
+alert(e); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Transfer_Visits</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Transfer Visits</masterLabel>
+        <openType>sidebar</openType>
+        <page>EEC_MassTransferVisits</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+    <webLinks>
+        <fullName>Use_With_Offline_Visit_App</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Use With Offline Visit App</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)}; 
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)}; 
+
+try { 
+var status = [&quot;To be scheduled&quot;, &quot;Scheduled&quot;]; 
+if(status.indexOf(&apos;{!Inspection__c.Status__c}&apos;) &lt; 0){ 
+throw &quot;Only visits that are not yet completed or cancelled can be used with the offline visit app.&quot;; 
+} 
+
+if(&apos;{!Inspection__c.Assigned_To_Id__c}&apos; != &apos;{!$User.Id}&apos;){ 
+throw &quot;You can only use with the offline app visits that are assigned to you. The visit must be re-assigned to you before you can use it in the offline visit app.&quot;; 
+} 
+
+if({!Inspection__c.Offline_Lock__c}){ 
+throw &quot;Visit has already been sent to the offline visit app. Connect to the offline visit app to view this visit.&quot;; 
+} 
+
+var visitReasons = [&quot;Pre-Licensing&quot;, &quot;Provisional License Renewal&quot;, &quot;Renewal - Full Review&quot;, &quot;Renewal - Enhanced Monitoring&quot;,&quot;Renewal, Monitoring&quot;,&quot;Progress&quot;,&quot;Enhanced Monitoring&quot;]; 
+
+if(visitReasons.indexOf(&apos;{!Inspection__c.Type_of_Visit__c}&apos;) &gt; -1 &amp;&amp; (&apos;{!Inspection__c.Visit_Tool_Used__c}&apos; == null || &apos;{!Inspection__c.Visit_Tool_Used__c}&apos; == &apos;&apos;)){ 
+throw &quot;This licensing visit should have a visit tool selected prior to be used in the offline visit app, select a visit tool and try again&quot;; 
+} 
+
+var insp = new sforce.SObject(&quot;Inspection__c&quot;); 
+insp.id = &quot;{!Inspection__c.Id}&quot;; 
+insp.Offline_Lock__c = true; 
+result = sforce.connection.update([insp]); 
+console.log(result); 
+
+if (!result) { 
+throw &quot;Could not update record.&quot;; 
+} 
+window.location.reload(); 
+
+} catch (e){ 
+alert(e); 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Visit_Mode</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Visit Mode</masterLabel>
+        <openType>noSidebar</openType>
+        <page>InspectVisitMode</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Visit_Mode_2</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Visit Mode</masterLabel>
+        <openType>noSidebar</openType>
+        <page>InspectVisitMode</page>
+        <protected>false</protected>
+    </webLinks>
+    <webLinks>
+        <fullName>Visit_Mode_Lock</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Visit Mode</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/25.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/25.0/apex.js&quot;)} 
+
+var visitModeLock = &apos;{!Inspection__c.Visit_Mode_Lock__c}&apos;; 
+
+if(visitModeLock == 1){
+    alert(&apos;The visit mode is currently locked for editing by another user. To view the visit mode, click View-Only Visit Mode.&apos;);
+}
+else{
+     
+     var v = new sforce.SObject(&quot;Inspection__c&quot;); 
+     v.id = &quot;{!Inspection__c.Id}&quot;; 
+     v.Visit_Mode_Lock__c = true; 
+     result = sforce.connection.update([v]); 
+
+     window.location = &apos;apex/InspectVisitMode?scontrolCaching=1&amp;id={!Inspection__c.Id}&apos;;
+
+}</url>
+    </webLinks>
+</CustomObject>

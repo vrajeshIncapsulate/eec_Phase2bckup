@@ -1,0 +1,13 @@
+<messaging:emailTemplate subject="TEST Email Template" recipientType="User" relatedToType="Case">
+<messaging:plainTextEmailBody >
+Hello, 
+
+A new case ({!relatedTo.CaseNumber} - {!relatedTo.Subject}) has been attached to investigation 
+{!relatedTo.Investigation__c} associated to provider : {!relatedTo.Account} you’re in charge of. 
+
+Please review your investigation (www.salesforce.com/{!relatedTo.Investigation__c}) in 
+Salesforce to get more information on this case. 
+
+LEAD System
+</messaging:plainTextEmailBody>
+</messaging:emailTemplate>

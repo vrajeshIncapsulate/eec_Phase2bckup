@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Supervisor requesting a review and approval of Visit Report</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>9 - New Licensing Visit to Review and Approve</name>
+    <style>none</style>
+    <subject>New Licensing Visit to Review and Approve</subject>
+    <type>text</type>
+</EmailTemplate>

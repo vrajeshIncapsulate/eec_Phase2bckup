@@ -1,0 +1,12 @@
+Hello,
+
+{!Inspection__c.Inspector_del__c} chose to switch tool:
+
+     • New tool selected: {!Inspection__c.Visit_Tool_Used__c}
+     • Previous tool selected: {!Inspection__c.Previous_Visit_Tool_Used__c}
+
+The reason is the following: {!Inspection__c.Email_Template_Switch_Tool_Justification__c}
+
+You can review the visit by following this link: {!Inspection__c.Link}
+
+LEAD System

@@ -1,0 +1,32 @@
+<apex:page showHeader="false" id="newCase" standardStylesheets="false" controller="EEC_TransactionWizardController">
+  <head>
+    <title>EEC : Login</title>
+    <c:EEC_Header id="pageHeader" />
+
+    <script>
+          
+    </script>
+    
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+         <br/>
+          <apex:form id="IntroductionForm">
+            <apex:pageBlock title="INTRODUCTION">
+                <apex:outputtext value="{!leadConfiguration.Portal_Transaction_Introduction__c}"/>
+                <table style="height: 100%; width: 100%;" cellspacing="30">
+                    <apex:repeat id="ButtonList" value="{!buttonList}" var="bl">
+                        <tr><td>
+                            <apex:commandLink action="{!callTransaction}" styleClass="btn" style="text-decoration:none;padding:4px;" value="{!bl}" >
+                                <apex:param name="buttonLabel" value="{!bl}"/> 
+                            </apex:commandLink>
+                        </td></tr>
+                    </apex:repeat>
+                </table>
+            </apex:PageBlock> 
+  		</apex:form>
+      </div>
+   <c:EEC_Site_Footer id="siteFooter" />        
+ </body>
+</apex:page>

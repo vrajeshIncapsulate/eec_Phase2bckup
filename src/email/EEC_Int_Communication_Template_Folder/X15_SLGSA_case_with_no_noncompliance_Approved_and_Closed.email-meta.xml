@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email communication sent to the original injury owner to inform that the responsible of triage has reviewed and agreed to close the injury as no non-compliance was identified</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>15 - SLGSA case with no noncompliance Approved and Closed</name>
+    <style>none</style>
+    <subject>Injury associated to Provider {!Case.Provider_Name_For_Email_Merge__c} has been reviewed by {!Case.Triage_Responsible__c} and has been closed</subject>
+    <type>text</type>
+</EmailTemplate>

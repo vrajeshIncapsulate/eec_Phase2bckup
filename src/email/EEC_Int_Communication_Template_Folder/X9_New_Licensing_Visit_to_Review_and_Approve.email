@@ -1,0 +1,7 @@
+Hello,
+
+A new visit associated to {!Inspection__c.Provider_No__c} is ready for your review and approval. 
+
+Please login to Salesforce and review the visit: https://na16.salesforce.com/{!Inspection__c.Id}
+
+LEAD System

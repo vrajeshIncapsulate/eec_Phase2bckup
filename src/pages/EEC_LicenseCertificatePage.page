@@ -1,0 +1,2 @@
+<apex:page standardController="Licensing_Transaction__c" extensions="EEC_LicenseCertificatePDF" action="{! savePDF }">
+</apex:page>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Standard Condition</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Standard Conditions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applicable To --></label>
+        <name>Apply_To__c</name>
+        <picklistValues>
+            <masterLabel>Adoption Agency</masterLabel>
+            <translation><!-- Adoption Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Child Care</masterLabel>
+            <translation><!-- Family Child Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Care Agency</masterLabel>
+            <translation><!-- Foster Care Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Care</masterLabel>
+            <translation><!-- Group Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Large Group</masterLabel>
+            <translation><!-- Large Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Small Group</masterLabel>
+            <translation><!-- Small Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Temporary Shelter</masterLabel>
+            <translation><!-- Temporary Shelter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Detail the text that will be displayed on the License Certificate. If you need to merge with Condition Start Date, use the tag #Effective_Date#. If you need to merge with Condition Additional Description, use the tag #Add_Info#. --></help>
+        <label><!-- Full Description --></label>
+        <name>Full_Description__c</name>
+    </fields>
+    <layouts>
+        <layout>Standard Condition Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

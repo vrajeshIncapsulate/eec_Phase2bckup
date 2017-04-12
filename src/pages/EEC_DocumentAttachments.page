@@ -1,0 +1,7 @@
+<apex:page standardController="Document__c" extensions="EEC_DocumentAttachmentsExtension" >
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />  
+    
+  <div class="s3-attachments-inline">
+    <c:EEC_ReadOnlyAttachments attachments="{!attachments}" interface="{!ctrlInstance}" sobject="{!Document__c}" viewOnly="true"></c:EEC_ReadOnlyAttachments>
+  </div>  
+</apex:page>

@@ -1,0 +1,2 @@
+<apex:page standardController="Case" extensions="EEC_CloseCaseNotRegulatory" action="{! close }"> 
+</apex:page>

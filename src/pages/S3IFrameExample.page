@@ -1,0 +1,30 @@
+<apex:page showHeader="false" sidebar="false" standardStylesheets="false">
+  <head>
+    <title>EEC : iFrame Example</title>
+    <c:EEC_Header id="pageHeader" />
+    <c:EEC_Site_Scripts ></c:EEC_Site_Scripts>
+  </head>    
+    
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />   
+    <apex:iframe src="/apex/EEC_FileUpload?target=uploadIframe" id="uploadIframe"/>
+    
+    <script>
+      var iframe = document.getElementById('uploadIframe');
+      iframe.onload = function() {
+        var url = window.uploadIframe.location.href;
+        try {
+          var urlParts = url.split('?');  
+      
+          if (typeof urlParts != undefined && urlParts.length > 1) {
+            console.log(urlParts[1]);   
+          }
+        } catch (err) {
+          console.log(err);   
+        }
+      }
+    </script>
+    
+    <c:EEC_Site_Footer id="siteFooter" /> 
+  </body>
+</apex:page>

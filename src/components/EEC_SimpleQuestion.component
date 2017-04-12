@@ -1,0 +1,8 @@
+<apex:component layout="none">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" /> 
+    <apex:attribute name="readOnly" type="Boolean" description="If the field should be readOnly" required="false" /> 
+    <apex:inputText rendered="{! !readOnly  && question['isTextArea'] == false }" html-data-parsley-required="{! question.isRequired }" styleclass="form-control {! question.className}" value="{! object[question['fieldName']] }" html-data-parsley-maxlength="{! question['maxLength'] }" />
+    <apex:inputTextArea rendered="{! !readOnly  && question['isTextArea'] == true }" html-data-parsley-required="{! question.isRequired }" styleclass="form-control {! question.className}" value="{! object[question['fieldName']] }" html-data-parsley-maxlength="{! question['maxLength'] }" /> 
+    <apex:outputLabel rendered="{! readOnly  }" value="{! object[question['fieldName']] }" />
+</apex:component>

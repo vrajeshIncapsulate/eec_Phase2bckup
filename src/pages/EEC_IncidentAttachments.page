@@ -1,0 +1,44 @@
+<apex:page standardController="Case" extensions="EEC_IncidentsAttachmentsExtension" >
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" />  
+    
+  <style>
+    .s3-attachments-inline {
+      font-family: Arial,Helvetica,sans-serif;
+      color: #222;
+    }
+      
+    .s3-attachments-inline form {
+      /*display: flex;
+      flex-direction: column; */
+      overflow-y: scroll;
+      max-height: 180px;
+    }
+      
+    .s3-attachments-inline h3 {
+      font-size: 1.1em; 
+      border-top-color: rgb(153, 89, 5);
+      border-top-style: solid;
+      border-top-width: 2px;
+    }
+      
+    .attachment-item {
+      width: 100%; 
+      display: flex;
+      flex-direction: row; 
+    }
+      
+    .attachment-item p {
+      float: left; 
+      margin-right: 15px;
+      align-self: center;
+    }
+      
+    .attachment-item p:first-child {
+      flex: 2; 
+    }
+  </style>
+    
+  <div class="s3-attachments-inline">
+    <c:EEC_ReadOnlyAttachments attachments="{!attachments}" interface="{!ctrlInstance}" sobject="{!Case}"></c:EEC_ReadOnlyAttachments>
+  </div>  
+</apex:page>

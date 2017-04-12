@@ -1,0 +1,12 @@
+<apex:component controller="S3AngularSampleCtrl">
+    <!-- This page requires that all Angular Assets are loaded in the parent container. -->
+    <s3-File-Upload 
+      bucket_name="{!bucketName}" 
+      prefix="{!transactionNumber}/"
+      key="{!key}" 
+      acl="{!bucketItemAccess}" 
+      redirect_url="{!portalUrl}" 
+      remote_func_params="{!$RemoteAction.S3AngularSampleCtrl.generateMultiplePolicySignature}"
+      target="">
+    </s3-File-Upload>  
+</apex:component>

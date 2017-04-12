@@ -1,0 +1,3 @@
+<apex:page controller="EEC_ExportReport" showHeader="false" showChat="false" contentType="application/vnd.ms-excel#{!$Request.fileName}">
+    <apex:outputText escape="false" value="{!reportData}"/>
+</apex:page>

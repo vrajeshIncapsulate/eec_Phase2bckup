@@ -1,0 +1,9 @@
+Hello,
+
+A new case ({!Case.CaseNumber} - {!Case.Subject}) has been attached to investigation 
+{!Case.Investigation__c} associated to provider : {!Case.Account} you’re in charge of. 
+
+Please review your investigation (https://na16.salesforce.com/{!Case.InvestigationId__c}) in 
+Salesforce to get more information on this case.
+
+LEAD System

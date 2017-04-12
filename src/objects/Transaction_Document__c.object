@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>A junction between the Document and a transaction.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Comments__c</fullName>
+        <externalId>false</externalId>
+        <label>Comments</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Document_Type__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Document Type</label>
+        <referenceTo>Document_Type__c</referenceTo>
+        <relationshipLabel>Transaction Documents</relationshipLabel>
+        <relationshipName>Transaction_Documents</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Document__c</fullName>
+        <externalId>false</externalId>
+        <label>Document</label>
+        <referenceTo>Document__c</referenceTo>
+        <relationshipLabel>Transaction Documents</relationshipLabel>
+        <relationshipName>Transaction_Documents</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Last_Status_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Status Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Licensing_Transaction__c</fullName>
+        <externalId>false</externalId>
+        <label>Licensing Transaction</label>
+        <referenceTo>Licensing_Transaction__c</referenceTo>
+        <relationshipLabel>Transaction Documents</relationshipLabel>
+        <relationshipName>Transaction_Documents</relationshipName>
+        <relationshipOrder>1</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Mode__c</fullName>
+        <externalId>false</externalId>
+        <label>Mode</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Optional</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Required</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Additional</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Note_For_Revision__c</fullName>
+        <externalId>false</externalId>
+        <label>Note For Revision</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Returned for Revision</fullName>
+                <default>false</default>
+            </picklistValues>
+            <restrictedPicklist>true</restrictedPicklist>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <label>Transaction Document</label>
+    <nameField>
+        <label>Transaction Document Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Transaction Documents</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Doc_Type_required_on_mode_selection</fullName>
+        <active>true</active>
+        <description>If the mode is Required or Optional then a document type is mandatory.</description>
+        <errorConditionFormula>AND( Document_Type__c == NULL, OR( ISPICKVAL(Mode__c , &apos;Required&apos;), ISPICKVAL(Mode__c , &apos;Optional&apos;) ))</errorConditionFormula>
+        <errorMessage>Document Type is required if mode is set to &apos;Required&apos; or &apos;Optional&apos;.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Note_required_if_returned_for_revision</fullName>
+        <active>true</active>
+        <description>A note is required if the status of the transaction document is set to &quot;Returned for Revision&quot;.</description>
+        <errorConditionFormula>AND(
+AND(
+ISPICKVAL( Status__c , &apos;Returned for Revision&apos;),
+Note_For_Revision__c == NULL
+),
+ISPICKVAL(PRIORVALUE(Status__c ), &apos;Returned for Revision&apos;)
+)</errorConditionFormula>
+        <errorMessage>A note is required if the Transaction Document&apos;s is in need of a revision.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Promote_to_Umbrella</fullName>
+        <availability>online</availability>
+        <description>This button will change ownership of the current transaction document to the umbrella provider.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Promote to Umbrella</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)};
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)};
+
+try {
+var provider = sforce.connection.query(&quot;Select Id, Umbrella_Members__c, Record_Type_Name__c From Account Where Id = &apos;{!Document__c.ProviderId__c}&apos;&quot;);
+
+if ({!Document__c.Provider__c != null}) {
+if (provider.size == 0 || provider.records.Umbrella_Members__c == null) {
+throw &quot;The provider associated with this transaction is not associated with an umbrella.&quot;;
+}
+}
+
+if ({!!ISPICKVAL(Transaction_Document__c.Status__c, &apos;Approved&apos;)}) {
+throw &apos;The document must be in status &quot;Approved&quot; to be promoted at umbrella level.&apos;;
+}
+
+if (provider.records.Record_Type_Name__c.indexOf(&apos;Umbrella&apos;) &gt; -1) {
+throw &quot;This document is already set at Umbrella level.&quot;;
+}
+
+// Fetch other documents from Umbrella and verify that one isn&apos;t approved for future use and is the same document type.
+result = sforce.connection.query(&quot;Select Id From Document__c Where Provider__c = &apos;&quot; + provider.records.Umbrella_Members__c + &quot;&apos; AND Document_Type__c = &apos;{!Transaction_Document__c.Document_TypeId__c}&apos;&quot;);
+records = result.getArray(&quot;records&quot;);
+
+if (records.length &gt; 0) {
+throw &quot;A document with a similar type is already approved at Umbrella level, you must set this document as &apos;out of date&apos; if you want to replace it with this document.&quot;;
+}
+
+var document = new sforce.SObject(&quot;Document__c&quot;);
+document.Id = &quot;{!Transaction_Document__c.DocumentId__c}&quot;;
+document.Provider__c = provider.records.Umbrella_Members__c;
+document.Approved_for_Future_Usage__c = true;
+document.Document_Type__c = &quot;{!Transaction_Document__c.Document_TypeId__c}&quot;;
+
+// Update the Document obj.
+docResult = sforce.connection.update([document]);
+
+if (docResult[0].success === &quot;false&quot;) {
+throw &quot;Could not update a record(s).\n\nError: &quot; + docResult[0].errors.message;
+}
+window.location.reload();
+} catch (e){
+alert(e);
+}</url>
+    </webLinks>
+</CustomObject>

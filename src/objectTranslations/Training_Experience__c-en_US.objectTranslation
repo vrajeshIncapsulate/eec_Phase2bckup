@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Training Experience</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Training Experience</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Training Experience --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Date of the Training --></label>
+        <name>Date_of_the_Training__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensing Transactions --></label>
+        <name>Licensing_Transactions__c</name>
+        <relationshipLabel><!-- Training Experience --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Number of Training Hours --></label>
+        <name>Number_of_Training_Hours__c</name>
+    </fields>
+    <fields>
+        <label><!-- Topic --></label>
+        <name>Topic__c</name>
+    </fields>
+    <layouts>
+        <layout>Training Experience Layout</layout>
+        <sections>
+            <label><!-- Association --></label>
+            <section>Association</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

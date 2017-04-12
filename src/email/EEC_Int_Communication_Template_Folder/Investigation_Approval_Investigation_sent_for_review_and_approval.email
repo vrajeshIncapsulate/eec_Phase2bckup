@@ -1,0 +1,10 @@
+Hello,
+
+Investigation {!Investigation__c.Name} associated to Provider 
+{!Investigation__c.Provider_No__c} and led by {!Investigation__c.Assigned_To__c} has been sent for approval by Investigation Director (and will be then sent to Regional Director). 
+
+If you want to review this case, please login to Salesforce and review the case: 
+
+https://na16.salesforce.com/{!Investigation.Id}. 
+
+LEAD System

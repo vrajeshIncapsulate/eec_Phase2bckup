@@ -1,0 +1,8 @@
+<apex:component layout="none">
+    <apex:attribute name="question" type="EEC_Question" description="The question to be displayed" required="true" />
+    <apex:attribute name="object" type="Object" description="The sObject to reference" required="true" /> 
+    <apex:attribute name="readOnly" type="Boolean" description="Is the field readOnly" required="true" /> 
+    <c:noDateLink rendered="{! !readOnly }" ><apex:input disabled="{! readOnly }" html-data-provide="datepicker"
+        html-data-parsley-required="{! question.isRequired }" styleclass="form-control small-control" value="{! object[question['dateField']] }" /></c:noDateLink>
+    <apex:outputLabel rendered="{! readOnly }" value="{! object[question['dateField']] }" />
+</apex:component>

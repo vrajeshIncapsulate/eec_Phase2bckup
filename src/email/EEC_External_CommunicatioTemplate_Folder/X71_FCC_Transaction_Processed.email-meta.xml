@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Provider that a Licensing Transaction has been processed and is now closed</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>71 - FCC Transaction Processed</name>
+    <style>formalLetter</style>
+    <subject>Early Education and Child Care Department - Your FCC Transaction has been processed</subject>
+    <type>html</type>
+</EmailTemplate>

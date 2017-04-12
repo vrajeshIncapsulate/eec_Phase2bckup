@@ -1,0 +1,137 @@
+<apex:page standardController="Inspection__c" extensions="EEC_CorrectiveActionReviewController" id="CorrectiveActionReviewId"  sidebar="false">
+    
+    <apex:outputText value="{!Inspection__c.Id}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.name}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.Provider_No__c}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+    
+    <script language="JavaScript" type="text/javascript">
+        function showAttachMessage(attachmessage){
+            if(attachmessage != null && attachmessage != '' && attachmessage.length > 1){
+                document.getElementById('{!$Component.iiDocAttach}').innerHTML = attachmessage.substring(0, attachmessage.length-2) + ' attached successfully.';
+            }
+        }
+    </script>
+    
+    <apex:outputText value="" id="iiDocAttach" style="padding-left:25em;color: #008080;font-size: 110%;; font-weight: bold;"/>
+    
+    <apex:form >
+    <apex:pagemessages id="showmsg"/>
+     <apex:outputPanel layout="block"  >
+     <apex:pageblock id="inspectionListBlockUpper" mode="detail" title="Corrective Action Review">
+     <apex:pageBlockButtons location="top" dir="LTR">
+        <b>This page displays all non-compliant items from a visit so it can be easily filled with the Corrective Actions the provider will follow.</b>
+     </apex:pageBlockButtons>
+     <apex:pageBlock id="inspectionListBlock" mode="maindetail">
+          <apex:pageBlockButtons location="top">
+            <apex:commandbutton action="{!Save}" value="Save"/>
+            <apex:commandbutton action="{!SaveAndCloseVisitMode}" value="Save and Close Corrective Action Review"/>
+            <apex:commandLink action="/{!Inspection__c.Id}" styleClass="btn" 
+                              style="text-decoration:none;padding:4px;" target="_parent" value="Close Corrective Action Review"/>
+            <apex:commandButton action="{!bulkSelect}" value="Select All Submitted for Acceptance" reRender="IIListTable"/>               
+            
+        </apex:pageBlockButtons>
+        
+        <apex:pageBlockTable value="{!iiWrapperList}" var="ii" Id="IIListTable" rendered="{!iiWrapperList.size > 0}">
+            <apex:column >
+                 <apex:facet name="header">
+                    <apex:commandLink action="{!getInspectionItemData}" value="Name {!IF(sortExpression=='Name',IF(sortDirection='ASC','▼','▲'),'')}">
+                        <apex:param value="Name" name="column" assignTo="{!sortExpression}" ></apex:param>
+                    </apex:commandLink>
+                </apex:facet>
+                <apex:outputpanel rendered="{!!ii.isDeleted}">
+                    <apex:commandlink onclick="window.open('/{!ii.Id}','_blank','width=1000, height=700');" value="{!ii.Name}" />
+                </apex:outputpanel>
+            </apex:column>
+            <apex:column >
+                
+                <apex:facet name="header"> 
+                    <a href="#" onclick="return false;">Associated Regulation</a>
+                </apex:facet>
+                <apex:outputpanel rendered="{!!ii.isDeleted && ii.regulationMap != null}">
+                    <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                        <apex:commandlink onclick="window.open('/apex/EEC_RegulationView?id={!ii.regulationMap[iiName]}','_blank','width=500, height=400');" value="{!iiName}" />&nbsp;&nbsp;&nbsp;
+                    </apex:repeat>
+                </apex:outputpanel>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink action="{!getInspectionItemData}" value="Item Name {!IF(sortExpression=='Inspection_Item_Name__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                        <apex:param value="Inspection_Item_Name__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                    </apex:commandLink>
+                </apex:facet>
+            <apex:outputText value="{!ii.itemName}"  rendered="{!!ii.isDeleted}"/> 
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">View History</a>
+                </apex:facet>
+                <apex:outputpanel rendered="{!SHlist.size != 0}">
+              <apex:commandlink onclick="window.open('/{!ii.itemid}');" value="{!ii.Name}" />
+              </apex:outputpanel>
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">Observations</a>
+                </apex:facet>
+               <apex:outputText value="{!ii.observations}" id="iiObservations"  rendered="{!!ii.isDeleted}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">Correction Plan</a>
+                </apex:facet>
+               <apex:inputTextArea value="{!ii.correctionPlan}" id="iiCorrectionPlan" rows="5" cols="50" rendered="{!!ii.isDeleted}" readonly="{!IF(Inspection__c.Status__c == 'Closed',true,false)}"/>
+            </apex:column>
+             <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">Status</a>
+                </apex:facet>
+               <apex:outputText value="{!ii.status}" id="iiStatus" />
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <apex:commandLink action="{!getInspectionItemData}" value="Date Implemented{!IF(sortExpression=='Date_Implemented__c',IF(sortDirection='ASC','▼','▲'),'')}">
+                        <apex:param value="Date_Implemented__c" name="column" assignTo="{!sortExpression}" ></apex:param>
+                    </apex:commandLink>
+                </apex:facet>
+                
+                <c:noDateLink ><apex:inputfield value="{!ii.inspItem.Date_Implemented__c}"  rendered="{!!ii.isDeleted && Inspection__c.Status__c != 'Closed'}" /> </c:noDateLink>
+                <c:noDateLink ><apex:outputfield value="{!ii.inspItem.Date_Implemented__c}"  rendered="{!!ii.isDeleted && Inspection__c.Status__c == 'Closed'}" /> </c:noDateLink>
+            </apex:column>
+            <apex:column colspan="2" >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">Select to Accept</a>
+                </apex:facet>
+               <apex:inputCheckbox value="{!ii.selectTOAccept}" disabled="{!!ii.selectToAcceptRendered}"/>
+                <!--<apex:commandButton value="Accept Plan" rendered="{!ii.selectToAcceptRendered}" disabled="true">
+                    <apex:actionSupport action="{!acceptStatus}" event="onclick();">
+                        <apex:param name="EECAccep" value="{!ii.id}" assignTo="{!param}"/>
+                    </apex:actionSupport>
+                </apex:commandButton>-->
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">Corrective Action EEC Feedback</a>
+                </apex:facet>
+                <apex:inputTextArea value="{!ii.feedback}" id="iiFeedback" rows="5" cols="50" disabled="{!!ii.selectToAcceptRendered}"  rendered="{!!ii.isDeleted}" readonly="{!IF(Inspection__c.Type_of_Visit__c == 'Investigation', false, IF(Inspection__c.Status__c == 'Closed',true,false))}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">
+                    <a href="#" onclick="return false;">&nbsp;</a>
+                </apex:facet>
+                <apex:commandLink onclick="window.open('/apex/EEC_AttachDocument?iiId={!ii.Id}&namefield={!$Component.iiDocAttach}','_blank','width=500, height=300, left=800,top=100');">
+                    <apex:param name="deleteIndex" value="{!ii.rowIndex}" />
+                    <apex:param name="deleteId" value="{!ii.Id}" />
+                    <apex:image url="{!URLFOR($Resource.Attachments)}" width="25px" height="25px" rendered="{!(!ii.isDeleted)}"/>
+                </apex:commandLink>
+            </apex:column>
+            
+        </apex:pageBlockTable>
+        
+        </apex:pageBlock>
+        </apex:pageblock>
+      </apex:outputPanel> 
+    </apex:form> 
+</apex:page>

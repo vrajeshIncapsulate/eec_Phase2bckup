@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<font face="Arial, sans-serif" size="2"><font>Dear Provider,</font><br><br><font>The Department of Early Education and Care (EEC) is requesting that you complete an internal investigation on a recent incident/allegation that has occurred in your program {!Intervention__c.Investigation__c}. </font><br><br><font>Here are the instructions related to this request: {!Intervention__c.Observations__c}</font><br><br><font>Please upload and submit this investigation to the <a href="http://eeclead.force.com">EEC Portal Page</a></font><font>&nbsp;upon its completion and prior to {!Intervention__c.To_Be_Provided_By__c}. You'll find the page to upload by navigating to your provider page, scrolling down to the list of Internal Investigation and clicking on "Upload Internal Investigation".</font><br><br>You may contact&nbsp;<font>{!Intervention__c.Investigation_Leader_Full_Name__c}</font>&nbsp;by phone at&nbsp;{!Intervention__c.Investigation_Leader_Phone_Number__c}&nbsp;or by&nbsp;email at&nbsp;{!Intervention__c.Investigation_Leader_Full_Name__c}<font>&nbsp;with any&nbsp;questions or concerns related to this matter.&nbsp; </font><br><br><font>Sincerely,</font><br><br><font>The Department of Early Education and Care</font><br></font><br>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; color:#000000; bEditID:r3st1; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[]]></td>
+</tr>
+</table>

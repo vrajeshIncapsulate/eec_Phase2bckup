@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Case Allegation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Case Allegations</value>
+    </caseValues>
+    <fields>
+        <label><!-- Allegation --></label>
+        <name>Allegation__c</name>
+        <relationshipLabel><!-- Cases --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Case --></label>
+        <name>Case__c</name>
+        <relationshipLabel><!-- Allegations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Provide the reason and comments for this allegation --></help>
+        <label><!-- Comments --></label>
+        <name>Comments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <layouts>
+        <layout>Case Allegation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Allegations can&apos;t be created or updated on &apos;Closed&apos; Cases --></errorMessage>
+        <name>Creation_Updates_on_Closed_Case</name>
+    </validationRules>
+</CustomObjectTranslation>

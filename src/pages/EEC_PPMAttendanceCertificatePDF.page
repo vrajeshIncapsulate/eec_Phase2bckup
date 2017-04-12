@@ -1,0 +1,108 @@
+<apex:page standardController="Lead" applyBodyTag="false" renderAs="pdf">
+    <head>
+        
+        <style type="text/css">
+            .removeLastPage:last-child {
+                position: absolute;
+                bottom: 0;
+            }
+            body{
+                border:2px solid black;
+                border-style: double;
+            }
+            .removeLastPage {
+                font-family: "helvetica";
+                font-size: 10pt;
+            }
+            @page {
+                size: landscape; 
+            }
+            .container{
+                text-align: center;
+                font-family :  'Times New Roman';
+            }
+            .header-with-logo
+            {
+                font-size: 32px;
+                margin-bottom: 18px;
+            }
+            .certificate-header{
+                top-padding : 50px;
+                font-size: 50px;
+                font-style: italic;
+                margin-bottom: 5px;
+            }
+            .attendee-name{
+                
+                text-decoration : underline;
+                font-size : 48px;
+                font-style: italic;
+                margin-bottom: 20px;
+            }
+            .center-image{
+                margin-bottom: 25px;
+            }
+            .small-text
+            {
+                font-size : 20px;
+                font-weight : bold;
+                font-style: italic;
+            }
+            .mid-text
+            {
+                font-size : 24px;
+                font-style: italic;
+                font-weight : bold;
+                margin-bottom: 25px;
+            }
+            .certify
+            {
+                font-size : 24px;
+                margin-bottom: 10px;
+            }
+            .footer{
+                font-size : 22px;
+                margin-bottom: 25px;
+            }
+            .bottom{
+                font-size : 22px;
+                margin-top: -15px;
+                margin-bottom: 15px;
+            }
+        </style>
+        <body>
+            <apex:outputPanel styleClass="removeLastPage">
+                <div class="container"><br/>
+                    <div class="header-with-logo">
+                        <img
+                        src="{!URLFOR($Resource.EEC_Bootstrap,
+                          'EEC_Bootstrap/img/eecCertificateHeart.png')}"
+                        alt="eec"/>&nbsp;Commonwealth of Massachusetts<br/>
+                        Department of Early Education and Care<br/>
+                    </div> 
+                    <div class="certificate-header">
+                        Certificate of Attendance
+                    </div>
+                    <div class="small-text certify">This is to certify that</div>
+                    <div class="attendee-name">
+                        {!Lead.Title} {!Lead.FirstName} {!Lead.LastName}<br/>
+                    </div>
+                    <div>
+                        <span class="small-text">Attended the two (2) hour</span><br/><br/>
+                        <div class="center-image">
+                            <img
+                                src="{!URLFOR($Resource.EEC_Bootstrap,
+                                  'EEC_Bootstrap/img/eecCertificateBigImage.png')}"
+                                     alt="eec"/> 
+                        </div>
+                        
+                        <div class="mid-text">Family Child Care Potential Provider Meeting</div>
+                        <div class="small-text footer">On &nbsp; <apex:outputText value="{0,date,MM'/'dd'/'yyyy}"> <apex:param value="{!Lead.PPM_Meeting_Attended_Date__c}" /></apex:outputText></div>
+                        <div class="small-text footer bottom">Presented by Department of Early Education and Care Licensing Staff &nbsp;&nbsp;
+                            <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/eecCertificateHeart.png')}" alt="eec"/></div>
+                    </div><br/><br/>
+                </div>
+            </apex:outputPanel>
+        </body>
+    </head>    
+</apex:page>

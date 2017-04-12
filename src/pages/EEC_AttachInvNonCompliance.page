@@ -1,0 +1,2 @@
+<apex:page standardController="Investigation__c" extensions="EEC_AttachInvNonCompliance" action="{! savePDF }" >
+</apex:page>

@@ -1,0 +1,118 @@
+<apex:page showheader="false" sidebar="false" controller="EEC_PortalMyProviderPageController">
+   <apex:form >
+   <apex:outputPanel style="padding:50px 50px 50px 50px" id="userDetail">
+           <apex:pageBlock title="Edit Umbrella" id="editUserDetail" rendered="{!isEdit}">
+             <apex:pageMessages />
+             <apex:pageBlockButtons id="editButtons" location="top">
+               <apex:commandButton id="save" value="{!$Label.site.save}" action="{!save}" rerender="userDetail"/>
+               <apex:commandButton id="cancel" value="{!$Label.site.cancel}" action="{!cancel}" rerender="userDetail" immediate="true"/>
+             </apex:pageBlockButtons>
+             <apex:pageBlockSection title="Umbrella Information">
+                <apex:outputField value="{!account.name}"/> 
+                <apex:outputField value="{!account.Recordtype.Name}" label="Type"/>  
+             </apex:pageblocksection>
+             <apex:pageBlockSection title="Contact Information">
+               <apex:inputField value="{!account.Phone}"/>
+               <apex:inputField value="{!account.Alternate_Phone__c}"/>
+               <apex:inputField value="{!account.fax}"/>
+               <apex:inputField value="{!account.Provider_Email__c}"/>
+             </apex:pageblocksection>
+             <apex:pageBlockSection title="Main Address Information">
+               <apex:outputField value="{!account.Provider_Address_1__c}"/>
+               <apex:outputField value="{!account.Provider_Address_2__c}"/>
+               <apex:outputField value="{!account.Provider_city_text__c}" label="City"/>
+               <apex:outputField value="{!account.State__c}"/>
+               <apex:outputField value="{!account.Provider_Zip_Code__c}"/>
+             </apex:pageblocksection>
+             <apex:pageblockSection title="Mailing Address Information">
+               <apex:inputField value="{!account.ShippingStreet}" label="Street Address"/>
+               <apex:inputField value="{!account.ShippingCity}" label="City"/>
+               <apex:inputField value="{!account.ShippingState}" label="State"/>
+               <apex:inputField value="{!account.ShippingPostalCode}" label="Zip Code"/>
+             </apex:pageblocksection>
+             </apex:pageblock>
+              
+           <apex:pageBlock title="View Umbrella" id="viewUserDetail" rendered="{!!isEdit}" >
+             <apex:pageBlockButtons id="detailButtons" location="top">
+               <apex:commandButton id="edit" value="{!$Label.site.edit}" action="{!edit}" rerender="userDetail"/>    
+               <apex:commandButton value="Home" action="{!home}"/>            
+             </apex:pageBlockButtons>
+             <apex:pageBlockSection title="Umbrella Information">
+               <apex:outputField value="{!account.name}"/>
+
+               <apex:outputField value="{!account.Business_Name__c}"/>
+               <apex:outputField value="{!account.Recordtype.Name}" label="Type"/>
+               <apex:outputField value="{!account.Provider_Number__c}"/>
+               <apex:outputField value="{!account.Tax_ID__c}"/>
+             </apex:pageblocksection>
+             <apex:pageblockSection title="Contact Information">
+               <apex:outputField value="{!account.Phone}"/>
+               <apex:outputField value="{!account.Alternate_Phone__c}"/>
+               <apex:outputField value="{!account.fax}"/>
+               <apex:outputField value="{!account.Provider_Email__c}"/>
+             </apex:pageblockSection> 
+             <apex:pageblockSection title="Main Address Information">
+               <apex:outputField value="{!account.Provider_Address_1__c}"/>
+               <apex:outputField value="{!account.Provider_Address_2__c}"/>
+               <apex:outputField value="{!account.Provider_city_text__c}" label="City"/>
+               <apex:outputField value="{!account.State__c}"/>
+               <apex:outputField value="{!account.Provider_Zip_Code__c}"/>
+             </apex:pageblockSection>
+        
+             <apex:pageblockSection title="Mailing Address Information">
+               <apex:outputField value="{!account.ShippingStreet}" label="Street Address"/>
+               <apex:outputField value="{!account.ShippingCity}" label="City"/>
+               <apex:outputField value="{!account.ShippingState}" label="State"/>
+               <apex:outputField value="{!account.ShippingPostalCode}" label="Zip Code"/>
+
+             </apex:pageblockSection>            
+             <apex:pageBlockSection title="Umbrella Members">
+              <apex:pageblockTable value="{!providerslist}" var="pro" rows="50">
+             
+                <apex:column headerValue="Name">
+                  <apex:outputlink value="https://test-eec-lead-portal-test.cs18.force.com/EEC_PortalProviderPage?accountId={!pro.Id}" target="_top">{!pro.name}
+                  </apex:outputLink>                 
+                </apex:column>               
+                <apex:column headervalue="Number">
+                 <apex:outputField value="{!pro.Provider_Number__c}"/>
+                </apex:column>
+                <apex:column headervalue="City">  
+                 <apex:outputField value="{!pro.Provider_city_text__c}"/>
+                </apex:column>
+                <apex:column headervalue="Phone">  
+                 <apex:outputField value="{!pro.Phone}"/>
+                </apex:column>
+                <apex:column headerValue="License Status">                               
+                 <apex:outputField value="{!pro.License_Status__c}"/>
+                </apex:column>  
+                <apex:column headerValue="Provider Status">                               
+                 <apex:outputField value="{!pro.Provider_Status__c}"/>
+                </apex:column>  
+                            
+              </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageblockSection title="Contacts">
+             <apex:pageBlockTable value="{!contactlist}" var="con" rows="50" >
+              <apex:column headerValue="Name">
+               <apex:outputlink value="https://test-eec-lead-portal-test.cs18.force.com/EEC_ContactPage?Id={!con.Id}" target="_top">{!con.name} 
+               </apex:outputlink>     
+              </apex:column>
+              <apex:column headerValue="Title">
+               <apex:outputField value="{!con.Title}"/>          
+              </apex:column>
+              <apex:column headerValue="Email">
+               <apex:outputField value="{!con.Email}"/>          
+              </apex:column> 
+              <apex:column headerValue="Phone">
+               <apex:outputField value="{!con.Phone}"/>          
+              </apex:column> 
+              <apex:column headerValue="Role">
+               <apex:outputField value="{!con.Role__c}"/>           
+              </apex:column> 
+             </apex:pageBlockTable>
+            </apex:pageblockSection>             
+          </apex:pageBlock>
+        
+   </apex:outputPanel>
+   </apex:form>
+</apex:page>

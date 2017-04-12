@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>CCRR</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>CCRR</value>
+    </caseValues>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- CCRR City --></label>
+        <name>CCRR_City__c</name>
+    </fields>
+    <fields>
+        <label><!-- CCRR ID --></label>
+        <name>CCRR_ID__c</name>
+    </fields>
+    <layouts>
+        <layout>CCRR Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

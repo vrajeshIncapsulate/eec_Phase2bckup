@@ -1,0 +1,28 @@
+<apex:page standardController="Inspection__c" recordSetVar="visits" extensions="EEC_MassTransferVisitsExtension">
+	<apex:form >
+		<apex:pageBlock title="Transfer Visits">
+			<apex:pageMessages id="showMsg"></apex:pageMessages>
+			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:selectList value="{!selectedUserId}" size="1" label="Assign To">
+					<apex:selectOptions value="{!transferToOptionsDisplay}"/>
+				</apex:selectList>
+			</apex:pageBlockSection>
+			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:selectList value="{!selectedAdditionalStaff}" size="1" label="Additional EEC Staff">
+					<apex:selectOptions value="{!transferToOptionsDisplay}"/>
+				</apex:selectList>
+			</apex:pageBlockSection>
+<!-- 			<apex:pageBlockSection rendered="{!transferAllowed}">
+				<apex:pageBlockTable value="{!selected}" var="v">
+					<apex:column value="{!v.name}"/>
+					<apex:column value="{!v.Assigned_To_Id__c}"/>
+					<apex:column value="{!v.Status__c}"/>
+				</apex:pageBlockTable>
+			</apex:pageBlockSection> -->
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!massTransferVisits}" rendered="{!transferAllowed}"/>
+				<apex:commandButton value="Cancel" action="{!goBackToVisitsTab}" />
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

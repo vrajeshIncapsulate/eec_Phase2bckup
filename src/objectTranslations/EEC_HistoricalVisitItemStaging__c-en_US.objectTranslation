@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>HistoricalVisitItemStaging</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>HistoricalVisitItemStaging</value>
+    </caseValues>
+    <fields>
+        <label><!-- Comment --></label>
+        <name>EEC_Comment__c</name>
+    </fields>
+    <fields>
+        <label><!-- ComplianceStatusDesc --></label>
+        <name>EEC_ComplianceStatusDesc__c</name>
+    </fields>
+    <fields>
+        <label><!-- ErrorText --></label>
+        <name>EEC_ErrorText__c</name>
+    </fields>
+    <fields>
+        <label><!-- HeaderVisitItem --></label>
+        <name>EEC_HeaderVisitItem__c</name>
+    </fields>
+    <fields>
+        <label><!-- HeaderVisit --></label>
+        <name>EEC_HeaderVisit__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hostname --></label>
+        <name>EEC_Hostname__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Hostname --></label>
+        <name>EEC_New_Hostname__c</name>
+    </fields>
+    <fields>
+        <label><!-- RegGroupItemDesc --></label>
+        <name>EEC_RegGroupItemDesc__c</name>
+    </fields>
+    <fields>
+        <label><!-- RegGroupItem --></label>
+        <name>EEC_RegGroupItem__c</name>
+    </fields>
+    <fields>
+        <label><!-- VisitDetailId --></label>
+        <name>EEC_VisitDetailId__c</name>
+    </fields>
+    <fields>
+        <label><!-- VisitHeaderId --></label>
+        <name>EEC_VisitHeaderId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Item Processed --></label>
+        <name>EEC_VisitItem_Processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- HistoricalVisitStaging --></label>
+        <name>HistoricalVisitStaging__c</name>
+        <relationshipLabel><!-- HistoricalVisitItemStaging --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>HistoricalVisitItemStaging Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

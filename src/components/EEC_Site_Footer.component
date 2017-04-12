@@ -1,0 +1,39 @@
+<apex:component controller="EEC_NavBarController">
+  <style>
+    .footer-container {
+      width: 100%; 
+      display: flex;
+      flex-direction: row; 
+    }
+      
+    .footer-container .copyright {
+      float: left; 
+      margin-right: 15px;
+      align-self: center;
+      flex: 2;
+    }
+      
+    .attachment-item social-buttons {
+      flex: 1; 
+    }
+  </style>  
+    
+  <div class="navbar navbar-default navbar-fixed-bottom">
+    <div class="footer-container">
+      <p class="copyright navbar-text"> © 2015 - Department of Early Education &amp; Care
+           <a href="http://www.mass.gov/edu/government/departments-and-boards/department-of-early-education-and-care/" >(EEC)</a>
+      </p>
+      
+      <div class="social-buttons">
+        <a href="https://twitter.com/massearlyedcare" class="navbar-btn btn pull-right">
+          <i id="social" class="fa fa-twitter-square fa-3x"></i>
+        </a>
+        <a href="mailto:{!licensorEmail}?Subject='EEC%20Inquiry'" target="_top" class="navbar-btn btn pull-right">
+          <i id="social" class="fa fa-envelope-square fa-3x"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+    
+  <c:EEC_Site_Scripts id="pageScripts"/>  
+</apex:component>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Submission History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Submission History</value>
+    </caseValues>
+    <fields>
+        <label><!-- Correction Plan --></label>
+        <name>Correction_Plan__c</name>
+    </fields>
+    <fields>
+        <label><!-- Corrective Action EEC Feedback --></label>
+        <name>Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <label><!-- Corrective Actions Submitter --></label>
+        <name>Corrective_Actions_Submitter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Corrective Actions Received --></label>
+        <name>Date_Corrective_Actions_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Implemented --></label>
+        <name>Date_Implemented__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation --></label>
+        <name>Investigation__c</name>
+        <relationshipLabel><!-- Submission History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Last Corrective Action EEC Feedback --></label>
+        <name>Last_Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <label><!-- Non Compliant Item --></label>
+        <name>Non_Compliant_Item__c</name>
+        <relationshipLabel><!-- Submission History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Visit Item --></label>
+        <name>Visit_Item__c</name>
+        <relationshipLabel><!-- Submission History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Visit --></label>
+        <name>Visit__c</name>
+        <relationshipLabel><!-- Submission History --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>NC Item Submission History Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Submission History Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- NC Item Corrective Action Plan Submission History --></label>
+        <name>NC_Item_Corrective_Action_Plan_Submission_History</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Visit Corrective Action Plan Submission History --></label>
+        <name>Visit_Corrective_Action_Plan_Submission_History</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

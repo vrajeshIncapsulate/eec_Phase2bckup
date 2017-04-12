@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AutoResponseRules xmlns="http://soap.sforce.com/2006/04/metadata">
+    <autoResponseRule>
+        <fullName>Auto Email Response upon Case Creation</fullName>
+        <active>false</active>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>Complaint</value>
+            </criteriaItems>
+            <senderEmail>flecoq@incapsulate.com</senderEmail>
+            <senderName>LEADAlertOrgWideDefault</senderName>
+            <template>EEC_External_CommunicatioTemplate_Folder/X5a_Notification_to_reporter_a_complaint_has_been_recorded</template>
+        </ruleEntry>
+        <ruleEntry>
+            <criteriaItems>
+                <field>Case.RecordTypeId</field>
+                <operation>equals</operation>
+                <value>SLGSA Injury,Incident</value>
+            </criteriaItems>
+            <replyToEmail>no-reply@salesforce.com</replyToEmail>
+            <senderEmail>flecoq@incapsulate.com</senderEmail>
+            <senderName>LEADAlertOrgWideDefault</senderName>
+            <template>EEC_External_CommunicatioTemplate_Folder/X5b_Notification_to_reporter_a_incident_has_been_recorded</template>
+        </ruleEntry>
+    </autoResponseRule>
+</AutoResponseRules>

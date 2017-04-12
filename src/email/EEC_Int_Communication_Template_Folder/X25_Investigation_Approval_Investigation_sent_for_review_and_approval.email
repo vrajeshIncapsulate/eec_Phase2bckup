@@ -1,0 +1,7 @@
+Hello,
+
+Investigation {!Investigation__c.Name} associated to Provider {!Investigation__c.Provider_No__c} and led by {!Investigation__c.Assigned_To__c} requires your review and approval. 
+
+Please login to Salesforce and review the case: {!Investigation__c.Link}.
+
+LEAD System

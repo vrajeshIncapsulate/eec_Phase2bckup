@@ -1,0 +1,1211 @@
+<apex:page controller="EEC_TransactionWizardController" docType="html-5.0" showheader="false" sidebar="false" standardStylesheets="false">
+  <head>
+    <title>EEC</title>
+    <c:EEC_Header id="pageHeader" />
+    <style>
+        .md-button.md-raised.md-eec, .md-button.md-raised.md-eec {
+            color: rgb(250,250,250);
+            background-color: #853F3F; 
+          }
+          .md-button.md-raised.md-eec:hover, .md-button.md-raised.md-eec:hover {
+            color: rgb(250,250,250);
+            background-color: #703E3E; 
+          }
+          .md-button.md-raised, .md-button.md-raised {  
+            background-color: #f7f7f7;
+          }
+          .md-button span {
+              padding: 6px;
+          }	
+          .top-level-label {
+            font-weight: 600;
+            margin-right: 5px;
+            line-height: 20px; 
+            color: rgba(0,0,0,0.54);
+          }
+          table{
+          	 border-collapse: separate;
+              border-spacing: 2px;
+          }
+          input[type="radio"], input[type="checkbox"] {
+              margin: 4px 7px 0;
+         }
+         .command-button-container {
+            position: relative;
+            top: -2px; 
+          }
+           .commandBtn {
+            margin: -1px 0px -2px;
+          }	
+         .transaction-info-row {
+            margin-left: 0px; 
+          }
+            
+          .eec-subhead {
+            font-size: 1.2em; 
+            font-weight: 600;
+        	margin-left: 0px;
+          }
+          .form-control{
+        		color: rgba(0,0,0,.87);
+          }  
+          .navigation-buttons {
+            overflow: visible; 
+          }
+          .not-visible{display: none;}	
+          textarea{margin-bottom : 20px;}
+          label {margin-bottom: 2px;font-weight: normal;}
+        	.requiredInput {
+              margin-left: 0px;
+            }
+        	.desc-panel{
+        	  margin-left: 15px;
+        	  width: 22%;
+        	}
+        	.ques-panel{
+        	  width: 68%;
+        	}	
+        	.background-form-container {
+                margin-bottom: 20px; 
+            }
+        	.btn-group{
+        		
+        	}
+          
+      @media only screen and (min-width: 0px) and (max-width: 959px) {
+        .household-form-container {
+          margin: 0 !important;
+          padding: 0 !important;
+        }
+            
+        .navigation-buttons .md-button, .clear-button {
+          width: 98%;
+        }
+            
+        .navigation-buttons md-content {
+          width: 100%;
+        }
+            
+        .add-button-container {
+          padding-right: 0;
+          width: 100%;
+        }
+        
+        .fileErrorMessage {
+          bottom: -20px !important;
+        }
+        
+        .s3-input-container {
+          margin-bottom: 5px; 
+        }
+      }
+        
+      .attachment-item {
+        width: 100%; 
+        display: flex;
+        flex-direction: row; 
+      }
+      
+      .attachment-item p {
+        float: left; 
+        margin-right: 15px;
+        align-self: center;
+      }
+      
+      .attachment-item p:first-child {
+        flex: 2; 
+      }
+        
+      .errorMessage, .fileErrorMessage {
+        color: red;
+        display: none;
+      }
+        
+      .attachments-container {
+        position: relative;
+        top: -10px; 
+      }
+        
+      .fileErrorMessage {
+        /*position: absolute;*/
+        bottom: -25px;
+        left: 10px; 
+        margin: 0;
+      }
+        
+      .errorMessage {
+        white-space: nowrap; 
+        height: 20px;
+      }
+        
+      .s3-input-container {
+        /*margin-top: 15px; */
+      }
+        
+      .question-panel-spacing {
+        margin-top: 2px; 
+      }
+        
+      .dateErrorMessage {
+        position: absolute; 
+      }
+    </style>
+    <script>
+          
+    </script>
+  </head>
+
+  <body ng-app="eecApp">
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="training-info-container training-info-controller-container" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="column" layout-padding="true" layout-margin="true" ng-controller="TransactionController as ctrl">
+        <md-content style="margin-top: 20px;" ng-show="ctrl.checkForMessages()" layout="row" flex="100" layout-align="center center">   
+            <md-whiteframe class="md-whiteframe-z2 ng-cloak" layout="column" layout-padding="true" flex="75">
+              <apex:pageMessages id="showmsg"></apex:pageMessages>
+            </md-whiteframe> 
+      	</md-content>
+          
+        <md-whiteframe class="md-whitefram-z2 ng-cloak" layout="column" layout-padding="true" flex="75" ng-if="missingFileError">
+          {{missingFileErrorText}}
+        </md-whiteframe>
+        
+        <div class="training-info-container col-lg-8 col-md-8 col-sm-12" layout="column" layout-padding="true" style="margin-bottom:100px;padding-left: 50px;">    
+          <apex:form id="TrainingInformationForm">
+                <h3 class="md-display-1">Training Information</h3>
+            	<md-divider class="ng-cloak" layout-align="center center"></md-divider>  
+                <div class="transaction-info">
+                  <h3 class="eec-subhead">Transaction Information</h3>
+                  <md-content class="transaction-info-row" layout="row">
+                    <p class="md-subhead top-level-label">Transaction Type: </p>
+                    <apex:outputText value="{!LicenseRecordTypeLabel}" />
+                  </md-content>
+                
+                  <md-content class="transaction-info-row" layout="row">
+                    <p class="md-subhead top-level-label">Transaction Number: </p>
+                    <apex:outputText value="{!licenseTransation.Name}" />
+                  </md-content>
+                </div>
+              
+                <div class="training-info-container form-block">
+                  <div class="card-row" flex="100" layout="row" layout-wrap="true">
+					<h3 class="eec-subhead" flex="95" layout-margin="true">Training Information</h3><br/>
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName=='FCC_Renewal'}">
+                            <apex:outputLabel styleClass="top-level-label required" value="Do you currently belong to a food program?"/>
+                            <span class="required">*</span>	
+                            <apex:actionRegion >
+                                    <div class="requiredInput">
+                                        <div class="requiredBlock"></div>
+                                        <apex:selectRadio value="{!licenseTransation.Belong_to_Food_Program__c}" styleClass="radio-container">
+                                            <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="wfpDesc" />
+                                            <apex:selectOptions value="{!items}"/>
+                                        </apex:selectRadio>
+                                        <p class="errorMessage">This field is required.</p>
+                                    </div>
+                                </apex:actionRegion>
+                        </apex:outputPanel>
+                    </apex:outputpanel> 
+                    
+                    <apex:outputpanel id="wfpDesc" style="width:100%;"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Belong_to_Food_Program__c == 'Yes'}">
+                            <apex:outputLabel styleClass="top-level-label required" value="If yes, which one?"/>
+                            <span class="required">*</span>	
+                            <apex:inputField styleClass="form-control" value="{!licenseTransation.Which_Food_Program__c}"  html-data-parsley-required="true"/>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                    <!-- Medication Adminstration -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                            <apex:outputLabel styleClass="top-level-label required" value="Medication Administration: The Five Rights"/>
+                            <span class="required">*</span>	
+                            <apex:actionRegion >
+                                    <div class="requiredInput">
+                                        <div class="requiredBlock"></div>
+                                        <apex:selectRadio value="{!licenseTransation.Took_Medication_Administration_Training__c}" styleClass="radio-container"> 
+                                            <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="dmaDesc, medicationEvidenceUpload, script-existing-items, medFileErrorMessageContainer" oncomplete="uploadVisibility(1)"/>
+                                            <apex:selectOptions value="{!items}"/>
+                                        </apex:selectRadio>
+                                        <p class="errorMessage">This field is required.</p>
+                                    </div>
+                                </apex:actionRegion>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                    
+                    <apex:outputpanel id="dmaDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Medication_Administration_Training__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.Medication_Administration_Training_Cert__c}" id="medicalAttached"/>
+                            
+                            <apex:outputLabel styleClass="top-level-label required" value="Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=medicalAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_Med_Administration_Training_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                  <div class="attachments-container" layout-fill="true">
+                    <apex:outputPanel id="medicationEvidenceUpload" styleClass="medicationEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Medication_Administration_Training__c == 'Yes'}">
+                      <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Medication_Administration_Training__c == 'Yes'}">
+                        <apex:outputPanel >
+                          <apex:outputPanel rendered="{!renderExistingMedicationAttachment}">
+                            <label class="top-level-label">Current File:</label>
+                            <div class="attachment-item">
+                              <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['med_administration_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['med_administration_training_evidence']['Filename__c']}</a></p>
+                              <p>{!transactionAttachmentsMap['med_administration_training_evidence']['Content_Type__c']}</p>
+                              <p>
+                                <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="medicationEvidenceUpload, script-existing-items" style="color: #000;">
+                                  <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['med_administration_training_evidence']['Filename__c']}"/>  
+                                  <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="Medication_Administration_Training_Cert__c"/>
+                                  <i class="material-icons">&#xE872;</i>
+                                </apex:commandLink>  
+                              </p>
+                            </div>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                      </apex:outputPanel>
+                    </apex:outputPanel>
+                    
+                    <s3-File-Upload ng-show="medicationUploadVisible"
+                      filename="med_administration_training_evidence"
+                      bucket_name="{!bucketName}" 
+                      prefix="{!licenseTransation.Id}/"
+                      key="{!accessKey}" 
+                      acl="{!bucketItemAccess}" 
+                      remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                      directive-index="1"
+                      button-text="Upload Certificate">
+    			    </s3-File-Upload>
+                      
+                    <apex:outputPanel id="medFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Medication_Administration_Training__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>  
+                  </div>
+                    <!-- Transportation Training -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                            <apex:outputLabel styleClass="top-level-label required" value="Transportation Training, Look Before You Lock"/>
+                            <span class="required">*</span>	
+                            <apex:actionRegion >
+                                    <div class="requiredInput">
+                                        <div class="requiredBlock"></div>
+                                        <apex:selectRadio value="{!licenseTransation.Took_Transportation_Training__c}" styleClass="radio-container">
+                                            <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="dttDesc, transportationEvidenceUpload, script-existing-items, transFileErrorMessageContainer" oncomplete="uploadVisibility(2)" />
+                                            <apex:selectOptions value="{!items}"/>
+                                        </apex:selectRadio>
+                                        <p class="errorMessage">This field is required.</p>
+                                    </div>
+                                </apex:actionRegion>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                    
+                    <apex:outputpanel id="dttDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Transportation_Training__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.Transportation_Training_Cert__c}" id="transAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=transAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_Transportation_Training_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                  <div class="attachments-container" layout-fill="true">
+                    <apex:outputPanel id="transportationEvidenceUpload" styleClass="transportationEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Transportation_Training__c == 'Yes'}">
+                      <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Transportation_Training__c == 'Yes'}">
+                        <apex:outputPanel >
+                          <apex:outputPanel rendered="{!renderExistingTransportationAttachment}">
+                            <label class="top-level-label">Current File:</label>
+                            <div class="attachment-item">
+                              <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['transportation_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['transportation_training_evidence']['Filename__c']}</a></p>
+                              <p>{!transactionAttachmentsMap['transportation_training_evidence']['Content_Type__c']}</p>
+                              <p>
+                                <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="transportationEvidenceUpload, script-existing-items" style="color: #000;">
+                                  <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['transportation_training_evidence']['Filename__c']}"/>  
+                                  <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="Transportation_Training_Cert__c"/>
+                                  <i class="material-icons">&#xE872;</i>
+                                </apex:commandLink>  
+                              </p>
+                            </div>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                      </apex:outputPanel>
+                    </apex:outputPanel>
+                    
+                    <s3-File-Upload ng-show="transportationUploadVisible"
+                      filename="transportation_training_evidence"
+                      bucket_name="{!bucketName}" 
+                      prefix="{!licenseTransation.Id}/"
+                      key="{!accessKey}" 
+                      acl="{!bucketItemAccess}" 
+                      remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                      directive-index="2"
+                      button-text="Upload Certificate">
+    			    </s3-File-Upload>
+                      
+                      <apex:outputPanel id="transFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Transportation_Training__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                  </div>
+                      
+                    <!-- SIDS Training -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                            <apex:outputLabel styleClass="top-level-label required" value="SIDS Training, Reducing the Risk of SIDS in Child Care"/>
+                            <span class="required">*</span>	
+                            <apex:actionRegion >
+                                    <div class="requiredInput">
+                                        <div class="requiredBlock"></div>
+                                        <apex:selectRadio value="{!licenseTransation.Took_SIDS_Training__c}" styleClass="radio-container">
+                                            <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="dlstDesc, sidsEvidenceUpload, script-existing-items,sidsFileErrorMessageContainer" oncomplete="uploadVisibility(3)" />
+                                            <apex:selectOptions value="{!items}"/>
+                                        </apex:selectRadio>
+                                        <p class="errorMessage">This field is required.</p>
+                                    </div>
+                                </apex:actionRegion>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                    
+                    <apex:outputpanel id="dlstDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_SIDS_Training__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.SIDS_Training_Cert__c}" id="sidsAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Last training date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=sidsAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_Last_SIDS_Training_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="sidsEvidenceUpload" styleClass="sidsEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_SIDS_Training__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_SIDS_Training__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingSidsAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['sids_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['sids_training_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['sids_training_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="sidsEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['sids_training_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="SIDS_Training_Cert__c"/>
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="sidsUploadVisible"
+                          filename="sids_training_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="3"
+                          button-text="Upload Certificate">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="sidsFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_SIDS_Training__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>
+                    
+                    <!-- USDA Nutrition Information -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                        <apex:outputLabel styleClass="top-level-label required" value="Basic training in USDA Nutrition Requirements and food choking hazards."/>
+                        <span class="required">*</span>	
+                        <apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.Took_USDA_Nutrition_Training__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="duntDesc, usdaEvidenceUpload, script-existing-items, usdaFileErrorMessageContainer" oncomplete="uploadVisibility(4)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                            </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="duntDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_USDA_Nutrition_Training__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.USDA_Nutrition_Training_Evidence__c}" id="usdaAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=usdaAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_USDA_Nutrition_Training_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="usdaEvidenceUpload" styleClass="usdaEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_USDA_Nutrition_Training__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_USDA_Nutrition_Training__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingUsdaAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['usda_nutrition_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['usda_nutrition_training_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['usda_nutrition_training_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="usdaEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['usda_nutrition_training_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="USDA_Nutrition_Training_Evidence__c"/>
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="usdaUploadVisible"
+                          filename="usda_nutrition_training_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="4"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="usdaFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_USDA_Nutrition_Training__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>
+                      
+                    <!-- FCC Orientation Module I -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName =='FCC_New_License'}">
+                        <apex:outputLabel styleClass="top-level-label required" value="Took FCC Orientation Module 1?"/>
+                        <span class="required">*</span>	
+                        <apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.Took_FCC_Orientation_Module_1__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="oriModuleDesc, oriModuleEvidenceUpload, script-existing-items, oriModuleFileErrorMessageContainer" oncomplete="uploadVisibility(10)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                            </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="oriModuleDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName=='FCC_New_License' && licenseTransation.Took_FCC_Orientation_Module_1__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.FCC_Orientation_Module_I_Evidence__c}" id="oriModuleAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=oriModuleAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_FCC_Orientation_Mod_1_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="oriModuleEvidenceUpload" styleClass="orientationModuleEvidenceUpload" html-data-visible="{!LicenseRecordTypeName=='FCC_New_License' && licenseTransation.Took_FCC_Orientation_Module_1__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName=='FCC_New_License' && licenseTransation.Took_FCC_Orientation_Module_1__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingOrientationModuleAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['fcc_orientation_module_1_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['fcc_orientation_module_1_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['fcc_orientation_module_1_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="oriModuleEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['fcc_orientation_module_1_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="FCC_Orientation_Module_I_Evidence__c"/>
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="orientationModuleUploadVisible"
+                          filename="fcc_orientation_module_1_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="10"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="oriModuleFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName=='FCC_New_License' && licenseTransation.Took_FCC_Orientation_Module_1__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>
+                      
+                    <!-- Upgrade capacity: 7-10 Children in Family Child Care -->  
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!(LicenseRecordTypeName =='FCC_License_Upgrade' ) || (LicenseRecordTypeName =='FCC_Renewal' && NOT(ISBLANK(licenseTransation.License_Requested__c)) && licenseTransation.License_Requested__c != 'Up to 6 Children')}">
+                        <apex:outputLabel styleClass="top-level-label required" value="Serving 7 - 10 Children in Family Child Care"/>
+                        <span class="required">*</span>	
+                        	<apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.Took_Upgrading_Capacity_Training__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="ductDesc, upgradeEvidenceUpload, script-existing-items, upgradeFileErrorMessageContainer" oncomplete="uploadVisibility(5)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                            </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="ductDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!licenseTransation.Took_Upgrading_Capacity_Training__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.Upgrading_Capacity_Training_Cert__c}" id="capacityAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Date"/><span class="required">*</span>
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=capacityAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_Upgrading_Capacity_Training_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="upgradeEvidenceUpload" styleClass="upgradeEvidenceUpload" html-data-visible="{!licenseTransation.Took_Upgrading_Capacity_Training__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!licenseTransation.Took_Upgrading_Capacity_Training__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingUpgradeAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['upgrade_capacity_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['upgrade_capacity_training_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['upgrade_capacity_training_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="upgradeEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['upgrade_capacity_training_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="Upgrading_Capacity_Training_Cert__c"/>
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="upgradeCapacityUploadVisible"
+                          filename="upgrade_capacity_training_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="5"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="upgradeFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!licenseTransation.Took_Upgrading_Capacity_Training__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>  
+                      
+                    <!-- FCC Orientation -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName =='FCC_Renewal'}">
+                        <apex:outputLabel styleClass="top-level-label required" value="FCC Orientation, Module II"/>
+                        <span class="required">*</span>	
+                        <apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.Took_FCC_Orientation__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="dfotDesc, orientationEvidenceUpload, script-existing-items, oriFileErrorMessageContainer" oncomplete="uploadVisibility(6)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                        </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="dfotDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Took_FCC_Orientation__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.FCC_Orientation_Module_II_Evidence__c}" id="oriAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=oriAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.Date_FCC_Orientation_Taken__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="orientationEvidenceUpload" styleClass="orientationEvidenceUpload" html-data-visible="{!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Took_FCC_Orientation__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Took_FCC_Orientation__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingOrientationAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['fcc_orientation_mod_II_training_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['fcc_orientation_mod_II_training_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['fcc_orientation_mod_II_training_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="orientationEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['fcc_orientation_mod_II_training_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="FCC_Orientation_Module_II_Evidence__c"/>
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="orientationUploadVisible"
+                          filename="fcc_orientation_mod_II_training_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="6"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="oriFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Took_FCC_Orientation__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div>  
+                      
+                    <!-- CPR Certified -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                        <apex:outputLabel styleClass="top-level-label required" value="CPR:"/>
+                        <span class="required">*</span>	
+                        <apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.CPR_Certified__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="ccidDesc, cprEvidenceUpload, script-existing-items, cprFileErrorMessageContainer" oncomplete="uploadVisibility(7)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                            </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="ccidDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.CPR_Certified__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.CPR_Certificate__c}" id="cprAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Issuance Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField onchange="jQuery('[id*=cprAttached]').val(true);" styleClass="form-control" value="{!licenseTransation.CPR_Certification_Issue_Date__c}"  html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="cprEvidenceUpload" styleClass="cprEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.CPR_Certified__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.CPR_Certified__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingCprAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['cpr_certification_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['cpr_certification_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['cpr_certification_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="cprEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['cpr_certification_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="CPR_Certificate__c"/>  
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="cprUploadVisible"
+                          filename="cpr_certification_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="7"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload>
+                        
+                        <apex:outputPanel id="cprFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.CPR_Certified__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div> 
+                      
+                    <!-- First Aid -->
+                    <apex:outputpanel styleClass="ques-panel" layout="block">
+                      <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade'}">
+                        <apex:outputLabel styleClass="top-level-label required" value="First Aid:"/>
+                        <span class="required">*</span>	
+                        <apex:actionRegion >
+                                <div class="requiredInput">
+                                    <div class="requiredBlock"></div>
+                                    <apex:selectRadio value="{!licenseTransation.First_Aid_Certified__c}" styleClass="radio-container">
+                                        <apex:actionSupport event="onchange" action="{!showLSDesc}" reRender="ficiDesc, firstAidEvidenceUpload, script-existing-items, faFileErrorMessageContainer" oncomplete="uploadVisibility(8)" />
+                                        <apex:selectOptions value="{!items}"/>
+                                    </apex:selectRadio>
+                                    <p class="errorMessage">This field is required.</p>
+                                </div>
+                            </apex:actionRegion>
+                      </apex:outputPanel>
+                    </apex:outputpanel>
+                      
+                    <apex:outputpanel id="ficiDesc" styleClass="desc-panel"  layout="block">
+                        <apex:outputPanel styleClass="question-panel-spacing" layout="block" rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.First_Aid_Certified__c == 'Yes'}">
+                            <apex:inputHidden value="{!licenseTransation.First_Aid_Certificate__c}" id="firstAidAttached"/>
+                            
+                            <apex:outputLabel styleClass="answer-label top-level-label required" value="Issuance Date"/>
+                            <span class="required">*</span>	
+                            <c:noDateLink ><apex:inputField styleClass="form-control" value="{!licenseTransation.First_Aid_Certification_Issue_Date__c}"  html-data-parsley-required="true" html-data-provide="datepicker" onchange="jQuery('[id*=firstAidAttached]').val(true);"/></c:noDateLink>
+                            <p class="errorMessage dateErrorMessage">This field is required.</p>
+                        </apex:outputPanel>
+                    </apex:outputpanel>
+                  </div>
+                    
+                    <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="firstAidEvidenceUpload" styleClass="firstAidEvidenceUpload" html-data-visible="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.First_Aid_Certified__c == 'Yes'}">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.First_Aid_Certified__c == 'Yes'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!renderExistingFirstAidAttachment}">
+                                <label class="top-level-label">Current File:</label>
+                                <div class="attachment-item">
+                                  <p><a target="_blank" href="{!transactionAttachmentsUrlMap[transactionAttachmentsMap['first_aid_certification_evidence']['FileMap_Id']]}">{!transactionAttachmentsMap['first_aid_certification_evidence']['Filename__c']}</a></p>
+                                  <p>{!transactionAttachmentsMap['first_aid_certification_evidence']['Content_Type__c']}</p>
+                                  <p>
+                                    <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="firstAidEvidenceUpload, script-existing-items" style="color: #000;">
+                                      <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!transactionAttachmentsMap['first_aid_certification_evidence']['Filename__c']}"/>  
+                                      <apex:param name="transCertCheckboxFieldname" assignTo="{!transCertCheckboxFieldname}" value="First_Aid_Certificate__c"/>  
+                                      <i class="material-icons">&#xE872;</i>
+                                    </apex:commandLink>  
+                                  </p>
+                                </div>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="firstAidUploadVisible"
+                          filename="first_aid_certification_evidence"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="8"
+                          button-text="Upload Evidence">
+                        </s3-File-Upload> 
+                        
+                        <apex:outputPanel id="faFileErrorMessageContainer">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.First_Aid_Certified__c == 'Yes'}">
+                            <p class="fileErrorMessage">If training is complete, you must upload certificate/evidence.</p>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                    </div> 
+                    
+                    <br/>
+                     
+                    <!-- Additional Training -->
+                     <apex:outputPanel id="assistantsPersonPanels" layout="block" styleClass="row" rendered="{!LicenseRecordTypeName =='FCC_Renewal'}">
+                        <h3 class="eec-subhead" style="margin-top:0px;margin-left:10px;">Additional Trainings</h3>
+                        <p class="md-subhead top-level-label" style="display:inline-block;margin-bottom: 8px;margin-left:10px;" >Please add below the additional child care related training that you have attended during the past three years as required under EEC’S  Regulations.  Please note: The licensor will review the applicable certificates and documentation of training at the time of the renewal visit.</p>
+                        <apex:outputpanel id="assistantsPersonPanel" styleClass="row">
+                         <apex:variable id="rowNum" var="rowNum" value="{!0}" />    
+                         <apex:repeat value="{!teList}" var="at" id="personsRepeater"> 
+                            <apex:outputPanel layout="block" styleClass="person col-md-6" html-data-row-num="{!rowNum}">
+                            <div class="well col-md-12">
+                            <div class="row">
+                            <div class="col-md-6">
+                                <label class="top-level-label required">Topic <span class="required">*</span></label>
+                                <apex:inputField required="false" styleClass="form-control" value="{!at.Topic__c}"  html-ng-model="additionalTopic"/>
+                            </div>
+                          	<div class="col-md-6">
+                                <label class="top-level-label required">Date <span class="required">*</span></label>
+                                <c:noDateLink ><apex:inputField required="false" styleClass="form-control" value="{!at.Date_of_the_Training__c}" html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>
+                            </div>
+							</div>
+                            <div class="row">    
+                            <div class="col-md-6">
+                                <label class="top-level-label required">Number of Hours <span class="required">*</span></label>
+                                <apex:inputField styleClass="form-control" required="false" value="{!at.Number_of_Training_Hours__c}" />
+                            </div>
+                            
+                          </div>
+                            <div class="md-actions" layout="row" layout-align="end center">
+                                <apex:commandLink action="{!delRowTE}" value="Remove" styleClass="md-button md-raised" rerender="assistantsPersonPanels" >
+                                  <apex:param value="{!rowNum}" name="index" />
+                                </apex:commandLink>
+                                <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                          	</div>  
+						  </div>    
+                         </apex:outputPanel>
+                      </apex:repeat>
+                            
+                     </apex:outputpanel>
+                     <div class="add-button-container row">
+					    <apex:commandButton styleClass="md-button md-raised"  style="margin-left:25px;" value="Add Additional Training" action="{!addRowTE}" reRender="assistantsPersonPanel"  />
+                     </div>     
+                     <!-- File Attachments: Additional -->    
+                     <div class="attachments-container" layout-fill="true">
+                        <apex:outputPanel id="additionalEvidenceUpload" styleClass="additionalEvidenceUpload" html-data-visible="{!IF(LicenseRecordTypeName =='FCC_Renewal', true, false)}" html-data-additional="true">
+                          <apex:outputPanel rendered="{!LicenseRecordTypeName =='FCC_Renewal'}">
+                            <apex:outputPanel >
+                              <apex:outputPanel rendered="{!additionalTrainingAttachments.size > 0}">
+                                <apex:repeat value="{!additionalTrainingAttachments}" var="attachment"> 
+                                  <div class="attachment-item">
+                                    <p>{!attachment.Filename__c}</p>  
+                                    <p>{!attachment.CreatedDate}</p>  
+                                    <p>
+                                      <apex:commandLink action="{!deleteAttachment}" value="" immediate="true" reRender="additionalEvidenceUpload, script-existing-items" style="color: #000;">
+                                        <apex:param name="attachmentName" assignTo="{!fileToDelete}" value="{!attachment.Filename__c}"/>  
+                                        <i class="material-icons">&#xE872;</i>
+                                      </apex:commandLink>  
+                                    </p>
+                                  </div>
+                                </apex:repeat>
+                              </apex:outputPanel>
+                            </apex:outputPanel>
+                          </apex:outputPanel>
+                        </apex:outputPanel>
+                        
+                        <s3-File-Upload ng-show="{!LicenseRecordTypeName =='FCC_Renewal'}"
+                          bucket_name="{!bucketName}" 
+                          prefix="{!licenseTransation.Id}/additional_training_"
+                          key="{!accessKey}" 
+                          acl="{!bucketItemAccess}" 
+                          remote_func_params="{!$RemoteAction.EEC_TransactionWizardController.generateMultiplePolicySignature}"
+                          directive-index="9"
+                          multiple-enabled="true"
+                          keep-files-enabled="true"
+                          button-text="Upload Additional Documentation/Certificates">
+                        </s3-File-Upload>
+                        <button type="button" class="clear-button md-button md-eec md-raised" ng-click="ctrl.clear(9)">Clear</button>
+                        <p><b>Note:</b> If you wish to upload multiple files then select all desired files in the file explorer window OR you may select each file one by one.</p>
+                    </div>
+                  </apex:outputPanel>
+              </div>
+              
+              <!-- Buttons -->
+              <div class="row" style="margin-bottom : 100px;">  
+                  <apex:actionfunction name="UpdateTransactionAttachments" action="{!saveTrainingAttachmentsFromJson}" onComplete="saveAttachmentsFromJsonComplete();" reRender="showmsg"> 
+                    <apex:param name="json" value="" assignTo="{!trainingAttachmentsJson}" /> 
+                  </apex:actionfunction>  
+                  
+                  <apex:actionFunction action="{!SaveAndNextTE}" name="SaveAndNext" />
+                  <apex:actionFunction action="{!SaveAndPreviousTE}" name="SaveAndPrevious" />
+                  <apex:actionFunction action="{!SaveAndReturnTE}" name="SaveAndReturn" />
+                  
+                  <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">   
+                    <apex:commandLink value="Save and Previous" styleClass="md-button md-raised md-eec" 
+                            html-layout-padding="true" 
+                            onclick="uploadAttachments(2); return false;" html-role="button"/>
+                    <apex:commandLink value="Save and Next" styleClass="md-button md-raised md-eec"
+                            html-layout-padding="true"  
+                            onclick="uploadAttachments(1); return false;" html-role="button"/>
+                  </md-content>
+                  <md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+                    <apex:commandLink styleClass="md-button md-raised" action="{!CancelTransaction}" value="Cancel {!formattedLicenseRecordTypeLabel} Transaction"  onclick="return confirm('Are you sure to cancel the transaction?');" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+                    <apex:commandLink value="Save and Return to Provider" styleClass="md-button md-raised" 
+                            html-layout-padding="true"  
+                            onclick="uploadAttachments(3); return false;" html-role="button"/>
+                  </md-content>
+              </div>
+           </apex:form>
+      	</div>
+        <eec-wizard btn-progress-color="#fff" class="col-lg-3" flex="30" passed-btn-bg-color="#4CAF50" btn-bg-color="#FAFAFA" active-btn-bg-color="#0288D1" hide="true" show-gt-md="true">
+          <eec-wz-step ng-repeat="step in ctrl.wizardElements" title="{{step.label}}" step-img="{{step.icon}}" selected="{{step.selected}}" passed="{{step.icon != 'info_outline'}}"></eec-wz-step>
+        </eec-wizard>    
+      </div>
+       <c:EEC_Site_Footer id="siteFooter" /> 
+        <script>
+          app.controller('TransactionController', ['$scope', '$rootScope', '$location', '$mdToast', 'Util', function($scope, $rootScope, $location, $mdToast, Util) {
+            $scope.additionalTopic = '';
+            $scope.funcId = ''; 
+            $scope.numUploadComponents = 0;
+            $scope.timesUploadComplete = 0;
+            $scope.bucketName = '{!bucketName}';
+            $scope.exisitingFiles = '{!trainingAttachmentsJson}';
+            $scope.missingFileError = false;  
+            $scope.missingFileErrorText = 'One or more file uploads are missing a file. Please attach all necessary documents and try again.';
+            // Variables for visibility for all file upload sections.
+            $scope.medicationUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Medication_Administration_Training__c == 'Yes'};
+            $scope.transportationUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_Transportation_Training__c == 'Yes'};
+            $scope.sidsUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_SIDS_Training__c == 'Yes'};
+            $scope.usdaUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.Took_USDA_Nutrition_Training__c == 'Yes'};
+            $scope.upgradeCapacityUploadVisible={!licenseTransation.Took_Upgrading_Capacity_Training__c == 'Yes'};
+            $scope.orientationUploadVisible={!LicenseRecordTypeName=='FCC_Renewal' && licenseTransation.Took_FCC_Orientation__c == 'Yes'};
+            $scope.cprUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.CPR_Certified__c == 'Yes'};
+            $scope.firstAidUploadVisible={!LicenseRecordTypeName!='FCC_License_Upgrade' && licenseTransation.First_Aid_Certified__c == 'Yes'};
+            $scope.orientationModuleUploadVisible={!LicenseRecordTypeName=='FCC_New_License' && licenseTransation.Took_FCC_Orientation_Module_1__c == 'Yes'};
+            // Toast Options
+            $scope.toastPosition = {
+              bottom: false,
+              top: true,
+              left: true,
+              right: true
+            };
+              
+            $scope.getToastPosition = function() {
+              return Object.keys($scope.toastPosition)
+              .filter(function(pos) { return $scope.toastPosition[pos]; })
+              .join(' ');
+            };
+              
+            $scope.showSimpleToast = function(msg) {
+              $mdToast.show($mdToast.simple()
+                .content(msg)
+                .position($scope.getToastPosition())
+                .hideDelay(6000)
+              );
+            };
+              
+            // Instance of controller.
+            var tranCtrl = this;
+            // Controller level variables.
+            tranCtrl.funcId = null;
+            tranCtrl.wizardElements = Util.generateWizardElements("{!licenseRecordTypeName}", "Training Information");
+            tranCtrl.selected = [];
+              
+            // Function to check for messages available due to errors.
+            tranCtrl.checkForMessages = function() {
+              // TODO: Switch this to use Angular and now jQuery.            
+              var ele = jQuery('[id*="showmsg"]');
+              if (ele.children().length > 0) {
+                return true;   
+              }
+              return false;
+            };
+              
+            // Call this function to broadcast to the directive to process the upload.  
+            this.upload = function(id) {
+            // Set the callback function ID for later.
+            $scope.funcId = id;  
+            $scope.numUploadComponents = jQuery('s3-file-upload').length;
+            // Clear all error messages.
+            jQuery('.fileErrorMessage').hide();
+            jQuery('.errorMessage').hide();
+            // Get all the upload containers.
+            var uploadContainers = jQuery('.ques-panel'); 
+            // Get all the S3 File Upload Directives.
+            var uploadDirectiveElements = jQuery('s3-file-upload');
+            // Get all the date inputs available.
+            var requiredDates = jQuery('.desc-panel input');    
+            // Reset the file error.
+            missingFileError = false;
+            // Loop through all directive elements.     
+            for (i=0; i < uploadDirectiveElements.length; i++) {
+              // Check for filename labels in the directive elements. If the directive is visible and has less than or one label then no files present. 
+              var filenameLabels = jQuery(uploadDirectiveElements[i]).find('.s3-input-container-labels label');
+              var checkForExisitingItem = jQuery(uploadDirectiveElements[i]).parent().children(':not("s3-file-upload")');
+              // Check for visiblity and label length.  
+              if (checkForExisitingItem.data('visible') && !checkForExisitingItem.data('additional') && filenameLabels.length <= 1) {
+                // If attachment item exists then we have an exisiting item so allow no upload.
+                if (jQuery(checkForExisitingItem.find('.attachment-item')).length <= 0) {
+                  missingFileError = true;  
+                  jQuery('body').scrollTop(0);
+                  jQuery(uploadDirectiveElements[i]).parent().find('.fileErrorMessage').css('display','block');
+                }
+              }
+            }
+                 
+            if (requiredDates.length > 0) {
+              _.each(requiredDates, function(value, key) {
+                var ele = jQuery(value);
+                var dateValue = ele.val();
+                if (_.isEmpty(dateValue)) {
+                  missingFileError = true;  
+                  ele.parent().parent().parent().parent().parent().find('.errorMessage').css('display', 'block');
+                }
+              });
+            }
+                
+            // Verify that the heating radio is checked. If not show error message on client side.
+            var radioContainers = jQuery('.radio-container');
+            _.each(radioContainers, function(value, key) { 
+              var radioContainerInput = jQuery(value).find('input');
+              var inputNotValid = [];
+                
+              for (var i = 0; i < radioContainerInput.length; i++) {
+                var input = jQuery(radioContainerInput[i]);
+                inputNotValid.push(input.prop('checked'));  
+              }
+               
+              if (!_.includes(inputNotValid, true)) {
+                jQuery(value).parent().find('.errorMessage').show();
+                missingFileError = true;
+              }
+            });
+             
+            if (!missingFileError) {
+              // Call all upload directives to process files.  
+              $rootScope.$broadcast('upload', {});
+            }
+          };
+        
+          this.clear = function(clearIndex) {
+            if (!angular.isUndefined(clearIndex)) {
+              $rootScope.$broadcast('clearFiles_' + clearIndex, {});   
+            } else {
+              $rootScope.$broadcast('clearFiles',{});   
+            }
+          } 
+          
+          // Capture Emit event from Directive for result data.  
+          $scope.$on('uploadComplete', function(event, data) {
+            $scope.timesUploadComplete++;  
+          
+            if (angular.isArray(data)) {
+              var json = [];
+            
+              for (var i = 0; i < data.length; i++) {
+                if (!data[i].status) {
+                  console.log("----> Error: File not successfully uploaded.");
+                  break;
+                }
+                console.log(data[i].data);
+                var attachment = data[i].data;
+                // Split the filename to get the prefix.  
+                var splitFilename = attachment.key.split('/');
+                // Create the JSON needed for the S3_File__c objects.  
+                var file = {
+                  "Filename__c": splitFilename[1],
+                  "Prefix__c": splitFilename[0],
+                  "Content_Type__c": attachment['Content-Type'],
+                  "Acl__c": attachment.acl,
+                  "Bucket__c": $scope.bucketName
+              };
+              
+              if (!angular.isUndefined($scope.exisitingFiles) && $scope.exisitingFiles !== '') {
+                var exisitingFilesJson = JSON.parse($scope.exisitingFiles);
+                // Loop through the results.
+                angular.forEach(exisitingFilesJson, function(value, key) {
+                  // Get the short names of the files without the file extensions. 
+                  var exisitingShortName = value.Filename__c.split('.')[0];
+                  var shortName = file.Filename__c.split('.')[0];
+                  // If the short name of the file is the same as the existing then set the id for upsert.
+                  if (exisitingShortName == shortName) {
+                    file.Id = value.Id;
+                  }
+                });
+              }
+              // Push the file into the json object to send.
+              json.push(file);
+            }
+            console.log("Files Uploaded Successfully!");
+            // Call the action function to create the S3 Object entries in Sforce.
+            UpdateTransactionAttachments(JSON.stringify(json));
+          } else if ($scope.timesUploadComplete == $scope.numUploadComponents) {
+            console.log("Error: " + data.error);   
+            
+            if (data.error.indexOf('No files') > -1) {
+              console.log("No files to upload. Continue to next page.");
+              switch($scope.funcId) {
+                case 1:
+                  SaveAndNext();    
+                  break;
+                case 2:
+                  SaveAndPrevious();   
+                  break;
+                case 3:
+                  SaveAndReturn();    
+                  break;
+                }
+              }
+            }
+          });
+        }]);
+      </script>
+      
+        <script>
+          var inProgress = false;  
+      
+          var uploadAttachments = function(functionId) {
+            console.log("----> Upload Begin.");
+            // Call the Angular process method from JS.  
+            return angular.element(jQuery('.training-info-controller-container'))
+              .scope()
+              .ctrl.upload(functionId);
+          }
+    
+          var saveAttachmentsFromJsonComplete = function() {
+            var timesComplete = angular.element(jQuery('.training-info-controller-container')).scope().timesUploadComplete;
+            var numUploadComponents = angular.element(jQuery('.training-info-controller-container')).scope().numUploadComponents;
+        
+            if (!inProgress && timesComplete == numUploadComponents) {
+              inProgress = true;  
+              console.log("----> On Complete for saving attachments");  
+              // Call action function for specified button.
+              switch(angular.element(jQuery('.training-info-controller-container')).scope().funcId) {
+                case 1:
+                  SaveAndNext();    
+                  break;
+                case 2:
+                  SaveAndPrevious();   
+                  break;
+                case 3:
+                  SaveAndReturn();    
+                  break;
+              }
+            }
+          }
+    
+          var uploadVisibility = function(clearIndex) {   
+            var scope = angular.element(jQuery('.training-info-controller-container')).scope();
+            // Clear the index provided by the onChange function.  
+            scope.ctrl.clear(clearIndex);
+            // Apply all the new visible status' 
+            scope.$apply(function() {
+              scope.medicationUploadVisible = jQuery('.medicationEvidenceUpload').data('visible'); 
+              scope.transportationUploadVisible = jQuery('.transportationEvidenceUpload').data('visible');   
+              scope.sidsUploadVisible = jQuery('.sidsEvidenceUpload').data('visible');  
+              scope.usdaUploadVisible = jQuery('.usdaEvidenceUpload').data('visible');  
+              scope.upgradeCapacityUploadVisible = jQuery('.upgradeEvidenceUpload').data('visible');  
+              scope.orientationUploadVisible = jQuery('.orientationEvidenceUpload').data('visible');  
+              scope.cprUploadVisible = jQuery('.cprEvidenceUpload').data('visible');  
+              scope.firstAidUploadVisible = jQuery('.firstAidEvidenceUpload').data('visible');  
+              scope.orientationModuleUploadVisible = jQuery('.orientationModuleEvidenceUpload').data('visible');
+            });
+          }
+        </script>  
+    
+        <apex:outputPanel id="script-existing-items">
+          <script>
+            jQuery(document).ready(function() {
+              var scope = angular.element(jQuery('.training-info-controller-container')).scope();
+              scope.$apply(function() {
+                scope.exisitingFiles = '{!trainingAttachmentsJson}';
+              });    
+            });
+          </script>  
+        </apex:outputPanel>
+    </body>
+</apex:page>

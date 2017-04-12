@@ -1,0 +1,7 @@
+Hello,
+
+A new self-reported Incident/Injury associated to Provider {!Case.Account} has been reported but NOT submitted from the Provider Portal. 
+
+Please login to Salesforce and review the transaction: {!Case.Link}
+
+LEAD System

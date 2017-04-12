@@ -1,0 +1,594 @@
+<apex:page controller="EEC_TransactionWizardController" standardStylesheets="false" showheader="false" sidebar="false">
+  <head>
+    <title>EEC : Transaction - Transaction/Provider Information</title>
+    <c:EEC_Header id="pageHeader" />
+      
+    <style>
+      .bPageBlock .requiredInput .requiredBlock {
+  	    background-color: #c00;
+  	    position: absolute;
+  	    left: -4px;
+  	    width: 3px;
+  	    top: 1px;
+  	    bottom: 1px;
+        top: 20px;
+        display: none;
+	  }  
+        
+      .parsley-errors-list {
+        
+        width:50%;
+      }
+        
+      .parsley-error {
+        border: 2px solid #c00;
+      }
+      .my_error_container{
+        position:absolute;
+        bottom: 90px; 
+        width:50%;
+      }  
+        
+      .errorMsg {
+        color: #d74c3b; 
+      }
+        
+      .message[class*='error'] {
+        background-color: #eee;
+        padding: 0 20px 10px;
+        margin-bottom: 25px;
+  	    border-radius: 3px;
+        -webkit-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+        -moz-box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+        box-shadow: 0px 0px 5px 0px rgba(204,0,0,0.4);
+      }
+        
+      .message[class*='error'] .messageTable {
+        width: 100%;
+      }
+        
+      .message[class*='error'] .messageText {
+        border-bottom: 1px solid grey;
+        height: 30px; 
+      }  
+      .transprovider-info-container {
+        margin-bottom: 120px; 
+      }
+        
+      md-input-container {
+        padding-top: 15px; 
+      }
+      .md-title, .md-toolbar-tools {
+            margin-bottom: 15px;
+      }  
+  
+      md-input-container .input-label {
+        /*top: -50px;*/
+      }
+        
+      md-input-container .input-label-date-picklist {
+        top: -25px;
+      }
+        
+      .base-info {
+        margin-top: 10px; 
+      }
+      .input-label{
+      	color: rgba(0,0,0,0.54);  
+      }  
+        
+      .base-info md-content {
+        margin-bottom: 20px; 
+      }
+        
+      .provider-checkbox {
+        margin-top: -25px;
+        margin-left: -5px; 
+        overflow: visible;
+      }
+      .radio-group .parsley-errors-list {
+        	margin-top: 20px;
+    		margin-left: -50px;
+    		position: absolute;
+        	width:50%;
+       }
+       .radio-group .parsley-error {
+       		border: 0px; 
+       }
+        
+      .new-address-live-at-address {
+        margin-top: 29px;
+      }
+      md-input-container:not(.md-input-invalid).md-input-has-value label{
+      	  transform: translate3d(0,6px,0) scale(1);
+      }
+      
+        
+      /* @see Angular Material - Input */
+      .requiredInput, md-input-container span {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+        -webkit-order: 2;
+        -ms-flex-order: 2;
+        order: 2;
+        display: block;
+        background: 0 0;
+        padding: 2px 2px 1px;
+        border-width: 0 0 1px;
+        line-height: 26px;
+        -ms-flex-preferred-size: 26px;
+        border-radius: 0; 
+      }
+        
+      .other-checkbox {
+         padding-top: 20px;
+      }
+      input[type="radio"], input[type="checkbox"] {
+              margin: 4px 7px 0;
+      } 
+      .radio-group label{
+      	font-weight : normal;  
+      }
+        
+      .commandBtn {
+        -webkit-appearance: none;
+        border: none;
+        box-shadow: none;
+        background: none;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 14px;
+        font-style: inherit;
+        font-variant: inherit;
+        font-family: inherit;
+        outline: none;
+        letter-spacing: .01em;
+        margin: 3px 0px;
+        white-space: normal;
+      }
+      input[type="text"] {
+    	width: 70%;
+        margin-bottom : 10px;
+        border-bottom-left-radius: 4px;
+    	border-bottom-right-radius: 4px;
+      }
+      textarea.form-control {
+        width: 70%;
+        margin-bottom : 15px;
+        border-bottom-left-radius: 4px;
+    	border-bottom-right-radius: 4px;
+      }  
+        
+      .navigation-buttons .md-button label {
+        white-space: normal;
+      }
+        
+      .base-label {
+        color: rgba(0,0,0,0.54); 
+      }
+      .md-input-has-value{
+      	
+      }  
+        
+      md-input-container input, md-input-container .md-input {
+        max-width: 200px; 
+      }
+      p{
+      	  display: inline-block;
+          max-width: 100%;
+          margin-bottom: 5px;
+          font-weight: bold;  
+      }
+        
+      .readonly-input {
+        border-bottom: none;
+        cursor: not-allowed; 
+      }
+      .read-only-input{
+      	cursor: not-allowed; 
+        background : rgba(0,0,0,0.54);
+      }  
+      
+      /* TODO: Remove this and use md-select with new Validation. */
+      select {
+        background: none;
+        border: none;
+        border-bottom: 1px solid #ddd; 
+      }
+        
+      .errorMsg {
+        color: red; 
+      }
+        
+      .city-outputfield {
+        outline: none;
+        text-decoration: none;
+      }
+        
+      @media only screen and (min-width: 0px) and (max-width: 959px) {
+        .navigation-buttons .md-button {
+          width: 100%;
+        }
+        
+        .navigation-buttons md-content {
+          width: 100%;
+        }
+        
+        md-input-container input {
+          max-width: none;
+        }
+      }
+    </style>
+      
+  </head>
+    
+  <body ng-app="eecApp">
+    <c:EEC_Nav_Bar id="navBar" />
+      
+    <div class="transprovider-info-container" layout-wrap="true" layout-lg="row" layout-gt-lg="row" layout="row" layout-padding="true" layout-margin="true" ng-controller="TransactionController as ctrl">
+      <md-content style="margin-top: 20px;" ng-show="ctrl.checkForMessages()" layout="row" flex="100" layout-align="center center">   
+        <md-whiteframe class="md-whiteframe-z2 ng-cloak" layout="column" layout-padding="true" flex="75">
+          <apex:pageMessages id="showmsg"></apex:pageMessages>
+        </md-whiteframe> 
+      </md-content>
+    
+    <apex:form id="ProviderTransactionForm" styleClass="transaction-parsley-form col-lg-8 col-md-8 col-sm-12">
+	  <apex:outputPanel style="padding:50px 50px 50px 50px" id="userDetail"  styleClass="ng-cloak">
+        <h3 class="md-display-1">Transaction / Provider Information</h3>
+        <md-divider layout-align="center center"></md-divider>  
+		<apex:pageBlock html-layout="column" html-layout-padding="true">
+          <!-- Basic Information -->
+		  <div class="base-info" layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true">   
+            <h3 class="md-title" flex="100">Transaction Details</h3>
+		    <md-content flex="50" layout="column">
+		      <label class="base-label">Transaction Type</label>
+		  	  <apex:outputText value="{!LicenseRecordTypeLabel}" id="transactionTypeTA" />
+			</md-content>
+			<md-content flex="50" layout="column">
+              <label class="base-label">Transaction Number</label>
+			  <apex:outputText value="{!licenseTransation.Name}" id="transactionNumberTA" />
+			</md-content>
+			<apex:outputPanel layout="block" html-flex="50" rendered="{!LicenseRecordTypeName=='FCC_Renewal' || LicenseRecordTypeName=='FCC_License_Upgrade'}">
+              <md-content layout="column">
+			    <label class="base-label">Current License Capacity</label>
+		  	    <apex:outputText value="{!provider.Capacity__c}" id="providerCapacity" />
+              </md-content>
+			</apex:outputPanel> 
+            <apex:outputPanel layout="block" styleClass="form" html-flex="50" rendered="{!LicenseRecordTypeName=='FCC_Renewal' || LicenseRecordTypeName=='FCC_License_Upgrade'}">
+                <md-input-container flex="50" style="margin-top:-10px;" class="form-group" ng-class="{'md-input-has-value' : {!IF(cntct.FirstName==null,false,true)}}">
+                    <p class="base-label">Would you like to change your license status to? <span class="required">*</span></p>
+                  <apex:InputField value="{!licenseTransation.License_Requested__c}" styleClass="form-control" style="width:70%;" html-data-parsley-required="true"/>  
+                </md-input-container> 
+            </apex:outputPanel>
+		  </div>
+            
+          <!-- Licensee Information -->
+          <div layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true" style="margin-top: -35px;">
+            <h3 class="md-title" flex="100">Licensee Information</h3>
+              
+            <div flex="50" class="form-group" ng-class="{'md-input-has-value' : {!IF(cntct.FirstName==null,false,true)}}">
+              <label class="input-label">First Name <span class="required">*</span></label>
+              <apex:InputField styleClass="form-control" value="{!cntct.FirstName}" id="firstName" html-data-parsley-required="true" />  
+            </div>
+                
+            <div flex="50" class="form-group" ng-class="{'md-input-has-value' : {!IF(cntct.LastName==null,false,true)}}">
+              <label class="input-label">Last Name <span class="required">*</span></label>
+              <apex:InputField styleClass="form-control" required="false" value="{!cntct.LastName}" id="lastName" html-data-parsley-required="true" />  
+            </div>  
+               
+            <apex:outputPanel html-flex="50" layout="block" rendered="{!LicenseRecordTypeName=='FCC_New_License'}">
+              <div flex="50" style="margin-top: -10px;" class="form-group" ng-class="{'md-input-has-value' : {!IF(cntct.Birthdate==null,false,true)}}">
+                <label class="input-label">Date of Birth <span class="required">*</span></label>
+                <c:noDateLink ><apex:InputField styleClass="form-control" value="{!cntct.Birthdate}" html-data-parsley-required="true" html-data-provide="datepicker"/></c:noDateLink>  
+              </div>
+            </apex:outputPanel>
+          </div>
+			
+          <!-- Provider Address Information --> 
+          <div layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true" style="overflow: visible;">
+			<h3 class="md-title" flex="100" style="margin-top: 0px;">Current Provider Address</h3> 
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.Provider_Address_1__c==null,false,true)}}">
+              <label class="input-label">Street Address 1 <span class="required">*</span></label>
+              <apex:InputText styleClass="form-control" value="{!provider.Provider_Address_1__c}" html-data-parsley-required="true" rendered="{!LicenseRecordTypeName == 'FCC_New_License'}"/>    
+              <apex:InputText styleClass="form-control" disabled="true" value="{!provider.Provider_Address_1__c}" id="ProviderAddress1" html-read-only="true" rendered="{!LicenseRecordTypeName != 'FCC_New_License'}"/>  
+            </div> 
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.Provider_Address_2__c==null,false,true)}}">
+              <label class="input-label">Street Address 2 </label>
+              <apex:InputText styleClass="form-control" value="{!provider.Provider_Address_2__c}" rendered="{!LicenseRecordTypeName=='FCC_New_License'}"/>  
+              <apex:InputText styleClass="form-control" disabled="true" value="{!provider.Provider_Address_2__c}" id="ProviderAddress2" html-read-only="true" rendered="{!LicenseRecordTypeName!='FCC_New_License'}"/>
+            </div>   
+              
+            <apex:outputPanel layout="block" html-flex="50" rendered="{!LicenseRecordTypeName=='FCC_New_License'}">
+              <!-- TODO: Correct this to use Material Design inputs. Currently broken due to being a lookup field and not a picklist.-->
+              <label class="input-label" style="width:100%;">City/Town <span class="required">*</span></label>
+              <!--<apex:inputField styleClass="city-outputfield readonly-input" value="{!provider.Provider_City__c}" html-data-parsley-required="true"/>-->
+              <apex:selectList styleClass="form-control" style="width:70%;height: 34px;" id="locationLookupPicklist" value="{!provider.Provider_City__c}" size="1" rendered="true" html-data-parsley-required="true">  
+                <apex:selectOptions value="{!CityOptions}"/>  
+              </apex:selectList>  
+            </apex:outputPanel>    
+              
+            <apex:outputPanel layout="block" html-flex="50" rendered="{!LicenseRecordTypeName!='FCC_New_License'}">  
+              <div ng-class="{'md-input-has-value' : {!IF(provider.Provider_City__c==null,false,true)}}" style="margin-bottom:10px;">
+                <label class="input-label" style="width:100%;">City/Town <span class="required">*</span></label>
+                <apex:OutputField styleClass="form-control city-outputfield readonly-input" value="{!provider.Provider_City__c}" />
+              </div>
+            </apex:outputPanel>
+              
+            <apex:outputPanel layout="block" html-flex="50" rendered="{!LicenseRecordTypeName=='FCC_New_License'}">    
+              <div ng-class="{'md-input-has-value' : {!IF(provider.Provider_Zip_Code__c==null,false,true)}}">
+                <label class="input-label" style="width:100%;">Zip Code <span class="required">*</span></label>
+                <apex:InputField styleClass="form-control" value="{!provider.Provider_Zip_Code__c}" html-data-parsley-required="true"/>
+              </div>  
+            </apex:outputPanel>
+              
+            <apex:outputPanel layout="block" html-flex="50" rendered="{!LicenseRecordTypeName!='FCC_New_License'}">    
+              <div ng-class="{'md-input-has-value' : {!IF(provider.Provider_Zip_Code__c==null,false,true)}}">
+                <label class="input-label" style="width:100%;">Zip Code <span class="required">*</span></label>
+                <apex:OutputField styleClass="form-control readonly-input" value="{!provider.Provider_Zip_Code__c}" />
+              </div> 
+            </apex:outputPanel>
+              
+			<apex:outputPanel styleClass="radio-group" layout="block" html-flex="50">    
+            	<p class="input-label">Do you live at this address? <span class="required">*</span></p>
+                  <apex:selectRadio value="{!provider.Live_at_this_address__c}">
+                      <apex:selectOptions value="{!items}" html-data-parsley-required="true"/>
+                  </apex:selectRadio>  
+            </apex:outputPanel>
+              
+          </div>
+         
+          <!-- NEW Mailing Address -->
+          <apex:outputPanel layout="block" rendered="{!LicenseRecordTypeName=='Change_of_Address'}">
+            <div layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true">    
+              <h3 class="md-title" flex="100">New Address</h3> 
+              
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.New_Street_Address_1__c==null,false,true)}}">
+                <label class="input-label">Street Address 1 <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.New_Street_Address_1__c}" html-data-parsley-required="true"/>
+              </div>
+              
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.New_Street_Address_2__c==null,false,true)}}">
+                <label class="input-label">Street Address 2</label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.New_Street_Address_2__c}"/>
+              </div>
+              
+              <!--<md-input-container flex="50">-->
+              <!-- TODO: Correct his to use Material Design inputs. Currently broken due to being a lookup field and not a picklist.-->
+              <md-content flex="50">
+                <label class="input-label">City <span class="required">*</span></label>
+                <apex:selectList styleClass="form-control" style="width:70%;height: 34px;" id="changeofAddressLookupPicklist" value="{!licenseTransation.New_City__c}" size="1" rendered="true" html-data-parsley-required="true">  
+                	<apex:selectOptions value="{!CityOptions}"/>  
+              	</apex:selectList>    
+              </md-content>    
+              <!--</md-input-container>-->
+            
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.New_Zip_Code__c==null,false,true)}}">
+                <label class="input-label">Zip Code <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.New_Zip_Code__c}" html-data-parsley-required="true"/>
+              </div>
+              
+              <div flex="50" >
+                <label class="input-label-date-picklist input-label">Will you live at this new address? <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" style="width:70%;height: 34px;" value="{!licenseTransation.Live_at_New_Address__c}" html-data-parsley-required="true"/>
+              </div>
+              
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.Moving_Date__c==null,false,true)}}">
+                <label class="input-label">Moving Date <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.Moving_Date__c}" html-data-parsley-required="true" html-data-provide="datepicker" style="margin-bottom:0px;"/>
+              </div>
+            
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.Date_Care_Resumes__c==null,false,true)}}">
+                 <label class="input-label">Date Care Resumes <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.Date_Care_Resumes__c}" html-data-parsley-required="true" html-data-provide="datepicker" style="margin-bottom:0px;"/>
+              </div>
+              
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.New_Address_Phone_Number__c==null,false,true)}}">
+                <label class="input-label">Address Phone Number <span class="required">*</span></label>  
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.New_Address_Phone_Number__c}" html-data-parsley-required="true"/>
+              </div>
+              
+              <div flex="50">
+                <label class="input-label-date-picklist input-label" style="width:100%;">Is this telephone number unlisted?</label>  
+                <apex:InputField styleClass="form-control" style="width:70%;" value="{!licenseTransation.New_Phone_Number_Unlisted__c}" html-data-parsley-required="true"/>
+              </div>
+            </div>
+          </apex:outputPanel>
+           
+          <!-- Mailing Address (If different than provider) -->
+          <div layout="row" layout-wrap="true">
+            <h3 class="md-title" flex="100">Mailing Address (if different than provider address)</h3> 
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.ShippingStreet==null,false,true)}}">
+              <label class="input-label">Mailing Street</label>
+              <apex:InputField styleClass="form-control" value="{!provider.ShippingStreet}"/>  
+            </div>
+            
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.ShippingCity==null,false,true)}}">
+              <label class="input-label">Mailing City</label>
+              <apex:selectList styleClass="form-control" style="width:70%;height: 34px;" id="MailingCityPicklist" value="{!provider.ShippingCity}" size="1" rendered="true">  
+                <apex:selectOptions value="{!CityOptions}"/>  
+              </apex:selectList>   
+            </div>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.ShippingPostalCode==null,false,true)}}">
+              <label class="input-label">Mailing Zip/Postal Code</label>
+              <apex:InputField styleClass="form-control" value="{!provider.ShippingPostalCode}"/>  
+            </div>
+                
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.ShippingState==null,false,true)}}">
+              <label class="input-label">Mailing State/Province</label>
+              <apex:InputField styleClass="form-control" value="{!provider.ShippingState}"/>    
+            </div>
+          </div>
+            
+          <!-- Contact Information -->
+          <div layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true">
+            <h3 class="md-title" flex="100">Contact Information</h3>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.Phone==null,false,true)}}">
+              <label class="input-label">Phone Number <span class="required">*</span></label>
+              <apex:inputField styleClass="form-control" value="{!provider.Phone}" id="providerPhNum" html-data-parsley-required="true"/>
+            </div>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(Provider.Unlisted_Phone_Number__c==null,false,true)}}">
+              <label class="input-label" style="width:100%;">Is this telephone number unlisted? <span class="required">*</span></label>
+              <apex:inputField styleClass="form-control" style="width:70%;" value="{!Provider.Unlisted_Phone_Number__c}" html-data-parsley-required="true"/>
+            </div>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.Alternate_Phone__c==null,false,true)}}">
+              <label class="input-label">Alternate Phone Number</label>
+              <apex:inputField styleClass="form-control" value="{!provider.Alternate_Phone__c}" />
+            </div>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(Provider.Fax==null,false,true)}}">
+              <label class="input-label">Fax Number</label>
+              <apex:InputField styleClass="form-control" value="{!Provider.Fax}"/>
+            </div>
+            
+            <apex:outputPanel html-flex="50" layout="block" rendered="{!LicenseRecordTypeName=='FCC_New_License'}">
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(licenseTransation.Work_Phone_Number__c==null,false,true)}}">
+                <label class="input-label">Current Work Phone Number</label>
+                <apex:InputField styleClass="form-control" value="{!licenseTransation.Work_Phone_Number__c}"/>
+              </div>
+            </apex:outputPanel>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(cntct.MobilePhone==null,false,true)}}">
+              <label class="input-label">Mobile Phone Number</label>
+              <apex:InputField styleClass="form-control" value="{!cntct.MobilePhone}"/>
+            </div>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(Provider.Provider_Email__c==null,false,true)}}">
+              <label class="input-label">Email Address <span class="required">*</span></label>
+              <apex:InputField styleClass="form-control" style="min-height:auto;" value="{!Provider.Provider_Email__c}" html-data-parsley-required="true" html-layout-fill="true"/>
+            </div>
+          </div>  
+            
+          <!-- Other Information -->
+          <div layout="column" layout-lg="row" layout-gt-lg="row" layout-wrap="true">
+            <h3 class="md-title" flex="100">Other Information</h3>
+              
+            <apex:outputPanel styleClass="radio-group" style="margin-bottom: 15px;" html-flex="50"  layout="block" rendered="{!LicenseRecordTypeName=='FCC_Renewal' || LicenseRecordTypeName=='FCC_New_License' || LicenseRecordTypeName=='FCC_License_Upgrade'}">
+              	<p class="input-label">Do you wish to be listed on the EEC Website for referrals? <span class="required">*</span></p>
+                  <apex:selectRadio value="{!provider.Accept_Referral__c}">
+                      <apex:selectOptions value="{!items}" html-data-parsley-required="true"/>
+                  </apex:selectRadio>
+            </apex:outputPanel>
+              
+            <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.Language__c==null,false,true)}}">
+                <p class="input-label">Language <span class="required">*</span></p>
+              <apex:inputField styleClass="form-control" value="{!provider.Language__c}" html-data-parsley-required="true" style="width:70%;"/>
+            </div> 
+              
+            <div flex="50" style="margin-bottom: 15px;" ng-class="{'md-input-has-value' : {!IF(provider.Preferred_Language__c==null,false,true)}}">
+                <p class="input-label">Preferred Communication Language <span class="required">*</span></p>
+              <apex:inputField styleClass="form-control" value="{!provider.Preferred_Language__c}" html-data-parsley-required="true" style="width:70%;"/>
+            </div> 
+              
+              <apex:outputPanel styleClass="radio-group" html-flex="50"  layout="block">
+                  <p class="input-label">Can you communicate in English? <span class="required">*</span></p>
+                  <apex:selectRadio value="{!provider.Can_Communicate_in_English__c}" >
+                      <apex:selectOptions value="{!items}" html-data-parsley-required="true" />
+                  </apex:selectRadio>
+              </apex:outputPanel>
+              
+            <apex:outputPanel html-flex="50" layout="block" rendered="{!LicenseRecordTypeName=='FCC_New_License' && provider.PPM_Meeting_Attended_Date__c == null}">
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.PPM_Meeting_Attended_Date__c==null,false,true)}}">
+                  <p class="input-label" style="width: 100%;">Date Attended Potential Provider Meeting <span class="required">*</span></p>
+                <apex:inputField styleClass="form-control" value="{!provider.PPM_Meeting_Attended_Date__c}" html-data-parsley-required="true"/>
+              </div> 
+            </apex:outputPanel>
+            
+            <apex:outputPanel html-flex="50" layout="block" rendered="{!LicenseRecordTypeName=='FCC_New_License' && provider.PPM_Meeting_Attended_Date__c != null}">
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(provider.PPM_Meeting_Attended_Date__c==null,false,true)}}">
+                  <p class="input-label" style="width: 100%;">Date Attended Potential Provider Meeting</p>
+                <apex:outputField styleClass="form-control" value="{!provider.PPM_Meeting_Attended_Date__c}"/>
+              </div> 
+            </apex:outputPanel>
+              
+            <apex:outputPanel html-flex="50" layout="block" rendered="{!LicenseRecordTypeName=='FCC_Renewal' || LicenseRecordTypeName=='FCC_New_License' || LicenseRecordTypeName=='FCC_License_Upgrade'}">
+              <div flex="50" ng-class="{'md-input-has-value' : {!IF(cntct.Prof_Qualification_Reg_Number__c==null,false,true)}}">
+                  <p class="input-label">Professional Qualification Registry Number <span class="required">*</span></p>
+                <apex:inputField styleClass="form-control" value="{!cntct.Prof_Qualification_Reg_Number__c}" html-data-parsley-required="true"/>
+              </div>   
+            </apex:outputPanel>  
+          </div> 
+
+           <!-- Navigation Buttons -->
+           <md-content class="navigation-buttons" style="margin-top:50px;" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+                	<apex:commandLink styleClass="md-button md-raised md-eec" value="Save and Previous" onclick="if(!form.validate()){return false;}" action="{!SaveAndPreviousTransactionProvider}" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+					<apex:commandLink styleClass="md-button md-raised md-eec" value="Save and Next" onclick="if(!form.validate()){return false;}" action="{!saveAndNextTransactionProvider}" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+			</md-content>
+			<md-content class="navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">    
+					<apex:commandLink styleClass="md-button md-raised" action="{!CancelTransaction}" value="Cancel {!formattedLicenseRecordTypeLabel} Transaction"  onclick="return confirm('Are you sure to cancel the transaction?');" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+					<apex:commandLink styleClass="md-button md-raised" value="Save and Return to Provider" onclick="if(!form.validate()){return false;}" action="{!SaveAndReturnTransactionProvider}" html-layout-padding="true" html-flex-order-sm="1" html-flex-order-md="1" html-md-button="true"/>
+            </md-content> 
+		  </apex:pageBlock>
+	    </apex:outputPanel>
+      </apex:form>
+       
+      <eec-wizard btn-progress-color="#fff" class="col-lg-3" flex="30" passed-btn-bg-color="#4CAF50" btn-bg-color="#FAFAFA" active-btn-bg-color="#0288D1" hide="true" show-gt-md="true">
+        <eec-wz-step ng-repeat="step in ctrl.wizardElements" title="{{step.label}}" step-img="{{step.icon}}" selected="{{step.selected}}" passed="{{step.icon != 'info_outline'}}"></eec-wz-step>
+      </eec-wizard>  
+    </div>
+      
+    <c:EEC_Site_Footer id="siteFooter" /> 
+    
+    <script>
+      	 var form = j$(".transaction-parsley-form").parsley({
+                        errorsWrapper: '<div class="parsley-errors-list"></div>',
+                        errorTemplate: '<p class="errorMsg"></p>'    
+                      });
+      
+      jQuery(window).load(function() {
+        _.each(jQuery('[id*=lookup'), function(value,key) { 
+          jQuery(value).off('click'); 
+          jQuery(value).attr('href', '');
+          jQuery(value).css('text-decoration', 'none');
+          jQuery(value).css('cursor', 'not-allowed');
+          jQuery(value).css('color', 'black');
+          jQuery(value).hover(function() {
+          jQuery(this).css('color', 'black');
+          jQuery(this).css('cursor', 'not-allowed');  
+          jQuery(this).css('text-decoration', 'none');
+          });
+        }); 
+      });
+    </script>
+      
+    <script>
+      app.controller('TransactionController', ['$scope', '$location', 'Util', function($scope, $location, Util) {
+        // Instance of controller.
+        var tranCtrl = this;
+        // Controller level variables.
+        tranCtrl.data = {};
+        tranCtrl.data.addressCheckbox = "{!provider.Live_at_this_address__c}";
+        tranCtrl.wizardElements = Util.generateWizardElements("{!licenseRecordTypeName}", 'Transaction/Provider Info');
+        tranCtrl.selected = [];
+        //  Function to toggle the checkbox.
+        tranCtrl.toggle = function (item, list) {
+          var idx = list.indexOf(item);
+          if (idx > -1) list.splice(idx, 1);
+          else list.push(item);
+        };
+        // Function to check if checkbox is already checked.
+        tranCtrl.exists = function (item, list) {
+          return list.indexOf(item) > -1;
+        };  
+        // Function to check for messages available due to errors.
+        tranCtrl.checkForMessages = function() {
+          // TODO: Switch this to use Angular and now jQuery.            
+          var ele = jQuery('[id*="showmsg"]');
+          if (ele.children().length > 0) {
+            return true;   
+          }
+          return false;
+        };
+      }]);
+      // TODO: Attempt this in Angular over jQuery.     
+      // If a dateformat is clicked - generated by SForce - then attach input-has-value class.
+      jQuery('.dateFormat').on('click', function() { jQuery(this).parent().parent().parent().addClass('md-input-has-value'); });
+    </script>
+  </body>
+</apex:page>

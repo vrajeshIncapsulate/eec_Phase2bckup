@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Standard Visit Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Standard Visit Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Applicable To --></label>
+        <name>Applicable_To__c</name>
+        <picklistValues>
+            <masterLabel>Adoption Agency</masterLabel>
+            <translation><!-- Adoption Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Child Care</masterLabel>
+            <translation><!-- Family Child Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Care Agency</masterLabel>
+            <translation><!-- Foster Care Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Care</masterLabel>
+            <translation><!-- Group Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Large Group</masterLabel>
+            <translation><!-- Large Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Small Group</masterLabel>
+            <translation><!-- Small Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Temporary Shelter</masterLabel>
+            <translation><!-- Temporary Shelter --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Domain --></label>
+        <name>Category__c</name>
+        <picklistValues>
+            <masterLabel>BRC Information</masterLabel>
+            <translation><!-- BRC Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Classroom</masterLabel>
+            <translation><!-- Classroom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Curriculum and Activities</masterLabel>
+            <translation><!-- Curriculum and Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equipments and Materials</masterLabel>
+            <translation><!-- Equipments and Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Involvement</masterLabel>
+            <translation><!-- Family Involvement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health and Safety</masterLabel>
+            <translation><!-- Health and Safety --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Infection Control</masterLabel>
+            <translation><!-- Infection Control --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inspections</masterLabel>
+            <translation><!-- Inspections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interactions</masterLabel>
+            <translation><!-- Interactions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mealtime, Food, Food Preparation</masterLabel>
+            <translation><!-- Mealtime, Food, Food Preparation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medications</masterLabel>
+            <translation><!-- Medications --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal Hygiene</masterLabel>
+            <translation><!-- Personal Hygiene --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Indoors</masterLabel>
+            <translation><!-- Physical Facility - Indoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Outdoors</masterLabel>
+            <translation><!-- Physical Facility - Outdoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Postings</masterLabel>
+            <translation><!-- Postings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress Reports</masterLabel>
+            <translation><!-- Progress Reports --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review of Written Materials</masterLabel>
+            <translation><!-- Review of Written Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sleep, Rest, Quiet Activities</masterLabel>
+            <translation><!-- Sleep, Rest, Quiet Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff and Educators</masterLabel>
+            <translation><!-- Staff and Educators --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supervision</masterLabel>
+            <translation><!-- Supervision --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Toileting / Diapering / Handwashing</masterLabel>
+            <translation><!-- Toileting / Diapering / Handwashing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation</masterLabel>
+            <translation><!-- Transportation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Water Safety</masterLabel>
+            <translation><!-- Water Safety --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- External SVI ID --></label>
+        <name>External_SVI_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Guidance --></label>
+        <name>Guidance__c</name>
+    </fields>
+    <fields>
+        <label><!-- StdVisitItemRandomDomainName --></label>
+        <name>StdVisitItemRandomDomainName__c</name>
+    </fields>
+    <fields>
+        <label><!-- StdVisitItemRandom --></label>
+        <name>StdVisitItemRandom__c</name>
+    </fields>
+    <fields>
+        <label><!-- StdVisitItemReg --></label>
+        <name>StdVisitItemReg__c</name>
+    </fields>
+    <fields>
+        <label><!-- StdVisitItemTool --></label>
+        <name>StdVisitItemTool__c</name>
+    </fields>
+    <layouts>
+        <layout>Standard Inspection Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

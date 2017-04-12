@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <description>This is a custom setting to hold any and all Amazon AWS configuration settings.</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>S3_Access_Control_Level__c</fullName>
+        <defaultValue>&quot;authenticated-read&quot;</defaultValue>
+        <description>The access level that S3 files will be flagged with when uploaded.</description>
+        <externalId>false</externalId>
+        <label>S3 Access Control Level</label>
+        <length>50</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>S3_Bucket_Name__c</fullName>
+        <description>The name of the S3 bucket to be used.</description>
+        <externalId>false</externalId>
+        <label>S3 Bucket Name</label>
+        <length>100</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>S3_Endpoint_Url__c</fullName>
+        <defaultValue>&quot;https://s3-us-gov-west-1.amazonaws.com/&quot;</defaultValue>
+        <description>This is the endpoint url for the configurations S3 buckets.</description>
+        <externalId>false</externalId>
+        <label>S3 Endpoint Url</label>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <label>AWS Configuration</label>
+    <visibility>Protected</visibility>
+</CustomObject>

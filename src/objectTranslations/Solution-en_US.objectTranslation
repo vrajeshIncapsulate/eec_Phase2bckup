@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FAQ</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FAQ</value>
+    </caseValues>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Helpful FAQ Report</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Helpful FAQ Report</value>
+        </caseValues>
+        <name>helpful_solution_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Attachments</value>
+        </caseValues>
+        <name>solution_attachments</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Category</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Categories</value>
+        </caseValues>
+        <name>solution_category</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Category Information</value>
+        </caseValues>
+        <name>solution_category_information</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Category Node ID</value>
+        </caseValues>
+        <name>solution_category_node_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Category Report</value>
+        </caseValues>
+        <name>solution_category_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Custom Field</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Custom Fields</value>
+        </caseValues>
+        <name>solution_custom_field</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Description</value>
+        </caseValues>
+        <name>solution_description</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Answer</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>Answer</value>
+        </caseValues>
+        <name>solution_detail</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Division</value>
+        </caseValues>
+        <name>solution_division</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Field</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Fields</value>
+        </caseValues>
+        <name>solution_field</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ History</value>
+        </caseValues>
+        <name>solution_history</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ History Report</value>
+        </caseValues>
+        <name>solution_history_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ ID</value>
+        </caseValues>
+        <name>solution_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Information</value>
+        </caseValues>
+        <name>solution_information</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ List</value>
+        </caseValues>
+        <name>solution_list</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ List Report</value>
+        </caseValues>
+        <name>solution_list_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Manager</value>
+        </caseValues>
+        <name>solution_manager</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Name</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Names</value>
+        </caseValues>
+        <name>solution_name</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Number</value>
+        </caseValues>
+        <name>solution_number</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Owner</value>
+        </caseValues>
+        <name>solution_owner</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Owner Alias</value>
+        </caseValues>
+        <name>solution_owner_alias</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Record Type</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Record Types</value>
+        </caseValues>
+        <name>solution_record_type</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Record Type ID</value>
+        </caseValues>
+        <name>solution_record_type_id</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Report</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Report</value>
+        </caseValues>
+        <name>solution_report</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Status</value>
+        </caseValues>
+        <name>solution_status</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Subject</value>
+        </caseValues>
+        <name>solution_subject</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ Subject and Description</value>
+        </caseValues>
+        <name>solution_subject_and_description</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>Question</value>
+        </caseValues>
+        <name>solution_title</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <fields>
+        <caseValues>
+            <plural>false</plural>
+            <value>FAQ View</value>
+        </caseValues>
+        <caseValues>
+            <plural>true</plural>
+            <value>FAQ Views</value>
+        </caseValues>
+        <name>solution_view</name>
+        <startsWith>Consonant</startsWith>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

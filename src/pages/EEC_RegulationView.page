@@ -1,0 +1,48 @@
+<apex:page controller="EEC_RegulationViewController" sidebar="false" showHeader="false">
+ <head>
+    <title>EEC : Regulation</title>
+    <c:EEC_Header id="pageHeader" />
+ <script>
+   function closeWin() {
+    window.open('','_parent','');
+    window.close();
+   }
+   $(document).ready(function() {
+      if( (typeof sforce != 'undefined') && (sforce != null) ) {
+           $('[id$=closeBtn]').addClass("close-btn");    
+      }
+   });
+ </script>
+    <style>
+        .close-btn
+        {
+            display : none;
+        }
+    </style>
+    </head>
+ <apex:form >
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <apex:commandButton id="closeBtn" value="Close" onclick="closeWin();"/>   
+    
+    <apex:pageBlock >
+        <apex:pageBlockSection title="Regulation Detail" columns="1" collapsible="false">
+                <apex:outputfield value="{!regulation.Name}" label="Regulation Number"/> 
+                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;               
+                <span class="labelCol" style="padding-left : 76px;">Parent Regulation Number</span><a href="/apex/EEC_RegulationView?Id={!regulation.Parent_Regulation__r.Id}" target="_top">{!regulation.Parent_Regulation__r.name}</a>
+                <apex:outputfield value="{!regulation.Article__c}"/>
+                <apex:outputfield value="{!regulation.Applicable_To__c}"/>                 
+         </apex:pageBlockSection>
+         <apex:pageblockSection title="Child Regulations">
+             <apex:pageBlockTable value="{!childregs}" style="min-width:400px;" var="creg" rows="50" >
+              <apex:column headerValue="Regulation Number">
+                <a href="/apex/EEC_RegulationView?Id={!creg.Id}" target="_top">{!creg.Name}</a>
+              </apex:column>
+              <apex:column headerValue="Article">
+               <apex:outputfield value="{!creg.Article__c}"/> 
+              </apex:column>
+             </apex:pageBlockTable>
+         </apex:pageblockSection>
+    </apex:pageBlock>
+
+ </apex:form>
+</apex:page>

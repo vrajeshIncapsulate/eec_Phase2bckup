@@ -1,0 +1,37 @@
+<apex:page controller="EEC_ComplaintsIntroController" doctype="html-5.0" showheader="false" sidebar="false" standardstylesheets="false" action="{! noComplaintRedirect }" cache="false">
+    <head>
+        <title>Early Education and Care - Complaint Submission Form</title>
+    </head>
+    <c:EEC_Complaints_NavBar />
+    
+    <div class="complaints-wrapper intro">
+        <apex:form styleclass="transaction-parsley-form col-lg-8 col-md-8 col-sm-12" html-layout="column" html-layout-padding="true">
+            <h3 class="md-headline">
+                Introduction
+            </h3>
+
+            <div class="panel panel-default">
+                <div class="panel-body"> 
+                    <apex:outputText value="{! conf.Complaints_Introduction__c}" escape="false" />
+                </div> 
+            </div>
+            <md-content class="footer navigation-buttons" layout="column" layout-lg="row" layout-align="space-between center" layout-gt-lg="row" layout-align-sm="center center" layout-align-md="center center">
+                <apex:commandlink styleclass="md-button md-raised md-eec"
+                                  value="Cancel"
+                                  action="{! cancel }"
+                                  html-layout-padding="true"
+                                  html-flex-order-sm="1"
+                                  html-flex-order-md="1"
+                                  html-md-button="true" />
+
+                <apex:commandlink styleclass="md-button md-raised md-eec"
+                                  value="Report a Complaint"
+                                  action="{!reportAComplaint}"
+                                  html-layout-padding="true"
+                                  html-flex-order-sm="1"
+                                  html-flex-order-md="1"
+                                  html-md-button="true" />
+            </md-content>
+        </apex:form>
+    </div>
+</apex:page>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Region</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Regions</value>
+    </caseValues>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- City --></label>
+        <name>City__c</name>
+    </fields>
+    <fields>
+        <help><!-- This information is used by the system during the approval process of escalated Investigation. This user is the 1st reviewer / approver. --></help>
+        <label><!-- Investigation Director --></label>
+        <name>Deputy_Commissioner__c</name>
+        <relationshipLabel><!-- Regions (Investigation Director) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- The External ID value as used in Licensing Manager (or other external feeder systems) for managing UPSERTS into LEAD --></help>
+        <label><!-- EEC Legacy Region ID --></label>
+        <name>EEC_Legacy_Region_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- Email --></label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases --></help>
+        <label><!-- FCC/GSA 1st Escalation Case Approver --></label>
+        <name>FCC_GSA_1st_Escalation_Case_Approver__c</name>
+        <relationshipLabel><!-- Regions (FCC/GSA 1st Escalation Case Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases --></help>
+        <label><!-- FCC/GSA 2nd Escalation Case Approver --></label>
+        <name>FCC_GSA_2nd_Escalation_Case_Approver__c</name>
+        <relationshipLabel><!-- Regions (FCC/GSA 2nd Escalation Case Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default user new cases will be assigned to for FCC --></help>
+        <label><!-- FCC - New Case Default Assignee --></label>
+        <name>FCC_New_Case_Default_Assignee__c</name>
+        <relationshipLabel><!-- Regions (FCC - New Case Default Assignee) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Fax --></label>
+        <name>Fax__c</name>
+    </fields>
+    <fields>
+        <label><!-- Number --></label>
+        <name>Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Phone --></label>
+        <name>Phone__c</name>
+    </fields>
+    <fields>
+        <help><!-- Denotes the user that will be the 1st Level escalation approver on R&amp;P cases --></help>
+        <label><!-- R&amp;P 1st Escalation Case Approver --></label>
+        <name>R_P_1st_Escalation_Case_Approver__c</name>
+        <relationshipLabel><!-- Regions (R&amp;P 1st Escalation Case Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Denotes the user that will be the 2nd Level escalation approver on R&amp;P cases --></help>
+        <label><!-- R&amp;P 2nd Escalation Case Approver --></label>
+        <name>R_P_2nd_Escalation_Case_Approver__c</name>
+        <relationshipLabel><!-- Regions (R&amp;P 2nd Escalation Case Approver) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default user the case will be assigned to for R &amp; P new cases. --></help>
+        <label><!-- R &amp; P - New Case Default Assignee --></label>
+        <name>R_P_New_Case_Default_Assignee__c</name>
+        <relationshipLabel><!-- Regions (R &amp; P - New Case Default Assignee) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- This information is used by the system during the approval process of escalated Investigation. For FCC / GSA, this user is the 2nd reviewer / approver. --></help>
+        <label><!-- Regional Director --></label>
+        <name>Regional_Director__c</name>
+        <relationshipLabel><!-- Regions (Regional Director) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Default user who will be assigned new cases for SGLSA. --></help>
+        <label><!-- SGLSA - New Case Default Assignee --></label>
+        <name>SGLSA_New_Case_Default_Assignee__c</name>
+        <relationshipLabel><!-- Regions (SGLSA - New Case Default Assignee) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- State --></label>
+        <name>State__c</name>
+    </fields>
+    <fields>
+        <label><!-- Street --></label>
+        <name>Street__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Financial Management Region</masterLabel>
+            <translation><!-- Financial Management Region --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Licensing Region</masterLabel>
+            <translation><!-- Licensing Region --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Used_In_Calc --></label>
+        <name>Used_In_Calc_2__c</name>
+    </fields>
+    <fields>
+        <label><!-- Zip --></label>
+        <name>Zip__c</name>
+    </fields>
+    <layouts>
+        <layout>Region Layout</layout>
+        <sections>
+            <label><!-- Address Information --></label>
+            <section>Address Information</section>
+        </sections>
+        <sections>
+            <label><!-- Case Approval Hierarchy --></label>
+            <section>Case Approval Hierarchy</section>
+        </sections>
+        <sections>
+            <label><!-- Contact Information --></label>
+            <section>Contact Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Default Assignee for Case Triage --></label>
+            <section>Default Assignee for Case Triage</section>
+        </sections>
+        <sections>
+            <label><!-- Management --></label>
+            <section>Management</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Subsidy Region</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Licensing Region --></label>
+        <name>Licensing_Region</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Subsidy Region --></label>
+        <name>Subsidy_Region</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

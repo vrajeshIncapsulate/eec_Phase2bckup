@@ -1,0 +1,276 @@
+<apex:page standardcontroller="Inspection__c" applybodytag="false" renderas="pdf" extensions="EEC_GenerateVisitChecklistExtension">
+  <apex:outputtext value="{!Inspection__c.Type_of_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+  <apex:variable var="provider" value="{! Inspection__c.Provider_No__r }" />
+  <apex:variable var="providerRegion" value="{! Inspection__c.Provider_No__r.Region__r }" />
+  <head>
+    <style type="text/css">
+      .removeLastPage:last-child {
+        position: absolute;
+        bottom: 0;
+        font-family: "Arial" "Sans-Serif";
+        font-size: 10pt;
+      }
+
+      table {
+        -fs-table-paginate: paginate !important;
+      }
+
+        table tr {
+          page-break-inside: avoid !important;
+        }
+
+      .table-header {
+        height: 30px !important;
+      }
+    </style>
+  </head>
+  <apex:outputpanel styleclass="removeLastPage">
+    <c:EEC_PDFHeaderTemplate providerregion="{! providerRegion }"></c:EEC_PDFHeaderTemplate>
+    <center>
+      <h4>{!TypeOfVisitHeaderText } VISIT SUMMARY -&nbsp;<c:EEC_DateFormat date="{! Inspection__c.Date_of_Visit__c }" /></h4>
+    </center>
+    <div>{! provider.Name  }&nbsp;</div>
+    <div>{! Inspection__c.Address_1__c }&nbsp;</div>
+    <apex:outputpanel rendered="{!IF(Inspection__c.Address_2__c != null && Inspection__c.Address_2__c != '', true, false)}">{! Inspection__c.Address_2__c }</apex:outputpanel>
+    <div>{! Inspection__c.City__c }, {! Inspection__c.State__c }, {! Inspection__c.Zip_Code__c }&nbsp;</div>
+    <br />
+    <div>License #: {! provider.Current_License_Number__c }&nbsp;</div>
+    <div>Capacity: {! provider.Capacity__c }&nbsp;</div>
+    <div>Expiration Date:&nbsp;<c:EEC_DateFormat date="{! provider.Renewal_date__c }" /></div>
+    <br />
+    <!-- Anything BUT FCC.-->
+    <apex:outputpanel rendered="{!provider.RecordType.DeveloperName != 'FCC'}">
+      <div>Ages Served: {!provider.Min_Age_Years_LG_SG__c} - {!provider.Max_Age_Years_LG_SG__c}</div>
+      <div>Program Type: {!provider.Record_Type_Name__c}</div>
+    </apex:outputpanel>
+    <!-- Only Group Care or Temporary Shelter-->
+    <apex:outputpanel rendered="{!provider.RecordType.DeveloperName == 'Group_Care' || provider.RecordType.DeveloperName == 'Temporary_Shelter'}">
+      <div>
+        Ratio: {!provider.Ratios__c}
+      </div>
+    </apex:outputpanel>
+    <!-- Anything BUT FCC-->
+    <apex:outputpanel rendered="{!provider.RecordType.DeveloperName != 'FCC'}">
+      <div>Characteristics of Children Served: {!provider.Characteristics_of_Children_Served__c}</div>
+    </apex:outputpanel>
+    <!-- Foster Care Only -->
+    <apex:outputpanel rendered="{!provider.RecordType.DeveloperName == 'Foster_Care_Agency'}">
+      <div>Number of Foster Homes: {!Inspection__c.Number_of_Foster_Homes__c}</div>
+      <div>Number of Children Placed in Care: {!Inspection__c.NumberOfChildrenPlacedInCare__c}</div>
+    </apex:outputpanel>
+    <br />
+    <div>Licensor: {! Inspection__c.Inspector_del__r.Name }&nbsp;</div>
+    <apex:outputpanel layout="block" rendered="{!Inspection__c.Additional_EEC_Staff__c != null}">
+      <div>Additional EEC Staff Present During the Visit: {!Inspection__c.Additional_EEC_Staff__r.Name}</div>
+    </apex:outputpanel>
+    <div>Phone Number: {! Inspection__c.Inspector_del__r.Phone }&nbsp;</div>
+    <br />
+    <apex:outputpanel styleclass="tab" layout="block" rendered="{!provider.RecordType.DeveloperName == 'Adoption_Agency'}">
+      <br />
+      <apex:outputpanel rendered="{!Inspection__c.Number_of_Adoptive_Placements__c != null || Inspection__c.Number_of_Foster_Homes__c != null || Inspection__c.No_Birth_Mothers_Receiving_Services__c != null || Inspection__c.No_Birth_Mothers_Making_Adoption_Plan__c != null || Inspection__c.Number_of_Waiting_Families__c != null || Inspection__c.No_Families_Rec_Home_Stdy_Serv_Only__c != null}">
+        <div class="group-head"><u>Specifics of Service:</u></div>
+        <br />
+        <apex:outputpanel styleclass="tab" layout="block">
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Adoptive_Placements__c != null}">Number of Adoptive Placements: {! Inspection__c.Number_of_Adoptive_Placements__c }</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Foster_Homes__c != null}">Number of Foster Homes: {! Inspection__c.Number_of_Foster_Homes__c }</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_Birth_Mothers_Receiving_Services__c != null}">Number of Birth Mothers Who Received Services: {! Inspection__c.No_Birth_Mothers_Receiving_Services__c }</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_Birth_Mothers_Making_Adoption_Plan__c != null}">Number of Birth Mothers Who Made an Adoption Plan: {! Inspection__c.No_Birth_Mothers_Making_Adoption_Plan__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Waiting_Families__c != null}">Number of Waiting Families: {! Inspection__c.Number_of_Waiting_Families__c }</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_Families_Rec_Home_Stdy_Serv_Only__c != null}">Number of Families Receiving Home Study Service Only: {! Inspection__c.No_Families_Rec_Home_Stdy_Serv_Only__c}</apex:outputpanel>
+        </apex:outputpanel>
+        <br />
+      </apex:outputpanel>
+      <apex:outputpanel rendered="{!Inspection__c.Number_of_Child_Assessments__c != null || Inspection__c.Number_of_Home_Study_Services__c != null || Inspection__c.No_of_Families_Rec_Case_Mgmt_Services__c != null || Inspection__c.No_Indiv_Rec_Search_and_or_Reunion_Serv__c != null || Inspection__c.No_Families_Receiving_Info_and_Referral__c != null || Inspection__c.Number_of_Reunions_Facilitated__c != null}">
+        <div class="group-head"><u>DCF Contracted Services</u></div>
+        <br />
+        <apex:outputpanel styleclass="tab" layout="block">
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Child_Assessments__c != null}">Number of Child Assessments: {! Inspection__c.Number_of_Child_Assessments__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Home_Study_Services__c != null}">Number of Home Study Services: {! Inspection__c.Number_of_Home_Study_Services__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_of_Families_Rec_Case_Mgmt_Services__c != null}">Number of Families Receiving Case Management Services: {! Inspection__c.No_of_Families_Rec_Case_Mgmt_Services__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_Indiv_Rec_Search_and_or_Reunion_Serv__c != null}">Number of Individuals Receiving Search and/or Reunion Services: {! Inspection__c.No_Indiv_Rec_Search_and_or_Reunion_Serv__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.No_Families_Receiving_Info_and_Referral__c != null}">Number of Families Received Information and Referral: {! Inspection__c.No_Families_Receiving_Info_and_Referral__c}</apex:outputpanel>
+          <apex:outputpanel layout="block" rendered="{!Inspection__c.Number_of_Reunions_Facilitated__c != null}">Number of Reunions Facilitated: {! Inspection__c.Number_of_Reunions_Facilitated__c}</apex:outputpanel>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <br />
+    <!-- Updates and Changes -->
+    <apex:outputpanel rendered="{!Inspection__c.Updates_Changes__c != ''}">
+      <div class="group-head"><u>Updates and Changes</u></div>
+      <br />
+      <apex:outputpanel styleclass="tab" layout="block">
+        <apex:outputtext escape="false" style="margin-left: 15px;" value="{!Inspection__c.Updates_Changes__c}" />
+      </apex:outputpanel>
+    </apex:outputpanel>
+    <hr />
+    <br />
+    <!-- Visit Outcomes Summary -->
+    <center><h4>Visit Outcomes Summary</h4></center>
+    <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="40%, 40%, 20%" cellpadding="3" width="100%" value="{! VisitOutcomesSummary }" var="domainStr">
+      <apex:column >
+        <apex:facet name="header"><center>Domain</center></apex:facet>
+        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{! domainStr }" />
+      </apex:column>
+      <apex:column >
+        <apex:facet name="header"><center>Level of Compliance</center></apex:facet>
+        <apex:outputtext value="{! domainComplianceCountMap[domainStr] }" /> / <apex:outputtext value="{! domainComplianceTotalCountMap[domainStr] }" />
+      </apex:column>
+      <apex:column >
+        <apex:facet name="header"><center></center></apex:facet>
+        <center>
+          <apex:image url="{!$Resource.Visit_Summary_Success}" width="25" height="25" rendered="{!domainComplianceCountMap[domainStr] == domainComplianceTotalCountMap[domainStr]}" />
+          <apex:image url="{!$Resource.Visit_Summary_Warning}" width="25" height="25" rendered="{!domainComplianceCountMap[domainStr] != domainComplianceTotalCountMap[domainStr]}" />
+        </center>
+      </apex:column>
+    </apex:datatable>
+    <br />
+    <!-- Comments -->
+    <apex:outputpanel rendered="{! Inspection__c.Comments__c != NULL}">
+      <div><u><i>Comments</i></u></div>
+      <apex:outputpanel layout="block">
+        <apex:outputtext escape="false" style="margin-left: 15px;" value="{! Inspection__c.Comments__c }" />
+      </apex:outputpanel>
+      <br />
+    </apex:outputpanel>
+    <!-- Non-Compliances -->
+    <hr />
+    <h4>Non-Compliance(s)</h4>
+    <apex:outputpanel rendered="{!NonComplaintAvailable}">
+      <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="20%, 17%, 15%, 48%" cellpadding="3" width="100%" value="{! nonCompliantAssessedItems }" var="item">
+        <apex:column >
+          <apex:facet name="header"><center>Domain</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(item.inspectionItem.Category_list__c ,'/','/ ')),'-','- ') }"  />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Associated_regulation__r.Name }" />
+          <apex:outputtext value="{! item.standardRegulations  }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Item</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE((item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c),'/','/ ')),'-','- ') }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Observations</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Observations__c }" />
+        </apex:column>
+      </apex:datatable>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!!NonComplaintAvailable}">
+      <p style="margin-left: 15px;">No detailed non-compliance was identified during the visit</p>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!Inspection__c.Corrective_Action_Required__c != null && Inspection__c.Corrective_Action_Required__c != ''}">
+      <br />
+      <div class="nc-corrective-action-container">
+        <div class="group-head"><u><i>Additional Corrective Action Required</i></u></div>
+        <apex:outputtext escape="false" style="margin-left: 15px;" value="{! Inspection__c.Corrective_Action_Required__c }" />
+      </div>
+    </apex:outputpanel>
+    <br />
+    <!-- Technical Assistance -->
+    <hr />
+    <h4>Technical Assistance</h4>
+    <apex:outputpanel rendered="{!TechnicalAssistanceAvailable}">
+      <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="25%, 25%, 50%" width="100%" cellpadding="5" value="{! AdditionalInspectionItems }" var="item">
+        <apex:column >
+          <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Associated_regulation__r.Name }" />
+          <apex:outputtext value="{! item.standardRegulations  }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Reviewed Item</center></apex:facet>
+          <apex:outputtext value="{! SUBSTITUTE((SUBSTITUTE((item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c),'/','/ ')),'-','- ')}" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Technical Assistance Provided</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Technical_assistance__c }" />
+        </apex:column>
+      </apex:datatable>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!!TechnicalAssistanceAvailable}">
+      <p style="margin-left: 15px;">No detailed technical assistance was documented during the visit</p>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!Inspection__c.Tech_Assist_Recommendations_Comments__c != null && Inspection__c.Tech_Assist_Recommendations_Comments__c != ''}">
+      <div class="nc-corrective-action-container">
+        <div class="group-head"><u><i>Additional Technical Assistance Provided</i></u></div>
+        <apex:outputtext escape="false" style="margin-left: 15px;" value="{! Inspection__c.Tech_Assist_Recommendations_Comments__c }" />
+      </div>
+    </apex:outputpanel>
+    <br />
+    <!-- Best Practices Observed -->
+    <apex:outputpanel rendered="{!IF(VisitBestPractices.size != 0, true, false)}"> 
+      <hr />
+      <h4>Best Practices Observed</h4>
+      
+      <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="20%, 20%, 60%" cellpadding="3" width="100%" value="{! VisitBestPractices }" var="vbp">
+        <apex:column >
+          <apex:facet name="header"><center>Domain</center></apex:facet>
+          <apex:outputtext value="{! vbp.Best_Practice__r.Domain__c }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Best Practice</center></apex:facet>
+          <apex:outputtext value="{! vbp.Best_Practice_Guidance__c }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Observation</center></apex:facet>
+          <apex:outputtext value="{! vbp.Observation__c }" />
+        </apex:column>
+      </apex:datatable>
+      <br />
+    </apex:outputpanel>
+    <!-- Compliances -->
+    <hr />
+    <h4>Compliances with observations</h4>
+    <apex:outputpanel rendered="{!ComplaintAvailable}">
+      <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="20%, 17%, 15%, 48%" cellpadding="3" width="100%" value="{! compliantAssessedItems }" var="item">
+        <apex:column >
+          <apex:facet name="header"><center>Domain</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(item.inspectionItem.Category_list__c ,'/','/ ')),'-','- ') }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Associated_regulation__r.Name }" />
+          <apex:outputtext value="{! item.standardRegulations  }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Item</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE((item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c),'/','/ ')),'-','- ') }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Observations</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Observations__c }" />
+        </apex:column>
+      </apex:datatable>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!!ComplaintAvailable}">
+      <p style="margin-left: 15px;">No detailed compliance was identified during the visit</p>
+    </apex:outputpanel>
+    <br />
+    <hr />
+    <h4>Compliances</h4>
+    <apex:outputpanel rendered="{!ComplaintNoobservationAvailable}">
+      <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="20%, 30%,50%" cellpadding="3" width="100%" value="{! compliantnoobservation }" var="item">
+        <apex:column >
+          <apex:facet name="header"><center>Domain</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(item.inspectionItem.Category_list__c ,'/','/ ')),'-','- ') }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Associated Regulation Number</center></apex:facet>
+          <apex:outputtext value="{! item.inspectionItem.Associated_regulation__r.Name }" />
+          <apex:outputtext value="{! item.standardRegulations  }" />
+        </apex:column>
+        <apex:column >
+          <apex:facet name="header"><center>Item</center></apex:facet>
+          <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE((item.inspectionItem.Inspection_Item_Name__c + item.inspectionItem.Additional_Inspection_Item_Name__c),'/','/ ')),'-','- ') }" />
+        </apex:column>
+        
+      </apex:datatable>
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!!ComplaintNoobservationAvailable}">
+      <p style="margin-left: 15px;">No detailed compliance was identified during the visit</p>
+    </apex:outputpanel>
+    <br/>
+  </apex:outputpanel>
+
+</apex:page>

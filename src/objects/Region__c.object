@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object is used to define EEC Region</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>true</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>City__c</fullName>
+        <description>City of the region office address</description>
+        <externalId>false</externalId>
+        <label>City</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Deputy_Commissioner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>This information is used by the system during the approval process of escalated Investigation. This user is the 1st reviewer / approver.</inlineHelpText>
+        <label>Investigation Director</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Regions4</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EEC_Legacy_Region_ID__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>The External ID value as used in Licensing Manager (or other external feeder systems) for managing UPSERTS into LEAD</description>
+        <externalId>true</externalId>
+        <inlineHelpText>The External ID value as used in Licensing Manager (or other external feeder systems) for managing UPSERTS into LEAD</inlineHelpText>
+        <label>EEC Legacy Region ID</label>
+        <length>30</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Email__c</fullName>
+        <description>Email of the region office address</description>
+        <externalId>false</externalId>
+        <label>Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FCC_GSA_1st_Escalation_Case_Approver__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases</inlineHelpText>
+        <label>FCC/GSA 1st Escalation Case Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>FCC_GSA_Case_Escalation_Approver</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FCC_GSA_2nd_Escalation_Case_Approver__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Denotes the user that will be the 1st Level escalation approver on FCC/GSA cases</inlineHelpText>
+        <label>FCC/GSA 2nd Escalation Case Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>FCC_GSA_Case_Lvl2_Approver</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>FCC_New_Case_Default_Assignee__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Default user new cases will be assigned to for FCC</inlineHelpText>
+        <label>FCC - New Case Default Assignee</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Regions2</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Fax__c</fullName>
+        <description>Fax of the region office</description>
+        <externalId>false</externalId>
+        <label>Fax</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>Number__c</fullName>
+        <description>Region&apos;s number</description>
+        <externalId>false</externalId>
+        <label>Number</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Phone__c</fullName>
+        <description>Phone number of the region office</description>
+        <externalId>false</externalId>
+        <label>Phone</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Phone</type>
+    </fields>
+    <fields>
+        <fullName>R_P_1st_Escalation_Case_Approver__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Denotes the user that will be the 1st Level escalation approver on R&amp;P cases</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Denotes the user that will be the 1st Level escalation approver on R&amp;P cases</inlineHelpText>
+        <label>R&amp;P 1st Escalation Case Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>R_P_Case_Lvl1_Approver</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>R_P_2nd_Escalation_Case_Approver__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Denotes the user that will be the 2nd Level escalation approver on R&amp;P cases</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Denotes the user that will be the 2nd Level escalation approver on R&amp;P cases</inlineHelpText>
+        <label>R&amp;P 2nd Escalation Case Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>R_P_Case_Lvl2_Approver</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>R_P_New_Case_Default_Assignee__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Default user the case will be assigned to for R &amp; P new cases.</inlineHelpText>
+        <label>R &amp; P - New Case Default Assignee</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Regions</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Regional_Director__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>This information is used by the system during the approval process of escalated Investigation. For FCC / GSA, this user is the 2nd reviewer / approver.</inlineHelpText>
+        <label>Regional Director</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Regions3</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SGLSA_New_Case_Default_Assignee__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>Default user who will be assigned new cases for SGLSA.</inlineHelpText>
+        <label>SGLSA - New Case Default Assignee</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Regions1</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>State__c</fullName>
+        <defaultValue>&quot;MA&quot;</defaultValue>
+        <description>State of the region office address</description>
+        <externalId>false</externalId>
+        <label>State</label>
+        <length>2</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Street__c</fullName>
+        <description>Number and name of the street of the region office</description>
+        <externalId>false</externalId>
+        <label>Street</label>
+        <length>150</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Type__c</fullName>
+        <externalId>false</externalId>
+        <label>Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Licensing Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Financial Management Region</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Used_In_Calc_2__c</fullName>
+        <description>This field is used in a formula to remove &lt;br&gt; from address compound. See solution: https://developer.salesforce.com/forums/?id=906F00000008w7kIAA</description>
+        <externalId>false</externalId>
+        <label>Used_In_Calc</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Zip__c</fullName>
+        <description>Zip code of the region office address</description>
+        <externalId>false</externalId>
+        <label>Zip</label>
+        <length>5</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Region</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Number__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>City__c</columns>
+        <columns>Phone__c</columns>
+        <columns>Fax__c</columns>
+        <columns>Regional_Director__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Licensing</fullName>
+        <columns>NAME</columns>
+        <columns>Number__c</columns>
+        <columns>City__c</columns>
+        <columns>Phone__c</columns>
+        <columns>Fax__c</columns>
+        <columns>Regional_Director__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Region__c.Licensing_Region</value>
+        </filters>
+        <label>All Licensing Regions</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Subsidy</fullName>
+        <columns>NAME</columns>
+        <columns>Number__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Region__c.Subsidy_Region</value>
+        </filters>
+        <label>All Subsidy Regions</label>
+    </listViews>
+    <nameField>
+        <label>Region Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Regions</pluralLabel>
+    <recordTypes>
+        <fullName>Licensing_Region</fullName>
+        <active>true</active>
+        <label>Licensing Region</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Financial Management Region</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensing Region</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Subsidy_Region</fullName>
+        <active>true</active>
+        <label>Subsidy Region</label>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Financial Management Region</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Licensing Region</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Number__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>City__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Phone__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Regional_Director__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Number__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>City__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Phone__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Regional_Director__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Number__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>City__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Phone__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Regional_Director__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

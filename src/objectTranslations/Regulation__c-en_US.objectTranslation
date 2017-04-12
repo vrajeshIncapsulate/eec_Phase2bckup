@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Regulation</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Regulations</value>
+    </caseValues>
+    <fields>
+        <help><!-- Can be used to provide additional information related to this regulation --></help>
+        <label><!-- Additional description --></label>
+        <name>Additional_description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Applicable To --></label>
+        <name>Applicable_To__c</name>
+        <picklistValues>
+            <masterLabel>Adoption Agency</masterLabel>
+            <translation><!-- Adoption Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Child Care</masterLabel>
+            <translation><!-- Family Child Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Care Agency</masterLabel>
+            <translation><!-- Foster Care Agency --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Group Care</masterLabel>
+            <translation><!-- Group Care --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Large Group</masterLabel>
+            <translation><!-- Large Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Small Group</masterLabel>
+            <translation><!-- Small Group --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Temporary Shelter</masterLabel>
+            <translation><!-- Temporary Shelter --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unlicensed Provider</masterLabel>
+            <translation><!-- Unlicensed Provider --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Article --></label>
+        <name>Article__c</name>
+    </fields>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date this regulation must be applied by Provider --></help>
+        <label><!-- Date Active --></label>
+        <name>Date_Active__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date this regulation was removed from legal framework --></help>
+        <label><!-- Date Removed --></label>
+        <name>Date_Removed__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits. --></help>
+        <label><!-- FCC High Risk Reg --></label>
+        <name>FCC_High_Risk_Reg__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits. --></help>
+        <label><!-- GSA High Risk Reg --></label>
+        <name>GSA_High_Risk_Reg__c</name>
+    </fields>
+    <fields>
+        <help><!-- Check if it&apos;s an high risk item --></help>
+        <label><!-- High Risk --></label>
+        <name>High_Risk__c</name>
+    </fields>
+    <fields>
+        <label><!-- Parent Regulation --></label>
+        <name>Parent_Regulation__c</name>
+        <relationshipLabel><!-- Regulations --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- If checked, any non-compliance associated with this regulation will be counted as a substantiated non-compliance for the selection of the visit tool to use during monitoring / progress / enhanced monitoring visits. --></help>
+        <label><!-- R&amp;P High Risk Reg --></label>
+        <name>R_P_High_Risk_Reg__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reg_key --></label>
+        <name>Reg_key__c</name>
+    </fields>
+    <layouts>
+        <layout>Regulation Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Regulation --></label>
+            <section>Regulation</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Non Compliant Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Non Compliant Item</value>
+    </caseValues>
+    <fields>
+        <label><!-- Correction Plan Status --></label>
+        <name>Correction_Plan_Status__c</name>
+        <picklistValues>
+            <masterLabel>EEC Accepted</masterLabel>
+            <translation><!-- EEC Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legacy Non-compliance</masterLabel>
+            <translation><!-- Legacy Non-compliance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider Submitted, EEC to Review</masterLabel>
+            <translation><!-- Provider Submitted, EEC to Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider To Submit</masterLabel>
+            <translation><!-- Provider To Submit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Collect</masterLabel>
+            <translation><!-- To Collect --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Describe here the corrective actives that have been taken or will be taken to resolve this non-compliance --></help>
+        <label><!-- Correction Plan --></label>
+        <name>Correction_Plan__c</name>
+    </fields>
+    <fields>
+        <help><!-- Fill this field if the corrective action submitted by the provider is not appropriate. By updating this field, Providers using electronic communication will be informed by email and will be able to update the correction plan on the portal --></help>
+        <label><!-- Corrective Action EEC Feedback --></label>
+        <name>Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <help><!-- Update &quot;Corrective Actions Submitter&quot; with First / Last name of the user who did the update --></help>
+        <label><!-- Corrective Actions Submitter --></label>
+        <name>Corrective_Actions_Submitter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Create History Record flag --></label>
+        <name>Create_History_Record_flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Correction Plan Accepted --></label>
+        <name>Date_Correction_Plan_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Corrective Actions Received --></label>
+        <name>Date_Corrective_Actions_Received__c</name>
+    </fields>
+    <fields>
+        <help><!-- Mention here the date the corrective actions were implemented or the expected date of completion --></help>
+        <label><!-- Date Implemented --></label>
+        <name>Date_Implemented__c</name>
+    </fields>
+    <fields>
+        <label><!-- Feedback Requested --></label>
+        <name>Feedback_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- InvestigationId --></label>
+        <name>InvestigationId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Investigation --></label>
+        <name>Investigation__c</name>
+        <relationshipLabel><!-- Non Compliant Item (additional to visit) --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Checked if this non compliant item is associated to a high risk regulation --></help>
+        <label><!-- Key Indicator --></label>
+        <name>Key_Indicator__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date of the last update of corrective action feedback --></help>
+        <label><!-- Last Corrective Action EEC Feedback --></label>
+        <name>Last_Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <help><!-- Describe here the non-compliance --></help>
+        <label><!-- Observations --></label>
+        <name>Observations__c</name>
+    </fields>
+    <fields>
+        <help><!-- Email address of the provider used to send EEC Feedback if corrective plan is not correct. --></help>
+        <label><!-- Provider Email Address --></label>
+        <name>Provider_Email_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, it means that the report was published on the web and the investigation has non-compliance items that needs to be filled by the provider --></help>
+        <label><!-- Require Portal Feedback --></label>
+        <name>Require_Portal_Feedback__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, the Provider needs to review the item on the portal. --></help>
+        <label><!-- To Review on Portal --></label>
+        <name>To_Review_on_Portal__c</name>
+    </fields>
+    <layouts>
+        <layout>Non Compliant Item Layout</layout>
+        <sections>
+            <label><!-- Corrective Actions --></label>
+            <section>Corrective Actions</section>
+        </sections>
+        <sections>
+            <label><!-- Corrective Actions EEC Feeback --></label>
+            <section>Corrective Actions EEC Feeback</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Non Compliance Description --></label>
+            <section>Non Compliance Description</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Investigation Non Compliant Item --></label>
+        <name>Investigation_Non_Compliant_Item</name>
+    </recordTypes>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Observations must be provided for non-compliant item as it will be used in the Non-Compliant Statement --></errorMessage>
+        <name>Cannot_save_NC_Item_with_Observ_NULL</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Corrective Action EEC Feedback should be empty if no correction plan has been yet submitted. --></errorMessage>
+        <name>Corr_Action_EEC_Feedback_empty_if_no_Cor</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Correction Plan is provided then Date Implemented is mandatory --></errorMessage>
+        <name>Correction_Plan_NULL_Date_Impl_NOT_Null</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Non Compliant Items can&apos;t be created or updated on &apos;Closed&apos; Investigation. --></errorMessage>
+        <name>Creation_Updates_on_Closed_Investigation</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Date Implemented is provided then Correction Plan is mandatory --></errorMessage>
+        <name>Date_Impl_NULL_Cor_Plan_NOT_NULL</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Updates not allowed on legacy data. --></errorMessage>
+        <name>Update_on_legacy_investigation_not_allow</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Accept_Correction_Plan --></label>
+        <name>Accept_Correction_Plan</name>
+    </webLinks>
+</CustomObjectTranslation>

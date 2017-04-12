@@ -1,0 +1,2 @@
+<apex:page standardController="Lead" extensions="EEC_PPMAttachCertificatePDF" action="{! savePDF }">
+</apex:page>

@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Visit Item</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Visit Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- Name --></label>
+        <name>Additional_Inspection_Item_Name__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date the visit item was assessed (= mark compliant / non compliant / not applicable) by the licensor. This date is automatically filled by the system when a result is added for the first time. --></help>
+        <label><!-- Assessed Date --></label>
+        <name>Assessed_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Associated regulation --></label>
+        <name>Associated_regulation__c</name>
+        <relationshipLabel><!-- Visit Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Domain --></label>
+        <name>Category_additional__c</name>
+        <picklistValues>
+            <masterLabel>BRC Information</masterLabel>
+            <translation><!-- BRC Information --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Classroom</masterLabel>
+            <translation><!-- Classroom --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Curriculum and Activities</masterLabel>
+            <translation><!-- Curriculum and Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Equipments and Materials</masterLabel>
+            <translation><!-- Equipments and Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Family Involvement</masterLabel>
+            <translation><!-- Family Involvement --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health and Safety</masterLabel>
+            <translation><!-- Health and Safety --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Infection Control</masterLabel>
+            <translation><!-- Infection Control --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Inspections</masterLabel>
+            <translation><!-- Inspections --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interactions</masterLabel>
+            <translation><!-- Interactions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Mealtime, Food, Food Preparation</masterLabel>
+            <translation><!-- Mealtime, Food, Food Preparation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medications</masterLabel>
+            <translation><!-- Medications --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Personal Hygiene</masterLabel>
+            <translation><!-- Personal Hygiene --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Indoors</masterLabel>
+            <translation><!-- Physical Facility - Indoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Facility - Outdoors</masterLabel>
+            <translation><!-- Physical Facility - Outdoors --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Postings</masterLabel>
+            <translation><!-- Postings --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Progress Reports</masterLabel>
+            <translation><!-- Progress Reports --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Review of Written Materials</masterLabel>
+            <translation><!-- Review of Written Materials --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sleep, Rest, Quiet Activities</masterLabel>
+            <translation><!-- Sleep, Rest, Quiet Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Staff and Educators</masterLabel>
+            <translation><!-- Staff and Educators --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Supervision</masterLabel>
+            <translation><!-- Supervision --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Toileting / Diapering / Handwashing</masterLabel>
+            <translation><!-- Toileting / Diapering / Handwashing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation</masterLabel>
+            <translation><!-- Transportation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Water Safety</masterLabel>
+            <translation><!-- Water Safety --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Domain (list) --></label>
+        <name>Category_list__c</name>
+    </fields>
+    <fields>
+        <label><!-- Domain --></label>
+        <name>Category_standard__c</name>
+    </fields>
+    <fields>
+        <label><!-- Correction Plan Status --></label>
+        <name>Correction_Plan_Status__c</name>
+        <picklistValues>
+            <masterLabel>EEC Accepted</masterLabel>
+            <translation><!-- EEC Accepted --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Legacy Non-compliance</masterLabel>
+            <translation><!-- Legacy Non-compliance --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider Submitted, EEC to Review</masterLabel>
+            <translation><!-- Provider Submitted, EEC to Review --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Provider To Submit</masterLabel>
+            <translation><!-- Provider To Submit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>To Collect</masterLabel>
+            <translation><!-- To Collect --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Correction Plan --></label>
+        <name>Correction_Plan__c</name>
+    </fields>
+    <fields>
+        <help><!-- Fill this field if the corrective action submitted by the provider is not appropriate. By updating this field, Providers using electronic communication will be informed by email and will be able to update the correction plan on the portal. --></help>
+        <label><!-- Corrective Action EEC Feedback --></label>
+        <name>Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <help><!-- User who added the corrective actions --></help>
+        <label><!-- Corrective Actions Submitter --></label>
+        <name>Corrective_Actions_Submitter__c</name>
+    </fields>
+    <fields>
+        <label><!-- Create History Record flag --></label>
+        <name>Create_History_Record_flag__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Correction Plan Accepted --></label>
+        <name>Date_Correction_Plan_Accepted__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Corrective Actions Received --></label>
+        <name>Date_Corrective_Actions_Received__c</name>
+    </fields>
+    <fields>
+        <label><!-- Date Implemented --></label>
+        <name>Date_Implemented__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description_of_additional_inspection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description_of_inspection__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description (list) --></label>
+        <name>Description_of_inspection_list__c</name>
+    </fields>
+    <fields>
+        <label><!-- Discussed --></label>
+        <name>Discussed__c</name>
+    </fields>
+    <fields>
+        <label><!-- ExternalOfflineId --></label>
+        <name>ExternalOfflineId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Feedback Requested --></label>
+        <name>Feedback_Requested__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Item Name --></label>
+        <name>Inspection_Item_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit Item Name for list --></label>
+        <name>Inspection_Item_Name_for_list__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit No --></label>
+        <name>Inspection_No__c</name>
+        <relationshipLabel><!-- Visit Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Result --></label>
+        <name>Inspection_Result__c</name>
+        <picklistValues>
+            <masterLabel>Compliant</masterLabel>
+            <translation><!-- Compliant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Discussion</masterLabel>
+            <translation><!-- Discussion --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non Assessed (tool abandoned)</masterLabel>
+            <translation><!-- Non Assessed (tool abandoned) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Non-Compliant</masterLabel>
+            <translation><!-- Non-Compliant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Applicable</masterLabel>
+            <translation><!-- Not Applicable --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Assessed</masterLabel>
+            <translation><!-- Not Assessed --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Visit Standard Id --></label>
+        <name>Inspection_Standard_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Checked if this visit item is identified as a key indicator = associated to a regulation flagged as high risk --></help>
+        <label><!-- Key Indicator --></label>
+        <name>Key_Indicator__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date of the last update of corrective action feedback. --></help>
+        <label><!-- Last Corrective Action EEC Feedback --></label>
+        <name>Last_Corrective_Action_EEC_Feedback__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, this visit item is only for information and does not need to be assessed during the visit --></help>
+        <label><!-- Non-Assessed Item --></label>
+        <name>Non_Assessed_Item__c</name>
+    </fields>
+    <fields>
+        <label><!-- Observations --></label>
+        <name>Observations__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Email Address --></label>
+        <name>Provider_Email_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- This field is checked if this item was picked as random item from the visit tool. --></help>
+        <label><!-- Random Item from Visit Tool --></label>
+        <name>Random_Item_from_Visit_Tool__c</name>
+    </fields>
+    <fields>
+        <help><!-- Only enter S3 File Map Id&apos;s into this field. It does not support Files &amp; Attachment Id&apos;s. --></help>
+        <label><!-- Read Only Attachments --></label>
+        <name>Read_Only_Attachments__c</name>
+    </fields>
+    <fields>
+        <label><!-- Associated Standard Item --></label>
+        <name>Standard_Inspection_Item__c</name>
+        <relationshipLabel><!-- Visit Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Technical Assistance --></label>
+        <name>Technical_Assistance__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, the Provider needs to review the item on the portal --></help>
+        <label><!-- To Review on Portal --></label>
+        <name>To_Review_on_Portal__c</name>
+    </fields>
+    <fields>
+        <label><!-- Unique Visit Standard Id --></label>
+        <name>Unique_Inspection_Standard_Id__c</name>
+    </fields>
+    <fields>
+        <help><!-- Allows you to sort visit items as they will be displayed in visit mode and on visit summary. Lowest ranking will be displayed first. Ranking should be set for each item. Items with empty rank will be displayed last. --></help>
+        <label><!-- Visit Mode Ranking --></label>
+        <name>Visit_Mode_Ranking__c</name>
+    </fields>
+    <fields>
+        <help><!-- Visit Tool this visit item was created from --></help>
+        <label><!-- Visit Tool Origin --></label>
+        <name>Visit_Tool_Origin__c</name>
+        <relationshipLabel><!-- Visit Items --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Additional Inspection Item Layout</layout>
+        <sections>
+            <label><!-- Correction Plan --></label>
+            <section>Correction Plan</section>
+        </sections>
+        <sections>
+            <label><!-- Correction Plan Attachments --></label>
+            <section>Correction Plan Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Correction Plan EEC Feedback --></label>
+            <section>Correction Plan EEC Feedback</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Visit result --></label>
+            <section>Visit result</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Standard Inspection Item Layout</layout>
+        <sections>
+            <label><!-- Correction Plan --></label>
+            <section>Correction Plan</section>
+        </sections>
+        <sections>
+            <label><!-- Correction Plan Attachments --></label>
+            <section>Correction Plan Attachments</section>
+        </sections>
+        <sections>
+            <label><!-- Correction Plan EEC Feedback --></label>
+            <section>Correction Plan EEC Feedback</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Visit result --></label>
+            <section>Visit result</section>
+        </sections>
+    </layouts>
+    <recordTypes>
+        <label><!-- Non Standard Visit Item --></label>
+        <name>Additional_Inspection_Item</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Standard Visit Item --></label>
+        <name>Standard_Item</name>
+    </recordTypes>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <errorMessage><!-- This status is only used for Non-Compliant Visit Items --></errorMessage>
+        <name>Cor_Plan_Status_is_NULL_if_Result_is_NC</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Correction Plan is provided then Date Implemented is mandatory --></errorMessage>
+        <name>Correction_Plan_NULL_Date_Impl_NOT_Null</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Date Implemented is provided then Correction Plan is mandatory --></errorMessage>
+        <name>Date_Impl_NULL_Cor_Plan_NOT_NULL</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- If Correction Plan has not been submitted and entered in LEAD, Corrective Action Feedback can not be filled. Enter first a correction plan and then add feedback. --></errorMessage>
+        <name>If_Cor_Plan_or_Sub_NULL_EEC_fdbk_Null</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Non-Assessed visit items should not be assessed and their assessment result should remain empty --></errorMessage>
+        <name>No_Result_for_Non_Assessed</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- No updates allowed on legacy data. --></errorMessage>
+        <name>No_updates_allowed_on_legacy_visit_data</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Regulation associated with this item does not  match the provider type. Please select another regulation. --></errorMessage>
+        <name>Regulation_match_provider_type</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Observations should be provided for items marked as &apos;Non-compliant&apos;, &apos;Not Applicable&apos; or &apos;Not Assessed&apos;. --></errorMessage>
+        <name>Visit_Items_NC_and_Observation_NULL</name>
+    </validationRules>
+</CustomObjectTranslation>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Licensor assigned to the transaction indicating that the Transaction has been rejected by the supervisor</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>44 - Licensing Transaction Rejected</name>
+    <style>none</style>
+    <subject>Licensing Transaction Rejected</subject>
+    <type>text</type>
+</EmailTemplate>

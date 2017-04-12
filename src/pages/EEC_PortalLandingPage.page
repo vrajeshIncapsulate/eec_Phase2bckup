@@ -1,0 +1,145 @@
+<apex:page sidebar="false" showHeader="false" controller="EEC_PortalLandingController" standardStylesheets="false" action="{!actionMethod}">
+  <head>
+    <title>EEC</title>
+    <c:EEC_Header id="pageHeader" />
+    <style>
+        div.featured-box {
+            background: rgba(0, 0, 0, 0.01) none repeat scroll 0 0;
+            border-radius: 6px;
+            padding: 23px;
+            text-align: center;
+            transition: all 0.2s ease 0s;
+        	margin-bottom:20px;
+        }
+        
+        div.featured-box i.fa {
+            background-color: #a94545;
+            border-radius: 50%;
+            color: #fff;
+            display: inline-block;
+            font-size: 40px;
+            height: 100px;
+            line-height: 100px;
+            margin: 20px 0;
+            padding: 0;
+            position: relative;
+            text-align: center;
+            width: 100px;
+        }
+        
+        i.fa {
+            text-decoration: none !important;
+        }
+        
+        .latest-news .jumbotron{
+ 		  padding-top: 10px !important;
+          padding-bottom: 10px !important;
+        }
+        
+        .latest-news h2 {
+          margin-top: 0;
+        }
+        
+        .main-container {
+          margin-bottom: 120px;
+        }
+    </style>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      
+      <div class="container main-container">
+       	<apex:form >
+         <header class="page-header text-center">
+            <h2>Executive Office of Education - Early Education and Care</h2>
+            <p class="lead">EEC Provider Licensing Portal</p>
+            <apex:outputtext value="{!leadConfiguration.Portal_Home_Welcome__c}" escape="false"/>  
+           	<div class="divider half-margins onepage center"></div>
+         </header>
+         <div class="row">
+            <!--<div class="col-md-6">
+            	<div class="featured-box noborder">
+                     <apex:commandLink action="{!gotoPersonalPage}">
+                        <i class="fa fa-user"></i>
+                        <h4>My Profile</h4>
+                    </apex:commandLink>
+                    <p>View or update your personal information, and update your password.</p>
+            	</div>
+            </div>-->
+            <apex:outputPanel rendered="{!leadConfiguration.Portal_Home_Latest_News__c != ''}"> 
+              <div class="latest-news col-md-12">
+                <div class="jumbotron">
+                  <h2>Latest News</h2>
+                  <apex:outputtext value="{!leadConfiguration.Portal_Home_Latest_News__c}" escape="false"/>  
+                </div>
+              </div>
+            </apex:outputPanel>
+             
+            <apex:outputPanel rendered="{!accessUmbrellaFlag}" >
+                <div class="col-md-6">
+                    <div class="featured-box noborder">
+                        <apex:commandLink action="{!goToUmbrellaPage}">
+                            <i class="fa fa-umbrella"></i>
+                            <h4>Umbrella</h4>
+                        </apex:commandLink>
+                        <p>Review your umbrella information, and select a provider to review</p>
+                    </div>
+            	</div>
+          	</apex:outputPanel>   
+            <apex:outputPanel rendered="{!accessProviderFlag}" >
+                <apex:outputpanel rendered="{!IF(account.Recordtype.Name ='Family Child Care' && profileName != 'Community Standard User without transactions for EEC',true,false)}">
+             		<div class="col-md-6">
+                        <div class="featured-box noborder">
+                            <apex:commandLink action="{!goToSubmitNewTransaction}">
+                                <i class="fa fa-check-square-o"></i>
+                                <h4>New Licensing Transaction</h4>
+                            </apex:commandLink>
+                            <p>Create a new transaction (new license, renewal, upgrade..)</p>
+                        </div>
+            		</div>     
+            	</apex:outputpanel>
+                
+                <div class="col-md-6">
+                    <div class="featured-box noborder">
+                        <apex:commandLink action="{!gotoProviderPage}">
+                            <i class="fa fa-street-view"></i>
+                            <h4>Provider</h4>
+                        </apex:commandLink>
+                        <p>Review your provider information and start a new transaction.</p>
+                    </div>
+            	</div>
+                 <div class="col-md-6">
+                    <div class="featured-box noborder">
+                        <apex:commandLink action="{!goToSubmitNewIncident}">
+                            <i class="fa fa-child"></i>
+                            <h4>New Incident / Injury</h4>
+                        </apex:commandLink>
+                        <p>Log a new self-reported incident/injury involving a child you care for.</p>
+                    </div>
+            	</div>
+                
+				<apex:outputpanel rendered="{!IF(account.License_Status__c ='Licensed and Collect Restraint Report',true,false)}">
+             		<div class="col-md-6">
+                        <div class="featured-box noborder">
+                            <apex:commandLink action="{!goToSubmitNewRestraint}">
+                                <i class="fa fa-check-square-o"></i>
+                                <h4>New Restraint Report</h4>
+                            </apex:commandLink>
+                            <p>Submit a new quarterly restraint report.</p>
+                        </div>
+            		</div>     
+            	</apex:outputpanel>              
+          	</apex:outputPanel>   
+             
+            <apex:outputPanel rendered="{!leadConfiguration.Portal_Home_Useful_Links__c != ''}">
+              <div class="col-md-12">
+                <h2>Useful Links</h2><hr/>
+                <apex:outputText value="{!leadConfiguration.Portal_Home_Useful_Links__c}" escape="false"/>
+              </div>
+            </apex:outputPanel> 
+          </div>  
+         </apex:form>
+      </div>
+      <c:EEC_Site_Footer id="siteFooter" />  
+  </body>
+</apex:page>

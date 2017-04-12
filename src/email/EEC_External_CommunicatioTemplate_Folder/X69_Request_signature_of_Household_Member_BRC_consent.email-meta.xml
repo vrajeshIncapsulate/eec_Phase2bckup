@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Once a licensing transaction requiring signature of BRC Consent by one of the household member / person on premise is submitted, this email is sent to require the household member / person on premise to sign a BRC consent</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>69a - Request signature of Household Member BRC consent (&gt;=18)</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - {!Household_Member__c.First_Name__c} {!Household_Member__c.Last_Name__c} BRC Consent Form is ready for signature</subject>
+    <type>html</type>
+</EmailTemplate>

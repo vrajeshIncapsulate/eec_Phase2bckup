@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FileMap</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FileMaps</value>
+    </caseValues>
+    <fields>
+        <label><!-- Object Id --></label>
+        <name>Object_Id__c</name>
+    </fields>
+    <fields>
+        <label><!-- Object Name --></label>
+        <name>Object_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- S3 File --></label>
+        <name>S3_File__c</name>
+        <relationshipLabel><!-- FileMaps --></relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

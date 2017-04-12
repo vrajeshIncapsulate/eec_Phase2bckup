@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>HistoricalVisitISubItemStaging</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>HistoricalVisitSubItemStaging</value>
+    </caseValues>
+    <fields>
+        <label><!-- DisplayText --></label>
+        <name>EEC_DisplayText__c</name>
+    </fields>
+    <fields>
+        <label><!-- Display Text + SubItemVal --></label>
+        <name>EEC_Display_Text_SubItemVal__c</name>
+    </fields>
+    <fields>
+        <label><!-- HeaderVisitItem --></label>
+        <name>EEC_HeaderVisitItem__c</name>
+    </fields>
+    <fields>
+        <label><!-- Hostname --></label>
+        <name>EEC_Hostname__c</name>
+    </fields>
+    <fields>
+        <label><!-- New Hostname --></label>
+        <name>EEC_New_Hostname__c</name>
+    </fields>
+    <fields>
+        <label><!-- SubItemVal --></label>
+        <name>EEC_SubItemVal__c</name>
+    </fields>
+    <fields>
+        <label><!-- VisitDetailId --></label>
+        <name>EEC_VisitDetailId__c</name>
+    </fields>
+    <fields>
+        <label><!-- VisitHeaderId --></label>
+        <name>EEC_VisitHeaderId__c</name>
+    </fields>
+    <fields>
+        <label><!-- VisitSubItemId --></label>
+        <name>EEC_VisitSubItemId__c</name>
+    </fields>
+    <fields>
+        <label><!-- Visit SubItem Processed --></label>
+        <name>EEC_Visit_SubItem_Processed__c</name>
+    </fields>
+    <fields>
+        <label><!-- HistoricalVisitItemStaging --></label>
+        <name>HistoricalVisitItemStaging__c</name>
+        <relationshipLabel><!-- HistoricalVisitSubItemStaging --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>HistoricalVisitItemDetailStaging Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

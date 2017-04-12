@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>S3 File</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>S3 Files</value>
+    </caseValues>
+    <fields>
+        <label><!-- Acl --></label>
+        <name>Acl__c</name>
+    </fields>
+    <fields>
+        <label><!-- Bucket --></label>
+        <name>Bucket__c</name>
+    </fields>
+    <fields>
+        <label><!-- Content_Type --></label>
+        <name>Content_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label><!-- Document --></label>
+        <name>Document__c</name>
+        <relationshipLabel><!-- S3 Files --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Filename --></label>
+        <name>Filename__c</name>
+    </fields>
+    <fields>
+        <label><!-- LegacyObjectId --></label>
+        <name>LegacyObjectId__c</name>
+    </fields>
+    <fields>
+        <help><!-- The originating object&apos;s ID typically. --></help>
+        <label><!-- Prefix --></label>
+        <name>Prefix__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

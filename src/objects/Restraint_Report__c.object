@@ -1,0 +1,1638 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>For R&amp;P, this object is used to capture DYS and Other types of Restraints. There will be a look up relationship from Restraint Report Object to Provider Object.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Calendar_Year__c</fullName>
+        <defaultValue>LEFT(Text (Today()),4)</defaultValue>
+        <description>Calendar Year</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Calendar Year</inlineHelpText>
+        <label>Calendar Year</label>
+        <length>4</length>
+        <required>true</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Submitted_By__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Submitted By</label>
+        <lookupFilter>
+            <active>true</active>
+            <booleanFilter>1 OR 2</booleanFilter>
+            <errorMessage>Chosen contact must be related to the Provider</errorMessage>
+            <filterItems>
+                <field>Contact.AccountId</field>
+                <operation>equals</operation>
+                <valueField>$Source.Provider__c</valueField>
+            </filterItems>
+            <filterItems>
+                <field>$Profile.Name</field>
+                <operation>contains</operation>
+                <value>Community</value>
+            </filterItems>
+            <infoMessage>Select a contact associated with the provider this restraint report belongs to.</infoMessage>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>Restraint Reports</relationshipLabel>
+        <relationshipName>Restraint_Reports</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>EEC_Legacy_History_Restraint_ID__c</fullName>
+        <externalId>true</externalId>
+        <label>EEC Legacy History Restraint ID</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>First_Day_Quarter_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATE( VALUE(Calendar_Year__c) ,IF( ISPICKVAL(Quarter__c, &quot;First Quarter&quot;), 1, IF(ISPICKVAL(Quarter__c, &quot;Second Quarter&quot;),4,IF( ISPICKVAL(Quarter__c, &quot;Third Quarter&quot;),7,10) ))  ,1)</formula>
+        <label>First Day Quarter Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter more than 60 mintes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Both_Prone_and_Supine_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes on the Floor in both the Prone and Supine Positions</inlineHelpText>
+        <label>Floor (Both Prone and Supine) 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Prone_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Prone) 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Supine) 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes on the Floor in the Supine Position</inlineHelpText>
+        <label>Floor (Supine) &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Floor_Supine_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes on the Floor in the Prone Position</inlineHelpText>
+        <label>Floor (Supine) 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Grand_Total__c</fullName>
+        <externalId>false</externalId>
+        <formula>Floor_Both_Prone_and_Supine_0_5__c+
+Floor_Both_Prone_and_Supine_6_10__c+
+Floor_Both_Prone_and_Supine_11_20__c+
+Floor_Both_Prone_and_Supine_21_30__c+
+Floor_Both_Prone_and_Supine_31_40__c+
+Floor_Both_Prone_and_Supine_41_50__c+
+Floor_Both_Prone_and_Supine_51_60__c+
+Floor_Both_Prone_and_Supine_60__c+
+
+Floor_Prone_0_5__c+
+Floor_Prone_6_10__c+
+Floor_Prone_11_20__c+
+Floor_Prone_21_30__c+
+Floor_Prone_31_40__c+
+Floor_Prone_41_50__c+
+Floor_Prone_51_60__c+
+Floor_Prone_60__c+
+
+Floor_Supine_0_5__c+
+Floor_Supine_6_10__c+
+Floor_Supine_11_20__c+
+Floor_Supine_21_30__c+
+Floor_Supine_31_40__c+
+Floor_Supine_41_50__c+
+Floor_Supine_51_60__c+
+Floor_Supine_60__c+
+
+
+Physical_Mechanical_0_5__c+
+Physical_Mechanical_6_10__c+
+Physical_Mechanical_11_20__c+
+Physical_Mechanical_21_30__c+
+Physical_Mechanical_31_40__c+
+Physical_Mechanical_41_50__c+
+Physical_Mechanical_51_60__c+
+Physical_Mechanical_60__c+
+
+Physical_holds_Only_0_5__c+
+Physical_Holds_Only_6_10__c+
+Physical_Holds_Only_11_20__c+
+Physical_Holds_Only_21_30__c+
+Physical_Holds_Only_31_40__c+
+Physical_Holds_Only_41_50__c+
+Physical_Holds_Only_51_60__c+
+Physical_Holds_Only_60__c+
+
+Sitting_0_5__c+
+Sitting_6_10__c+
+Sitting_11_20__c+
+Sitting_21_30__c+
+Sitting_31_40__c+
+Sitting_41_50__c+
+Sitting_51_60__c+
+Sitting_60__c+
+
+Standing_0_5__c+
+Standing_6_10__c+
+Standing_11_20__c+
+Standing_21_30__c+
+Standing_31_40__c+
+Standing_41_50__c+
+Standing_51_60__c+
+Standing_60__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Grand Total</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Injured_Residents_Minor_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Injured Residents (Minor Injury)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Injured_Residents_Serious_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Injured Residents (Serious Injury)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Injured_Staff_Minor_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Injured Staff (Minor Injury)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Injured_Staff_Serious_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Injured Staff (Serious Injury)</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_System_Interaction__c</fullName>
+        <description>Legacy System Number</description>
+        <externalId>false</externalId>
+        <formula>Provider__r.Provider_No__c</formula>
+        <label>Legacy System Number</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Restraints_Leading_to_Res_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraints which lead to resident injury</inlineHelpText>
+        <label>No. Restraints Leading to Res. Injury</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_Restraints_Leading_to_Staff_Injury__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraints which lead to staff injury</inlineHelpText>
+        <label>No. Restraints Leading to Staff Injury</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Holds_Only_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_Mechanical_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes using Physical &amp; Mechanical holds</inlineHelpText>
+        <label>Physical &amp; Mechanical 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Physical_holds_Only_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes using Physical holds only</inlineHelpText>
+        <label>Physical Holds Only 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider__c</fullName>
+        <description>Look up relationship from Restraint Report to Provider</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Look up relationship from Restraint Report to Provider</inlineHelpText>
+        <label>Provider</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Restraint Reports</relationshipLabel>
+        <relationshipName>Restraint_Reports</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Quarter__c</fullName>
+        <description>Calendar Quarter</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Calendar Quarter for which the Restraint Report is being generated.</inlineHelpText>
+        <label>Quarter</label>
+        <picklist>
+            <picklistValues>
+                <fullName>First Quarter</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Second Quarter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Third Quarter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Fourth Quarter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Restraint_Method2__c</fullName>
+        <externalId>false</externalId>
+        <label>Restraint Method</label>
+        <picklist>
+            <picklistValues>
+                <fullName>ANV</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PAC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PART</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SCIT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SOLVE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>TCI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CALM</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>BIT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CPI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>DYS</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>MAB</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NAPPI</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NonRestraint</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NVSD</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Varied</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Sitting_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Sitting_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes in the Sitting position</inlineHelpText>
+        <label>Sitting 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_0_5__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Field is used to capture Restraint Statistics by Position and Minutes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 0-5 minutes in the Standing position</inlineHelpText>
+        <label>Standing 0-5</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_11_20__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 11-20 minutes in the Standing position</inlineHelpText>
+        <label>Standing 11-20</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_21_30__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 21-30 minutes in the Standing position</inlineHelpText>
+        <label>Standing 21-30</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_31_40__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 31-40 minutes in the Standing position</inlineHelpText>
+        <label>Standing 31-40</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_41_50__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 41-50 minutes in the Standing position</inlineHelpText>
+        <label>Standing 41-50</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_51_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 51-60 minutes in the Standing position</inlineHelpText>
+        <label>Standing 51-60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_60__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter exceeding 60 minutes in the Standing position</inlineHelpText>
+        <label>Standing &gt;60</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Standing_6_10__c</fullName>
+        <defaultValue>0</defaultValue>
+        <description>Restraint Statistics by Position and Minutes</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of restraint cases during the reported quarter between 6-10 minutes in the Standing position</inlineHelpText>
+        <label>Standing 6-10</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Submitted_Date__c</fullName>
+        <defaultValue>TODAY()</defaultValue>
+        <externalId>false</externalId>
+        <label>Submitted Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Total_Bed_Days_Utilized_this_Quarter__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Total Bed Days Utilized this Quarter</label>
+        <precision>7</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_Injured__c</fullName>
+        <externalId>false</externalId>
+        <formula>Injured_Residents_Minor_Injury__c +
+ Injured_Residents_Serious_Injury__c +
+ Injured_Staff_Minor_Injury__c +
+ Injured_Staff_Serious_Injury__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Total Injured</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unduplicated_Count_of_Residents_Served__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Unduplicated Count of Residents Served</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Unduplicated_Count_of_Residnts_Restraind__c</fullName>
+        <defaultValue>0</defaultValue>
+        <externalId>false</externalId>
+        <label>Unduplicated Count of Residents Restrain</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Restraint Report</label>
+    <listViews>
+        <fullName>DYS_Restraint_Report</fullName>
+        <columns>NAME</columns>
+        <columns>Provider__c</columns>
+        <columns>Legacy_System_Interaction__c</columns>
+        <columns>Calendar_Year__c</columns>
+        <columns>Quarter__c</columns>
+        <columns>Grand_Total__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Restraint_Report__c.DYS_Restraint</value>
+        </filters>
+        <label>DYS Restraint Report</label>
+    </listViews>
+    <listViews>
+        <fullName>Other_Restraint_Report</fullName>
+        <columns>NAME</columns>
+        <columns>Provider__c</columns>
+        <columns>Legacy_System_Interaction__c</columns>
+        <columns>Calendar_Year__c</columns>
+        <columns>Quarter__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Restraint_Report__c.Other_Restraint</value>
+        </filters>
+        <label>Other Restraint Report</label>
+    </listViews>
+    <listViews>
+        <fullName>Varied_Restraint_Report</fullName>
+        <columns>NAME</columns>
+        <columns>Provider__c</columns>
+        <columns>Legacy_System_Interaction__c</columns>
+        <columns>Calendar_Year__c</columns>
+        <columns>Quarter__c</columns>
+        <columns>Grand_Total__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Restraint_Report__c.Varied_Restraint</value>
+        </filters>
+        <label>Varied Restraint Report</label>
+    </listViews>
+    <nameField>
+        <displayFormat>RR-{00000}</displayFormat>
+        <label>Report ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Restraint Reports</pluralLabel>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>DYS_Restraint</fullName>
+        <active>true</active>
+        <description>DYS Restraint</description>
+        <label>DYS Restraint</label>
+        <picklistValues>
+            <picklist>Quarter__c</picklist>
+            <values>
+                <fullName>First Quarter</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Fourth Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Second Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Third Quarter</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Restraint_Method2__c</picklist>
+            <values>
+                <fullName>ANV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CALM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DYS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MAB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAPPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NVSD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NonRestraint</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PART</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOLVE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TCI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Varied</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Other_Restraint</fullName>
+        <active>true</active>
+        <description>Other Restraint</description>
+        <label>Other Restraint</label>
+        <picklistValues>
+            <picklist>Quarter__c</picklist>
+            <values>
+                <fullName>First Quarter</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Fourth Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Second Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Third Quarter</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Restraint_Method2__c</picklist>
+            <values>
+                <fullName>ANV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CALM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DYS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MAB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAPPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NVSD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NonRestraint</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PART</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOLVE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TCI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Varied</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Varied_Restraint</fullName>
+        <active>true</active>
+        <description>Program type which is neither DYS or Non-DYS</description>
+        <label>Varied Restraint</label>
+        <picklistValues>
+            <picklist>Quarter__c</picklist>
+            <values>
+                <fullName>First Quarter</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Fourth Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Second Quarter</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Third Quarter</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Restraint_Method2__c</picklist>
+            <values>
+                <fullName>ANV</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>BIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CALM</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>CPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DYS</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MAB</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NAPPI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NONE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NVSD</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>NonRestraint</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PAC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>PART</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SC</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SCIT</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOLVE</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TCI</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Varied</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>Provider__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Legacy_System_Interaction__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Calendar_Year__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Quarter__c</customTabListAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Report_to_match_Provider_RestraintMethod</fullName>
+        <active>true</active>
+        <errorConditionFormula>IF( AND( RecordType.Name = &apos;DYS Restraint&apos; , TEXT(Provider__r.Restraint_Method__c) = &apos;DYS&apos; ) , False , 
+  IF( AND( RecordType.Name = &apos;Varied Restraint&apos; , TEXT(Provider__r.Restraint_Method__c) = &apos;Varied&apos;), False,
+  IF( AND( RecordType.Name = &apos;Other Restraint&apos; , TEXT(Provider__r.Restraint_Method__c) &lt;&gt; &apos;DYS&apos;,TEXT(Provider__r.Restraint_Method__c) &lt;&gt; &apos;Varied&apos;), False, True)))</errorConditionFormula>
+        <errorMessage>The restraint report doesn&apos;t match the restraint method on the provider.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Year_is_correct</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(AND(ISNUMBER( Calendar_Year__c ), VALUE(Calendar_Year__c) &gt; 1900, VALUE(Calendar_Year__c) &lt;= 2100))</errorConditionFormula>
+        <errorDisplayField>Calendar_Year__c</errorDisplayField>
+        <errorMessage>Calendar Year is not a correct value, please update.</errorMessage>
+    </validationRules>
+</CustomObject>

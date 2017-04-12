@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Renewal Reminder to Provider 30 days prior to license expiration</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>56 - Renewal Reminder to Provider 30 days prior to license expiration</name>
+    <style>freeForm</style>
+    <subject>Renewal Reminder to Provider 30 days prior to license expiration</subject>
+    <type>html</type>
+</EmailTemplate>

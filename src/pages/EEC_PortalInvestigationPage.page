@@ -1,0 +1,260 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" controller="EEC_PortalInvestigationController">
+  <head>
+    <title>EEC : Investigation</title>
+    <c:EEC_Header id="pageHeader" />
+    
+    <style>
+      .investigation-container {
+        margin-bottom: 120px; 
+      }
+      .img-thumbnail{
+            width:60px;
+            height : 60px;
+            border:0px;
+      }  
+        
+      .visit-container md-card-content label {
+        margin-right: 5px;
+      }
+        
+      .investigation-report-buttons .md-button {
+        width: 90%; 
+        margin-left: auto;
+        margin-right: auto;
+      }
+        
+      .investigation-non-compliance-container h2.md-headline {
+        margin-left: 15px;  
+      }
+      thead{
+                background-color : #f5f5f5;
+        }
+        .table > thead:first-child > tr:first-child > th{
+            border-bottom: 0px;
+            border-top: 1px solid #dddddd;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .table {
+            border-left : 1px solid #dddddd;
+            border-right : 1px solid #dddddd;
+            border-bottom : 1px solid #dddddd;
+         }
+        
+    </style>
+  </head>  
+  
+  <body ng-app="eecApp">
+   <c:EEC_Nav_Bar id="navBar" />
+   <div class="container">
+    <div class="investigation-container col-lg-12 " layout-margin="true" layout-padding="true">
+      <div class="investigation-top-section" layout="column" layout-gt-lg="row" layout-lg="row" >
+        <div class="investigation-detail-report-container col-lg-12" layout="column">
+          <div class="investigation-detail col-lg-12" style="padding-left: 0px;" layout="column">
+               <br/>
+              <h2 class="pull-left">Investigation Report</h2>
+          </div>
+           <apex:form >
+              <div class="investigation-buttons col-lg-12" layout="row" layout-align-gt-lg="end center" layout-align-lg="end center">
+                <apex:commandButton action="{!returnProvider}" styleClass="md-button md-raised md-eec" html-layout-align-gt-lg="end center" html-layout-align-lg="end center" html-layout-margin="true" html-layout-padding="true" value="Back to Provider"/>
+              </div>
+            </apex:form>    
+            <section style="padding-bottom: 1em;">
+                <h4 class="md-title">Investigation Report</h4>
+                <md-divider></md-divider><br/>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="md-subhead" layout="row">
+                            <p ><strong>Name: </strong>{!invest.Name}</p>
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p ><strong>Facility Description: </strong></p>
+                        </div>
+                        <div class="md-subhead">   
+                            <apex:outputText value="{!invest.Facility_Description__c}" escape="false" />
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p><strong>Reason for Investigation: </strong></p>
+                        </div>
+                        <div class="md-subhead">
+                            <apex:outputText value="{!invest.Reason_for_Investigation__c}" escape="false" />
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p ><strong>Investigation Activities: </strong></p>
+                        </div>
+                        <div class="md-subhead">
+                            <apex:outputText value="{!invest.Investigation_Activities__c}" escape="false" />
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="md-subhead" layout="row">
+                            <p flex-sm="80" flex="90"><strong>Status: </strong>{!invest.Investigation_Status__c} - <c:EEC_DateFormat date="{!invest.Closed_Date__c}" style="margin-left: 5px;"/></p>
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p><strong>Determinations: </strong></p>
+                        </div>
+                        <div class="md-subhead">   
+                            <apex:outputText value="{!invest.Determinations__c}" escape="false" />
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p ><strong>Investigation Findings: </strong></p>
+                        </div>
+                        <div class="md-subhead">
+                            <apex:outputText value="{!invest.Investigation_Findings__c}" escape="false" />
+                        </div>
+                        <br/>
+                        <div class="md-subhead" layout="row">
+                            <p ><strong>Non-compliances: </strong></p>
+                        </div>
+                        <div class="md-subhead">
+                            <apex:outputText value="{!invest.Non_compliances__c}" escape="false" />
+                        </div>
+                    </div> 
+                </div>   
+            </section>
+        </div>
+      </div>
+        
+      <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Investigation Reports
+                </h3>
+            </div>
+            <div class="panel-body"> 
+                <div class="col-lg-6"> 
+                <div class="form-group">
+                    <apex:outputPanel rendered="{!attachmentMap['CoverLetter'] != 'null'}"> 
+                        <span class="form-label">
+                            <a href="/servlet/servlet.FileDownload?file={!attachmentMap['CoverLetter']}" target="_blank">
+                                <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Cover Letter" class="img-thumbnail"/>  
+                            </a>
+                        </span>
+                            Cover Letter
+                    </apex:outputPanel>
+                </div>
+                <div class="form-group">
+                    <apex:outputPanel rendered="{!attachmentMap['NonCompliance'] != 'null'}"> 
+                        <span class="form-label">
+                            <a href="/servlet/servlet.FileDownload?file={!attachmentMap['NonCompliance']}" target="_blank">
+                            <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Statement of Non-Compliance" class="img-thumbnail"/>  
+                            </a>
+                        </span>
+                            Statement of Non-Compliance 
+                    </apex:outputPanel>
+                </div>
+                </div>
+                 <div class="col-lg-6">
+                     <div class="form-group">
+                    <apex:outputPanel rendered="{!attachmentMap['Narrative'] != 'null'}"> 
+                        <span class="form-label">
+                            <a href="/servlet/servlet.FileDownload?file={!attachmentMap['Narrative']}" target="_blank">
+                            <img src="{!URLFOR($Resource.EEC_Bootstrap,'EEC_Bootstrap/img/rsz_file_types_pdf.png')}" alt="Statement of Non-Compliance" class="img-thumbnail"/>  
+                            </a>
+                        </span>
+                            Investigation Report
+                    </apex:outputPanel>
+                    </div>
+                </div>
+            </div>
+        </div> 
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Identified Non Compliance
+                </h3>
+            </div>
+            <div class="panel-body">
+                <div id="no-more-tables">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Description</th>
+                                <th style="width: 40%;">Correction Plan</th>
+                                <th>Date Implemented</th>
+                                <th>Corrective Actions Submitter</th>
+                                <th>Date Corrective Actions Submitted</th>
+                            </tr>    
+                        </thead>
+                        <apex:repeat value="{!nonCompliants}" var="comp">
+                            <tr>
+                                <td data-title="Description">{!comp.Observations__c}</td>
+                                <td data-title="Correction Plan">{!comp.Correction_Plan__c}</td>
+                                <td data-title="Date Implemented"><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!comp.Date_Implemented__c}" />
+                                                </apex:outputText></td>
+                                <td data-title="Corrective Actions Submitter">{!comp.Corrective_Actions_Submitter__c}</td>
+                                <td data-title="Corrective Actions Submitted"><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!comp.Date_Corrective_Actions_Received__c}" />
+                                                </apex:outputText></td>
+                            </tr>
+                        </apex:repeat>
+                        <apex:repeat value="{!iitems}" var="iitem">
+                            <tr>
+                                <td data-title="Description">{!iitem.Observations__c}</td>
+                                <td data-title="Correction Plan">{!iitem.Correction_Plan__c}</td>
+                                <td data-title="Date Implemented"><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!iitem.Date_Implemented__c}" />
+                                                </apex:outputText></td>
+                                <td data-title="Corrective Actions Submitter">{!iitem.Corrective_Actions_Submitter__c}</td>
+                                <td data-title="Corrective Actions Submitted"><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!iitem.Date_Corrective_Actions_Received__c}" />
+                                                </apex:outputText></td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <h3 class="panel-title">
+                    Visits Associated with this Investigation
+                </h3>
+            </div>
+            <div class="panel-body"> 
+                <div id="no-more-tables">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Status</th>
+                                <th>Date of Visit</th>
+                                <th>Time of Visit</th>
+                                <th>No. of Non-Compliance</th>
+                                <th>Licensor</th>
+                            </tr>    
+                        </thead>
+                        <apex:repeat value="{!lstVisits}" var="vis">
+                            <tr>
+                                <td data-title="Name">{!vis.Name}</td>
+                                <td data-title="Status">{!vis.Status__c}</td>
+                                <td data-title="Date of Visit"><apex:outputText value="{0, date, MMMM d','  yyyy}">
+                                                    <apex:param value="{!vis.Date_of_Visit__c}" />
+                                                </apex:outputText></td>
+                                <td data-title="Time of Visit">{!vis.Time_of_visit__c}</td>
+                                <td data-title="# of Non-Compliances">{!vis.Number_of_non_compliant_items__c}</td>
+                                <td data-title="Licensor">{!vis.Inspector_del__r.Name}</td>
+                            </tr>
+                        </apex:repeat>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <c:EEC_Site_Footer id="siteFooter" />  
+      
+    <script>
+     app.controller('InvestigationCtrl', ['$scope', '$location', function($scope, $location) {
+       
+     }]);
+    </script>
+  </body>
+</apex:page>

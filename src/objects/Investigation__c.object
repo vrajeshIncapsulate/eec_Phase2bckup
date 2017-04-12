@@ -1,0 +1,1721 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>true</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Investigations object is used to manage an investigation triggered by either a complaint, incident or 51A form</description>
+    <enableActivities>true</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>All_Interventions_Done__c</fullName>
+        <externalId>false</externalId>
+        <formula>Number_of_Interventions__c = Number_of_Interventions_Done__c</formula>
+        <inlineHelpText>Checked if all interventions associated with this investigation are done</inlineHelpText>
+        <label>All Interventions Done</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Approval_Task_Creation__c</fullName>
+        <externalId>false</externalId>
+        <label>Approval Task Creation</label>
+        <picklist>
+            <picklistValues>
+                <fullName>NonEscalated Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>NonEscalated Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated Approved</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Escalated Rejected</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_As_a_Backup__c</fullName>
+        <description>If the current user is assigned as a backup to the Investigation this formula will evaluate to TRUE, else FALSE</description>
+        <externalId>false</externalId>
+        <formula>$User.Id =  Backup__r.Id</formula>
+        <inlineHelpText>If the current user is assigned as a backup to the Investigation this formula will evaluate to TRUE, else FALSE</inlineHelpText>
+        <label>Assigned As a Backup</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the Investigation was assigned to an investigator</inlineHelpText>
+        <label>Assigned Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Assigned_To__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Assigned_To_Me_Or_My_Subordinates__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR( Assigned_to_Me__c ,
+Assigned_To__r.ManagerId = $User.Id ,
+Assigned_To__r.Manager.ManagerId = $User.Id )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assigned To Me Or My Subordinates</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_To__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Investigation can be assigned to a Licensor, Supervisor or Inspector</description>
+        <externalId>false</externalId>
+        <inlineHelpText>User who will take the lead on the investigation.</inlineHelpText>
+        <label>Leader</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Investigations</relationshipName>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Assigned_to_Me__c</fullName>
+        <description>This flag is used in reports to identify &quot;My&quot; investigations</description>
+        <externalId>false</externalId>
+        <formula>$User.Id =  Assigned_To__c</formula>
+        <label>Assigned to Me</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Assignment__c</fullName>
+        <description>This is used in Dashboard to identify who is assigned to the investigation: &quot;Me&quot; / &quot;Investigator&quot; / &quot;Licensor&quot;</description>
+        <externalId>false</externalId>
+        <formula>IF($User.Id = Assigned_To__c, &quot;Assigned to me&quot;, IF(CONTAINS(Assigned_To__r.UserRole.Name, &quot;Investigator&quot;), &quot;Assigned To Another Investigator&quot;, &quot;Assigned to Licensor&quot;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Assignment</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Backup__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <inlineHelpText>User that will be used as backup on this case. This user will receive / have the same access than the lead.</inlineHelpText>
+        <label>Backup</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Investigations_Backup</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Closed_Date__c</fullName>
+        <description>Investigation.Closed Date</description>
+        <externalId>false</externalId>
+        <label>Closed Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Completed_Date__c</fullName>
+        <description>Investigation.Completed Date</description>
+        <externalId>false</externalId>
+        <label>Completed Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Corrective_Actions_Reminder_Date__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(  isLegacyInvestigation__c, null , (TODAY() +  IF(ISNULL( Number_of_Days_to_Receive_Response__c ) = true, 0, Number_of_Days_to_Receive_Response__c) ) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Corrective Actions Reminder Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cover_Letter_Issue_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the cover letter was created in the system</inlineHelpText>
+        <label>Cover Letter Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Cover_Letter_Narrative__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This text will compose the cover letter. Salutations and signatures will be added by the system and does not need to be added here. To get the default text, please click on &quot;Set Narrative Default Values&quot; button.</inlineHelpText>
+        <label>Cover Letter Narrative</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>20</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Created_on_the_Web__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This field will determine if a report has been deployed/shown to the portal community.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this box if you wish to deploy this Investigation to the Web Portal.</inlineHelpText>
+        <label>Publish Report on Portal</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Determinations__c</fullName>
+        <externalId>false</externalId>
+        <label>Determinations</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Due_Date__c</fullName>
+        <description>Investigation Type, Due Date and Intervention Type must be filled out when an Investigation is assigned</description>
+        <externalId>false</externalId>
+        <label>Due Date</label>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Escalated_Investigation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>If this field is checked, it means that the investigation has been reviewed by Deputy Commissioner and has most likely been assigned to an Investigator. It will need to go through a full approval process of findings.</inlineHelpText>
+        <label>Escalated Investigation</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Facility_Description__c</fullName>
+        <externalId>false</externalId>
+        <label>Provider Description</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Follow_up_Actions_Recommendations__c</fullName>
+        <externalId>false</externalId>
+        <label>Follow-up Actions Recommendations</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>InterventionsDoneAndCancelled__c</fullName>
+        <externalId>false</externalId>
+        <label>InterventionsDoneAndCancelled</label>
+        <summaryFilterItems>
+            <field>Intervention__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Done, Cancelled</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Intervention__c.Investigation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Investigation_Activities__c</fullName>
+        <externalId>false</externalId>
+        <label>Investigation Activities</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Investigation_Findings__c</fullName>
+        <externalId>false</externalId>
+        <label>Investigation Findings</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Investigation_Status__c</fullName>
+        <description>Investigation Status</description>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>New</fullName>
+                <default>true</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Assigned - In Progress</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Pending Approval</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Approved - Report to send</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Ready to Publish/Send to Provider</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Closed (Legacy Investigation)</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Investigation_Type__c</fullName>
+        <description>Investigation Type, Due Date and Intervention Type must be filled out when an Investigation is assigned</description>
+        <externalId>false</externalId>
+        <label>Investigation Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Regulatory Issue</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>High Risk</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Issue Resolved by Licensee</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <required>false</required>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Is_In_My_Region__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.User_In_Region__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In My Region</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Leader_Deputy_Commisioner__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Escalated Inv - First Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leader_Investigation_Director</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Leader_Director_Supervisor__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Escalated Inv - Second Approver</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leader_Director_Supervisor</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Leader_Email__c</fullName>
+        <externalId>false</externalId>
+        <formula>Assigned_To__r.Email</formula>
+        <label>Leader Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Leader_Is_An_Investigator__c</fullName>
+        <description>If the Leader assigned to the investigation is an Investigator, this formula will evaluate to TRUE, else will be FALSE</description>
+        <externalId>false</externalId>
+        <formula>IF( Assigned_To__r.UserRole.Name  = &quot;Investigator&quot;, TRUE, FALSE)</formula>
+        <inlineHelpText>If the Leader assigned to the investigation is an Investigator, this formula will evaluate to TRUE, else will be FALSE</inlineHelpText>
+        <label>Leader Is An Investigator</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Leader_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Leader Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Leader_Manager</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Leader_Name_Text__c</fullName>
+        <externalId>false</externalId>
+        <formula>Assigned_To__r.FirstName + &apos; &apos; + Assigned_To__r.LastName</formula>
+        <label>Leader_Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Leader_Phone__c</fullName>
+        <externalId>false</externalId>
+        <formula>Assigned_To__r.Phone</formula>
+        <label>Leader Phone</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Leader_Title__c</fullName>
+        <description>Leader Title</description>
+        <externalId>false</externalId>
+        <formula>Assigned_To__r.Title</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Leader Title</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_FCC_LM_Mobile_Investigation__c</fullName>
+        <description>Unique id of EECRS legacy records.</description>
+        <externalId>false</externalId>
+        <label>Legacy_FCC_LM_Mobile_Investigation</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_IntakeID__c</fullName>
+        <description>Used only in legacy Investigations as a reference when the legacy cases are migrated as this will be the key that will connect the uploaded Investigation to the Case</description>
+        <externalId>false</externalId>
+        <label>Legacy IntakeID</label>
+        <length>25</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Legacy_System_Interaction__c</fullName>
+        <description>Interaction Id from EECCRS for legacy data imported</description>
+        <externalId>false</externalId>
+        <label>Legacy_System_Interaction</label>
+        <length>128</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Licensor_Manager__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>Manager of the Licensor of the associated Provider. Used for correspondence during escalated approval process.</description>
+        <externalId>false</externalId>
+        <label>Licensor Manager</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Investigations1</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Lock_Investigation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>If checked then Edits on a closed investigation are not authorized, Investigation must first be re-opened by a Supervisor or Director to be edited.</description>
+        <externalId>false</externalId>
+        <label>Lock Investigation</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Non_compliances__c</fullName>
+        <externalId>false</externalId>
+        <label>Non-compliances</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Note_to_User__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(isLegacyInvestigation__c, &quot;Legacy Investigation, please be aware that some Non-compliance Items might appear to be duplicates.&quot;, &quot;&quot;)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Note to User</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Days_to_Receive_Response__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days given to the provider to receive corrective actions plan.</inlineHelpText>
+        <label>Number of Days to Receive Response</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Interventions_Done__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Interventions Done</label>
+        <summaryFilterItems>
+            <field>Intervention__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Done</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Intervention__c.Investigation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Interventions__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Interventions</label>
+        <summaryForeignKey>Intervention__c.Investigation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Non_Compliant_items_Accepted__c</fullName>
+        <externalId>false</externalId>
+        <label>Number of Non-Compliant items Accepted</label>
+        <summaryFilterItems>
+            <field>Non_Compliant__c.Correction_Plan_Status__c</field>
+            <operation>equals</operation>
+            <value>EEC Accepted</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Non_Compliant__c.Investigation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Number_of_Other_Non_Compliant_Items__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Non Compliant items identified during the investigation, other than the ones from Visit</inlineHelpText>
+        <label>Number of Other Non-Compliant Items</label>
+        <summaryForeignKey>Non_Compliant__c.Investigation__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Provider_Email__c</fullName>
+        <description>Copies the email id from the Provider record so it can be used as a Recipient in workflows on the Investigation object</description>
+        <externalId>false</externalId>
+        <label>Provider Email</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_Id__c</fullName>
+        <externalId>false</externalId>
+        <formula>Provider_No__r.Id</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Provider Id</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Provider_No__c</fullName>
+        <description>Provider.Provider No links the parent Provider (Account) record to the child Investigation record</description>
+        <externalId>false</externalId>
+        <label>Provider</label>
+        <referenceTo>Account</referenceTo>
+        <relationshipLabel>Investigations</relationshipLabel>
+        <relationshipName>Investigations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Reason_for_Investigation__c</fullName>
+        <externalId>false</externalId>
+        <label>Reason for Investigation</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Related_To_Complaint_Case__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Related To Complaint Case</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Related_to_51A__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Check if this investigation is associated to a 51A Report.</inlineHelpText>
+        <label>Related to 51A Report</label>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Report_Narrative_Issue_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the report narrative was issued last</inlineHelpText>
+        <label>Report Narrative Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Require_Portal_Feedback__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Allows for Licensor/Investigator to specify if a feedback is to be sent to the Provider via email to request a review of non-compliance items</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Check this field if an email is required to be sent to the Provider to request a review of non-compliant items</inlineHelpText>
+        <label>Require Portal Feedback</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sent_Date__c</fullName>
+        <externalId>false</externalId>
+        <label>Sent Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Statement_of_non_compliance_Issue_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Date the statement of non-compliance was last generated</inlineHelpText>
+        <label>Statement of non-compliance Issue Date</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>X1st_Escalation_Approver_Email_Address__c</fullName>
+        <description>Email address of 1st escalation approver on the case. used as an email field when email alerts have to be sent to 1st escalation owner upon approved or rejected escalated investigations</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Email address of 1st escalation approver on the case. used as an email field when email alerts have to be sent to 1st escalation owner upon approved or rejected escalated investigations</inlineHelpText>
+        <label>1st Escalation Approver Email Address</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isLegacyInvestigation__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>This is to indicate that this is a legacy investigation.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is to indicate that this is a legacy investigation.</inlineHelpText>
+        <label>isLegacyInvestigation</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Investigation</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>Invest. - All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllMy</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Mine</filterScope>
+        <label>All My Investigation</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_Escalated_Open</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Escalated_Investigation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Prov. Invest. - Open and Escalated</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_Open</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <label>My Prov. Invest. - Open</label>
+    </listViews>
+    <listViews>
+        <fullName>All_My_Prov</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Mine</filterScope>
+        <label>My Prov. Invest. - All</label>
+    </listViews>
+    <listViews>
+        <fullName>All_Open</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <label>Invest. - Open</label>
+    </listViews>
+    <listViews>
+        <fullName>AnneC_Esc_and_Reg3</fullName>
+        <booleanFilter>(1 OR 2) AND 3</booleanFilter>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Investigation_Type__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Licensor_Manager__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Leader_Is_An_Investigator__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Is_In_My_Region__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <label>AnneC-Open Escalated Inv &amp; Reg3 Inv</label>
+        <sharedTo>
+            <role>Regional_Director</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Escalated_Investigation</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Investigation_Type__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Escalated_Investigation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <label>All Open Escalated Investigation</label>
+    </listViews>
+    <listViews>
+        <fullName>Legacy_Investigations</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>equals</operation>
+            <value>Closed (Legacy Investigation)</value>
+        </filters>
+        <label>Legacy Investigations</label>
+    </listViews>
+    <listViews>
+        <fullName>My_ALL</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Invest. - All</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Escalated_Investigation</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Investigation_Type__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Escalated_Investigation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Invest. - Open and Escalated</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Open</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Invest. - Open</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Prov_Status_Closed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Closed_Date__c</columns>
+        <filterScope>Mine</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </filters>
+        <label>My Prov. Invest. - Closed</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Region_ALL</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_In_My_Region__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Region Invest. - All</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Region_Open</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_In_My_Region__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <label>My Region Invest. - Open</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Region_Open_Escalated</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Number_of_Interventions__c</columns>
+        <columns>Number_of_Interventions_Done__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Is_In_My_Region__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>notEqual</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Escalated_Investigation__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Region Invest. - Open and Escalated</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Region_Status_Closed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Closed_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Is_In_My_Region__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Region Invest. - Closed</label>
+    </listViews>
+    <listViews>
+        <fullName>My_Team_Open_Investigations</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Due_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Assigned_To_Me_Or_My_Subordinates__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>Closed_Date__c</field>
+            <operation>equals</operation>
+        </filters>
+        <label>My Team Open Investigations</label>
+        <sharedTo>
+            <role>FCC_Supervisor</role>
+            <role>SLGSA_Supervisor</role>
+        </sharedTo>
+    </listViews>
+    <listViews>
+        <fullName>Status_Closed</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Closed_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </filters>
+        <label>Invest. - Closed</label>
+    </listViews>
+    <listViews>
+        <fullName>Status_Closed_My</fullName>
+        <columns>NAME</columns>
+        <columns>Provider_No__c</columns>
+        <columns>Escalated_Investigation__c</columns>
+        <columns>Investigation_Status__c</columns>
+        <columns>Assigned_To__c</columns>
+        <columns>Closed_Date__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Investigation_Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </filters>
+        <filters>
+            <field>Assigned_to_Me__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>My Invest. - Closed</label>
+    </listViews>
+    <nameField>
+        <displayFormat>Inv# {000000}</displayFormat>
+        <label>Investigation No</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Investigations</pluralLabel>
+    <searchLayouts>
+        <customTabListAdditionalFields>Provider_No__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Investigation_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Escalated_Investigation__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Investigation_Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Assigned_To__c</customTabListAdditionalFields>
+        <listViewButtons>Transfer_Investigations</listViewButtons>
+        <lookupDialogsAdditionalFields>Provider_No__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Investigation_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Escalated_Investigation__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Investigation_Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Assigned_To__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Provider_No__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Investigation_Type__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Escalated_Investigation__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Investigation_Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Assigned_To__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Provider_No__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Investigation_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Escalated_Investigation__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Investigation_Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Assigned_To__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <startsWith>Vowel</startsWith>
+    <validationRules>
+        <fullName>Allow_Assigned_To_Backup_Change</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(!ISNEW(),OR(ISCHANGED(Assigned_To__c),ISCHANGED(Backup__c)),!ISBLANK($UserRole.Name),!CONTAINS($UserRole.Name,&apos;Director&apos;), !CONTAINS($UserRole.Name,&apos;Supervisor&apos;), $User.Id!= Provider_No__r.OwnerId)</errorConditionFormula>
+        <errorMessage>You&apos;re not authorized to change this investigation assignment, please contact your supervisor.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>At_least_one_intervetion_must_be_done</fullName>
+        <active>true</active>
+        <description>At least one intervention must be in status &quot;Done&quot; or &quot;Cancelled&quot;</description>
+        <errorConditionFormula>AND(
+OR(ISNEW(), ISCHANGED(Investigation_Status__c)),
+ISPICKVAL(Investigation_Status__c, &apos;Closed&apos;),
+ All_Interventions_Done__c  = FALSE
+)</errorConditionFormula>
+        <errorMessage>An investigation can not be closed if at least one intervention is not done or cancelled. Review the status of your intervention before trying to close</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Backup_with_Leader</fullName>
+        <active>true</active>
+        <description>If a backup user is defined without a leader being defined an error should be trigger</description>
+        <errorConditionFormula>AND(NOT(Backup__c=&quot;&quot;), Assigned_To__c =&quot;&quot;)</errorConditionFormula>
+        <errorDisplayField>Assigned_To__c</errorDisplayField>
+        <errorMessage>A backup investigator can not be defined if the lead investigator is unknown. Fill the lead investigator user before saving.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Cant_go_from_new_to_closed</fullName>
+        <active>true</active>
+        <description>An investigation cannot go from new, assigned or pending to closed.</description>
+        <errorConditionFormula>AND( 
+OR(ISNEW(), ISCHANGED(Investigation_Status__c)), 
+ISPICKVAL(Investigation_Status__c, &apos;Closed&apos;),
+OR (
+ISPICKVAL(PRIORVALUE(Investigation_Status__c), &apos;New&apos;),
+ISPICKVAL(PRIORVALUE(Investigation_Status__c), &apos;Assigned - In Progress&apos;),
+ISPICKVAL(PRIORVALUE(Investigation_Status__c), &apos;Pending Approval&apos;)
+)
+)</errorConditionFormula>
+        <errorMessage>An investigation cannot go from &apos;New&apos;, &apos;Assigned - In Progress&apos;, or &apos;Pending Approval&apos; to closed.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Must_have_cover_letter_issue_date_to_clo</fullName>
+        <active>true</active>
+        <description>A cover letter must be generated to close a report.</description>
+        <errorConditionFormula>AND(
+OR(ISNEW(), ISCHANGED(Investigation_Status__c)),
+ISPICKVAL(Investigation_Status__c, &apos;Closed&apos;),
+ISBLANK(Cover_Letter_Issue_Date__c)
+)</errorConditionFormula>
+        <errorMessage>An investigation can not be closed if the report has not been generated and sent</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Only_leader_backup_may_close</fullName>
+        <active>true</active>
+        <description>On the leader, or backup leader, may close an investigation.</description>
+        <errorConditionFormula>AND(
+OR(ISNEW(), ISCHANGED(Investigation_Status__c)),
+ISPICKVAL(Investigation_Status__c, &apos;Closed&apos;),
+$User.Id != Assigned_To__c,
+$User.Id != Backup__c,
+$UserRole.Name != &apos;Regional Director&apos;,
+$UserRole.Name != &apos;Executive and Directors&apos;,
+$UserRole.Name != &apos;FCC Supervisor&apos;,
+$UserRole.Name != &apos;R &amp; P Supervisor&apos;,
+$UserRole.Name != &apos;SLGSA Supervisor&apos;
+)</errorConditionFormula>
+        <errorMessage>You are not authorized to close this investigation, please check with your Supervisor / Director.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Update_Closed_Investigations</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND( 
+  OR(Lock_Investigation__c == true,  isLegacyInvestigation__c == true),
+  $UserRole.Name != &apos;Executive_and_Directors&apos;, 
+  $UserRole.Name != &apos;Regional_Director&apos;,
+  OR(
+    NOT(
+      OR(
+        CONTAINS($UserRole.DeveloperName, &apos;Director&apos;),
+        CONTAINS($UserRole.DeveloperName, &apos;Supervisor&apos;), 
+        CONTAINS($Profile.Name , &apos;Community&apos;)
+      )
+    ),
+    AND(
+      $UserRole.DeveloperName ==&apos;FCC_Supervisor&apos;, 
+      Provider_No__r.RecordType.Name != &apos;Family Child Care&apos;
+    ),
+    AND(
+      $UserRole.DeveloperName == &apos;SLGSA_Supervisor&apos;,
+      AND(
+        Provider_No__r.RecordType.Name != &apos;Large Group&apos;, 
+        Provider_No__r.RecordType.Name != &apos;Small Group&apos;
+      )
+    ),
+    AND(
+      $UserRole.DeveloperName == &apos;R_P_Supervisor&apos;, 
+      Provider_No__r.RecordType.Name != &apos;Group Care&apos;,
+      Provider_No__r.RecordType.Name != &apos;Temporary Shelter&apos;,
+      Provider_No__r.RecordType.Name != &apos;Adoption Agency&apos;,
+      Provider_No__r.RecordType.Name != &apos;Foster Care Agency&apos;
+    )
+  )
+)</errorConditionFormula>
+        <errorMessage>Edits on a closed investigation are not authorized, Investigation must first be re-opened by a Supervisor or Director to be edited.</errorMessage>
+    </validationRules>
+    <webLinks>
+        <fullName>Add_Follow_up_Actions</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Add Follow-up Actions</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+var url = parent.location.href;
+
+
+var tRType = sforce.connection.query(&quot;select Id from recordType where DeveloperName = &apos;Investigation_Follow_Up_Actions&apos; and sobjectType = &apos;Task&apos;&quot;);
+
+
+var accnt = sforce.connection.query(&quot;select OwnerId from Account where Id = &apos;{!Investigation__c.Provider_NoId__c}&apos;&quot;);
+
+var usr = sforce.connection.query(&quot;select Id,Name from User where Id = \&apos;&quot;+accnt.records.OwnerId+&quot;\&apos;&quot;);
+
+window.location = &apos;/00T/e?what_id={!Investigation__c.Id}&amp;tsk1=&apos;+usr.records.Name+&apos;&amp;tsk1_lkid=&apos;+accnt.records.OwnerId+&apos;&amp;RecordType=&apos;+tRType.records.Id+&apos;&amp;retURL={!Investigation__c.Id}&apos;;</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Corrective_Action_Plan_Report</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Corrective Action Plan Report</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/35.0/connection.js&quot;)} 
+{!REQUIRESCRIPT(&quot;/soap/ajax/35.0/apex.js&quot;)} 
+
+	var inves = sforce.connection.query(&quot;SELECT id,name,Investigation__c,InvestigationId__c,Number_of_Non_Compliant_items_Accepted__c,Number_of_non_compliant_items__c FROM Inspection__c WHERE InvestigationId__c = &apos;{! Investigation__c.Id }&apos;&quot;); 
+	var nonComp = sforce.connection.query(&quot;SELECT id,name,Investigation__c,InvestigationId__c FROM Non_Compliant__c WHERE InvestigationId__c = &apos;{! Investigation__c.Id }&apos;&quot;);  
+	
+	var records = inves.getArray(&quot;records&quot;); 
+	var records1 = nonComp.getArray(&quot;records&quot;);
+	var bool = false; 
+	var sum = 0; 
+
+	for (var i=0; i&lt; records.length; i++) { 
+	var record = records[i]; 
+	sum = sum + record.Number_of_non_compliant_items__c; 
+		if(i==0){ 
+			if(record.Number_of_Non_Compliant_items_Accepted__c == record.Number_of_non_compliant_items__c){ 
+			bool = true; 
+			} 
+		}else{ 
+			if(bool){ 
+				if(record.Number_of_Non_Compliant_items_Accepted__c == record.Number_of_non_compliant_items__c){ 
+				bool = true; 
+				}else{ 
+				bool = false; 
+				} 
+				} 
+			} 
+	} 
+	
+	
+if(records.length!=0 &amp;&amp; records1.length!=0){
+
+if((&apos;{!Investigation__c.Number_of_Non_Compliant_items_Accepted__c}&apos; == &apos;{!Investigation__c.Number_of_Other_Non_Compliant_Items__c}&apos;)&amp;&amp;bool){ 
+		if(&apos;{!Investigation__c.Number_of_Other_Non_Compliant_Items__c}&apos;==0){ 
+		alert(&apos;This feature is only available for visits with at least one non compliance&apos;); 
+		}else if((&apos;{!Investigation__c.Number_of_Other_Non_Compliant_Items__c}&apos;+sum)&gt;0 ){ 
+			var nonCompliantCount = 0; 
+			var investigation = sforce.connection.query(&quot;SELECT (SELECT ID FROM Non_Compliant_Item__r) FROM Investigation__c WHERE ID = &apos;{! Investigation__c.Id }&apos;&quot;).records; 
+			nonCompliantCount += investigation != null &amp;&amp; investigation.Non_Compliant_Item__r != null ? investigation.Non_Compliant_Item__r.size : 0; 
+			var inspections = sforce.connection.query(&quot;SELECT (SELECT ID FROM Inspection_Items__r WHERE Inspection_Result__c = &apos;Non-Compliant&apos;) FROM Inspection__c WHERE InvestigationId__c = &apos;{! Investigation__c.Id }&apos;&quot;).records; 
+			nonCompliantCount += inspections != null &amp;&amp; inspections.Inspection_Items__r != null ? inspections.Inspection_Items__r.size : 0; 
+				if(&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Approved - Report to send&apos; &amp;&amp; 
+				&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Assigned - In Progress&apos; &amp;&amp; 
+				&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Pending Approval&apos;){ 
+				alert(&apos;Statement of Non-Compliance can only be generated if the Investigation is Completed, and not Closed&apos;); 
+				}else if(nonCompliantCount === 0 &amp;&amp; inspections == null) { 
+				alert(&apos;No non-compliance item is associated to this investigation, therefore the statement of non-compliance is not available&apos;); 
+				}else{ 
+				parent.location.href = &apos;/apex/EEC_AttachInvNonCompliance?id={!Investigation__c.Id}&amp;Corrective_Action_Plan_Report=true&apos;; 
+				} 
+		} 
+		else{ 
+		alert(&apos;This functionality is not available for a Closed or Cancelled Visit, Visit must first be re-opened by a Supervisor or Director&apos;); 
+		} 
+	}else{ 
+	alert(&apos;Corrective action plan must be approved for all non-compliance items.&apos;); 
+	}
+}else{
+alert(&apos;No non-compliance item is associated to this investigation, therefore the statement of non-compliance is not available&apos;);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Create_an_investigation_visit</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Create an investigation visit</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+
+var url = parent.location.href;
+
+var provName = &quot;&apos;&quot; + &apos;{!JSENCODE(Account.Name)}&apos; + &quot;&apos;&quot;; 
+
+var agree = confirm(&quot;Do you want to create an investigation visit for provider &quot;+ provName + &quot;? Once this visit is created it can only be deleted by a system administrator.&quot;); 
+
+if(agree){
+
+if(&apos;{!Investigation__c.Investigation_Status__c}&apos; != null &amp;&amp; &apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Closed&apos;){
+   var iVisit = new sforce.SObject(&quot;Inspection__c&quot;);
+   if(&apos;{!JSENCODE(Investigation__c.Assigned_To__c)}&apos; != null &amp;&amp; &apos;{!JSENCODE (Investigation__c.Assigned_To__c)}&apos; != &apos;&apos;){
+      iVisit.Inspector_del__c = &apos;{!JSENCODE(Investigation__c.Assigned_To_Id__c)}&apos;;
+   }
+   else{
+      iVisit.Inspector_del__c = sforce.connection.getUserInfo().userId.toString();
+   }
+   iVisit.Provider_no__c = &apos;{!Investigation__c.Provider_NoId__c}&apos;;   
+   iVisit.Type_of_Visit__c = &apos;Investigation&apos;;
+   iVisit.Investigation__c = &apos;{!Investigation__c.Id}&apos;;
+   iVisit.Status__c = &apos;To be scheduled&apos;;
+   iVisit.Address_1__c = &apos;{!Account.Provider_Address_1__c}&apos;; 
+   iVisit.City__c = &apos;{!Account.Provider_City__c}&apos;; 
+
+   var provider = sforce.connection.query(&quot;select Id, RecordTypeId,RecordType.Name from Account where Id = &apos;{!Investigation__c.Provider_NoId__c}&apos;&quot;);
+   var rtypeName = provider.records.RecordType.Name;
+
+   if(rtypeName != null &amp;&amp; rtypeName!=&apos;&apos;){
+       var leadConf = sforce.connection.query(&quot;select Id,name, Number_of_days_for_Investigation_Visit__c from LEAD_Configuration__c where name = \&apos;&quot;+rtypeName+&quot;\&apos;&quot;);
+     
+     if(leadConf != null &amp;&amp;leadConf.records != null){
+     var nDays = leadConf.records.Number_of_days_for_Investigation_Visit__c;
+     if(nDays != null){
+       var dt = new Date();
+       dt.setDate(dt.getDate()+parseInt(nDays));
+       var date1 =((dt.getMonth()+1)+&quot;/&quot;+dt.getDate()+&quot;/&quot;+dt.getFullYear());
+       iVisit.Estimated_Deadline__c = new Date(date1);
+     }
+
+   }
+ }
+   var iRType = sforce.connection.query(&quot;select Id from recordType where DeveloperName = &apos;Investigation_Visits&apos; and sobjectType = &apos;Inspection__c&apos;&quot;);
+   iVisit.RecordTypeId = iRType.records.Id;
+   
+      var result=sforce.connection.create([iVisit]);
+
+   if (result[0].getBoolean(&quot;success&quot;) == false )
+   {
+      alert(&quot;An error occurred creating a Investigation Visit.&quot; + result[0].get(&quot;errors&quot;));
+   } 
+   else{
+      window.location = &apos;/&apos;+result[0].id+&apos;/e?retURL=&apos;+result[0].id;
+   }
+
+   
+}
+else{
+   alert(&apos;This functionality is not available for a closed investigation. Investigation must first be re-opened by a supervisor or director.&apos;);
+}
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_Cover_Letter</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Cover Letter</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Approved - Report to send&apos;){ 
+
+alert(&apos;Report Cover Letter can only be generated if the Investigation is Completed and has been approved&apos;); 
+
+} 
+
+else if({! ISNULL(Investigation__c.Cover_Letter_Narrative__c) }) {
+
+alert(&apos;Cover letter can not be generated if the Cover Letter Narrative is empty. Please fill it with custom text, or click on &quot;Set Narrative Default Values&quot; to use the standard text before trying to generate the cover letter&apos;); 
+
+}
+else{
+parent.location.href = &apos;/apex/EEC_AttachInvCoverLetter?id={!Investigation__c.Id}&apos;;  
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_Report_Narrative</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Report Narrative</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Approved - Report to send&apos; &amp;&amp; 
+&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Assigned - In Progress&apos; &amp;&amp; 
+&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Pending Approval&apos;){ 
+
+alert(&apos;Report Narrative can only be generated if the Investigation is Completed, and not Closed&apos;); 
+
+} 
+ 
+else{ 
+parent.location.href = &apos;/apex/EEC_AttachInvNarrative?id={!Investigation__c.Id}&apos;; 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Generate_Statement_of_Non_Compliance</fullName>
+        <availability>online</availability>
+        <displayType>link</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Generate Statement of Non-Compliance</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{! REQUIRESCRIPT(&quot;/soap/ajax/31.0/connection.js&quot;) } 
+
+var nonCompliantCount = 0; 
+
+var investigation = sforce.connection.query(&quot;SELECT (SELECT ID FROM Non_Compliant_Item__r) FROM Investigation__c WHERE ID = &apos;{! Investigation__c.Id }&apos;&quot;).records; 
+
+nonCompliantCount += investigation != null &amp;&amp; investigation.Non_Compliant_Item__r != null ? investigation.Non_Compliant_Item__r.size : 0; 
+
+var inspections = sforce.connection.query(&quot;SELECT (SELECT ID FROM Inspection_Items__r WHERE Inspection_Result__c = &apos;Non-Compliant&apos;) FROM Inspection__c WHERE InvestigationId__c = &apos;{! Investigation__c.Id }&apos;&quot;).records; 
+
+nonCompliantCount += inspections != null &amp;&amp; inspections.Inspection_Items__r != null ? inspections.Inspection_Items__r.size : 0; 
+
+
+if(&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Approved - Report to send&apos; &amp;&amp; 
+&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Assigned - In Progress&apos; &amp;&amp; 
+&apos;{!Investigation__c.Investigation_Status__c}&apos; != &apos;Pending Approval&apos;){ 
+
+alert(&apos;Statement of Non-Compliance can only be generated if the Investigation is Completed, and not Closed&apos;); 
+
+} 
+
+else if(nonCompliantCount === 0 &amp;&amp; inspections == null) { 
+
+alert(&apos;No non-compliance item is associated to this investigation, therefore the statement of non-compliance is not available&apos;); 
+
+} 
+else{ 
+parent.location.href = &apos;/apex/EEC_AttachInvNonCompliance?id={!Investigation__c.Id}&apos;; 
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Publish_Report_on_Portal</fullName>
+        <availability>online</availability>
+        <description>This button will allow the user to flag an investigation for published on the web.</description>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Publish Report on Portal</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/connection.js&quot;)};
+{!REQUIRESCRIPT(&quot;/soap/ajax/32.0/apex.js&quot;)};
+
+try {
+
+  if (!{!Account.Electronic_Communication__c}) {
+    throw &quot;This provider does not use electronic communication&quot;;
+  }
+
+  if ({!ISBLANK(Investigation__c.Report_Narrative_Issue_Date__c)}) {
+    throw &quot;Report Narrative has not been issued. Please generate one of these reports before publishing.&quot;;
+  }
+
+  if ({!ISBLANK(Investigation__c.Cover_Letter_Issue_Date__c)}) {
+    throw &quot;Cover Letter has not been issued. Please generate the letter before publishing.&quot;;
+  }
+
+  if({!Investigation__c.Created_on_the_Web__c}) {
+    throw &quot;This investigation has already been published.&quot;;
+  }
+
+  var scheduledVisits = sforce.connection.query(&quot;Select Id, Name, Status__c From Inspection__c Where Investigation__c = &apos;{!Investigation__c.Id}&apos; AND Status__c IN (&apos;Scheduled&apos;,&apos;To be scheduled&apos;)&quot;);
+  // If there are some visits available for this investigation.
+  if (scheduledVisits.size &gt; 0) {
+    throw &quot;This investigation is associated with visits that have not been completed. Please review these visits before publishing.&quot;;
+  }
+
+  
+
+  var invest = new sforce.SObject(&quot;Investigation__c&quot;); 
+  invest.id = &quot;{!Investigation__c.Id}&quot;; 
+  invest.Created_on_the_Web__c = true;
+  invest.Investigation_Status__c = &apos;Closed&apos;; 
+
+  var result = null;
+  if({!TEXT(Investigation__c.Investigation_Status__c) != &apos;Closed&apos;}){
+      if(confirm(&apos;An investigation must be closed before it can be published to the portal. Do you want to close the investigation and publish to the portal?&apos;)){
+        
+        result = sforce.connection.update([invest]); 
+       
+       /* result = sforce.connection.update([invest]);
+        console.log(result);
+       */
+
+        if (!result) {
+          throw &quot;Could not update record.&quot;;
+        }
+      }
+  }
+
+  
+  
+  window.location.reload();
+
+} catch (e){
+  alert(e);
+}</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Set_Narrative_Default_Values</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Set Narrative Default Values</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>{!REQUIRESCRIPT(&quot;/soap/ajax/20.0/connection.js&quot;)}
+
+var investObj = new sforce.SObject(&quot;Investigation__c&quot;);
+investObj.Id = &apos;{!Investigation__c.Id}&apos;;
+ 
+if(&apos;{!JSENCODE(Investigation__c.Facility_Description__c)}&apos; == null || &apos;{!JSENCODE(Investigation__c.Facility_Description__c)}&apos; == &apos;&apos; ){
+ 
+   var investList = sforce.connection.query(&quot;select Id, Facility_Description__c from Investigation__c where Provider_No__c = &apos;{!Investigation__c.Provider_Id__c}&apos; order by createddate asc&quot;); 
+   if(investList != null){
+      investRecords = investList.getArray(&quot;records&quot;);
+   
+      for (var i=0; i&lt;investRecords.length; i++) {
+         var record = investRecords[i];
+
+         if(record.Facility_Description__c != null &amp;&amp; record.Facility_Description__c != &apos;&apos;)
+         {
+           investObj.Facility_Description__c = record.Facility_Description__c;
+         }
+      }
+   }
+}
+
+var provider = sforce.connection.query(&quot;select Id, RecordTypeId,RecordType.Name,OwnerId, Owner.FirstName, Owner.LastName, Owner.Phone  from Account where Id = &apos;{!Investigation__c.Provider_Id__c}&apos;&quot;);
+var rtypeName = provider.records.RecordType.Name; 
+var leadConf = sforce.connection.query(&quot;select Id,name, Investig_Non_comp_Default_if_Any__c,Investigation__c from LEAD_Configuration__c where name = \&apos;&quot;+rtypeName+&quot;\&apos;&quot;); 
+
+var ncList = sforce.connection.query(&quot;select Id, Investigation__c from Non_Compliant__c where Investigation__c = &apos;{!Investigation__c.Id}&apos; order by createddate desc&quot;);
+
+var vList = sforce.connection.query(&quot;select Id, Number_of_non_compliant_items__c from Inspection__c where Investigation__c = &apos;{!Investigation__c.Id}&apos; and Number_of_non_compliant_items__c &gt; 0 order by createddate desc&quot;);
+
+if(&apos;{!JSENCODE(Investigation__c.Non_compliances__c)}&apos; == null || &apos;{!JSENCODE(Investigation__c.Non_compliances__c)}&apos; == &apos;&apos;){
+   
+    if(ncList.size&gt;0 || vList.size&gt;0){
+investObj.Non_compliances__c=leadConf.records.Investig_Non_comp_Default_if_Any__c;
+    }
+    else{
+        investObj.Non_compliances__c = leadConf.records.Investigation__c;
+    }
+}
+var numberDays = &apos;0&apos;;
+if(&apos;{!Investigation__c.Number_of_Days_to_Receive_Response__c}&apos; != null){
+  numberDays = &apos;{!Investigation__c.Number_of_Days_to_Receive_Response__c}&apos;.toString();
+}
+
+if(&apos;{!JSENCODE(Investigation__c.Cover_Letter_Narrative__c)}&apos; == null || &apos;{!JSENCODE(Investigation__c.Cover_Letter_Narrative__c)}&apos; == &apos;&apos;){
+  if(ncList.size&gt;0 || vList.size&gt;0){
+   var cln = &apos;This letter is in reference to the intake number(s) above. EEC has carefully reviewed all information collected regarding this matter, and it was noted there were regulatory issues which you did not appropriately identify and/or correct.&apos;;
+   cln = cln + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+   cln = cln +&apos;The attached Statement of Outstanding Compliance Issues details the regulatory non-compliances that must still be addressed by you.  Please complete the form with a specific plan to address the issues, and submit the completed form to your licensor within &apos;+numberDays+&apos; days.&apos;;
+   cln = cln + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+   cln = cln + &apos;Should you have any questions, please contact your licensor &apos;+provider.records.Owner.FirstName+&apos; &apos;+ provider.records.Owner.LastName+ (provider.records.Owner.Phone != null ? &apos; at &apos;+provider.records.Owner.Phone : &apos;&apos;) + &apos;.&apos;;
+}
+else{
+    var cln = &apos;This letter is in reference to the intake number(s) above. EEC has carefully reviewed all information collected regarding this matter, and it has been determined that there were no regulatory issues noted.  This letter and any relevant information will be maintained in accordance with EEC record keeping procedures. &apos;;
+   cln = cln + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+   cln = cln + &apos;Should you have any questions, please contact your licensor &apos;+provider.records.Owner.FirstName+&apos; &apos;+ provider.records.Owner.LastName+ (provider.records.Owner.Phone != null ? &apos; at &apos;+provider.records.Owner.Phone : &apos;&apos;) + &apos;.&apos;;
+}
+
+cln = cln + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+cln = cln + &apos;Respectfully,&apos; + &apos;&lt;br/&gt;&lt;br/&gt;&apos;;
+cln = cln + &apos;{!JSENCODE(Investigation__c.Leader_Name_Text__c)}&apos; + &apos;&lt;br/&gt;&apos;;
+cln = cln + &apos;{!Investigation__c.Leader_Title__c}&apos;;
+investObj.Cover_Letter_Narrative__c = cln;
+
+}
+var result = sforce.connection.update([investObj]);
+window.location.reload();</url>
+    </webLinks>
+    <webLinks>
+        <fullName>Transfer_Investigations</fullName>
+        <availability>online</availability>
+        <displayType>massActionButton</displayType>
+        <height>600</height>
+        <linkType>page</linkType>
+        <masterLabel>Transfer Investigations</masterLabel>
+        <openType>sidebar</openType>
+        <page>EEC_MassTransferInvestigations</page>
+        <protected>false</protected>
+        <requireRowSelection>true</requireRowSelection>
+    </webLinks>
+</CustomObject>

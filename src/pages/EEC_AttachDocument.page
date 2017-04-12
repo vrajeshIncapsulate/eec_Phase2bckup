@@ -1,0 +1,29 @@
+<apex:page controller="EEC_AttachDocumentController" sidebar="false" showHeader="false">
+	<apex:form enctype="multipart/form-data">
+	<style type="text/css">
+    .pbTitle {
+        white-space: nowrap
+    }
+	</style>
+	<script language="JavaScript" type="text/javascript">
+        function CloseAndRefresh(attachmentMsg){
+        	 window.opener.showAttachMessage(attachmentMsg);
+             self.close();
+        }
+      
+	</script>
+    <apex:pageMessages />
+	    <apex:pageBlock title="Upload a Attachment" >
+	
+		    <b>Chose a file to attach : &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
+		    <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/><br/><br/><br/><br/>
+		      
+	       <span style="padding-left:15em">
+	      
+	       		<apex:commandButton action="{!upload}" value="Upload"/>
+	       		<apex:commandButton value="Close" onclick="javascript:CloseAndRefresh('{!attachmentMessage}')"/>
+	     
+	       </span>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>This object will be used to set configuration needs for LEAD per type of provider.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ReadWrite</externalSharingModel>
+    <fields>
+        <fullName>Admin_Queue_Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Admin Queue Assignment</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>LEAD_Configurations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Change_of_Address_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>Change of Address Fee</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Change_of_Address_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>Change of Address Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Close_Prior_Expiration_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>Close Prior Expiration Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Complaint_Form_Redirect__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Web page to redirect the user once the complaint is submitted or abandoned.</inlineHelpText>
+        <label>Complaint Form Redirect</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Complaints_Confirmation__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Text that will be used on the Complaints Web Form confirmation page.</inlineHelpText>
+        <label>Complaints Confirmation</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Complaints_Introduction__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Text that will be used on the Complaints Web Form introduction page.</inlineHelpText>
+        <label>Complaints Introduction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Change_Room_Floor_Level_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC Change Room / Floor Level Intruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Change_of_Household_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC Change of Household Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Inactivate_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC Inactivate Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_License_Upgrade_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC License Upgrade Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_New_License_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC New License Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Re_Active_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC Re-Active Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Renewal_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>FCC Renewal Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>FCC_Renewal_Significant_Delay__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This number represents the number of days after expiration date that a renewal should be processed without manager approval. If this number of days after expiration date is passed, the system will require manager approval</inlineHelpText>
+        <label>FCC - Renewal Significant Delay</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Follow_up_Visit_Estimated_Deadline__c</fullName>
+        <externalId>false</externalId>
+        <label>Follow-up Visit Estimated Deadline</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Incident_Involved_Person_Intro__c</fullName>
+        <externalId>false</externalId>
+        <label>Incident - Involved Person Intro</label>
+        <length>20000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Incidents_Intro__c</fullName>
+        <externalId>false</externalId>
+        <label>Incidents Intro</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Injury_Involved_Person_Intro__c</fullName>
+        <externalId>false</externalId>
+        <label>Injury - Involved Person Intro</label>
+        <length>20000</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Investig_Non_comp_Default_if_Any__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This text will be used as default on Investigation Non-Compliance narrative text in case there is at least one non-compliance item identified on this investigation.</inlineHelpText>
+        <label>Investig. Non-comp. Default if Any</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Investigation__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>This text will be used as default on Investigation Non-Compliance narrative text in case there is no non-compliance identified on this investigation.</inlineHelpText>
+        <label>Investig. Non-comp. Default if None</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Large_Group_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>Large Group Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Lic_Anniversary_Visit_Estimated_Deadline__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days used to calculate the visit estimated deadline for visits automatically created by the system for Monitoring Visits / Progress Visits / Mid-Cycle Review Visits / Provisional Visits</inlineHelpText>
+        <label>Lic Anniversary Visit Estimated Deadline</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>License_Renewal_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>License Renewal Fee</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>License_Upgrade_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>License Upgrade Fee</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Messages_Alerts_Known_Issues__c</fullName>
+        <description>Messages &amp; Alerts - Known Issues text for home page layouts.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This field is only used on the &quot;Home Page Message &amp; Alerts&quot; record. If you are attempting to edit this field on a different record type (i.e. Family Child Care, Small Group, etc.) there will be no impact on the homepage.</inlineHelpText>
+        <label>Messages &amp; Alerts - Known Issues</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Nb_Days_Prior_to_Lic_Anniv_to_Create_Vis__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days prior to the window start date the system will create a monitoring / mid-cycle / progress visit automatically so that the licensor knows that a visit should be scheduled</inlineHelpText>
+        <label>Nb Days Prior to Window to Create Vis</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>New_License_Fee__c</fullName>
+        <externalId>false</externalId>
+        <label>New License Fee</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>No_of_Days_For_Internal_Investig_Due_Da__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Default number of days for an internal investigation to be received. When an internal investigation is created this number of days is added to the current date to determine the default value of &quot;To Be Provider By&quot; field</inlineHelpText>
+        <label>No. of Days For Int. Investig. Due Date</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Days_For_Investigation_Due_Date__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days that will be used as default to set the investigation due date.</inlineHelpText>
+        <label>No. of Days For Investigation Due Date</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>No_of_Days_Prior_Corr_Action_Deadline__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of days prior to the corrective action plan reception deadline the email reminder (template #6) should be sent. If NULL, the reminder will not be sent.</inlineHelpText>
+        <label>No. of Days Prior Corr Action Deadline</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Non_Comp_before_longer_visit__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Max Number of non-compliance in the last 14 months before the system proposed a longer visit tool. For example, if we want to use a longer visit tool if there are 2 or more substantiated citations, the value here should 1 (max 1 before longer visit)</inlineHelpText>
+        <label>Number of Non-Comp. before longer visit</label>
+        <precision>2</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_days_for_Investigation_Visit__c</fullName>
+        <defaultValue>5</defaultValue>
+        <externalId>false</externalId>
+        <inlineHelpText>Set the number of days that will be used to set by default the Estimated Deadline when creating a new visit for an Investigation: Estimated Deadline = Date of Creation of this visit + this number of day</inlineHelpText>
+        <label>Number of days for Investigation Visit</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Portal_Home_Latest_News__c</fullName>
+        <description>The latest and up to date news for portal users.</description>
+        <externalId>false</externalId>
+        <label>Portal Home Latest News</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Portal_Home_Useful_Links__c</fullName>
+        <description>Useful links for portal users on the home page.</description>
+        <externalId>false</externalId>
+        <label>Portal Home Useful Links</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Portal_Home_Welcome__c</fullName>
+        <description>This is the portal&apos;s home page message.</description>
+        <externalId>false</externalId>
+        <label>Portal Home Welcome</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Portal_Transaction_Introduction__c</fullName>
+        <externalId>false</externalId>
+        <label>Portal Transaction Introduction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>20</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Re_issuance_of_License_Cert_Instruction__c</fullName>
+        <externalId>false</externalId>
+        <label>Re-issuance of License Cert Instruction</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Transaction_Attachments_New__c</fullName>
+        <externalId>false</externalId>
+        <label>Transaction Attachments New</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Transaction_Attachments_Renewal__c</fullName>
+        <externalId>false</externalId>
+        <label>Transaction Attachments Renewal</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Transaction_Attachments_Upgrade__c</fullName>
+        <externalId>false</externalId>
+        <label>Transaction Attachments Upgrade</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>Html</type>
+        <visibleLines>25</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Visit_Narrative_Summary_Default__c</fullName>
+        <externalId>false</externalId>
+        <inlineHelpText>Text that will be used as default for the visit narrative summary text. Note that the tags #Visit_Date# and #Visit_Reason# will be replaced by the values from the visit object when the text is used.</inlineHelpText>
+        <label>Visit Narrative Summary Default</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <label>LEAD Configuration</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>UPDATEDBY_USER</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <label>LEAD Configuration Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>LEAD Configurations</pluralLabel>
+    <recordTypes>
+        <fullName>All_Settings</fullName>
+        <active>true</active>
+        <description>General configuration of LEAD.</description>
+        <label>All Settings</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Global_Settings</fullName>
+        <active>true</active>
+        <description>Give configuration capabilities at global level</description>
+        <label>Global Settings</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Messages_and_Alerts</fullName>
+        <active>true</active>
+        <description>Configuration for the Home tab &apos;Messages and Alerts&apos; section.</description>
+        <label>Messages and Alerts</label>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Per_Provider_Type</fullName>
+        <active>true</active>
+        <description>Provide Configuration options based on Provider type</description>
+        <label>Per Provider Type</label>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

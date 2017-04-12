@@ -1,0 +1,142 @@
+<apex:page controller="EEC_GeneratePDFNCController" id="GeneratePDFNCId" renderAs="pdf" applyBodyTag="false" >
+<head>
+ <style type="text/css">
+  @page
+  {
+    size:landscape;
+  }
+
+  body {
+    font-family: "Arial" "Sans-Serif";
+    font-size:10pt;
+  }
+  
+  .removeLastPage:last-child {
+     page-break-after: avoid;
+     position: absolute;
+     Bottom: 0;
+   }
+  
+   
+       
+    table {
+        -fs-table-paginate: paginate !important;
+    }
+    
+    table tr {
+        page-break-inside:avoid !important;
+    }
+
+</style>
+    <div class="removeLastPage"> 
+    <apex:pageBlock id="GeneratePDFBlock" >
+            <table width="100%">
+             <caption style="background-color: #FFCC99; margin-bottom: 10px;font-size:130%"><strong>Statement of Non-compliance</strong></caption>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr width="100%">
+                    <td><strong>Interaction ID  &nbsp;&nbsp;&nbsp;</strong>{!inspection.name}</td>
+                    <td><strong>Date of report &nbsp;&nbsp;&nbsp;</strong>
+                        <apex:outputText value="{0, date, MM/dd/yyyy}">
+                            <apex:param value="{! TODAY() }" /> 
+                        </apex:outputText>
+                    </td>
+                </tr>
+                <tr><td colspan="2">&nbsp;</td></tr>
+                <tr>
+                    <td><strong>Provider Information:</strong></td>
+                    <td style="display:{! IF(inspection.Provider_No__r.Umbrella_Members__r != NULL, 'inherit', 'none') }"><strong>Umbrella Organization Information:</strong></td>
+                </tr>
+                <tr>
+                    <td width="50%">
+                        <table style="padding: 10px;">
+                            <tr><td><b>Phone number:</b> &nbsp;&nbsp;&nbsp;{!inspection.Provider_No__r.Phone}</td></tr>
+                            <tr><td><strong>Licensee ID: &nbsp;&nbsp;&nbsp;</strong>{!IF(inspection.Provider_No__r.Use_Legacy_Prov_Number__c == true , inspection.Provider_No__r.Provider_No__c,inspection.Provider_No__r.Provider_Number__c)}</td></tr>
+                            <tr><td><strong>Licensee name: &nbsp;&nbsp;&nbsp;</strong>{!inspection.Provider_No__r.name}</td></tr>
+                            <tr><td><strong>Address: &nbsp;&nbsp;&nbsp;</strong>{!inspection.Address_1__c } {!inspection.Address_2__c }</td></tr>
+                            <tr><td style='padding-left: 85px;'>{!inspection.City__c } {!inspection.State__c } {!inspection.Zip_Code__c }</td></tr>
+                        </table>
+                    </td>
+                    <td width="50%" style="display:{! IF(inspection.Provider_No__r.Umbrella_Members__r != NULL, 'inherit', 'none') } ">
+                        <table style="padding: 10px;">
+                            <tr><td><strong>Phone number: &nbsp;&nbsp;&nbsp;</strong>{!inspection.Provider_No__r.Umbrella_Members__r.Phone}</td></tr>
+                            <tr><td><strong>Licensee ID: &nbsp;&nbsp;&nbsp;</strong>{!IF(inspection.Provider_No__r.Umbrella_Members__r.Use_Legacy_Prov_Number__c == true , inspection.Provider_No__r.Umbrella_Members__r.Provider_No__c,inspection.Provider_No__r.Umbrella_Members__r.Provider_Number__c)}</td></tr>
+                            <tr><td><strong>Licensee name: &nbsp;&nbsp;&nbsp;</strong>{!inspection.Provider_No__r.Umbrella_Members__r.name}</td></tr>
+                            <tr><td><strong>Address: &nbsp;&nbsp;&nbsp;</strong>{!inspection.Provider_No__r.Umbrella_Members__r.BillingStreet}</td></tr>
+                            <tr><td style='padding-left: 85px;'>{!inspection.Provider_No__r.Umbrella_Members__r.BillingCity} {!inspection.Provider_No__r.Umbrella_Members__r.BillingState} {!inspection.Provider_No__r.Umbrella_Members__r.BillingPostalCode}</td></tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td colspan="2" width="100%">
+                    <apex:outputpanel rendered="{!iiWrapperList != null}" >
+                        <table cellpadding="10" border="2" style="table-layout: fixed; border-style: solid;" width="100%">
+                            <tr>
+                                <th style="width:120px;">Regulation</th>
+                                <th style="width:265px;">Statement of Non-Compliance</th>
+                                <th style="width:350px;">Correction Plan</th>
+                                <th style="width:100px;">Date Correction Implemented</th>
+                            </tr>
+                            <apex:repeat value="{!iiWrapperList}" var="ii">
+                                <tr style="page-break-after: auto">
+                                    <td height="160px" style="width:90px;">
+                                        <apex:outputpanel rendered="{!ii.regulationList != null}">
+                                            <apex:repeat value="{!ii.regulationList}" var="iiName">{!iiName}</apex:repeat>
+                                        </apex:outputpanel>
+                                    </td>
+                                    <td style="width:270px;"><apex:outputText value="{!ii.observations}"/></td>
+                                    <td style="width:390px;"><apex:outputText value="{!ii.correctionPlan}"/></td>
+                                    <td style="width:70px;">
+                                        <apex:outputText value="{0, date, MM/dd/yyyy}">
+                                            <apex:param value="{!ii.dateImplemented}" /> 
+                                        </apex:outputText>
+                                    </td>
+                                </tr>
+                            </apex:repeat>
+                        </table>
+                    </apex:outputpanel>
+                  </td>
+                 </tr>
+                 <!--  <apex:pageBlockTable value="{!iiWrapperList}" var="ii" Id="IIListTable" rendered="{!iiWrapperList.size > 0}" style="border:1px solid black;width:300px;cellpadding:10px">
+                    <apex:column style="border:1px solid black; width:50px" headervalue="Regulation">
+                         <apex:outputpanel rendered="{!ii.regulationMap != null}">
+                            <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                                <apex:outputText value="{!iiName}" />&nbsp;&nbsp;&nbsp;
+                            </apex:repeat>
+                         </apex:outputpanel>
+                    </apex:column>
+                    <apex:column style="border:1px solid black; width:120px" headervalue="Statement of Non-Compliance">
+                         <apex:outputText value="{!ii.observations}"/>
+                    </apex:column>
+                    <apex:column style="border:1px solid black; width:120px" headervalue="Correction Plan">
+                         <apex:outputText value="{!ii.correctionPlan}"/>
+                    </apex:column>
+                    <apex:column style="border:1px solid black; width:50px" headervalue="Date Correction Implemented">
+                         <apex:outputText value="{0, date, MM/dd/yyyy}">
+                            <apex:param value="{!ii.dateImplemented}" /> 
+                         </apex:outputText>
+                    </apex:column>
+                  </apex:pageBlockTable>-->
+                  
+                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">{!inspection.Provider_no__r.Owner.Name}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">{!inspection.Provider_no__r.Owner.Title}</td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td colspan="2">I have reviewed the above non-compliances and have specified my plan and date of correction for each non-compliance.</td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                    <td>LICENSEE’S SIGNATURE:</td>
+                    <td>DATE: </td>
+                </tr>
+            </table >
+    </apex:pageBlock>
+</div>
+</head>
+</apex:page>

@@ -1,0 +1,13 @@
+<apex:component >
+    <apex:attribute name="providerRegion" description="Account for the inspection" type="Region__c" required="true"/>
+    
+    <div id="header">
+        <center>
+            <div style="font-size: 16pt"><b>The Commonwealth of Massachusetts</b></div>
+            <div style="font-size: 16pt"><b>Department of Early Education and Care</b></div>   
+            <div style="font-size: 12pt">{! providerRegion.Street__c }, {! providerRegion.City__c }, {! providerRegion.State__c }, {! providerRegion.Zip__c }</div>
+        </center>
+    </div>
+    
+    <hr />
+</apex:component>

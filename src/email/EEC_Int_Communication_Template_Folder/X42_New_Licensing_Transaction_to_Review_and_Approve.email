@@ -1,0 +1,7 @@
+Hello,
+
+A new {!Licensing_Transaction__c.RecordType} Licensing Transaction associated to Provider {!Licensing_Transaction__c.Provider__c} and assigned to {!Licensing_Transaction__c.Assigned_To__c} is ready for your review and approval. 
+
+Please login to Salesforce and review the transaction: https://na16.salesforce.com/{!Licensing_Transaction__c.Id}
+
+LEAD System

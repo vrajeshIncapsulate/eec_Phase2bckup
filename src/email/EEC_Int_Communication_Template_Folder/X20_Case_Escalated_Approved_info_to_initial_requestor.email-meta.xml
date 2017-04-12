@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email communication sent to the original triage responsible and all previous approvers to inform that the case has been reviewed by the Deputy Commissioner and he/she agreed to escalate and assign this case to an investigator</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>20 - Case Escalated - Approved info to initial requestor</name>
+    <style>none</style>
+    <subject>A case for {!Case.Provider_Name_For_Email_Merge__c} has been escalated</subject>
+    <type>text</type>
+</EmailTemplate>

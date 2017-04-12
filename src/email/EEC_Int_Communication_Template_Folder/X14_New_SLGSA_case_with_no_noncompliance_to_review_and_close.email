@@ -1,0 +1,7 @@
+Hello,
+
+A new injury associated to Provider {!Case.Provider_Name_For_Email_Merge__c} is ready to be closed as no non-compliance items have been identified. 
+
+Please login to Salesforce and review the injury: https://na16.salesforce.com/{!Case.Id}. If you "approve", the injury will automatically be closed and an email will be sent to the case reporter (provider) to inform him of the closure of this case. If you "reject", then the case will be sent to your triage queue.
+
+LEAD System

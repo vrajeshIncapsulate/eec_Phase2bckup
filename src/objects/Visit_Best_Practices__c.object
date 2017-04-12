@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSearch>false</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Associated_Visit__c</fullName>
+        <externalId>false</externalId>
+        <label>Associated Visit</label>
+        <referenceTo>Inspection__c</referenceTo>
+        <relationshipLabel>Visit Best Practices</relationshipLabel>
+        <relationshipName>Visit_Best_Practices</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>AutorabitExtId__c</fullName>
+        <description>External Id created by AutoRABIT</description>
+        <externalId>true</externalId>
+        <label>AutorabitExtId__c</label>
+        <length>18</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Best_Practice_Guidance__c</fullName>
+        <externalId>false</externalId>
+        <formula>Best_Practice__r.Best_Practice_Guidance__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Best Practice Guidance</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Best_Practice__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Best Practice</label>
+        <referenceTo>Standard_Best_Practices__c</referenceTo>
+        <relationshipLabel>Visit Best Practices</relationshipLabel>
+        <relationshipName>Visit_Best_Practices</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Observation__c</fullName>
+        <externalId>false</externalId>
+        <label>Observation</label>
+        <length>32768</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Visit_Provider_Type__c</fullName>
+        <externalId>false</externalId>
+        <formula>Associated_Visit__r.Provider_Type__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Provider Type</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>Visit Best Practices</label>
+    <nameField>
+        <displayFormat>VBP-{0000}</displayFormat>
+        <label>Key</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Visit Best Practices</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Lock_in_RO_Visits</fullName>
+        <active>true</active>
+        <errorConditionFormula>If(Associated_Visit__r.Offline_Lock__c,true,false)</errorConditionFormula>
+        <errorMessage>This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action.</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>Verify_Best_Practice_Applicable_to_Type</fullName>
+        <active>true</active>
+        <description>Verifies Best Practice&apos;s Applicable To Matches Visit&apos;s Provider Type</description>
+        <errorConditionFormula>NOT(CONTAINS(Best_Practice__r.Applicable_To_Text_Version__c , Associated_Visit__r.Provider_No__r.Record_Type_Name__c ))</errorConditionFormula>
+        <errorDisplayField>Best_Practice__c</errorDisplayField>
+        <errorMessage>The Best Practice must be Applicable To the Provider Type. It is possible that the Best Practice selected appears multiple times as applicable to different Provider types, but the one matching this Visits Provider must be the one selected.</errorMessage>
+    </validationRules>
+</CustomObject>

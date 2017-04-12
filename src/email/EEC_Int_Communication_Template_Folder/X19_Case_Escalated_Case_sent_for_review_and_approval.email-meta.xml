@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent to the next reviewer to inform him / her that a new case needs his / her review as it has been escalated</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>19 - Case Escalated - Case sent for review and approval</name>
+    <style>none</style>
+    <subject>A case associated to {!Case.Provider_Name_For_Email_Merge__c} has been escalated and requires your review</subject>
+    <type>text</type>
+</EmailTemplate>

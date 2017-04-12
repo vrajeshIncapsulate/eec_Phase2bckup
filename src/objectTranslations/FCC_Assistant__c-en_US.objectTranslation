@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCC Assistant</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCC Assistants</value>
+    </caseValues>
+    <fields>
+        <help><!-- If checked, it means that it&apos;s the latest information available for this provider --></help>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- First Name --></label>
+        <name>First_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Last Name --></label>
+        <name>Last_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- Certificate Expiration Date --></label>
+        <name>License_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Certificate Number --></label>
+        <name>License_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Mailing Address --></label>
+        <name>Mailing_Address__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider --></label>
+        <name>Provider__c</name>
+        <relationshipLabel><!-- Assistants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Source Transaction --></label>
+        <name>Source_Transaction__c</name>
+        <relationshipLabel><!-- Assistants --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>FCC Assistant Layout</layout>
+        <sections>
+            <label><!-- Associations --></label>
+            <section>Associations</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

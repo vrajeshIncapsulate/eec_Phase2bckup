@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent to the provider to inform that report is available on the portal after a licensing visit that didn&apos;t find any non-compliance</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>31b - Notification to Provider after Licensing Visit (no non-compliance)</name>
+    <style>freeForm</style>
+    <subject>Early Education and Care - Your visit report is available</subject>
+    <type>html</type>
+</EmailTemplate>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Junction between non compliant items and regulations so multiple regulations can be added to one non-compliant item.</description>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <fields>
+        <fullName>Non_Compliant_Item__c</fullName>
+        <externalId>false</externalId>
+        <label>Non Compliant Item</label>
+        <referenceTo>Non_Compliant__c</referenceTo>
+        <relationshipLabel>Associated Regulations</relationshipLabel>
+        <relationshipName>Non_Compliant_Item_Regulations</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>Regulation__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Regulation</label>
+        <referenceTo>Regulation__c</referenceTo>
+        <relationshipLabel>Non Compliant Item Regulations</relationshipLabel>
+        <relationshipName>Non_Compliant_Item_Regulations</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>Non Compliant Item Regulation</label>
+    <nameField>
+        <displayFormat>NC-R-{00000}</displayFormat>
+        <label>ID</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Non Compliant Item Regulations</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>Regulation_match_provider_type</fullName>
+        <active>true</active>
+        <errorConditionFormula>NOT(OR(
+(INCLUDES(Regulation__r.Applicable_To__c,&apos;Adoption Agency&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Adoption Agency&apos;), (INCLUDES(Regulation__r.Applicable_To__c, &apos;Family Child Care&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Family Child Care&apos;), (INCLUDES(Regulation__r.Applicable_To__c,&apos;Foster Care Agency&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Foster Care Agency&apos;), (INCLUDES(Regulation__r.Applicable_To__c,&apos;Group Care&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Group Care&apos;),(INCLUDES(Regulation__r.Applicable_To__c,&apos;Large Group&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Large Group&apos;),(INCLUDES(Regulation__r.Applicable_To__c,&apos;Large and Small Group Umbrella&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Large and Small Group Umbrella&apos;),(INCLUDES(Regulation__r.Applicable_To__c,&apos;R&amp;P Umbrella&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;R&amp;P Umbrella&apos;),(INCLUDES(Regulation__r.Applicable_To__c,&apos;Small Group&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Small Group&apos;), 
+(INCLUDES(Regulation__r.Applicable_To__c,&apos;Temporary Shelter&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Temporary Shelter&apos;), 
+(INCLUDES(Regulation__r.Applicable_To__c,&apos;Unlicensed Provider&apos;) &amp;&amp; Non_Compliant_Item__r.Investigation__r.Provider_No__r.RecordType.Name = &apos;Unlicensed Provider&apos;))
+)</errorConditionFormula>
+        <errorMessage>Regulation associated with this item does not  match the provider type. Please select another regulation.</errorMessage>
+    </validationRules>
+</CustomObject>

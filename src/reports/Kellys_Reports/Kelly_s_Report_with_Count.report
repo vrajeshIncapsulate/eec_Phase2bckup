@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>ACCOUNT.NAME</field>
+    </columns>
+    <columns>
+        <field>Account.Provider_Address_1__c</field>
+    </columns>
+    <columns>
+        <field>Account.Capacity__c</field>
+    </columns>
+    <columns>
+        <field>Account.Licensor_Full_Name__c</field>
+    </columns>
+    <filter>
+        <criteriaItems>
+            <column>Account.Region__c</column>
+            <operator>equals</operator>
+            <value>Southeast and Cape</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Account.License_Status__c</column>
+            <operator>equals</operator>
+            <value>Licensed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>RECORDTYPE</column>
+            <operator>equals</operator>
+            <value>Account.FCC</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Account.Provider_City__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Kelly&apos;s Report with Count</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>AccountList</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>CREATED_DATE</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

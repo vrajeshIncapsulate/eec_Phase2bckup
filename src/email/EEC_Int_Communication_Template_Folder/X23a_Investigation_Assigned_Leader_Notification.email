@@ -1,0 +1,7 @@
+Hello,
+
+You have been assigned as Lead Investigator to Investigation {!Investigation__c.Name} associated to Provider {!Investigation__c.Provider_No__c} by {!Investigation__c.LastModifiedBy}. The due date for this investigation is {!Investigation__c.Due_Date__c}.
+
+Please login to Salesforce and review the Investigation: {!Investigation__c.Link}.
+
+LEAD System

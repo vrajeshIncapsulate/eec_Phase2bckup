@@ -1,0 +1,353 @@
+<apex:component controller="EEC_ReadOnlyAttachmentsCtrl" allowDML="true">
+  <apex:attribute name="sobject" description="The sObject that will be vieiwing attachments." type="sObject" required="true" assignto="{!obj}" />
+  <apex:attribute name="attachments" description="Attachments to display." type="S3_File__c[]" required="false"/>
+  <apex:attribute name="interface" description="" type="AttachActionInterface" assignTo="{!aif}"/>  
+
+  <apex:attribute name="restrictHeight" description="This will determine if we need to restrict the height of the frame." type="Boolean" default="true" />  
+  <apex:attribute name="uploadOnly" description="This will determine if the file list is shown." type="Boolean" default="false"/>  
+  <apex:attribute name="viewOnly" description="This will determine if the file upload will be shown." type="Boolean" default="false"/>  
+    
+  <apex:stylesheet value="{!URLFOR($Resource.AngularAssets, 'AngularAssets/css/lib/angular-material.min.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.AngularAssets, 'AngularAssets/css/app.css')}" />
+    
+  <style>
+    .s3-attachments-inline {
+      font-family: Arial,Helvetica,sans-serif;
+      color: #222;
+    }
+      
+    .s3-attachments-inline form {
+      /*display: flex;
+      flex-direction: column; */
+      overflow-y: scroll;
+      max-height: {!IF(restrictHeight, '180px', 'initial')}
+    }
+      
+    .s3-attachments-inline h3 {
+      font-size: 1.1em; 
+      border-top-color: rgb(153, 89, 5);
+      border-top-style: solid;
+      border-top-width: 2px;
+    }
+      
+    .fileListContainer h4 {
+      font-size: 13px; 
+    }
+      
+    .attachment-item {
+      width: 100%; 
+      display: flex;
+      flex-direction: row; 
+    }
+      
+    .attachment-item p {
+      float: left; 
+      margin: 5px;
+      align-self: center;
+    }
+      
+    .attachment-item p:first-child {
+      flex: 2; 
+    }
+      
+    label {
+      font-size: 14px; 
+    }
+      
+    s3-file-upload, hr {
+      float: left; 
+    }
+      
+    hr {
+      width: 95%; 
+    }
+      
+    .attachment-item p {
+      font-size: 13px;
+    }
+
+    .clear-button {
+      font-size: 12px;
+      /*position: relative;
+      top: -2px;*/
+      position: absolute;
+      top: 3px;
+      left: 221px;
+      height: 22px;
+      line-height: 1px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .upload-button-top-level {
+      left: 165px;
+    }
+
+    .s3-input-container-input .upload-button {
+      font-size: 15px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+      .s3-input-container-input .upload-button .md-button {
+        width: 98%;
+        padding: 0;
+        margin: 0;
+        height: 22px;
+        box-shadow: none;
+        color: #333;
+        margin: 1px;
+        padding: 1px 3px;
+        border: 1px solid #b5b5b5;
+        border-bottom-color: #7f7f7f;
+        background: #e8e8e9 url('/img/alohaSkin/btn_sprite.png') repeat-x right top;
+        font-weight: bold;
+        font-size: 12px;
+        -moz-border-radius: 3px;
+        -webkit-border-radius: 3px;
+        border-radius: 3px;
+        min-height: initial !important;
+        line-height: 18px;
+        text-transform: capitalize;
+        margin-left: 6px;
+      }
+      
+    .s3-input-container-input .upload-button .md-button:hover {
+      color: #333;
+      background-position: right -30px; 
+    }
+      
+    .loading-container {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.3);
+      color: #fff; 
+      z-index: 9000;
+      display: none;
+    }
+      
+    .loading-container md-progress-circular {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+    }
+
+    .s3-input-container-input .upload-button {
+      position: absolute;
+      top: 3px;
+      left: 0;
+    }
+
+    .s3-input-container-labels {
+      margin-top: 30px;
+      margin-left: 0;
+    }
+
+    .s3-input-container-labels label, .attachment-item p {
+      color: #000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+    }
+
+    .s3-input-container-labels label p {
+      margin: 0 !important;
+    }
+
+    .s3-input-container-labels label:first-child {
+      color: #4a4a56;
+      font-weight: bold;  
+    }
+
+    .fileListContainer {
+      margin-top: 0px; 
+    }
+
+    .absolute-background {
+      position: absolute;
+      background: #f8f8f8;
+      width: 98%;
+      height: 30px;
+      border-radius: 0 0 5px 5px;
+      border: 1px #e0e3e5 solid;
+    }
+  </style>
+    
+  <apex:form html-ng-app="eecApp">
+    <div class="loading-container" layout="row" layout-align="center center" layout-fill="true">
+      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>  
+      
+    <apex:actionfunction name="UpdateIncidentAttachments" action="{!saveAttachmentsFromJson}" oncomplete="saveAttachmentsFromJsonComplete();" rerender="showmsg, fileListContainer">
+      <apex:param name="json" value="" assignto="{!attachmentsJson}" />
+    </apex:actionfunction>      
+      
+    <apex:actionfunction rerender="fileListContainer" action="{!aif.refreshAttachmentsList}" name="reloadAttachments" oncomplete="inProgress = false;$('.loading-container').hide();" />
+      
+    <apex:outputpanel id="fileAttachmentContainer" styleclass="fileAttachmentContainer" style="width: 100%;" html-ng-controller="ReadOnlyController as ctrl">
+      <!-- Upload File Section -->
+      <apex:outputpanel rendered="{!!viewOnly}" layout="block" style="width: 100%;">
+        <div style="float: left;">
+          <div class="absolute-background"></div>
+          <div class="upload-directive-container">
+            <s3-file-upload button-text="Add a new attachment"
+                            endpoint_url="{!$Setup.AWS_Config__c.S3_Endpoint_Url__c}"
+                            bucket-name="{!$Setup.AWS_Config__c.S3_Bucket_Name__c}"
+                            acl="{!$Setup.AWS_Config__c.S3_Access_Control_Level__c}"
+                            prefix="{!obj.Id}/"
+                            key="{!accessKey}"
+                            remote-func-params="{!$RemoteAction.EEC_ReadOnlyAttachmentsCtrl.generateMultiplePolicySignature}"
+                            multiple-enabled="true"
+                            timestamp-enabled="true"
+                            keep-files-enabled="true">
+            </s3-file-upload>
+          </div>
+          <button type="button" class="clear-button upload-button-top-level" ng-click="ctrl.upload()">Upload</button>
+          <button type="button" class="clear-button" ng-click="ctrl.clear()">Clear</button>  
+        </div>
+        <!-- -->
+      </apex:outputpanel>
+      <apex:outputpanel id="fileListContainer" styleclass="fileListContainer" layout="block" style="float: left; width: 100%;">
+        <apex:outputpanel rendered="{!!uploadOnly}">
+          <apex:outputPanel rendered="{!!viewOnly}"><hr /><br/></apex:outputPanel>
+          <h4 style="color: #4a4a56; font-family: Arial, Helvetica, sans-serif; ">Current Attachment(s)</h4>
+          <!-- Incident Attachments -->
+            
+          <apex:outputpanel rendered="{!attachments.size > 0}">
+            <apex:repeat value="{!attachments}" var="attachment">
+              <div class="attachment-item">
+                <p>
+                  <apex:commandlink value="{!attachment.Filename__c}" action="{!genetateS3Link}" target="_blank">
+                    <apex:param name="generateFileId" value="{!attachment.Id}" assignto="{!generateFileId}" />
+                  </apex:commandlink>
+                </p>
+                <p><c:EEC_DateTimeFormat datetime="{!attachment.CreatedDate}" /></p>
+                <apex:outputPanel rendered="{!viewOnly}">
+                  <p>
+                    <apex:commandlink action="{!deleteAttachment}" value="" rerender="script-existing-items, fileListContainer" style="color: #000;" onclick="$('.loading-container').show();" oncomplete="$('.loading-container').hide();">
+                      <apex:param name="attachmentName" assignto="{!fileToDelete}" value="{!attachment.Filename__c}" />
+                      <i class="material-icons">&#xE872;</i>
+                    </apex:commandlink>
+                  </p>
+                </apex:outputPanel>
+              </div>
+            </apex:repeat>
+          </apex:outputpanel>
+          <!-- No Attachments -->
+          <apex:outputpanel rendered="{!attachments.size == 0}">
+            <p style="font-size: 12px; margin-left: 10px;">No attachments currently available.</p>
+          </apex:outputpanel>
+        </apex:outputpanel>
+      </apex:outputpanel>
+    </apex:outputpanel>
+  </apex:form>  
+    
+  <c:EEC_Site_Scripts />
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.js" type="text/javascript"></script>
+  <apex:includeScript value="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"/>
+
+  <script>
+    var inProgress = false;  
+    
+    app.controller('ReadOnlyController', ['$scope', '$rootScope', '$location', function($scope, $rootScope, $location) {
+      //$scope.funcId = '';
+      $scope.numUploadComponents = 0;
+      $scope.timesUploadComplete = 0;
+      $scope.bucketName = '{!bucketName}';
+      //$scope.exisitingFiles = '{!attachmentsJson}';
+
+      var ctrl = this;
+      // Call this function to broadcast to the directive to process the upload.
+      this.upload = function() {
+        $('.loading-container').show();
+        $scope.numUploadComponents = jQuery('s3-file-upload').length;
+        // Call all upload directives to process files.
+        $rootScope.$broadcast('upload', {});
+      };
+
+      this.clear = function(clearIndex) {
+        if (!angular.isUndefined(clearIndex)) {
+          $rootScope.$broadcast('clearFiles_' + clearIndex, {});
+        } else {
+          $rootScope.$broadcast('clearFiles',{});
+        }
+        $scope.numUploadComponents = 0;
+        $scope.timesUploadComplete = 0;
+      }
+
+      // Capture Emit event from Directive for result data.
+      $scope.$on('uploadComplete', function(event, data) {
+        console.log('Times Upload Complete => uploadComplete: ' + $scope.timesUploadComplete);
+        $scope.timesUploadComplete++;
+        console.log('Times Upload Complete => uploadComplete [AFTER]: ' + $scope.timesUploadComplete);
+
+        if (angular.isArray(data)) {
+          var json = [];
+
+          for (var i = 0; i < data.length; i++) {
+            if (!data[i].status) {
+              console.log("----> Error: File not successfully uploaded.");
+              break;
+            }
+            console.log(data[i].data);
+            var attachment = data[i].data;
+            // Split the filename to get the prefix.
+            var splitFilename = attachment.key.split('/');
+            // Create the JSON needed for the S3_File__c objects.
+            var file = {
+              "Filename__c": splitFilename[1],
+              "Prefix__c": splitFilename[0],
+              "Content_Type__c": attachment['Content-Type'],
+              "Acl__c": attachment.acl,
+              "Bucket__c": $scope.bucketName
+            };
+
+            if (!angular.isUndefined($scope.exisitingFiles) && $scope.exisitingFiles !== '') {
+              var exisitingFilesJson = JSON.parse($scope.exisitingFiles);
+              // Loop through the results.
+              angular.forEach(exisitingFilesJson, function(value, key) {
+                // Get the short names of the files without the file extensions.
+                var exisitingShortName = value.Filename__c.split('.')[0];
+                var shortName = file.Filename__c.split('.')[0];
+                // If the short name of the file is the same as the existing then set the id for upsert.
+                if (exisitingShortName == shortName) {
+                  file.Id = value.Id;
+                }
+              });
+            }
+            // Push the file into the json object to send.
+            json.push(file);
+          }
+          console.log("Files Uploaded Successfully!");
+          // Call the action function to create the S3 Object entries in Sforce.
+          UpdateIncidentAttachments(JSON.stringify(json));
+        } else if ($scope.timesUploadComplete == $scope.numUploadComponents) {
+          console.log("Error: " + data.error);
+
+          if (data.error.indexOf('No files') > -1) {
+            console.log("No files to upload. Continue to next page.");
+              //location.reload(true);
+            reloadAttachments();
+            angular.element(jQuery('.fileListContainer')).scope().ctrl.clear();
+          }
+        }
+      });
+    }]);
+    
+    var saveAttachmentsFromJsonComplete = function() {
+        //refreshAttachmentsJson();
+      var timesComplete = angular.element(jQuery('.fileListContainer')).scope().timesUploadComplete;
+      var numUploadComponents = angular.element(jQuery('.fileListContainer')).scope().numUploadComponents;
+      console.log('Times Complete: ' + timesComplete);
+      console.log('Num Upload Components: ' + numUploadComponents);
+      if (!inProgress && timesComplete == numUploadComponents) {
+        inProgress = true;  
+        console.log("----> On Complete for saving attachments");  
+          //location.reload(true);
+        reloadAttachments();
+        angular.element(jQuery('.fileListContainer')).scope().ctrl.clear();
+      }
+    }
+  </script>
+</apex:component>

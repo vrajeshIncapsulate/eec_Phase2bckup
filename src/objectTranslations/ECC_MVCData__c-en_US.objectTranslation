@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>ECC_MVCData</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>ECC_MVCData</value>
+    </caseValues>
+    <fields>
+        <help><!-- Separate choices by two semi-colons (i.e. this;;that;;there) --></help>
+        <label><!-- choices --></label>
+        <name>choices__c</name>
+    </fields>
+    <fields>
+        <label><!-- defaultRequired --></label>
+        <name>defaultRequired__c</name>
+    </fields>
+    <fields>
+        <help><!-- fields that will appear conditionally based on other fields --></help>
+        <label><!-- dependentFields --></label>
+        <name>dependentFields__c</name>
+    </fields>
+    <fields>
+        <help><!-- Whether or not this is active --></help>
+        <label><!-- isActive --></label>
+        <name>isActive__c</name>
+    </fields>
+    <fields>
+        <label><!-- isDependent --></label>
+        <name>isDependent__c</name>
+    </fields>
+    <fields>
+        <help><!-- Field name --></help>
+        <label><!-- key --></label>
+        <name>key__c</name>
+    </fields>
+    <fields>
+        <help><!-- often times this is a question. --></help>
+        <label><!-- label --></label>
+        <name>label__c</name>
+    </fields>
+    <fields>
+        <help><!-- The name of the page where the question will exist --></help>
+        <label><!-- pageName --></label>
+        <name>pageName__c</name>
+    </fields>
+    <fields>
+        <label><!-- recordTypesDisplayedFor --></label>
+        <name>recordTypesRequired__c</name>
+    </fields>
+    <fields>
+        <help><!-- The order in which the questions will appear --></help>
+        <label><!-- sortOrder --></label>
+        <name>sortOrder__c</name>
+    </fields>
+    <fields>
+        <help><!-- text, radio, picklist, upload, textarea, date --></help>
+        <label><!-- type --></label>
+        <name>type__c</name>
+    </fields>
+    <fields>
+        <label><!-- uploadName --></label>
+        <name>uploadName__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

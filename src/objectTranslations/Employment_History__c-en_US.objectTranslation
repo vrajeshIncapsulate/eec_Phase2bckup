@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Employment History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Employment History</value>
+    </caseValues>
+    <fields>
+        <label><!-- Contact --></label>
+        <name>Contact__c</name>
+        <relationshipLabel><!-- Employment History --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Employer Address --></label>
+        <name>Employer_Address__c</name>
+    </fields>
+    <fields>
+        <help><!-- Phone number the employer can be contacted --></help>
+        <label><!-- Employer Phone --></label>
+        <name>Employer_Phone__c</name>
+    </fields>
+    <fields>
+        <help><!-- Name of the employer --></help>
+        <label><!-- Employer --></label>
+        <name>Employer__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Transaction this record was captured from --></help>
+        <label><!-- Licensing Transaction --></label>
+        <name>Licensing_Transaction__c</name>
+        <relationshipLabel><!-- Employment History --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Position Occupied with this employer --></help>
+        <label><!-- Position --></label>
+        <name>Position__c</name>
+    </fields>
+    <fields>
+        <label><!-- Reason for Leaving --></label>
+        <name>Reason_for_Leaving__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <layouts>
+        <layout>Employment History Layout</layout>
+        <sections>
+            <label><!-- Association --></label>
+            <section>Association</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- If the End Date is provided, Reason for Leaving is mandatory --></errorMessage>
+        <name>Reason_For_Leaving_Mandatory_If</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- End Date must be superior to Start Date --></errorMessage>
+        <name>Superior_to_Start_Date</name>
+    </validationRules>
+</CustomObjectTranslation>

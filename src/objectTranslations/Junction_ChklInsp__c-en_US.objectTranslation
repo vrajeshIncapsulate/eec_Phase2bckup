@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Tools Visit Items</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Tools Visit Items</value>
+    </caseValues>
+    <fields>
+        <label><!-- AutorabitExtId__c --></label>
+        <name>AutorabitExtId__c</name>
+    </fields>
+    <fields>
+        <label><!-- External TVI ID --></label>
+        <name>External_TVI_ID__c</name>
+    </fields>
+    <fields>
+        <help><!-- If checked, this visit item is only for information and does not need to be assessed during the visit --></help>
+        <label><!-- Non-Assessed Item --></label>
+        <name>Non_Assessed_Item__c</name>
+    </fields>
+    <fields>
+        <help><!-- Domain name that is used in case of Random Items. These can vary as most random items are associated to standard items in longer visit tools which contains more detailed domains. --></help>
+        <label><!-- Random Item Domain --></label>
+        <name>Random_Item_Domain__c</name>
+        <picklistValues>
+            <masterLabel>Administration</masterLabel>
+            <translation><!-- Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adoptive Children Records</masterLabel>
+            <translation><!-- Adoptive Children Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Adoptive Parent Records</masterLabel>
+            <translation><!-- Adoptive Parent Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Behavior Support</masterLabel>
+            <translation><!-- Behavior Support --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Birth Parent Records</masterLabel>
+            <translation><!-- Birth Parent Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Care of Children</masterLabel>
+            <translation><!-- Care of Children --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Emergency Preparedness</masterLabel>
+            <translation><!-- Emergency Preparedness --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Executive Administration</masterLabel>
+            <translation><!-- Executive Administration --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Children Records</masterLabel>
+            <translation><!-- Foster Children Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Foster Parent Records</masterLabel>
+            <translation><!-- Foster Parent Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Health</masterLabel>
+            <translation><!-- Health --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Interactions</masterLabel>
+            <translation><!-- Interactions --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Plant</masterLabel>
+            <translation><!-- Physical Plant --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Physical Space (Indoor &amp; Outdoor)</masterLabel>
+            <translation><!-- Physical Space (Indoor &amp; Outdoor) --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Records</masterLabel>
+            <translation><!-- Records --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Routine &amp; Activities</masterLabel>
+            <translation><!-- Routine &amp; Activities --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Transportation</masterLabel>
+            <translation><!-- Transportation --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Check this box if this item will be only added if picked as random by the system when using this tool. --></help>
+        <label><!-- Random Item --></label>
+        <name>Random_Item__c</name>
+    </fields>
+    <fields>
+        <label><!-- Tool --></label>
+        <name>Standard_Checklist_Reference__c</name>
+        <relationshipLabel><!-- Associated Visit Items --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Standard Visit Item --></label>
+        <name>Standard_Inspection_Item__c</name>
+        <relationshipLabel><!-- Tool Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- Allows you to sort visit items as they will be displayed in visit mode and on visit summary. Lowest ranking will be displayed first. Ranking should be set for each item. Items with empty rank will be displayed last. --></help>
+        <label><!-- Visit Mode Ranking --></label>
+        <name>Visit_Mode_Ranking__c</name>
+    </fields>
+    <layouts>
+        <layout>Junction ChklInsp Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- A Random Item Domain is not permitted when Random Item is not checked. --></errorMessage>
+        <name>Disallow_Random_Item_Domain_if_NotRandom</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- A Random Item Domain is required when Random Item is checked. --></errorMessage>
+        <name>Require_Random_Item_Domain_if_Random</name>
+    </validationRules>
+</CustomObjectTranslation>

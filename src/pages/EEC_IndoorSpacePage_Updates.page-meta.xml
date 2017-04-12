@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>34.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>This page is a clone of EEC_IndoorSpacePage but with updates for Angular Material.</description>
+    <label>EEC_IndoorSpacePage_Updates</label>
+</ApexPage>

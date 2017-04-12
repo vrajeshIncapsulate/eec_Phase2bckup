@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>FCC Provider Assistants</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>FCC Provider Assistants</value>
+    </caseValues>
+    <fields>
+        <label><!-- Added --></label>
+        <name>Added__c</name>
+    </fields>
+    <fields>
+        <help><!-- This flagged is used in the Process Flow &quot;Notify FCC Assistant when Added/Removed on a Provider&quot; to notify the assistant. --></help>
+        <label><!-- AssistantNotificationEmailSent --></label>
+        <name>AssistantNotificationEmailSent__c</name>
+    </fields>
+    <fields>
+        <label><!-- Assistant Certificate Number --></label>
+        <name>Assistant_Certificate_Number__c</name>
+    </fields>
+    <fields>
+        <label><!-- Certificate Expiration Date --></label>
+        <name>Certificate_Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Current --></label>
+        <name>Current__c</name>
+    </fields>
+    <fields>
+        <label><!-- End Date --></label>
+        <name>End_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Assistant Email --></label>
+        <name>FCC_Assistant_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- FCC Assistant --></label>
+        <name>FCC_Assistant__c</name>
+        <relationshipLabel><!-- Providers This Assistant Works For --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- FCC Provider --></label>
+        <name>FCC_Provider__c</name>
+        <relationshipLabel><!-- Assistants Working for this Provider --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- IsSupervisorOrAbove --></label>
+        <name>IsSupervisorOrAbove__c</name>
+    </fields>
+    <fields>
+        <label><!-- Licensing Transaction --></label>
+        <name>Licensing_Transaction__c</name>
+        <relationshipLabel><!-- FCC Provider Assistants --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Provider Email --></label>
+        <name>Provider_Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Provider Licensor --></label>
+        <name>Provider_Licensor__c</name>
+    </fields>
+    <fields>
+        <label><!-- Removed --></label>
+        <name>Removed__c</name>
+    </fields>
+    <fields>
+        <label><!-- Start Date --></label>
+        <name>Start_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- isCopied --></label>
+        <name>isCopied__c</name>
+    </fields>
+    <layouts>
+        <layout>FCC Provider Assistants Layout</layout>
+        <sections>
+            <label><!-- Affiliation Period --></label>
+            <section>Affiliation Period</section>
+        </sections>
+        <sections>
+            <label><!-- Assistant Information --></label>
+            <section>Assistant Information</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- Only EEC users above/equal to &apos;Supervisor&apos; role can select &apos;Family Child Care&apos; record type. Otherwise only use &apos;FCC Assistant&apos; record type. --></errorMessage>
+        <name>Insufficient_privileges_to_select_FCC</name>
+    </validationRules>
+</CustomObjectTranslation>

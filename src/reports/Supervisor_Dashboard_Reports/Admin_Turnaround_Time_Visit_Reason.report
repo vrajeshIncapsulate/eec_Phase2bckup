@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <aggregates>
+        <calculatedFormula>Inspection__c.Admin_Turnaround_Time_for_Visits_Days__c:AVG</calculatedFormula>
+        <datatype>number</datatype>
+        <developerName>FORMULA1</developerName>
+        <downGroupingContext>Inspection__c$Type_of_Visit__c</downGroupingContext>
+        <isActive>true</isActive>
+        <isCrossBlock>false</isCrossBlock>
+        <masterLabel>Average Admin Turnaround Time</masterLabel>
+        <scale>2</scale>
+    </aggregates>
+    <chart>
+        <backgroundColor1>#FFFFFF</backgroundColor1>
+        <backgroundColor2>#FFFFFF</backgroundColor2>
+        <backgroundFadeDir>Diagonal</backgroundFadeDir>
+        <chartSummaries>
+            <axisBinding>y</axisBinding>
+            <column>FORMULA1</column>
+        </chartSummaries>
+        <chartType>VerticalColumn</chartType>
+        <enableHoverLabels>false</enableHoverLabels>
+        <expandOthers>true</expandOthers>
+        <groupingColumn>Inspection__c$Type_of_Visit__c</groupingColumn>
+        <location>CHART_TOP</location>
+        <showAxisLabels>true</showAxisLabels>
+        <showPercentage>false</showPercentage>
+        <showTotal>false</showTotal>
+        <showValues>false</showValues>
+        <size>Medium</size>
+        <summaryAxisRange>Auto</summaryAxisRange>
+        <textColor>#000000</textColor>
+        <textSize>12</textSize>
+        <titleColor>#000000</titleColor>
+        <titleSize>18</titleSize>
+    </chart>
+    <columns>
+        <field>Inspection__c$Admin_Turnaround_Time_for_Visits_Days__c</field>
+    </columns>
+    <filter>
+        <booleanFilter>1 AND 2 AND (3 OR 4 OR 5)</booleanFilter>
+        <criteriaItems>
+            <column>Inspection__c$Admin_Turnaround_Time_for_Visits_Days__c</column>
+            <operator>notEqual</operator>
+            <value></value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Inspection__c$Date_and_Time_of_Published_on_the_Portal__c</column>
+            <operator>greaterOrEqual</operator>
+            <value>LAST_N_MONTHS:12</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Inspection__c$Provider_Type__c</column>
+            <operator>equals</operator>
+            <value>Family Child Care</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Inspection__c$Provider_Type__c</column>
+            <operator>equals</operator>
+            <value>Small Group</value>
+        </criteriaItems>
+        <criteriaItems>
+            <column>Inspection__c$Provider_Type__c</column>
+            <operator>equals</operator>
+            <value>Large Group</value>
+        </criteriaItems>
+    </filter>
+    <format>Summary</format>
+    <groupingsDown>
+        <dateGranularity>Day</dateGranularity>
+        <field>Inspection__c$Type_of_Visit__c</field>
+        <sortOrder>Asc</sortOrder>
+    </groupingsDown>
+    <name>Admin Turnaround Time Visit Reason</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Vist_Visit_Types_Providers_Regions__c</reportType>
+    <scope>organization</scope>
+    <showDetails>false</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Inspection__c$Date_and_Time_of_Published_on_the_Portal__c</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

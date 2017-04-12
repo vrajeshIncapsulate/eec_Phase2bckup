@@ -1,0 +1,1386 @@
+<apex:page standardcontroller="Inspection__c" applyhtmltag="true"
+           doctype="html-5.0" showheader="false" standardstylesheets="false"
+           extensions="InspectVisitModeController" id="InspectVisitModeId" 
+           sidebar="false" manifest="/apex/CacheManifest" action="{!lockVisitMode}">
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.RecordType.Name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Start_Time__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.End_Time__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Status__c}" rendered="false" />  
+    
+  <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <head>
+    <c:EEC_VisitModeHeader id="pageHeader" />
+    <script src="/soap/ajax/32.0/connection.js" type="text/javascript"/>
+    <script type='text/javascript' src='/canvas/sdk/js/29.0/publisher.js'></script>  
+    <script src="/soap/ajax/32.0/apex.js" type="text/javascript"/>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/Clamp.js/0.5.1/clamp.min.js"></script>
+    <style>
+      html, body {
+                height: 100%; 
+                width: 100%;
+                overflow: auto; 
+                -webkit-overflow-scrolling: touch;
+      }     
+      .message {
+        text-align: center;
+      }
+
+      #bp-modal-messages {
+        margin-bottom: 10px;
+        display: none;
+      }
+    
+      #ba-modal-messages {
+        margin-bottom: 10px;
+        display: none;
+      }
+
+      .bp-list-panel-container {
+        display: none;
+      }
+
+      .bp-panel-button-group {
+        margin-top: 10px;
+        justify-content: flex-end;
+      }
+
+      #sidebar .sub-menu > .sub li {
+        padding-left: 14px;
+      }
+
+      #sidebar {
+        position: absolute;
+        height: auto;
+        min-height: 1024px;
+      }
+
+      .btn.active {
+        background: #68dff0;
+        color: #fff;
+      }
+
+      .not-visible{display : none;}
+      .edit-container{
+          margin-left : -15px;
+          margin-right : -15px;
+          margin-top: 50px;
+          padding : 20px;
+          margin-bottom : 10px;
+          background-color : #fff;
+          text-align : left;
+      }
+      .btn-container{
+          text-align : center
+      }
+      .desc-group {
+          margin-bottom: 2px;
+      }
+      .result-radio {
+        display: inline-block;
+        -webkit-transform: scale(1.1);
+        -moz-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+
+      input[type="radio"], input[type="checkbox"] {
+        margin: 7px 11px 0;
+      }
+
+      .twitter-panel {
+        overflow: hidden;
+      }
+       .panel-default > .panel-heading {
+            padding: 3px 0px;
+        }
+        .panel-heading h4{
+            color: #797979;
+            background: #f2f2f2;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .twitter-panel i.fa-paperclip {
+          margin-top: -5px;
+          position: relative;
+          left: -10px;
+          font-size: 25px;
+        }
+
+        .twitter-panel p {
+          margin-bottom: 0;
+        }
+
+      .fa-navicon:before, .fa-reorder:before, .fa-bars:before {
+        color: #fff;
+      }
+
+      .result-radio td {
+        float: left;
+      }
+
+      .modal .modal-body {
+        max-height: 700px;
+        overflow-y: auto;
+      }
+      .logo.back-btn{
+        text-transform: capitalize; 
+        padding-right: 10px;
+      }  
+
+      @media only screen and (min-width: 0px) and (max-width: 959px) {
+        #sidebar {
+          min-height: 1px;
+        }
+
+        .wrapper {
+          padding-left: 20px !important;
+        }
+        .sidebar-menu{
+            
+        }
+        .twitter-panel {
+            height : 300px;
+        }
+        .goto-lead{
+            font-size:0.85em;
+        }
+      }
+      @media only screen and (min-width: 768px) {
+        .r-float{
+            float:right;
+        }
+      
+      }  
+      
+      .svg-vbp-button path {
+        fill: #54698d;
+      }
+        
+      .slds-theme--eec {
+        color: #fff;
+        background-color: #2a4158;
+        margin: 0px 10px 15px 10px;
+        min-height: 250px;  
+      }
+    </style>
+    <script language="JavaScript" type="text/javascript">
+            $(document).ready(function() {
+                var container = $('#Container');
+                var filterStr = "{!activeFilter}";
+
+                $('#alert').hide();
+                $('#btnSaveReason').click(function(event) {
+                var reason = $('#reason').val();
+                    if(reason != ''){
+                        $('#alert').hide();
+                        saveReason(reason);
+                    }
+                    else{
+                        $('#alert').html('<strong>You need to fill the reason if you want to abandon the visit.</strong>');
+                        $('#alert').show();
+                    }
+                });
+
+                if (typeof filterStr != "undefined" && filterStr != '' && filterStr != 'all') {
+                  container.mixItUp({
+                    load: {
+                      filter: '.' + filterStr
+                    }
+                  });
+                } else {
+                  container.mixItUp();
+                }
+
+                $('[id*=attachments]').fileinput({
+                    showRemove: false,
+                    showUpload: false
+                });
+
+                $('#non-assessed').html($('.non-assessed').length);
+                $('#Non-Compliant').html($('.Non-Compliant').length);
+                
+                $('#Not-Assessed').html($('.not-assessed').length);
+                $('#Compliant').html($('.Compliant').length);
+                $('#TechAssistance').html($('.TechAssistance').length);
+                $('#Observation').html($('.Observation').length);
+                $('#KeyIndicators').html($('.KeyIndicators').length);
+
+                $('#all').html($('.twitter-panel').length);
+                $('#all-category').html($('.twitter-panel').length);
+                $('#non-selected-one').html($('.non-selected').length);
+                $('#non-selected-two').html($('.no-category').length);
+
+                var brc = $('.BRC').length;
+                if(brc == 0)
+                    $('#brc').parent().addClass('not-visible');
+                else
+                    $('#brc').html(brc);
+
+                var cur = $('.Curriculum').length;
+                if(cur == 0)
+                    $('#curriculum').parent().addClass('not-visible');
+                else
+                    $('#curriculum').html($('.Curriculum').length);
+                if($('.Administration').length == 0)
+                    $('#administration').parent().addClass('not-visible');
+                else
+                    $('#administration').html($('.Administration').length);
+                if($('.Routine').length == 0)
+                    $('#routine').parent().addClass('not-visible');
+                else
+                    $('#routine').html($('.Routine').length);
+                if($('.Equipments').length == 0)
+                    $('#equipments').parent().addClass('not-visible');
+                else
+                    $('#equipments').html($('.Equipments').length);
+
+                if($('.Classroom').length == 0)
+                    $('#classroom').parent().addClass('not-visible');
+                else
+                    $('#classroom').html($('.Classroom').length);
+
+                if($('.Family').length == 0)
+                    $('#family').parent().addClass('not-visible');
+                else
+                    $('#family').html($('.Family').length);
+
+                if($('.Health').length == 0)
+                    $('#health').parent().addClass('not-visible');
+                else
+                    $('#infection').html($('.Health').length);
+
+                if($('.Infection').length == 0)
+                    $('#infection').parent().addClass('not-visible');
+                else
+                    $('#infection').html($('.Infection').length);
+
+                if($('.Inspections').length == 0)
+                    $('#inspection').parent().addClass('not-visible');
+                else
+                    $('#inspection').html($('.Inspections').length);
+
+                if($('.Interactions').length == 0)
+                    $('#interaction').parent().addClass('not-visible');
+                else
+                    $('#interaction').html($('.Interactions').length);
+
+                if($('.Preparation ').length == 0)
+                    $('#meal').parent().addClass('not-visible');
+                else
+                    $('#meal').html($('.Preparation ').length);
+
+                if($('.Health').length == 0)
+                    $('#health').parent().addClass('not-visible');
+                else
+                    $('#health').html($('.Health').length);
+
+                if($('.Medication').length == 0)
+                    $('#medication').parent().addClass('not-visible');
+                else
+                    $('#medication').html($('.Medication').length);
+
+                if($('.Space').length == 0)
+                    $('#indoors').parent().addClass('not-visible');
+                else
+                    $('#indoors').html($('.Space').length);
+
+                if($('.Hygiene').length == 0)
+                    $('#hygiene').parent().addClass('not-visible');
+                else
+                    $('#hygiene').html($('.Hygiene').length);
+
+                if($('.Outdoors').length == 0)
+                    $('#physical').parent().addClass('not-visible');
+                else
+                    $('#physical').html($('.Outdoors').length);
+
+                if($('.Postings').length == 0)
+                    $('#posting').parent().addClass('not-visible');
+                else
+                    $('#posting').html($('.Postings').length);
+
+                if($('.Postings').length == 0)
+                    $('#posting').parent().addClass('not-visible');
+                else
+                    $('#posting').html($('.Postings').length);
+
+                if($('.Progress').length == 0)
+                    $('#progress').parent().addClass('not-visible');
+                else
+                    $('#progress').html($('.Progress').length);
+
+                if($('.Review').length == 0)
+                    $('#review').parent().addClass('not-visible');
+                else
+                    $('#review').html($('.Review').length);
+
+                if($('.Quiet').length == 0)
+                    $('#quiet').parent().addClass('not-visible');
+                else
+                    $('#quiet').html($('.Quiet').length);
+
+                if($('.Staff').length == 0)
+                    $('#staff').parent().addClass('not-visible');
+                else
+                    $('#staff').html($('.Staff').length);
+
+                if($('.Supervision').length == 0)
+                    $('#supervision').parent().addClass('not-visible');
+                else
+                    $('#supervision').html($('.Supervision').length);
+
+                if($('.Toileting').length == 0)
+                    $('#handwashing').parent().addClass('not-visible');
+                else
+                    $('#handwashing').html($('.Toileting').length);
+
+                if($('.Transportation').length == 0)
+                    $('#trans').parent().addClass('not-visible');
+                else
+                    $('#trans').html($('.Transportation').length);
+
+                if($('.Water').length == 0)
+                    $('#water').parent().addClass('not-visible');
+                else
+                    $('#water').html($('.Water').length);
+
+            });
+
+            function getData()
+            {
+                getItems();
+            }
+            function createNewItem()
+            {
+                var itemID = '{!Inspection__c.Id}';
+                if((typeof sforce.one != 'undefined') && (sforce.one != null)) {
+                    sforce.one.navigateToRelatedList("Inspection_Item__r", '{!Inspection__c.Id}');
+                }
+            }
+            function regulationView(id)
+            {
+               sforce.one.navigateToURL('/apex/EEC_RegulationViewTabletVersion?id=' + id);
+            }
+
+            function toggleSideBar()
+            {
+                if ($('#sidebar > ul').is(":visible") === true) {
+                    $('#main-content').css({
+                        'margin-left': '0px',
+                    });
+                    $('.wrapper').css({
+                        'padding-left': '60px',
+                    });
+                    $('#sidebar').css({
+                        'margin-left': '-300px'
+                    });
+                    $('#sidebar > ul').hide();
+                    $("#container").addClass("sidebar-closed");
+                } else {
+                    $('#main-content').css({
+                        'margin-left': '300px',
+                    });
+                     $('.wrapper').css({
+                        'padding-left': '10px',
+                    });
+                    $('#sidebar > ul').show();
+                    $('#sidebar').css({
+                        'margin-left': '0',
+                    });
+                    $("#container").removeClass("sidebar-closed");
+                }
+            }
+            function goBack(){
+                if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+                    sforce.one.navigateToSObject('{!Inspection__c.Id}','detail'); 
+                }
+            }
+            function navigateToDetail(){
+              sforce.one.navigateToSObject('{!Inspection__c.Id}', 'detail');
+            }
+            $('.modal').on('hidden.bs.modal', function (e) {
+              alert('hide modal');
+              alert(e);  
+            });
+            function toggleDetail(iName){
+              $('#' + iName).toggle();
+            }
+    </script>
+  </head>
+  <body>
+    <apex:outputtext value="{!Inspection__c.Abandon_Tool_Reason__c}" rendered="false" />
+    <section id="container">
+      <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+          <div class="fa fa-bars tooltips" onclick="toggleSideBar();" data-placement="right" id="toggle-btn"></div>
+        </div>
+        <a class="logo centered"><b>Visit Mode</b></a>
+        <a class="logo pull-right back-btn" href="javascript:;" onclick="goBack();">
+            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+            Back
+        </a>  
+      </header>
+
+
+      <aside>
+        <div id="sidebar" class="nav-collapse ">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu" id="nav-accordion">
+            <li class="sub-menu" id="refreshFilterMsg" style="padding-top: 1em; display: none; color: #FFFFFF; font-weight: bold;">Refresh page to update filter counts.</li>
+            <li class="sub-menu">
+              <a class="{!IF(resultFilterActive, 'active', '')}" href="javascript:;" onclick="$('.bp-list-panel-container').hide(); $('.visit-items-panel').show();$('.visit-item-button-only').show();$('.main-title').html('List of Visit Items');">
+                <i class="fa fa-cogs"></i>
+                <span>Result Filter</span>
+              </a>
+              <ul class="sub">
+                <li><span class="btn filter active" data-filter="all">All <span class="badge bg-success" id="all"></span></span></li>
+                <li><span class="btn filter" data-filter=".non-selected">Non-Selected <span class="badge bg-success" id="non-selected-one"></span></span></li>
+                <li><span class="btn filter" data-filter=".KeyIndicators">Key Indicators <span class="badge bg-success" id="KeyIndicators"></span></span></li>
+                <li><span class="btn filter" data-filter=".non-assessed">Non-Assessed Items <span class="badge bg-success" id="non-assessed"></span></span></li>
+                <li><span class="btn filter" data-filter=".Non-Compliant">Non-Compliant Items <span class="badge bg-success" id="Non-Compliant"></span></span></li>
+                <li><span class="btn filter" data-filter=".not-assessed">Not Assessed Items <span class="badge bg-success" id="Not-Assessed"></span></span></li>
+                <li><span class="btn filter" data-filter=".Compliant">Compliant Items <span class="badge bg-success" id="Compliant"></span></span></li>
+                <li><span class="btn filter" data-filter=".TechAssistance">Technical Assistance Provided <span class="badge bg-success" id="TechAssistance"></span></span></li>
+                <li><span class="btn filter" data-filter=".Observation">Observations Provided <span class="badge bg-success" id="Observation"></span></span></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a class="{!IF(!resultFilterActive, 'active', '')}" href="javascript:;" onclick="$('.bp-list-panel-container').hide(); $('.visit-items-panel').show();$('.visit-item-button-only').show();$('.main-title').html('List of Visit Items');">
+                <i class="fa fa-cogs"></i>
+                <span>Domain Filter</span>
+              </a>
+              <ul class="sub">
+                <li><span class="btn filter active" data-filter="all">All <span class="badge bg-success" id="all-category"></span></span></li>
+                <li><span class="btn filter" data-filter=".no-category">No Category <span class="badge bg-success" id="non-selected-two"></span></span></li>
+                <li><span class="btn filter" data-filter=".Administration">Administration <span class="badge bg-success" id="administration"></span></span></li>
+                <li><span class="btn filter" data-filter=".BRC">BRC Information <span class="badge bg-success" id="brc"></span></span></li>
+                <li><span class="btn filter" data-filter=".Classroom">Classroom <span class="badge bg-success" id="classroom"></span></span></li>
+                <li><span class="btn filter" data-filter=".Curriculum">Curriculum and Activities <span class="badge bg-success" id="curriculum"></span></span></li>
+                <li><span class="btn filter" data-filter=".Routine">Routine and Activities <span class="badge bg-success" id="routine"></span></span></li>
+                <li><span class="btn filter" data-filter=".Equipments">Equipments and Materials <span class="badge bg-success" id="equipments"></span></span></li>
+                <li><span class="btn filter" data-filter=".Family">Family Involvement <span class="badge bg-success" id="family"></span></span></li>
+                <li><span class="btn filter" data-filter=".Health">Health and Safety <span class="badge bg-success" id="health"></span></span></li>
+                <li><span class="btn filter" data-filter=".Infection">Infection Control <span class="badge bg-success" id="infection"></span></span></li>
+                <li><span class="btn filter" data-filter=".Inspections">Inspections <span class="badge bg-success" id="inspection"></span></span></li>
+                <li><span class="btn filter" data-filter=".Interactions">Interactions <span class="badge bg-success" id="interaction"></span></span></li>
+                <li><span class="btn filter" data-filter=".Preparation">Mealtime, Food, Food Preparation <span class="badge bg-success" id="meal"></span></span></li>
+                <li><span class="btn filter" data-filter=".Medication">Medication <span class="badge bg-success" id="medication"></span></span></li>
+                <li><span class="btn filter" data-filter=".Hygiene">Personal Hygiene <span class="badge bg-success" id="hygiene"></span></span></li>
+                <li><span class="btn filter" data-filter=".Space">Physical Space (Indoor &amp; Outdoor) <span class="badge bg-success" id="indoors"></span></span></li>
+                <li><span class="btn filter" data-filter=".Outdoors">Physical Facility - Outdoors <span class="badge bg-success" id="physical"></span></span></li>
+                <li><span class="btn filter" data-filter=".Postings">Postings <span class="badge bg-success" id="posting"></span></span></li>
+                <li><span class="btn filter" data-filter=".Progress">Progress Reports <span class="badge bg-success" id="progress"></span></span></li>
+                <li><span class="btn filter" data-filter=".Review">Review of Written Materials <span class="badge bg-success" id="review"></span></span></li>
+                <li><span class="btn filter" data-filter=".Quiet">Sleep, Rest, Quiet Activities <span class="badge bg-success" id="quiet"></span></span></li>
+                <li><span class="btn filter" data-filter=".Staff">Staff and Educators <span class="badge bg-success" id="staff"></span></span></li>
+                <li><span class="btn filter" data-filter=".Supervision">Supervision <span class="badge bg-success" id="supervision"></span></span></li>
+                <li><span class="btn filter" data-filter=".Toileting">Toileting/Diapering/Handwashing <span class="badge bg-success" id="handwashing"></span></span></li>
+                <li><span class="btn filter" data-filter=".Transportation">Transportation <span class="badge bg-success" id="trans"></span></span></li>
+                <li><span class="btn filter" data-filter=".Water">Water and Safety <span class="badge bg-success" id="water"></span></span></li>
+              </ul>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="javascript:$('.bp-list-panel-container').show(); $('.visit-items-panel').hide();$('.visit-item-button-only').hide();$('.main-title').html('List of Best Practices');">
+                <i class="fa fa-cogs"></i>
+                <span>Best Practices</span>
+              </a>
+            </li>
+            <li class="sub-menu">
+              <a class="" href="#">
+                <i class="fa fa-paperclip"></i>
+                <span >Current Tool: <b>{!ToolName}</b></span>
+              </a>
+            </li>
+          </ul>
+          
+          <!-- sidebar menu end-->
+        </div>
+      </aside>
+      <apex:form id="mainForm" enctype="multipart/form-data">
+              <!-- Best Practice Modal -->
+              <div class="slds modal fade" id="bestPractice" role="dialog">
+                <apex:outputpanel id="activateSldsModelBPContainer" layout="block">
+                  <apex:outputpanel >
+                    <div id="slds-modal-bp" aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                      <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                          <h2 class="slds-text-heading--medium slds-modal-bp-header-text">Add a New Best Practice</h2>
+                          <button class="slds-button slds-button--icon-inverse slds-modal__close" data-dismiss="modal" type="button" onclick="refreshBPModal();">
+                            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                              <use xlink:href="{!URLFOR($Resource.SLDS0101, '/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                          </button>
+                        </div>
+                        <div class="slds-modal__content">
+                          <div id="bp-modal-messages">
+                            <div class="slds-box">
+                              <p class="message"></p>
+                            </div>
+                          </div>
+                          <!-- Domain Section -->
+                          <div class="slds-model-domain-container">
+                            <label for="slds-model-domain-dropdown" class="control-label">Domain</label>
+                            <apex:selectlist id="slds-model-domain-dropdown" size="1" styleclass="form-control slds-model-domain-dropdown" onchange="retrieveBestPracticeListForDomain($(this).val())">
+                              <apex:selectoptions value="{!allDomainList}" />
+                            </apex:selectlist>
+                          </div>
+                          <!-- Best Practice Section -->
+                          <apex:outputpanel id="sldsModalBPContainer">
+                            <apex:outputpanel styleclass="slds-modal-bp-content" id="sldsModalBPContent" layout="block" rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}" style="margin-top: 10px;">
+                              <label for="slds-model-bp-dropdown" class="control-label">Best Practices</label>
+                              <apex:selectlist id="slds-model-bp-dropdown" size="1" styleclass="form-control slds-model-bp-dropdown">
+                                <apex:selectoptions value="{!activeDomainBPList}" />
+                              </apex:selectlist>
+                            </apex:outputpanel>
+                            <!-- Best Practice Observations Section -->
+                            <apex:outputpanel styleclass="slds-modal-bp-observation-container" style="margin-top: 10px;" layout="block" id="sldsModalBPObservations" rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}">
+                              <label for="slds-modal-bp-practice-observation" class="control-label">Best Practice Observation</label>
+                              <input id="slds-modal-bp-practice-observation" class="form-control slds-modal-bp-practice-observation" type="text" />
+                            </apex:outputpanel>
+                            <apex:outputpanel rendered="{!activeDomainBPList == null || (activeDomainBPList != null && activeDomainBPList.size == 0)}" layout="block" style="text-align: center; margin-top: 10px;">
+                              <p>No Best Practices available for this domain.</p>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                        <apex:outputpanel id="slds-modal-footer" styleclass="slds-modal__footer">
+                          <div class="slds-x-small-buttons--horizontal">
+                            <button class="slds-button slds-button--neutral" data-dismiss="modal" type="button" onclick="refreshBPModal();">Cancel</button>                            
+                            <apex:outputpanel rendered="{!activeDomainBPList != null && activeDomainBPList.size > 0}">
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" type="button" onclick="addNewBP($(this));">Add</button>
+                            </apex:outputpanel>
+                            <apex:outputpanel rendered="{!activeDomainBPList == null || (activeDomainBPList != null && activeDomainBPList.size == 0)}">
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" type="button" disabled="true">Add</button>
+                            </apex:outputpanel>
+                          </div>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                  </apex:outputpanel>
+                </apex:outputpanel>
+              </div>
+              <!-- Best Practice Modal -->
+        <section id="main-content">
+          <section class="wrapper site-min-height">
+            <h3><i class="fa fa-angle-right"></i> List of Visit Items</h3>
+              <div class="row">
+                <div class="col-sm-3">
+                  <button type="button" data-toggle="modal" data-target="#bulkAssess" class="btn btn-info btn-block" onClick="refreshBPModal();bulkAssess();">Bulk Assess</button> 
+                </div>
+                <div class="col-sm-3 text-center" >
+                  <!-- <button type="button" onclick="markCompliant();" class="btn btn-info btn-block">Mark Compliant</button> -->
+                </div>
+                <div class="col-sm-3 text-center">
+                  <button type="button" id="refreshPageButtonTop" style="display: none;" class="btn btn-info btn-block" onClick="prepareLocation();" >Refresh</button> 
+                </div>
+                <div class="col-sm-3">
+                  <button type="button" onClick="saveAndClose();" class="btn btn-info btn-block r-float">Save &amp; Close</button>
+                </div>
+              </div>
+              <div class="row" style="padding-top: 5px;">
+                <div class="col-sm-3">
+                  <a href="javascript:sforce.one.createRecord('Inspection_Item__c', '{!additionalItemRtId}');" class="btn btn-info btn-block" id="addNewItemButton">Add New Visit Items</a>
+                </div>
+                <div class="col-sm-3 text-center">
+                  <button type="button" data-toggle="modal" data-target="#bestPractice" class="btn btn-info btn-block">New Best Practice</button>
+                </div>
+                <div class="col-sm-3 text-center">
+                  <button type="button" onclick="startVisitTimer();" class="btn btn-info btn-block {!IF(Inspection__c.Start_Time__c == null,'','not-visible')}">Start Timer</button>
+                  <button id="btnEnd"  type="button" onclick="endVisitTimer();" class="btn btn-info btn-block {!IF(Inspection__c.Start_Time__c != null,IF(Inspection__c.End_Time__c == null ,'', 'not-visible'),'not-visible')}">End Timer</button>
+                </div>
+                <div class="col-sm-3">
+                  <apex:outputpanel rendered="{!IF(iiWrapperList.size > 0 && Inspection__c.Abandon_Tool_Reason__c == null,true,false)}">
+                    <button id="btnSaveAb" data-toggle="modal" data-target="#myModal" type="button" class="btn btn-info btn-block r-float">Abandon Visit Tool</button>
+                  </apex:outputpanel>
+                </div>
+              </div>
+              
+              
+        <!------ Bulk Assess -------------------------------->
+         <div class="slds modal fade" id="bulkAssess" role="dialog">
+                <apex:outputpanel id="activateSldsModelBAContainer" layout="block">
+                  <apex:outputpanel >
+                    <div id="slds-modal-bp" aria-hidden="false" role="dialog" class="slds-modal slds-fade-in-open">
+                      <div class="slds-modal__container">
+                        <div class="slds-modal__header">
+                          <h2 class="slds-text-heading--medium slds-modal-bp-header-text">Bulk Assess of Visit Items</h2>
+                          <button class="slds-button slds-button--icon-inverse slds-modal__close" data-dismiss="modal" type="button" onclick="refreshBPModal();">
+                            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                              <use xlink:href="{!URLFOR($Resource.SLDS0101, '/assets/icons/action-sprite/svg/symbols.svg#close')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                          </button>
+                        </div>
+                        <div class="slds-modal__content">
+                          <div id="bp-modal-messages">
+                            <div class="slds-box">
+                              <p class="message"></p>
+                            </div>
+                          </div>
+                        
+                          <!-- Domain Section -->
+                          <div class="slds-model-domain-container">
+                            <p>This functionality allows you to edit in bulk all visit items that are currently filtered in your visit mode view. All items that do not currently have a result (compliant, non compliant or other) will have their result value changed to the selection made below. If you select "Not Applicable" or "Not Assessed" then you will be required to add an Observation.</p><br/>
+                            <label for="slds-model-domain-dropdown" class="control-label">Mark all items filtered and currently without result as</label>
+                            
+                            <apex:selectList size="1" id="bulkAsVal" value="{!bulkPickVal}" styleclass="form-control slds-model-domain-dropdown  bulkAsVal">
+                                <apex:selectoption itemvalue=""/>
+                                <apex:selectoption id="compliant" itemvalue="Compliant"></apex:selectoption>
+                                <!-- <apex:selectoption id="non-compliant" itemvalue="Non-Compliant">&nbsp;&nbsp;</apex:selectoption> -->
+                                <apex:selectoption id="not-applicable" itemvalue="Not Applicable">&nbsp;&nbsp;</apex:selectoption>
+                                <!-- <apex:selectoption id="abandoned" itemvalue="Non Assessed (tool abandoned)" itemdisabled="true">&nbsp;&nbsp;</apex:selectoption> -->
+                                <apex:selectoption id="not-assessed" itemvalue="Not Assessed">&nbsp;&nbsp;</apex:selectoption>
+                          </apex:selectList>
+                            
+                          
+                           <apex:outputpanel styleclass="slds-modal-bp-observation-container" style="margin-top: 10px;" layout="block" id="sldsModalBAObservations" >
+                              <label for="slds-modal-bp-practice-observation" class="control-label">Observation</label>
+                            
+                              <apex:inputText value="{!bulkObservation}" id="slds-modal-bp-practice-observation-bulkObsText" styleclass="form-control slds-modal-bp-practice-observation" />
+                            </apex:outputpanel>
+                          </div>
+                        <script>
+                            $('.bulkAsVal').change(function() { 
+                                var groupName = $(this).attr('id');
+                                var theRadioButtonSet = document.getElementsByName(groupName);
+                                var selectList = document.getElementById(groupName);
+                                
+                                var selectedVal = selectList.options[selectList.selectedIndex].value;
+                                
+                                var flag = false;
+                                
+                                if(selectedVal =='Non-Compliant' || selectedVal =='Not Assessed'||selectedVal =='Not Applicable'){
+                                    flag=true;
+                                
+                                }
+                               
+                                if(flag){ 
+                                    //$('.inspect_visitmode').parsley().destroy();
+                                    $('.bulkObsText').attr('data-parsley-required', 'true');
+                                    $('.inspect_visitmode').parsley().validate();
+                                }
+                                else{
+                                    $('.bulkObsText').removeAttr('data-parsley-required');
+                                    $('.inspect_visitmode').parsley().validate();
+                                }
+                            });
+                        </script> 
+                         </div>
+                       <apex:outputpanel id="slds-modal-ba-footer" styleclass="slds-modal__footer">
+                          <div class="slds-x-small-buttons--horizontal">
+                            <button class="slds-button slds-button--neutral" data-dismiss="modal" type="button" onclick="refreshBPModal();">Cancel</button>                            
+                            
+                            <apex:outputpanel >
+                              <button class="slds-button-bp-submit slds-button slds-button--neutral slds-button--brand" onclick="addNewBA($(this));"  type="button">Submit</button>
+                               <apex:actionfunction name="retrieveBulkAssess" oncomplete="$('#bulkAssess').modal().hide();prepareLocation();" action="{!markBulkAssessForDomain}"  >
+                                    <apex:param value="" name="domain" assignTo="{!filterCriteria}"/>
+                                </apex:actionfunction>
+                            </apex:outputpanel>
+                          </div>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+                    <div class="slds-backdrop slds-backdrop--open"></div>
+                  </apex:outputpanel>
+                </apex:outputpanel>
+         </div> 
+        <!------ Bulk Assess --------------------------------> 
+        <!-- Abandon Modal -->
+              <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Abandon Visit Tool</h4>
+                    </div>
+                    <div class="modal-body">
+                      <div id="alert" class="alert alert-danger fade in" tabindex="1">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+                      </div>
+                      <div class="form-group">
+                        <label for="message-text" class="control-label">Abandon Reason: <span class="required">*</span></label>
+                        <textarea rows="2" id="reason" class="form-control text-area" html-placeholder="Abandon Reason"></textarea>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="btn btn-primary" id="btnSaveReason">Abandon </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            <apex:messages style="color: #FF0000; font-weight: bold;" />
+            <apex:outputtext value="{!Inspection__c.Id}" rendered="false" />
+            <apex:outputtext value="{!Inspection__c.name}" rendered="false" />
+            <apex:outputtext value="{!Inspection__c.Provider_No__c}" rendered="false" />
+            <apex:outputtext value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+            <apex:outputtext value="{!Inspection__c.Can_be_Edited__c}" rendered="false" /><br /><br />
+            <!-- Best Practice Panel -->
+            <apex:outputPanel styleClass="slds bp-list-panel-container" id="bpListPanelContainer" layout="block">
+              <apex:outputpanel layout="block" styleclass="slds-grid slds-wrap">
+                <apex:repeat value="{!visitBPList}" var="bp">
+                  <div class="slds-col slds-size--1-of-3">
+                    <div class="slds-box slds-theme--shade slds-theme--eec" style="color: #fff; background-color: #2a4158; margin: 0px 10px 15px 10px;">
+                      <p><strong>Best Practice</strong></p>
+                      <hr style="margin: 5px 0;" />
+                      <p><strong>Guidance:</strong> {!bp.Best_Practice_Guidance__c}</p>
+                      <p><strong>Observation:</strong> {!bp.Observation__c}</p>
+                      <div class="slds-button-group bp-panel-button-group" role="group">
+                        <button onclick="switchModalToEditMode($(this));" class="slds-button slds-button--icon-border-filled slds-toggle-visibility" type="button" data-id="{!bp.Id}" data-domain="{!bp.Best_Practice__r.Domain__c}" data-observation="{!bp.Observation__c}" data-bp-guidance="{!bp.Best_Practice__c}" data-toggle="modal" data-target="#bestPractice">
+                          <apex:image url="{!URLFOR($Resource.SLDS0101, '/assets/icons/action/edit.svg')}" styleclass="svg svg-vbp-button" />
+                          <span class="slds-assistive-text">Edit</span>
+                        </button> 
+                        <button class="slds-button slds-button--icon-border-filled slds-toggle-visibility" type="button" data-id="{!bp.Id}" onclick="deleteSelectedVBP($(this));">
+                          <apex:image url="{!URLFOR($Resource.SLDS0101, '/assets/icons/action/delete.svg')}" styleclass="svg svg-vbp-button slds-button__icon" />
+                          <span class="slds-assistive-text">Delete</span>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </apex:repeat>
+              </apex:outputpanel>
+              <apex:outputpanel rendered="{!visitBPList.size == 0}">
+                <p>No best practices currenlty saved on this Visit.</p>
+              </apex:outputpanel>
+            </apex:outputPanel>
+            <!-- Visit Items Panel -->
+            <div class="row mt visit-items-panel">
+              <div class="col-lg-12">
+                <div class="row" id="Container">
+                  <apex:outputpanel styleclass="{!IF(iiWrapperList.size > 0 , '' , 'not-visible')}">
+                    <apex:variable var="wrapperIndex" value="{!0}" />
+                    <apex:repeat value="{!iiWrapperList}" var="ii">
+                      <div id="{!ii.Id}" class="col-lg-12 col-md-12 col-sm-12 mb mix {!IF(ii.iCategory == null , 'no-category', '' )}
+                                                              {!IF(ii.iCategory == 'Toileting/Diapering/Handwashing' , 'Toileting' , ii.iCategory)}
+                                                              {!IF(ii.iCategory == 'Physical Facility - Indoors' , 'Indoors' , IF(ii.iCategory == 'Physical Facility - Outdoors' , 'Outdoors' , ii.iCategory))}
+                                                              {!ii.result} {!IF(ii.observations != null, 'Observation', '')}
+                                                              {!IF(ii.techAssistance != null, 'TechAssistance', '')}
+                                                              {!IF(ii.Keyindicator == true, 'KeyIndicators', '')}
+                                                              {!IF(ii.nonAssessed || ii.result == 'Non Assessed (tool abandoned)', 'non-assessed', '')}
+                                                              {!IF(ii.result == 'Not Assessed' , 'not-assessed', '')}
+                                                              {!IF(ii.result == null && !ii.nonAssessed , 'non-selected', '')}
+                                                              {!IF(ii.result == null && ii.nonAssessed , 'complete-non-assessed', '')}">
+                        <div class="twitter-panel {!IF(ii.keyindicator,'KeyIndicator',IF(ii.nonAssessed || ii.result == 'Non Assessed (tool abandoned)', 'non-assessed-check','nonAssessed'))}"> 
+                        
+                          <br />
+                          <div class="user col-lg-3 col-md-3 col-sm-3 col-xs-3" name="{!ii.Name}">
+                            <span class="pull-left panel-label" style="{!IF(!ii.hasAttachment, 'display: none;', '')}"><i class="fa fa-paperclip"></i></span>
+                            <!--<span class="pull-left panel-label">Name: </span> -->
+                            <!--<a href="#" data-toggle="modal" data-target="#{!ii.Name}">-->
+                              <span id="badgeSpan{!ii.id}" onClick="toggleDetail('{!ii.Name}');"  class="badge {!IF(ii.result == 'Compliant', 'bg-success ' ,
+                                                                 IF(ii.result == 'Non-Compliant' , 'bg-important',
+                                                                 IF(ii.result == 'Not Applicable' , 'bg-warning','bg-info')))}
+                                                                 fa fa-pencil-square-o pull-left">
+                                {!IF(ii.result != null, ii.result,IF(ii.nonAssessed,'Non-Assessed','Non-Selected'))}
+                              </span>
+                              <span id="badgeSelected{!ii.id}" onClick="toggleDetail('{!ii.Name}');" style="display:none;" class="badge bg-primary fa fa-pencil-square-o pull-left"> Selected </span>
+                            <!--</a>-->
+                          </div>
+                          <div class="user col-lg-9 col-md-9 col-sm-9 col-xs-9" style="padding-bottom: 25px;">
+                            <!--<span class="pull-left panel-label">Item Name: </span>-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                <span class="panel-content pull-left"><apex:outputtext style="font-size: 1.5em;"  value="{!ii.itemName}" rendered="{!!ii.isDeleted}" styleclass="clampedText" /></span>
+                            </div>
+                          
+                          <!--<p class="user col-xs-12" style="padding: 0;">
+                            <span class="pull-left panel-label">Domain: </span>-->
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <span class="panel-content pull-left">
+                              <apex:outputpanel rendered="{!ii.iCategory == null}"><br /></apex:outputpanel>
+                              <apex:outputtext value="{!ii.iCategory}" rendered="{!!ii.isDeleted}" styleclass="clampedText" />
+                            </span>
+                          <!--</p>
+                          <p class="user col-xs-12" style="padding: 0;">
+                            <span class="pull-left panel-label">Associated Regulation:</span> -->
+                            <span class="panel-content pull-left">
+                              <apex:outputpanel rendered="{!ii.regulationMap == null}"><br /></apex:outputpanel>
+                              <apex:outputpanel rendered="{!!ii.isDeleted && ii.regulationMap != null}" styleclass="clampedTextLink">
+                                <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                                  <a target="_blank" href="/apex/EEC_RegulationViewTabletVersion?id={!ii.regulationMap[iiName]}">{!iiName}</a>
+                                </apex:repeat>
+                              </apex:outputpanel>
+                            </span>
+                          
+                        </div>
+                      </div>
+                      <div id="{!ii.Name}" style="display: none;" tabindex="-1" role="dialog" aria-labelledby="{!ii.Name}Label" aria-hidden="true">
+                        <div>
+                          <div style="padding: 25px 15px 15px 15px;">
+                           
+                            <div class="edit-container">
+                              <form>
+                                <div class="form-group desc-group">
+                                  <label id="lblMessage{!ii.Id}" style="color: #FF0000; font-weight: bold;"></label>
+                                </div>
+                                <div>
+                                <div class="form-group desc-group">
+                                  <label for="message-text" class="control-label">Description:&nbsp;&nbsp;</label>
+                                  <apex:outputtext value="{!ii.description}" rendered="{!!ii.isDeleted}" />
+                                </div>
+
+                                <apex:outputPanel rendered="{!ii.guidance != null}">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading collapsed" onClick="toggleDetail('{!ii.Id}-guidance');" >
+                                          <h4 class="panel-title">
+                                            <a>
+                                                Guidance:
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="{!ii.Id}-guidance" class="panel-collapse" role="tabpanel" aria-labelledby="headingThree">
+                                          <div class="panel-body"> 
+                                              {!ii.guidance}
+                                          </div>
+                                        </div>
+                                    </div> 
+                                </apex:outputPanel>  
+                                
+                                <apex:outputpanel rendered="{!!ii.isDeleted && ii.regulationMap != null}">
+                                  <label for="message-text" class="control-label">Regulations:&nbsp;&nbsp;</label>
+                                  <apex:repeat value="{!ii.regulationMap}" var="iiName">
+                                    <a target="_blank" href="/apex/EEC_RegulationViewTabletVersion?id={!ii.regulationMap[iiName]}">{!iiName}</a>
+                                  </apex:repeat>
+                                </apex:outputpanel>
+                                
+                                <div class="form-group" id="div{!ii.Id}">
+                                  <apex:outputpanel rendered="{!!ii.isDeleted}">
+                                    <apex:selectradio value="{!ii.result}" onchange="toggleRadio(this.value,'{!ii.Id}');" id="result-radio" styleclass="result-radio radio-{!ii.Id} input-group" style="padding-left:10px;" disabled="{!IF(ii.result == 'Non Assessed (tool abandoned)' || ii.nonAssessed,true,false)}">
+                                      <apex:selectoption itemlabel="Compliant" itemvalue="Compliant"></apex:selectoption>
+                                      <apex:selectoption itemvalue="Non-Compliant" itemlabel="Non-Compliant">&nbsp;&nbsp;</apex:selectoption>
+                                      <apex:selectoption itemvalue="Not Applicable" itemlabel="Not Applicable">&nbsp;&nbsp;</apex:selectoption>
+                                      <apex:selectoption itemvalue="Not Assessed" itemlabel="Not Assessed">&nbsp;&nbsp;</apex:selectoption>
+                                    </apex:selectradio>
+                                  </apex:outputpanel>
+                                </div>
+                                <div class="form-group">
+                                  <label for="message-text" class="control-label">Observations:</label>
+                                  <textarea rows="2" id="obse{!ii.Id}" class="form-control text-area" html-placeholder="Add Observation">{!ii.observations}</textarea>
+                                </div>
+                                <apex:outputpanel id="outerPanel">
+                                  <apex:outputpanel layout="block">
+                                    <div id="checkPanel{!ii.Id}" class="form-group {!IF(ii.result == 'Non-Compliant','','not-visible')}">
+                                      <label for="message-text" class="control-label">Corrected at time of visit: </label>
+                                      <apex:inputcheckbox value="{!ii.dateAI}" onclick="togglePanel(this ,'{!ii.Id}');">
+                                      </apex:inputcheckbox>
+                                    </div>
+                                    <apex:outputpanel id="cPanel">
+                                      <div id="corPanel{!ii.Id}" class="form-group {!IF(ii.dateAI,'','not-visible')}">
+                                        <input type="hidden" value="{!ii.dateAI}" id="dateAI{!ii.Id}" />
+                                        <label for="message-text" class="control-label">Corrective Actions:</label>
+                                        <textarea rows="2" id="corr{!ii.Id}" class="form-control text-area">{!ii.correctionPlan}</textarea>
+                                      </div>
+                                    </apex:outputpanel>
+                                  </apex:outputpanel>
+                                </apex:outputpanel>
+                                <div class="form-group">
+                                  <label for="message-text" class="control-label">Technical Assistance:</label>
+                                  <textarea rows="2" id="tech{!ii.Id}" class="form-control text-area" html-placeholder="Add Technical Assistance">{!ii.techAssistance}</textarea>
+                                </div>
+                                <div class="form-group">
+                                  <input id="attachments{!ii.Id}" type="file" class="form-control" />
+                                </div>
+                                <apex:outputpanel rendered="{!ii.itemBestPracticesOptions != null && ii.itemBestPracticesOptions.size > 0}">
+                                  <hr />
+                                  <div class="best-practices-container">
+                                    <label class="success-label col-xs-12" style="color: green; text-align: center; display: none;">Best Practice Entry Saved</label>
+                                    <div class="bp-dropdown-container">
+                                      <label for="bestPracticeDropdown" class="control-label">Observed Best Practice</label>
+                                      <apex:selectlist id="bp-dropdown" size="1" styleclass="form-control bp-dropdown" onchange="showAdditionalInformation($(this));">
+                                        <apex:selectoptions value="{!ii.itemBestPracticesOptions}" />
+                                      </apex:selectlist>
+                                    </div>
+                                    <div class="bp-observation-container" style="margin-top: 10px; display: none;">
+                                      <label for="bp-practice-observation" class="control-label">Best Practice Observation</label>
+                                      <input id="bp-practice-observation" class="form-control bp-practice-observation" type="text" />
+                                    </div>
+                                    <div class="bp-button-container" style="margin-top: 10px; display: none;">
+                                      <button id="bp-submit-button" type="button" class="bp-submit-button btn btn-success col-xs-12">Save Best Practice</button>
+                                    </div>
+                                  </div>
+                                </apex:outputpanel>
+                            
+                                <div class="modal-footer">
+                                  <button type="button" id="closeButton{!ii.id}" class="btn btn-default" data-dismiss="modal" onclick="hideAdditionalInformation($(this));$('.success-label').hide();">Close</button>
+                                  <button style="display: {!IF(ii.nonAssessed || ii.result == 'Non Assessed (tool abandoned)', 'none', 'block')};" type="button" id="saveButton{!ii.id}" class="btn btn-primary" onclick="save('{!ii.Id}'); return false;">Save</button>
+                                  <button type="button" id="refreshButton{!ii.id}" class="btn btn-default" onClick="prepareLocation();" style="display: none;">Refresh</button> 
+                                </div>
+                                </div>
+                            </form>
+                        </div>
+                      </div>
+                      </div>
+                     </div>
+                     <div style="position:absolute;bottom:0;margin-left: 5px;margin-bottom: 5px;">
+                        <apex:commandlink onclick="window.open('/{!ii.Id}','_blank','width=1000, height=700'); return false;" value="Go to LEAD for more info" />
+                     </div>
+                     </div>    
+                     </div>
+                     <apex:variable var="wrapperIndex" value="{!wrapperIndex + 1}" />
+                    </apex:repeat>
+                  </apex:outputpanel>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </apex:form>
+      <apex:form >
+        <c:EEC_ActionStatus ></c:EEC_ActionStatus>
+        <apex:actionfunction name="getItems" status="pageStatus" action="{!getInspectionItemData}" oncomplete="prepareLocation();">
+        </apex:actionfunction>
+        <apex:actionfunction name="saveItems" status="pageStatus" action="{!SaveItems}" oncomplete="saveItemSuccessActions();">
+          <apex:param name="correctionPlan" value="" />
+          <apex:param name="observations" value="" />
+          <apex:param name="techAssistance" value="" />
+          <apex:param name="result" value="" />
+          <apex:param name="itemId" value="" />
+          <apex:param name="att" value="" />
+          <apex:param name="fileName" value="" />
+        </apex:actionfunction>
+        <apex:actionfunction name="markSelectionCompliant" status="pageStatus" action="{!MarkSelectionCompliant}" oncomplete="prepareLocation();">
+          <apex:param name="ids" value="" />
+        </apex:actionfunction>
+        <apex:actionfunction name="MarkBulkAssessForDomain" status="pageStatus" action="{!markBulkAssessForDomain}" oncomplete="prepareLocation();">
+          <apex:param name="ids" value="" />
+        </apex:actionfunction>
+        
+        <apex:actionFunction name="saveAndClose" action="{!unLockVisitMode}" oncomplete="navigateToDetail();"/>
+        <apex:actionfunction name="startTimer" action="{!StartTimer}" status="pageStatus" rerender="btnPanel" oncomplete="prepareLocation();">
+          <apex:param name="inspID" value="" />
+        </apex:actionfunction>
+        <apex:actionfunction name="endTimer" action="{!EndTimer}" status="pageStatus" rerender="btnPanel" oncomplete="prepareLocation();">
+          <apex:param name="inspID" value="" />
+        </apex:actionfunction>
+        <apex:actionfunction name="saveReason" action="{!SaveReason}" oncomplete="prepareLocation();">
+          <apex:param name="reason" value="" />
+          <apex:param name="mode" value="tablet" />  
+        </apex:actionfunction>
+        <apex:actionfunction name="uploadExcelAttachment" action="{!uploadAttachment}" oncomplete="prepareLocation();" />
+        <!-- Best Practice Functions -->
+        <apex:actionfunction name="retrieveBestPracticeListForDomain" action="{!retrieveBestPracticeListForDomain}" rerender="sldsModalBPContainer,slds-modal-footer">
+          <apex:param value="" name="domain" />
+        </apex:actionfunction>
+        <apex:actionfunction name="retrieveBestPracticeListForDomainEditMode" action="{!retrieveBestPracticeListForDomain}" rerender="sldsModalBPContainer,slds-modal-footer" oncomplete="editModeFillAutoComplete()">
+          <apex:param value="" name="domain" />
+        </apex:actionfunction>
+        <apex:actionfunction name="SaveBP" action="{!SaveBP}" rerender="bpListPanelContainer,convertSvg" oncomplete="onSaveBPComplete();if(!$('.visit-items-panel').is(':visible')){$('.bp-list-panel-container').show();}">
+          <apex:param name="bpID" value="" />
+          <apex:param name="optObservation" value="" />
+          <apex:param name="vbpId" value="" />
+        </apex:actionfunction>
+        <apex:actionfunction name="DeleteBP" action="{!DeleteBP}" rerender="bpListPanelContainer,convertSvg" oncomplete="$('.bp-list-panel-container').show();">
+          <apex:param name="bpID" value="" />
+        </apex:actionfunction>
+      </apex:form>
+    </section>
+    <apex:outputpanel id="refreshNothing"></apex:outputpanel>
+    <script>
+      var refreshBPModal = function refreshBPModal() {
+        $('.slds-model-domain-dropdown').removeAttr('disabled');
+        $('.slds-model-domain-dropdown').val('');
+        $('.slds-modal-bp-practice-observation-bulkObsText').val('');
+        //$('.slds-modal-bp-header-text').html('Add a New Best Practice');
+        $('#bestPractice').data('vbpId', '');
+        // Reset the meassage modal.
+        $('#bp-modal-messages').hide();
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+        retrieveBestPracticeListForDomain('');
+      }
+
+      var deleteSelectedVBP = function deleteSelectedVBP(ele) {
+        var bpId = ele.data('id');
+        DeleteBP(bpId);
+      }
+
+      var switchModalToEditMode = function switchModalToEditMode(ele) {
+        var modal = $('#bestPractice');
+        // Pre-set the values.
+        $('.slds-modal-bp-header-text').html('Edit Best Practice');
+        $('.slds-model-domain-dropdown').val(ele.data('domain'));
+        modal.data('bp-guidance', ele.data('bp-guidance'));
+        modal.data('observation', ele.data('observation'));
+        modal.data('vbpId', ele.data('id'));
+        retrieveBestPracticeListForDomainEditMode(ele.data('domain'));
+          //$('.slds-model-bp-dropdown').val(ele.data('bp-guidance'));
+          //$('.slds-modal-bp-practice-observation').val(ele.data('observation'));
+      }
+
+      var editModeFillAutoComplete = function editModeFillAutoComplete() {
+        var modal = $('#bestPractice');
+        $('.slds-model-domain-dropdown').attr('disabled', 'true');
+        $('.slds-model-bp-dropdown').attr('disabled', 'true');
+        $('.slds-model-bp-dropdown').val(modal.data('bp-guidance'));
+        $('.slds-modal-bp-practice-observation').val(modal.data('observation'));
+        $('.slds-button-bp-submit').html('Save');
+      }
+
+      var hideAdditionalInformation = function hideAdditionalInformation(ele) {
+        ele.parent().parent().find('.success-label').hide();
+        var dropdownEle = ele.parent().parent().find('.bp-dropdown');
+
+        dropdownEle.val('');
+        dropdownEle.parents('.best-practices-container').children('.bp-observation-container').find('input').val('');
+        dropdownEle.parents('.best-practices-container').children('.bp-observation-container').hide();
+        dropdownEle.parents('.best-practices-container').children('.bp-button-container').hide();
+      }
+
+      var showAdditionalInformation = function showAdditionalInformation(ele) {
+        if (ele.val() != '') {
+          ele.parents('.best-practices-container').children('.bp-observation-container').show();
+          ele.parents('.best-practices-container').children('.bp-button-container').show();
+        } else {
+          ele.parents('.best-practices-container').children('.bp-observation-container').hide();
+          ele.parents('.best-practices-container').children('.bp-button-container').hide();
+        }
+      }
+
+      $('body').on('click', '.bp-submit-button', function() {
+        $('.success-label').hide();
+        var dropdownVal = $(this).parents('.best-practices-container').find('.bp-dropdown').val();
+        var optObservationVal = $(this).parents('.best-practices-container').find('.bp-practice-observation').val();
+
+        SaveBP(dropdownVal, optObservationVal);
+        hideAdditionalInformation($(this));
+      });
+
+      var addNewBP = function addNewBP(ele) {
+        // Reset the meassage modal.
+        $('#bp-modal-messages').hide();
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+        // Get the id and observation text.
+        var bpId = ele.parents('.slds-modal__container').find('.slds-model-bp-dropdown').val();
+        var bpObservation = ele.parents('.slds-modal__container').find('.slds-modal-bp-practice-observation').val();
+        var vbpId = $('#bestPractice').data('vbpId');
+        // If the id is available then save the record.
+        if (bpId != null && bpId != '') {
+          SaveBP(bpId, bpObservation, vbpId);
+          ele.parents('.slds-modal__container').find('.slds-model-domain-dropdown').val('');
+          retrieveBestPracticeListForDomain('');
+          // Show the success message.
+          $('#bp-modal-messages').show();
+          $('#bp-modal-messages .slds-box').addClass('slds-theme--success');
+          $('#bp-modal-messages .slds-box p').html('Best Practice Saved Successfully.');
+          window.setTimeout(function() {
+            $('#bp-modal-messages .slds-box').removeClass('slds-theme--success');
+            $('#bp-modal-messages').hide();
+          }, 3000);
+
+          if (typeof vbpId != "undefined" && vbpId != null && vbpId != '') {
+            $('#bestPractice').modal('toggle');
+            refreshBPModal();
+          }
+        } else {
+          // If no id is present then show the error.
+          $('#bp-modal-messages').show();
+          $('#bp-modal-messages .slds-box').addClass('slds-theme--error');
+          $('#bp-modal-messages .slds-box p').html('A best practice must be provided in order to save.');
+        }
+      }
+      
+      var addNewBA = function addNewBA(ele) {
+        // Reset the meassage modal.
+        
+         var bpId = ele.parents('.slds-modal__container').find('.bulkAsVal').val();
+        var bpObservation = ele.parents('.slds-modal__container').find('.slds-modal-bp-practice-observation').val();
+       
+        $('#ba-modal-messages').hide();
+        $('#ba-modal-messages .slds-box').removeClass('slds-theme--error');
+        $('#ba-modal-messages .slds-box').removeClass('slds-theme--success');
+        // Get the id and observation text.
+        
+        // If the id is available then save the record.
+        if (bpId != null && bpId != '') {
+          
+          if ((bpId == 'Compliant' && (bpObservation == null || bpObservation == '' || bpObservation != null || bpObservation !='')) || ( bpId!='Compliant' && bpId != null && bpId != '' && bpObservation != null && bpObservation != '' )) {
+            var filterCriteria = $("span.btn.filter.active")[0].attributes[1].value;
+            console.log('----> Selected Filter: ' + filterCriteria);
+            retrieveBulkAssess(filterCriteria);
+            // If no id is present then show the error.
+            $('#ba-modal-messages').show();
+            $('#ba-modal-messages .slds-box').addClass('slds-theme--error');
+            $('#ba-modal-messages .slds-box p').html('Updated Successfully.');
+          }else {
+              // If no id is present then show the error.
+          $('#ba-modal-messages').show();
+          $('#ba-modal-messages .slds-box').addClass('slds-theme--error');
+          $('#ba-modal-messages .slds-box p').html('Observation should be filled in.');
+          }
+        } 
+      }
+
+      var bulkAssessSaveAction = function bulkAssessSaveAction(){
+        console.log('Bulk Assess Completed');
+        $('#bulkAssess').modal().hide();
+
+      }
+
+      var onSaveBPComplete = function onSaveBPComplete() {
+        $('.bp-dropdown').val('');
+        $('.bp-practice-observation').val('');
+        $('.success-label').show();
+        window.setTimeout(function() {
+          $('.success-label').hide();
+        }, 3000);
+      }
+
+            function toggleRadio(rb, id){
+                var checkPanel = $('#checkPanel'+id);
+                var corPanel = $('#corPanel'+id);
+                if(rb == 'Non-Compliant'){
+                    if(checkPanel.hasClass('not-visible')){
+                        checkPanel.removeClass('not-visible');
+                    }
+                }
+                else{
+                    if(!checkPanel.hasClass('not-visible')){
+                        checkPanel.addClass('not-visible');
+                        if(!corPanel.hasClass('not-visible'))
+                            corPanel.addClass('not-visible');
+                    }
+                }
+                return false;
+            }
+            function togglePanel(cb, id){
+                var corPanel = $('#corPanel'+id);
+                if(cb.checked){
+                    if(corPanel.hasClass('not-visible'))
+                        corPanel.removeClass('not-visible');
+                }
+                else{
+                    if(!corPanel.hasClass('not-visible'))
+                        corPanel.addClass('not-visible');
+                }
+                return false;
+            }
+
+            var clampItems = jQuery('.clampedText');
+            clampItems.each(function(index, ele) {
+              $clamp(ele, {clamp: 2});
+            });
+
+            var clampLinkItems = jQuery('.clampedTextLink');
+            clampLinkItems.each(function(index, ele) {
+              $clamp(ele, {clamp: 1});
+            });
+
+            var prepareLocation = function() {
+              var activeFilterStr = '';
+              var filters = $('.btn.filter');
+
+              for(i=0;i<filters.length;i++) {
+                var filter = $(filters[i]);
+                if (filter.hasClass('active')){
+                  activeFilterStr = filter.data('filter');
+                  activeFilterStr = activeFilterStr.replace('.', '');
+                  break;
+                }
+              }
+
+              var href = location.href;
+              var urlParams = getUrlVars();
+
+              if (href.indexOf('filter') > -1) {
+                href = href.substring(0, href.indexOf('?'));
+                delete urlParams['filter'];
+                var paramsStr = '';
+                var counter = 0;
+                for (var key in urlParams) {
+                  paramsStr += (counter != 0 ? '&' + key + '=' + urlParams[key] : '?'+ key + '=' + urlParams[key]);
+                  counter++;
+                }
+                window.location.href = href + paramsStr + '&filter=' + activeFilterStr;
+              } else {
+                window.location.href = href + '&filter=' + activeFilterStr;
+              }
+            };
+
+            function getUrlVars() {
+              var vars = [], hash;
+              var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+              for(var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars[hash[0]] = hash[1];
+              }
+              return vars;
+            };
+
+            function recordView(id){
+                if(typeof sforce != 'undefined' && typeof sforce.one != 'undefined'){
+                 sforce.one.navigateToSObject(id);
+               }
+            }
+            function markCompliant(){
+                var ids = '';
+                var counter = 0;
+                $('div').each(function( i ){
+                    if ( this.style.display === "inline-block" ){
+                        if( counter == 0)
+                            ids = $(this).attr('id');
+                        else ids += ',' + $(this).attr('id');
+                        counter++;
+                    }
+                });
+                console.log('value of ids'+ids);
+                markSelectionCompliant(ids);
+            }
+            
+            function bulkAssess(){
+                var ids = '';
+                var counter = 0;
+                $('div').each(function( i ){
+                    if ( this.style.display === "inline-block" ){
+                        if( counter == 0)
+                            ids = $(this).attr('id');
+                        else ids += ',' + $(this).attr('id');
+                        counter++;
+                    }
+                });
+                console.log('value of ids2'+ids2);
+                MarkBulkAssessForDomain(ids);
+                //markSelectionCompliant(ids);
+            }
+            function startVisitTimer(){
+                var inspID = '{!Inspection__c.Id}';
+                startTimer(inspID);
+            }
+            function endVisitTimer(){
+                var inspID = '{!Inspection__c.Id}';
+                if($(".non-selected").length != 0){
+                    if (confirm('All visit items of the checklist have not been assessed. Do you want to continue with ending the visit timer?')) {
+                        endTimer(inspID);
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else
+                    endTimer(inspID);
+            }
+            function uploadAttachment(){
+                uploadExcelAttachment();
+            }
+            function save(id){
+                var maxStringSize = 5000000;
+                var maxFileSize = 4350000;
+                var chunkSize = 950000;
+                var attachment;
+                var attachmentName;
+                var fileSize;
+                var positionIndex;
+                var doneUploading;
+                saveSuccessItemId = id;
+
+                $('#lblMessage').text("");
+                var chkCorrVisit = $('#dateAI'+id).val();
+                var corPanel = $('#corPanel'+id);
+                var correctionPlan = $('#corr'+id).val();
+                if(corPanel.hasClass('not-visible'))
+                    correctionPlan = '';
+                var observation = $('#obse'+id).val();
+                var techAssistance = $('#tech'+id).val();
+                var result =  $('.radio-'+id).val();
+                var res = $('#div'+ id +' input[name*=result-radio]:checked').val();
+                var file = $('#attachments' + id)[0].files[0];
+                    if((res == "Non-Compliant" ||res == "Not Applicable" ||res == "Not Assessed") && !$('#obse'+id).val()){
+                        $('#lblMessage'+id).text('Observations are required for Non-Compliant, Not Applicable, and Not Assessed items.');
+                    }
+                    else if(chkCorrVisit && correctionPlan == '' && !corPanel.hasClass('not-visible'))
+                    {
+                        if($('#lblMessage'+id).text() != null){
+                            $('#lblMessage'+id).html('<br/> Corrective Actions are required if corrected at time of visit.');
+                        }
+                        else{
+                            $('#lblMessage'+id).text('Corrective Actions are required if corrected at time of visit.');
+                        }
+                    }
+                    else if(file){
+                      var filePath = $('#attachments' + id).val();
+                      var filename = filePath.replace(/^.*[\\\/]/, '');
+    
+    
+                      attachmentName = file.name;
+                      var fileReader = new FileReader();
+                      fileReader.onloadend = function(e) {
+                        attachment = window.btoa(this.result);  //Base 64 encode the file before sending it
+                        positionIndex=0;
+                        fileSize = attachment.length;
+                        doneUploading = false;
+                        if(fileSize < maxStringSize) {
+                            saveItems(correctionPlan,observation,techAssistance,res,id,attachment,filename);
+                        } else {
+                            alert("Base 64 Encoded file is too large.  Maximum size is " + maxStringSize/1000000 + " MB your file is " + fileSize/1000000 + "MB.");
+                        }
+                      }
+                      fileReader.onerror = function(e) {
+                        alert("There was an error reading the file.  Please try again.");
+                      }
+                      fileReader.onabort = function(e) {
+                        alert("There was an error reading the file.  Please try again.");
+                      }
+    
+                      fileReader.readAsBinaryString(file);  //Read the body of the file
+                   }
+                   else {
+                        saveItems(correctionPlan,observation,techAssistance,res,id,'','');
+                        $('#saveButton' + saveSuccessItemId).prop('disabled', true);
+                   }
+            }
+            function saveItemSuccessActions(){
+              
+              $('#closeButton' + saveSuccessItemId).hide();
+              $('#refreshButton' + saveSuccessItemId).show();
+              $('#badgeSpan' + saveSuccessItemId).hide();
+              $('#badgeSelected' + saveSuccessItemId).show();
+              $('#refreshFilterMsg').show();
+              $('#refreshPageButtonTop').show();
+            }
+              
+    </script>
+      
+    <apex:outputpanel id="convertSvg">
+      <script>
+         /*
+          * Replace all SVG images with inline SVG
+          */
+          var convertSVGtoInlineSVG = function() {
+            jQuery('img.svg').each(function(){
+              var $img = jQuery(this);
+              var imgID = $img.attr('id');
+              var imgClass = $img.attr('class');
+              var imgURL = $img.attr('src');
+
+              jQuery.get(imgURL, function(data) {
+                  // Get the SVG tag, ignore the rest
+                  var $svg = jQuery(data).find('svg');
+
+                  // Add replaced image's ID to the new SVG
+                  if(typeof imgID !== 'undefined') {
+                      $svg = $svg.attr('id', imgID);
+                  }
+                  // Add replaced image's classes to the new SVG
+                  if(typeof imgClass !== 'undefined') {
+                      $svg = $svg.attr('class', imgClass+' replaced-svg');
+                  }
+                  
+                  // Remove any invalid XML tags as per http://validator.w3.org
+                  $svg = $svg.removeAttr('xmlns:a');
+                  $svg = $svg.attr('height', '1.25rem');
+                  $svg = $svg.attr('width', '1.25rem');
+
+                  // Replace image with new SVG
+                  $img.replaceWith($svg);
+
+              }, 'xml');
+            });
+          }
+          convertSVGtoInlineSVG();
+      </script>
+    </apex:outputpanel>
+  </body>
+</html>
+</apex:page>

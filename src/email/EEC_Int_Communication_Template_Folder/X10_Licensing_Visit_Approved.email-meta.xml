@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Licensor indicating that the Visit Report is approved.</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>10 - Licensing Visit Approved</name>
+    <style>none</style>
+    <subject>Licensing Visit - Approved</subject>
+    <type>text</type>
+</EmailTemplate>

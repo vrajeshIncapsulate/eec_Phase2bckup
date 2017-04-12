@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <assignments>
+        <name>Assign_Licensing_Transaction_to_Licensor_on_Provider</name>
+        <label>Assign Licensing Transaction to Licensor on Provider</label>
+        <locationX>136</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>LicenseTransactionRecord.Assigned_To__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>ProviderRecord.Licensor_Full_Name__c</elementReference>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Check_if_Licensing_Transaction_Submitted_Has_Assignee</name>
+        <label>Check if Licensing Transaction Submitted Has Assignee</label>
+        <locationX>138</locationX>
+        <locationY>44</locationY>
+        <defaultConnectorLabel>[Default Outcome]</defaultConnectorLabel>
+        <rules>
+            <name>Unassigned_License_Transaction</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>LicenseTransactionRecord.Assigned_To__c</leftValueReference>
+                <operator>IsNull</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Assign_Licensing_Transaction_to_Licensor_on_Provider</targetReference>
+            </connector>
+            <label>Unassigned License Transaction</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Assign Licensing Transaction to Licensor if Unassigned {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Assign Licensing Transaction to Licensor if Unassigned</label>
+    <processType>AutoLaunchedFlow</processType>
+    <startElementReference>Check_if_Licensing_Transaction_Submitted_Has_Assignee</startElementReference>
+    <variables>
+        <name>LicenseTransactionRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Licensing_Transaction__c</objectType>
+    </variables>
+    <variables>
+        <name>ProviderRecord</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>

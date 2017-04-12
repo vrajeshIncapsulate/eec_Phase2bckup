@@ -1,0 +1,151 @@
+<apex:page standardcontroller="Inspection__c" extensions="EEC_VisitToolSelectionController" action="{!populateLists}" sidebar="false">
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS0101, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+  <apex:stylesheet value="{!URLFOR($Resource.EEC_FontAwesome, 'font-awesome-4.1.0/css/font-awesome.min.css')}" />
+  <apex:outputtext value="{!Inspection__c.Id}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.RecordType.Name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.Name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Type_of_Visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.Config_Record__r.Number_of_Non_Comp_before_longer_visit__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Visit_Tool_Used__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Visit_Tool_Used__r.Name}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Switch_Tool_Justification_1__c}" rendered="false" />
+  <apex:outputtext value="{!Inspection__c.Switch_Tool_Justification_2__c}" rendered="false" />  
+  <apex:outputtext value="{!Inspection__c.Provider_No__r.Additional_Ineligibility_Criteria__c}" rendered="false" />
+    <script src="/soap/ajax/32.0/connection.js" type="text/javascript"/>
+	<script src="/soap/ajax/32.0/apex.js" type="text/javascript"/>
+    <apex:includeScript value="/canvas/sdk/js/publisher.js" />
+    <script>
+        $j = jQuery.noConflict();
+        $j( document ).ready(function() {
+            if( (typeof sforce != 'undefined') && sforce && (!!sforce.one) ) {
+            if({!Inspection__c.Offline_Lock__c }){
+                alert('This visit is being used in the offline visit app and is locked. Go to the offline visit app and upload the visit before selecting this action');
+                Sfdc.canvas.publisher.publish({ name : "publisher.close", payload : { refresh:"true" }});
+                sforce.one.navigateToSObject('{!Inspection__c.Id}','detail');
+            }  
+    	  }
+        });
+    </script>
+  <style> 
+    .radio-label {
+      /*float: left;*/
+      margin-left: 30px !important;
+      line-height: 12px;
+    }
+
+    .pull-left {
+      /*float: left;*/
+    }
+
+    .tool-option {
+      padding: 5px 0px 5px 15px;
+    }
+
+    .other-justification-container {
+      margin-top: 15px;
+    }
+
+    .other-justification-container .parsley-errors-list {
+      width: 100%;
+      text-align: right;
+    }
+
+    .parsley-errors-list {
+      margin-left: 15px;
+    }
+ 
+    .parsley-error {
+      border: 2px solid #c00;
+    }
+
+    .errorMsg {
+      color: #d74c3b;
+    }
+  </style>
+  <div class="slds">
+    <apex:form id="CopyInspectionsForm" styleclass="visitToolForm">
+      <h2 style="margin-bottom: 5px; font-size: 1.4em;"><strong>Select a new Tool to Use for this {!Inspection__c.Type_of_Visit__c} Visit</strong></h2>
+      <apex:messages styleclass="slds-box slds-theme--error slds-theme--inverse-text" />
+      <apex:outputpanel rendered="{!scrWrapperList.size >= 0}">
+        <div class="current-tool-container slds-box" style="margin-bottom: 15px;"> 
+          <h4 style="margin-bottom: 5px;"><strong>Current Tool</strong></h4>
+          <p style="padding-left: 30px;">{!Inspection__c.Visit_Tool_Used__r.Name}</p>
+        </div>  
+          
+        <div class="other-tools-container slds-box">
+          <h4 style="margin-bottom: 5px;"><strong>Available tools</strong></h4>
+          <div class="tool-options-container slds-grid slds-wrap">
+            <div class="tool-option slds-col slds-size--1-of-1" style="padding-left: 15px;">  
+              <input class="pull-left" type="radio" name="tools" value="" onclick="changeValue(this, '{!$Component.ToolRadioButtonValue}');" data-parsley-required="true" data-parsley-required-message="Please select a tool before submitting." /><p class="radio-label">None (Remove currently used tool)</p>
+            </div>
+            <apex:outputpanel rendered="{!scrWrapperList.size > 0}">
+              <apex:repeat id="copyrowsNew" value="{!scrWrapperList}" var="scr">
+                <div class="tool-option slds-col slds-size--1-of-1">
+                  <input class="pull-left" type="radio" name="tools" value="{!scr.name}" onclick="changeValue(this, '{!$Component.ToolRadioButtonValue}');" data-parsley-required="true" data-parsley-required-message="Please select a tool before submitting." /><p class="radio-label">{!scr.name}</p>
+                </div>
+              </apex:repeat>
+            </apex:outputpanel>
+          </div>
+            
+          <div class="other-justification-container slds-grid slds-wrap">
+            <h4 class="slds-col slds-size--1-of-4"><span style="color: red;">*</span>Justification to select another tool:</h4>
+            <apex:inputtextarea html-name="justificationText" styleclass="slds-col slds-size--3-of-4" value="{!justificationText}" id="justificationOther" html-data-parsley-required="true" html-data-parsley-required-message="Justification is mandatory when you select a new tool." />
+          </div>
+          <p style="margin-top: 15px;"><span>*</span> : Note that switching to another tool will remove all standard visit items from the current visit tool not found in the new visit tool, including observations and technical assistance associated with them.</p>
+        </div>
+        <div class="buttons-container" style="margin-top: 25px;">
+          <a href="/{!Inspection__c.Id}" class="slds-button slds-button--neutral slds-button--small" style="float: left;">Cancel</a>
+          <apex:commandButton styleClass="slds-button slds-button--brand slds-button--small" style="float: right;" onclick="if(!checkForm()){return false;}" value="Switch Tool"/>    
+        </div>
+        <apex:actionfunction name="switchTool" action="{!switchTool}">
+        </apex:actionfunction>  
+      </apex:outputpanel>
+      <apex:inputhidden value="{!selectedTool}" id="ToolRadioButtonValue" />
+    </apex:form>
+  </div>
+  <apex:includescript value="{!URLFOR($Resource.EEC_Bootstrap, 'EEC_Bootstrap/js/jquery-1.11.2.min.js')}" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/parsley.js/2.0.7/parsley.js" type="text/javascript"></script>
+  <script>
+    $j = jQuery.noConflict();
+    var submitted = false;
+
+    var form = $j(".visitToolForm").parsley({
+      errorsWrapper: '<div class="parsley-errors-list slds-size--1-of-1"></div>',
+      errorTemplate: '<p class="errorMsg"></p>'
+    });
+
+    function changeValue(input, textid) {
+      document.getElementById(textid).value = input.value;
+    }
+
+    $j('#submit').on('click', function() {
+      submitted = true;
+      if (form.validate()) {
+        console.log('----> Form is valid!');
+      } else {
+        console.log('----> Form is NOT valid!');
+      }
+    });
+    
+    function checkForm() {
+      if (form.validate()) {
+        if(confirm('Data may be lost. Do you confirm that you want to switch to the new tool selected?')){
+            var reason = "{!Inspection__c.Abandon_Tool_Reason__c}";
+            if(reason == ''){
+                switchTool();
+            }   
+            else {
+                alert('Visit tool switch is not available if a visit tool has been previously abandoned');
+                sforce.one.navigateToSObject('{!Inspection__c.Id}','detail');
+                return false;
+            }
+        }
+      }
+      return false;
+    }
+  </script>
+</apex:page>

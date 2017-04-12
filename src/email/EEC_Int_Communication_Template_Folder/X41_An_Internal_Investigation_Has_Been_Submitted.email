@@ -1,0 +1,7 @@
+Hello,
+
+An internal investigation from {!Account.Name} has been submitted and is ready for your review. 
+
+Please login to Salesforce and review the corresponding intervention associated to this investigation: {!Investigation__c.Name}
+
+LEAD System

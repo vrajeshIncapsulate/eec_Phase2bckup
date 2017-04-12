@@ -1,0 +1,7 @@
+Hello,
+
+Your assigned investigation {!Investigation__c.Name} associated to Provider - {!Investigation__c.Provider_No__c} has been reassigned by {!Investigation__c.LastModifiedBy}. 
+
+If you need to check the current status of the investigation, please login to Salesforce through this link: {!Investigation__c.Link} .
+
+LEAD System

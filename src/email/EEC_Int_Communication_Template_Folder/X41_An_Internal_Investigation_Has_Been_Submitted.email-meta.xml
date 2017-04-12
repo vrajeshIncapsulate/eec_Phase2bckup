@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email sent to the investigation leader to inform him/her that internal investigation have been submitted on the portal and it must be checked</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>41 -  An Internal Investigation Has Been Submitted</name>
+    <style>none</style>
+    <subject>Alert to Investigation Leader that internal investigation has been submitted</subject>
+    <type>text</type>
+</EmailTemplate>

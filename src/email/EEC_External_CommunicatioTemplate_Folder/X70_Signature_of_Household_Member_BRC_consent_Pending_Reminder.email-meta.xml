@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>If a household member / person on premise BRC consent is pending for more than 5 days, then this email is sent to remind the user that the document is pending</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <letterhead>EEC_Letterhead</letterhead>
+    <name>70a - Signature of Household Member BRC consent Pending Reminder (&gt;= 18 yo)</name>
+    <style>freeForm</style>
+    <subject>Department of Early Education and Care - {!Household_Member__c.First_Name__c} {!Household_Member__c.Last_Name__c} BRC Consent Form is ready for signature - Reminder</subject>
+    <type>html</type>
+</EmailTemplate>

@@ -1,0 +1,12 @@
+<apex:page standardController="Inspection__c">
+  <h1>Please Wait</h1>
+    Redirecting ....
+  <script>
+    if ( (typeof window.sforce != 'undefined') && (window.sforce!=null) ) {
+      sforce.one.navigateToURL('/apex/EEC_VisitModeTabletVersion?id={!Inspection__c.id}');
+    }
+    else {
+      alert('An error has occured tryig to execute your command');
+    }
+ </script>
+</apex:page>

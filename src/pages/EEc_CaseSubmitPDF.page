@@ -1,0 +1,632 @@
+<apex:page showheader="false" standardstylesheets="false" applybodytag="false" sidebar="false" renderas="pdf" controller="EEC_CasesIncidentsPageController" html-ng-app="eecApp" doctype="html-5.0">
+<style type="text/css">
+table {
+        -fs-table-paginate: paginate !important;
+      }
+.table-header {
+        height: 30px !important;
+      }
+      
+        .form-label{
+          font-weight: bold;
+          font-size:14px;
+        }
+        
+ </style>
+ <style>
+table, th, td {
+    
+    border-collapse: collapse;
+}
+th, td {
+    padding: 5px;
+    text-align: center;
+}
+</style>
+
+  <apex:form >
+  <apex:pageblock >
+ 
+                <br />
+               <apex:outputPanel >
+                  <center><h2> 
+                      Incident / Injury Summary and Submission Page
+                  </h2></center>
+                  <br/>
+                  
+                <table style="width:100%">
+                <!-- <center> <h4 styleclass="form-label">Provider and Reporter</h4></center> -->
+                <br/>
+                <tr>
+    				<td style="width:40%;text-align:left;"><b>Provider Name:</b> {!a.Name}</td>
+    				<td><b>Contact Name:</b> {!ct.Name}</td>
+    				<td style="width:33%;text-align:right;"><b>Date Opened:</b> <c:EEC_DateFormat date="{!c.CreatedDate}"/></td>
+    				
+    				</tr>
+    				<tr><td>&nbsp;</td></tr>
+    			<tr>
+    				<td style="width:40%;text-align:left;"><b>Contact Number:</b> {!ct.Phone}</td>
+    				<td ><b>Email Address:</b> {!ct.Email}</td>
+    				
+    				<td></td>
+    				</tr>
+                </table>  
+              </apex:outputPanel>
+              
+                
+                <br/>
+                <hr/>
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="headingTwo">
+                   <center> <h4 class="panel-title">{!caseTypeLabel} Description
+                     
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="incidentDesc" class="panel-group" role="tabpanel" aria-labelledby="headingTwo">
+                    <div class="panel-body">
+                      <div class="col-lg-4">
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span style="font-weight: bold;">Summary / Type of Case </span><br />
+                            <apex:outputtext value="{!c.subject}" label="Subject" />
+                          </div>
+                        </div>
+                        <br/>
+                        <apex:outputPanel rendered="{!caseTypeLabel == 'Injury' || caseTypeLabel == 'Incident'}"> 
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span style="font-weight: bold;">When did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Date_Event_Occured__c}" />
+                            </apex:outputtext>
+                          </div>
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span style="font-weight: bold;">What time did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{!c.Time_Event_Occured__c}" label="Time Event Occurred" />
+                          </div>
+                        </div>
+                        </apex:outputPanel>
+                      </div>
+                      <br/>
+                      <div class="col-lg-8">
+                        <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}"> 
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span style="font-weight: bold;">Number of children in the group</span><br />
+                              <apex:outputtext value="{!c.No_children_in_group__c  }" />
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span style="font-weight: bold;">What group was the child in when injury occured?</span><br />
+                              <apex:outputtext value="{!c.Group_the_child_was_in__c }" />
+                            </div>
+                          </div>  
+                          <br/> 
+                          <div class="form-group">
+                          <div class="input-group">
+                            <span style="font-weight: bold;">What happened? (If applicable, describe any equipment involved including its location and condition)</span><br />
+                            <apex:outputtext value="{!c.description}" label="Description" />
+                          </div>
+                         </div> 
+                         <br/>
+                        <div class="form-group">
+                          <div class="input-group">
+                            <span style="font-weight: bold;">Where did the {!caseTypeLabel} occur?</span><br />
+                            <apex:outputtext value="{!c.Event_Location__c}" label="Event Description" />
+                          </div>
+                        </div> 
+                        <br/> 
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span style="font-weight: bold;">Names &amp; qualifications of staff supervising the group when injury occurred?</span><br />
+                              <apex:outputtext value="{!c.Name_Qual_of_staff_supervising__c}" />
+                            </div>
+                          </div>
+                          <br/>
+                          <div class="form-group">
+                            <div class="input-group">
+                              <span style="font-weight: bold;">Description of any corrective action taken to prevent similar occurence</span><br />
+                              <apex:outputtext value="{!c.Description_of_corrective_action__c}" />
+                            </div>
+                          </div>
+                        </apex:outputPanel>    
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <center><h3> Involved Persons</h3></center>   
+                    </div>
+                    <br/>
+                    <div class="panel-body">
+                      <div id="no-more-tables">
+                        <h4>Involved Children</h4>
+                        <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="12%, 14%, 14%,14%,14%,15%,17%" cellpadding="7" width="100%" value="{!InvolvedPersons}" var="p" id="personsRepeaters">
+                        <apex:column >
+                        <apex:facet name="header"><center>Name</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Name,'/','/ ')),'-','- ') }"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Type</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.TypeName,'/','/ ')),'-','- ') }"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Birth Date</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!p.ChildBirthDate}"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Guardian Name</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!p.GuardianName}"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Guardian Phone</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!p.GuardianPhone}"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Guardian Address</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.GuardianAddress,'/','/ ')),'-','- ') }"  />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Description of Involvement</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Description_of_Involvement,'/','/ ')),'-','- ') }"  />
+                        </apex:column>
+                        </apex:datatable>
+                      </div>
+                      <div id="no-more-tables">
+                        <h4>Involved Adults</h4>
+                        <apex:datatable headerclass="table-header" border="1" style="table-layout: fixed; border-style: solid;" styleclass="table" columnswidth="15%, 15%, 15%,15%,15%,25%" cellpadding="6" width="100%" value="{!InvolvedPersons}" var="p" id="personsRepeater">
+                        <apex:column >
+                        <apex:facet name="header"><center>Name</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Name,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Type</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.TypeName,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Role</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Role,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Other Role</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.OtherRole,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Title</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Title,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        <apex:column >
+                        <apex:facet name="header"><center>Description of Involvement</center></apex:facet>
+                        <apex:outputtext style="overflow-wrap: break-word;word-break: break-all;" value="{!SUBSTITUTE((SUBSTITUTE(p.Description_of_Involvement,'/','/ ')),'-','- ') }"  rendered="{!p.TypeName = 'Adult Involvement'}" />
+                        </apex:column>
+                        </apex:datatable>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <br/>
+                <hr/>
+                <br/>
+                <apex:outputPanel rendered="{!caseTypeLabel == 'Injury' || caseTypeLabel == 'Incident'}"> 
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="headingTwo">
+                   <center> <h4 class="panel-title">First Aid / CPR
+                     
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="firstaidCPR" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span style="font-weight: bold;">Was first aid provided?</span><br />
+                            <apex:outputtext value="{!c.First_Aid_or_CPR_Provided__c}" />
+                          </div>
+                          <br/>
+                          <apex:outputpanel id="PanelFirstAidCPR">
+                            <apex:outputpanel rendered="{!blnFirstAidCPR}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">When?</span><br />
+                                <apex:outputtext value="{!c.First_Aid_When__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">By Whom?</span><br />
+                                <apex:outputtext value="{!c.First_Aid_By_whom__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-4">
+                                  <span style="font-weight: bold;">What was provided?</span><br />
+                                  <apex:outputtext value="{!c.First_Aid_What__c}" />
+                              </div> 
+                              <br/>  
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                        <br/>
+
+                        <!-- <hr class="col-xs-12" /> -->
+         
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span style="font-weight: bold;">CPR provided?</span><br />
+                            <apex:outputtext value="{!c.CPR_Provided__c}" />
+                          </div>
+                          <br/>
+
+                          <apex:outputpanel id="summaryPanelCPR">
+                            <apex:outputpanel rendered="{!blnCPR}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">When?</span><br />
+                                <apex:outputtext value="{!c.CPR_When__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">By Whom?</span><br />
+                                <apex:outputtext value="{!c.CPR_By_Whom__c}" />
+                              </div>
+                              <br/>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                   <center> <h4 class="panel-title">911 Contacted
+                      
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="911Contacted" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-4">
+                            <span style="font-weight: bold;">Was 911 called?</span><br />
+                            <apex:outputtext value="{!c.X911_Called__c}" />
+                          </div>
+                          <br/>
+
+                          <apex:outputpanel id="Panel911">
+                            <apex:outputpanel rendered="{!blnCalled911}">
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">When?</span><br />
+                                <apex:outputtext value="{!c.X911_called_when__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">By Whom?</span><br />
+                                <apex:outputtext value="{!c.X911_By_whom__c}" />
+                              </div>
+                              <br/>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                   <center> <h4 class="panel-title">Medical Attention
+                      
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="medicalAttn" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+                          <div class="col-xs-12 col-lg-6">
+                            <span style="font-weight: bold;">Was the child transported for medical attention?</span><br />
+                            <apex:outputtext value="{!c.Child_Transported_for_Medical_Attention__c}" label="Child Transported for Medical Attention">
+                            </apex:outputtext>
+                          </div>
+                          <br/>
+
+                          <apex:outputpanel id="PanelMedical">
+                            <apex:outputpanel rendered="{!blnChildTransport}">
+                              <div class="col-xs-12 col-lg-3">
+                                <span style="font-weight: bold;">Where?</span><br />
+                                <apex:outputtext value="{!c.Med_AttentionWhere__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-3">
+                                <span style="font-weight: bold;">By whom?</span><br />
+                                <apex:outputtext value="{!c.Med_Attention_By_whom__c}" />
+                              </div>
+                              <br/>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span style="font-weight: bold;">What medical treatment was provided? (be specific)</span><br />
+                                <apex:outputtext value="{!c.Medical_Treatment_Provided__c}" />
+                              </div>
+                              <br/>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span style="font-weight: bold;">What diagnosis resulted from any medical intervention?</span><br />
+                                <apex:outputtext value="{!c.Diagnosis_Resulted__c}" />
+                              </div>
+                              <br/>
+
+                              <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                <span style="font-weight: bold;">Did the child return to your program?</span><br />
+                                <apex:outputtext value="{!c.Child_return_to_Program__c}">
+                                </apex:outputtext>
+                              </div>
+                              <br/>
+
+                              <apex:outputpanel id="PanelChildReturn">
+                                <apex:outputpanel rendered="{!blnChildReturned}">
+                                  <div class="col-xs-12 col-lg-6" style="margin-top: 10px;">
+                                    <span style="font-weight: bold;">When?</span><br />
+                                    <apex:outputtext value="{!c.When_Child_Return__c}" />
+                                  </div>
+                                  <br/>
+                                </apex:outputpanel>
+                              </apex:outputpanel>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr/>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                   <center> <h4 class="panel-title">Information Shared with Parents / Guardians
+                      
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="infoShared" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="form-group">
+
+                          <div class="col-xs-12 col-lg-5">
+                            <span style="font-weight: bold;">Was this information shared with the child's parent/guardian?</span><br />
+                            <apex:outputtext value="{!c.Shared_with_Parents__c}">
+                            </apex:outputtext>
+                          </div>
+                          <br/>
+
+                          <apex:outputpanel id="PanelSharedParents">
+                            <apex:outputpanel rendered="{!blnSharedParents}">
+
+                              <div class="col-xs-12 col-lg-3">
+                                <span style="font-weight: bold;">When was this information shared?</span><br />
+                                <apex:outputtext value="{!c.When_Shared_Info__c}" />
+                              </div>
+                              <br/>
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">Provide the name of the parent/guardian who was contacted?</span><br />
+                                <apex:outputtext value="{!c.With_who__c}" />
+                              </div>
+                              <br/>
+
+                              <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                <div class="col-xs-12 col-lg-4">
+                                  <span style="font-weight: bold;">Who shared the information with the parent/guardian?</span><br />
+                                  <apex:outputtext value="{!c.Who_Shared_Info__c}" />
+                                </div>
+                                <br/>
+                                <div class="col-xs-12 col-lg-8">
+                                  <span style="font-weight: bold;">How was this information shared?</span><br />
+                                  <apex:outputtext value="{!c.How_What_Shared_Info__c}" />
+                                </div>
+                                <br/>
+                              </div>
+                            </apex:outputpanel>
+                          </apex:outputpanel>
+                          <apex:outputPanel rendered="{!caseTypeLabel == 'Injury'}">
+                          <div class="col-xs-12 col-lg-5">
+                              <span style="font-weight: bold;">Was anyone else notified?</span><br />
+                              <apex:outputtext value="{!c.Other_Person_Notified__c }">
+                              </apex:outputtext>
+                            </div>
+                            <br/>
+                            <apex:outputpanel id="PanelOtherPersons">
+                              <apex:outputpanel rendered="{!blnOtherParents}">
+                                <div class="col-xs-12 col-lg-3">
+                                  <span style="font-weight: bold;">Who else was notified?</span><br />
+                                  <apex:outputtext value="{!c.Other_Person_Notified_Who__c }" />
+                                </div>
+                                <br/>
+                                <div class="col-xs-12 col-lg-4">
+                                  <span style="font-weight: bold;">How was this other person notified?</span><br />
+                                  <apex:outputtext value="{!c.Other_Person_Notified_How__c }" />
+                                </div>
+                                <br/>
+
+                                <div class="col-xs-12" style="margin-top: 10px; padding: 0;">
+                                  <div class="col-xs-12 col-lg-4">
+                                    <span style="font-weight: bold;">When was this other person notified?</span><br />
+                                    <apex:outputtext value="{!c.Other_Person_Notified_When__c }" />
+                                  </div>
+                                  <br/>
+                                </div>
+                              </apex:outputpanel>
+                            </apex:outputpanel> 
+                            </apex:outputPanel>  
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </apex:outputPanel>
+                <hr/>
+                <apex:outputPanel rendered="{!caseTypeLabel == 'Incident' || caseTypeLabel == '51A Incident'}">  
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <center><h4 class="panel-title">Other Information
+                      
+                    </h4></center>
+                  </div>
+                  <br/>
+                  <div id="otherInformation" class="panel-group">
+                    <div class="panel-body">
+                      <div class="col-lg-12">
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Was a report filed with the Massachusetts Department of Children and Families (DCF)(51A)?</span><br />
+                          <apex:outputtext value="{!c.Filed_with_DCF__c}">
+                          </apex:outputtext>
+                        </div>
+                        <br/>
+                       <apex:outputPanel rendered="{!caseTypeLabel == '51A Incident'}">
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Dates of contact with Homefinder within last 6 months?</span><br />
+                            <apex:outputtext value="{!c.Homefinder_Contact_Last_6_Months__c}" >
+                            </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">    
+                          <span style="font-weight: bold;">Last social worker home visit date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Last_Social_Worker_Home_Visit__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Most recent re-evaluation date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Most_Recent_Reevaluation__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Original Home Study date?</span><br />
+                            <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.Original_Home_Study__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Concerns identified if any?</span><br />
+                          <apex:outputtext value="{!c.Concerns_Identified__c}">
+                          </apex:outputtext>
+                        </div>
+                        <br/>
+                         <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">MAPP training date?</span><br />
+                           <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                              <apex:param value="{!c.MAPP_Training_Date__c}"/>
+                            </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">Home type (Regular/Restricted)?</span><br />
+                          <apex:outputtext value="{!c.Home_Type__c}">
+                          </apex:outputtext>
+                        </div>
+                        <br/>
+                        <div class="col-xs-12 col-lg-6">
+                          <span style="font-weight: bold;">List of restrictions?</span><br />
+                          <apex:outputtext value="{!c.List_of_Restrictions__c}">
+                          </apex:outputtext>
+                        </div>
+                        <br/>
+                        </apex:outputPanel>
+                        <apex:outputpanel id="PanelFiledDCF">
+                          <apex:outputpanel rendered="{!blnFiledDCF}">
+                            <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                              <span style="font-weight: bold;">By whom?</span><br />
+                              <apex:outputtext value="{!c.DCF_Filer__c}" />
+                            </div>
+                            <br/>
+
+                            <div class="col-xs-12 col-lg-3" style="margin-top: 20px;">
+                              <span style="font-weight: bold;">When was it reported?</span><br />
+                              <apex:outputtext value="{0, date, MMMM d','  yyyy}">
+                                <apex:param value="{!c.DCF_File_Submission_Date__c}" />
+                              </apex:outputtext>
+                            </div>
+                            <br/>
+
+                            <div style="margin-top: 10px; padding: 0;" class="col-xs-12">
+                              <div class="col-xs-12 col-lg-4">
+                                <span style="font-weight: bold;">Does your report involves legal proceedings?</span><br />
+                                <apex:outputtext value="{!c.Incident_involves_legal_proceedings__c}">
+                                </apex:outputtext>
+                              </div>
+                              <br/>
+
+                              <apex:outputpanel id="PanelInvolvesLegal">
+                                <apex:outputpanel rendered="{!blnLegal}">
+                                  <div class="col-xs-12 col-lg-8">
+                                    <span style="font-weight: bold;">Describe the nature of legal proceedings and explain who is involved</span><br />
+                                    <apex:outputtext value="{!c.Legal_Proceeding_Description__c}" />
+                                  </div>
+                                  <br/>
+                                </apex:outputpanel>
+                              </apex:outputpanel>
+                            </div>
+                          </apex:outputpanel>
+                        </apex:outputpanel>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+                </apex:outputPanel>
+                <hr/>
+                <div class="panel-group">
+                  <div class="panel panel-default">
+                    <div class="panel-heading">
+                     <center> <h3 class="panel-title">Attachments</h3></center>
+                    </div>
+                    <br/>
+
+                    <div class="panel-body">
+                      <apex:outputpanel id="fileAttachmentContainer" styleclass="fileAttachmentContainer" style="width: 100%;">
+                        <apex:outputpanel id="fileListContainer">
+                          <!-- Incident Attachments -->
+                          <apex:outputpanel rendered="{!attachments.size > 0}">
+                            <apex:repeat value="{!attachments}" var="attachment">
+                              <div class="attachment-item">
+                                <p>{!attachment.Filename__c}</p>
+                                <p><apex:outputtext value="{0, date, MMMM d','  yyyy}"><apex:param value="{!attachment.CreatedDate}" /></apex:outputtext></p>
+                                <p>
+                                  <apex:commandlink action="{!deleteAttachment}" value="" rerender="script-existing-items, fileAttachmentContainer" style="color: #000;">
+                                    <apex:param name="attachmentName" assignto="{!fileToDelete}" value="{!attachment.Id}" />
+                                    <i class="material-icons">&#xE872;</i>
+                                  </apex:commandlink>
+                                </p>
+                              </div>
+                            </apex:repeat>
+                          </apex:outputpanel>
+                          <!-- No Attachments -->
+                          <apex:outputpanel rendered="{!attachments.size == 0}">
+                            <p>No attachments for this Incident.</p>
+                          </apex:outputpanel>
+                        </apex:outputpanel>
+                      </apex:outputpanel>
+                    </div>
+                  </div>
+                </div>
+                <br />
+        </apex:pageblock>
+                
+   </apex:form>
+                
+</apex:page>

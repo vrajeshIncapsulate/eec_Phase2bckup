@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://soap.sforce.com/2006/04/metadata">
+    <columns>
+        <field>Account.Investigations__r.Non_Compliant_Item__r$Id</field>
+    </columns>
+    <format>Tabular</format>
+    <name>Non Compliant Item</name>
+    <params>
+        <name>co</name>
+        <value>1</value>
+    </params>
+    <reportType>Providers_Umbrellas_with_Investigations_with_Non_Compliant_Item__c</reportType>
+    <scope>organization</scope>
+    <showDetails>true</showDetails>
+    <timeFrameFilter>
+        <dateColumn>Account$CreatedDate</dateColumn>
+        <interval>INTERVAL_CUSTOM</interval>
+    </timeFrameFilter>
+</Report>

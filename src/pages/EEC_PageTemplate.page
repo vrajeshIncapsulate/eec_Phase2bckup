@@ -1,0 +1,17 @@
+<apex:page showHeader="false" standardStylesheets="false">
+  <head>
+    <title>EEC</title>
+    <c:EEC_Header id="pageHeader" />
+
+    <script>
+          
+    </script>
+  </head>
+  <body>
+      <c:EEC_Nav_Bar id="navBar" />
+      <div class="container">
+         <br/>
+      </div>
+      <c:EEC_Site_Footer id="siteFooter" />   
+ </body>
+</apex:page>

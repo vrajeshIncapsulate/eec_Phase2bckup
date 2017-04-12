@@ -1,0 +1,61 @@
+<apex:page standardController="Inspection__c" extensions="EEC_CopyInspectionsItemsController" action="{!populateLists}">
+    
+    <apex:stylesheet value="{!URLFOR($Resource.EEC_Bootstrap, 'css/bootstrap.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.EEC_Bootstrap, 'css/bootstrap-theme.min.css')}" />
+    <apex:stylesheet value="{!URLFOR($Resource.EEC_FontAwesome, 'font-awesome-4.1.0/css/font-awesome.min.css')}" />
+    <apex:includeScript value="{!URLFOR($Resource.EEC_Bootstrap, 'js/bootstrap.min.js')}" />
+    
+    <apex:outputText value="{!Inspection__c.Id}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.name}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.Provider_No__c}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.Provider_No__r.RecordType.Name}" rendered="false"/>
+    <apex:outputText value="{!Inspection__c.Can_be_Edited__c}" rendered="false" />
+    <apex:outputText value="{!Inspection__c.Mater_Visit_for_Res_Cluster_of_Visits__c}" rendered="false" />
+    
+    <apex:messages style="color: #FF0000; font-weight: bold;"/>
+    <apex:form id="CopyInspectionsForm">
+      <c:EEC_ActionStatus ></c:EEC_ActionStatus>
+      <apex:outputpanel rendered="{! allowCopyItems && scrWrapperList.size > 0}">
+        <apex:pageBlock id="searchBlock" title="Copy Inspection Items">
+        <apex:pageBlockButtons location="bottom">
+            <!--  <input type="button" onclick="assignSelectedLeads();return false;" value="Assign"/> -->
+            <apex:commandbutton status="pageStatus" rerender="CopyInspectionsForm" action="{!copyInspectionItems}" value="Copy Items" id="copyItemsButton"/>
+        </apex:pageBlockButtons>
+        <apex:outputPanel id="opnlInvoiceTable" layout="block">
+               <apex:outputPanel layout="block" rendered="{!scrWrapperList.size > 0}">
+               <div style="border: 1px solid #c0c0c0; padding: 8px; margin-bottom: 12px;">
+                            <table id="copyItemsTable" cellpadding="3">
+                                <thead>
+                                    <tr style="border-bottom: 1px dotted #000;">
+                                        <th width="20%">&nbsp;</th>
+                                        <th>Name</th>
+                                        <!-- <th>Applicable To</th> -->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                   <apex:repeat id="copyRows" value="{!scrWrapperList}" var="scr">
+                                       <tr>
+                                           <td>
+                                               <apex:inputCheckbox value="{!scr.selected}"/>
+                                           </td>
+                                           <td>
+                                               <apex:outputText value="{!scr.name}" />
+                                           </td>
+                                          <!--  <td>
+                                               <apex:outputText value="{!sii.applicable_to__c}" />
+                                           </td> -->
+                                       </tr>
+                                   </apex:repeat>
+                                </tbody>
+                            </table>
+                           </div>
+                        </apex:outputPanel>
+                 
+                <!-- <apex:commandbutton action="{!assignLeads}" value="Assign"/> -->
+            </apex:outputPanel>
+        </apex:pageBlock>
+       </apex:outputpanel>
+    </apex:form>
+  
+</apex:page>

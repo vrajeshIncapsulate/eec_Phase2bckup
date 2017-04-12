@@ -1,0 +1,14 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div><div style="font-size: medium;"><p style="margin-top: 10px; margin-right: 0px; margin-left: 0px; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, sans-serif; background-color: rgb(255, 255, 255);"><i><font size="2">This email is intended to the licensed provider under the name: {!Account.Name}</font></i></p><div><i><font size="2"><br></font></i></div></div><font face="Arial, sans-serif" size="2"></font></div><font face="Arial, sans-serif" size="2"><font style="color: rgb(0, 0, 0);">Dear Provider,</font><br><br><font style="color: rgb(0, 0, 0);">The Department of Early Education and Care (EEC) is requesting that you complete an internal investigation on a recent incident/allegation that has occurred in your program {!Intervention__c.Investigation__c}. </font><br><br><font style="color: rgb(0, 0, 0);">Here are the instructions related to this request:&nbsp;</font>{!Intervention__c.Portal_User_Instructions__c}<br><br><font style="color: rgb(0, 0, 0);">Please upload and submit this investigation to the&nbsp;</font><a href="{!$Setup.EEC_Config__c.Portal_Url__c}" style="color: rgb(0, 0, 0);">EEC Portal Page</a><font style="color: rgb(0, 0, 0);">&nbsp;upon its completion and prior to {!Intervention__c.To_Be_Provided_By__c}. You'll find the page to upload by navigating to your provider page, scrolling down to the list of Internal Investigations and clicking on "Upload Internal Investigation".</font><br><br>You may contact&nbsp;{!Intervention__c.Investigation_Leader_Full_Name__c}&nbsp;by phone at&nbsp;{!Intervention__c.Investigation_Leader_Phone_Number__c}&nbsp;or by&nbsp;email at&nbsp;{!Intervention__c.Investigation_Leader_Email__c}<font style="color: rgb(0, 0, 0);">&nbsp;with any questions or concerns related to&nbsp;this matter.&nbsp; </font><br><br><font style="color: rgb(0, 0, 0);">Sincerely,</font><br><br><font style="color: rgb(0, 0, 0);">The Department of Early Education and Care</font><br></font><br>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<div align="center"><font face="Arial,Sans-Serif" size="2">{!Account.Region_Address__c}<br>{!Account.Region_Phone__c} • {!Account.Region_Fax__c} • {!Account.Region_Email__c}<br>www.mass.gov/eec</font></div>]]></td>
+</tr>
+</table>

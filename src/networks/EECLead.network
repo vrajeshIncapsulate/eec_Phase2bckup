@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Network xmlns="http://soap.sforce.com/2006/04/metadata">
+    <allowMembersToFlag>false</allowMembersToFlag>
+    <branding>
+        <loginFooterText>salesforce.com</loginFooterText>
+        <primaryColor>#1797C0</primaryColor>
+        <primaryComplementColor>#FFFFFF</primaryComplementColor>
+        <quaternaryColor>#B1BAC1</quaternaryColor>
+        <quaternaryComplementColor>#222222</quaternaryComplementColor>
+        <secondaryColor>#51606E</secondaryColor>
+        <tertiaryColor>#DDE4E9</tertiaryColor>
+        <tertiaryComplementColor>#222222</tertiaryComplementColor>
+        <zeronaryColor>#51606E</zeronaryColor>
+        <zeronaryComplementColor>#FFFFFF</zeronaryComplementColor>
+    </branding>
+    <changePasswordTemplate>EEC_External_CommunicatioTemplate_Folder/X85_Community_Member_Password_Change</changePasswordTemplate>
+    <emailSenderAddress>eecleaddonotreply@state.ma.us</emailSenderAddress>
+    <emailSenderName>Early Education and Care - LEAD System Admin</emailSenderName>
+    <enableGuestChatter>false</enableGuestChatter>
+    <enableInvitation>false</enableInvitation>
+    <enableKnowledgeable>false</enableKnowledgeable>
+    <enableNicknameDisplay>false</enableNicknameDisplay>
+    <enablePrivateMessages>false</enablePrivateMessages>
+    <enableReputation>false</enableReputation>
+    <forgotPasswordTemplate>EEC_External_CommunicatioTemplate_Folder/X84_Community_Member_Password_Reset</forgotPasswordTemplate>
+    <logoutUrl>https://eeclead.force.com/EEC_Login</logoutUrl>
+    <networkMemberGroups>
+        <profile>Admin</profile>
+        <profile>Community Standard User without transactions for EEC</profile>
+        <profile>EEC Community Standard User</profile>
+        <profile>EEC Community Standard User without transaction</profile>
+    </networkMemberGroups>
+    <picassoSite>EECLead1</picassoSite>
+    <selfRegistration>false</selfRegistration>
+    <sendWelcomeEmail>true</sendWelcomeEmail>
+    <site>EECLead</site>
+    <status>Live</status>
+    <tabs>
+        <defaultTab>home</defaultTab>
+        <standardTab>Chatter</standardTab>
+    </tabs>
+    <welcomeTemplate>EEC_External_CommunicatioTemplate_Folder/X83_Welcome_New_Community_Member</welcomeTemplate>
+</Network>

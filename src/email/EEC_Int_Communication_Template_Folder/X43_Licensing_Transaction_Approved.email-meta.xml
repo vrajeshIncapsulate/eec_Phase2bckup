@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmailTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <available>true</available>
+    <description>Email Communication to the Licensor assigned to the transaction indicating that the Transaction has been approved by the supervisor</description>
+    <encodingKey>ISO-8859-1</encodingKey>
+    <name>43 - Licensing Transaction Approved</name>
+    <style>none</style>
+    <subject>Licensing Transaction Approved</subject>
+    <type>text</type>
+</EmailTemplate>

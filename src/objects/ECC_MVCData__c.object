@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>List</customSettingsType>
+    <description>Holds metadata for each field in the solution. Grabbing information from Salesforce&apos;s schema meta-data will not work because of the yes/no radio buttons and the file upload sections</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>choices__c</fullName>
+        <description>Separate choices by two semi-colons (i.e. this;;that;;there)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Separate choices by two semi-colons (i.e. this;;that;;there)</inlineHelpText>
+        <label>choices</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>defaultRequired__c</fullName>
+        <defaultValue>true</defaultValue>
+        <externalId>false</externalId>
+        <label>defaultRequired</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>dependentFields__c</fullName>
+        <description>fields that will appear conditionally based on other fields</description>
+        <externalId>false</externalId>
+        <inlineHelpText>fields that will appear conditionally based on other fields</inlineHelpText>
+        <label>dependentFields</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>isActive__c</fullName>
+        <defaultValue>true</defaultValue>
+        <description>Whether or not this is active</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Whether or not this is active</inlineHelpText>
+        <label>isActive</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>isDependent__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>isDependent</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>key__c</fullName>
+        <description>Field name</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field name</inlineHelpText>
+        <label>key</label>
+        <length>120</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>label__c</fullName>
+        <description>often times this is a question.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>often times this is a question.</inlineHelpText>
+        <label>label</label>
+        <length>255</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>pageName__c</fullName>
+        <description>The name of the page where the question will exist</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The name of the page where the question will exist</inlineHelpText>
+        <label>pageName</label>
+        <length>80</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>recordTypesRequired__c</fullName>
+        <externalId>false</externalId>
+        <label>recordTypesDisplayedFor</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>sortOrder__c</fullName>
+        <description>The order in which the questions will appear</description>
+        <externalId>false</externalId>
+        <inlineHelpText>The order in which the questions will appear</inlineHelpText>
+        <label>sortOrder</label>
+        <precision>3</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>type__c</fullName>
+        <description>text, radio, picklist, upload, textarea, date</description>
+        <externalId>false</externalId>
+        <inlineHelpText>text, radio, picklist, upload, textarea, date</inlineHelpText>
+        <label>type</label>
+        <length>40</length>
+        <required>true</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>uploadName__c</fullName>
+        <externalId>false</externalId>
+        <label>uploadName</label>
+        <length>40</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <label>ECC_MVCData</label>
+    <visibility>Public</visibility>
+</CustomObject>

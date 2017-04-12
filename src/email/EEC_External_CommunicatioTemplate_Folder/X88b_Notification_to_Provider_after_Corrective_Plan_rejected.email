@@ -1,0 +1,54 @@
+<table border="0" cellpadding="5" width="600" cellspacing="5" height="400" >
+<tr valign="top" height="50" >
+<td tEditID="c1r1" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r1" locked="0" >
+<![CDATA[]]></td>
+</tr>
+<tr valign="top" height="300" >
+<td tEditID="c1r2" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r2" locked="0" >
+<![CDATA[<div><p style="margin-top: 10px; margin-right: 0px; margin-left: 0px; font-size: medium; padding: 0px; color: rgb(51, 51, 51); font-family: Arial, sans-serif; background-color: rgb(255, 255, 255);"><i><font size="2">This email is intended to the licensed provider under the name: {!Account.Name}</font></i></p><div><i><font size="2"><br></font></i></div><p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">Dear&nbsp;Provider,<o:p></o:p></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal"><font face="Arial, sans-serif" size="2">Following the results from
+the recent investigation conducted by the Department of Early Education and
+Care (EEC) (see&nbsp;<a href="https://eeclead.force.com/EEC_PortalInvestigationPage?Id={!Non_Compliant__c.InvestigationId__c}">investigation summary</a>), you submitted a correction plan associated to the following
+non-compliance:</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><span style="background-image: initial; background-attachment: initial; background-color: rgb(255, 255, 255); background-size: initial; background-origin: initial; background-clip: initial; background-position: initial; background-repeat: initial;">{!Non_Compliant__c.Observations__c}</span><o:p></o:p></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">After review, we would like
+you to review it and provide the following information:<o:p></o:p></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal"><font face="Arial, sans-serif" size="2">{!Non_Compliant__c.Corrective_Action_EEC_Feedback__c}</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">You can update your corrective
+action plan on the portal by following the link below:<o:p></o:p></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2"><a href="https://eeclead.force.com/eec_portalnoncompliancepage?accountId={!Account.Id}">Link to corrective action plan</a></font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">You may contact your licensor {!Account.OwnerFirstName} {!Account.OwnerLastName} by phone at {!Account.OwnerPhone} or by email at&nbsp; {!Account.OwnerEmail} with any questions or concerns related to this matter.&nbsp;&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">&nbsp;</font></p>
+
+<p class="MsoNormal" style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">Sincerely,<o:p></o:p></font></p>
+
+<span style="color: rgb(0, 0, 0);"><font face="Arial, sans-serif" size="2">The
+Department of Early Education and Care.</font></span></div>]]></td>
+</tr>
+<tr valign="top" height="50" >
+<td tEditID="c1r3" style=" background-color:#FFFFFF; bEditID:r3st1; color:#000000; bLabel:main; font-size:12pt; font-family:arial;" aEditID="c1r3" locked="0" >
+<![CDATA[<div align="center"><font face="Arial, sans-serif"><font size="2">{!Account.Region_Address__c}<br>{!Account.Region_Phone__c} • {!Account.Region_Fax__c} • {!Account.Region_Email__c}</font><font size="2"><br>www.mass.gov/eec</font></font><br></div>]]></td>
+</tr>
+</table>

@@ -1,0 +1,6 @@
+<apex:component >
+    <apex:attribute name="Inspection__c" description="The visit to write the footer for" type="Inspection__c" required="true"/>
+      
+    <div><b>Licensor</b></div>
+    <div style="padding-left:30px">{! Inspection__c.Inspector_del__r.Name }</div>
+</apex:component>

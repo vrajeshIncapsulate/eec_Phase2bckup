@@ -1,0 +1,5 @@
+<apex:page controller="VF_SchemaUtil_Controller">
+  <strong>Output:</strong>
+  <br/>
+  <apex:outputText value="{!output}" escape="false"/>
+</apex:page>

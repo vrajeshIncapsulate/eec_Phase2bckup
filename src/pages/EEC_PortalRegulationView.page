@@ -1,0 +1,82 @@
+<apex:page controller="EEC_RegulationViewController" standardStylesheets="false" sidebar="false" showHeader="false">
+ <head>
+     <c:EEC_VisitModeHeader id="pageHeader" />
+     <style>
+         body{
+         	overflow: scroll;
+         }
+     	.not-visible {
+         	display : none;
+         }
+         .labelCol{
+         	font-weight : bold;
+         	padding-left : 65px;
+         }
+         h3,h4{
+         	margin-left:20px;
+         }
+         .ignore{margin-left:0px;}
+         .top-buffer { margin-top:20px; }
+     </style>
+</head>
+<body>
+        <h3>Regulation Detail</h3><br/>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            	<span class="labelCol">Regulation Number</span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                {!regulation.Name}
+            </div><br/>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            	<span class="labelCol">Parent Regulation Number</span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                <a href="/apex/EEC_PortalRegulationView?Id={!regulation.Parent_Regulation__r.Id}">{!regulation.Parent_Regulation__r.name}</a>
+            </div><br/>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            	<span class="labelCol">Article</span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                {!regulation.Article__c}
+            </div><br/>
+        </div>
+        <div class="row top-buffer">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            	<span class="labelCol">Applicable To</span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                {!regulation.Applicable_To__c}
+            </div>
+        </div><br/><br/>
+        <div class="{!IF(childregs.size > 0 , '' , 'not-visible') }">
+            <h3>
+                Child Regulations
+            </h3>
+        
+        <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <h4>Regulation Number</h4>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                   <h4 class="ignore">Article</h4>
+                </div>
+            </div><br/>
+        <apex:repeat value="{!childregs}" var="creg" >
+            <div class="row">
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <span class="labelCol"><a href="/apex/EEC_PortalRegulationView?Id={!creg.Id}">{!creg.Name}</a></span>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+                    {!creg.Article__c}
+                </div>
+            </div><br/>
+        </apex:repeat> 
+        </div> 
+        
+</body>   
+</apex:page>

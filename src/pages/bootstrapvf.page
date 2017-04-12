@@ -1,0 +1,42 @@
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false" docType="html-5.0" controller="CustomLoginController">
+<apex:form >
+ <html lang="en">
+  <head>
+      <meta charset="utf-8"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content=""/>
+      <meta name="author" content=""/>
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <apex:stylesheet value="{!URLFOR($Resource.EEC_Bootstrap, 'css/bootstrap.min.css')}"/>
+    <apex:stylesheet value="{!URLFOR($Resource.EEC_Bootstrap, 'css/signin.css')}"/>
+    <apex:stylesheet value="//cdn.jsdelivr.net/webjars/bootstrap-sf1/0.1.0-beta.6/css/bootstrap-namespaced.css"/>
+   
+  </head>
+
+  <body>
+
+    <div class="bootstrap">
+
+      <form class="form-signin">
+        <h2 class="form-signin-heading">Please sign in</h2>
+          <apex:outputLabel value="Enter your username " styleclass="sr-only" for="username"/>
+          <apex:inputText id="username" styleclass="form-control"/> 
+          <br/><br/>
+          <apex:outputlabel Value="Enter your password" styleclass="sr-only" for="inputpassword"/>&nbsp;
+          <apex:inputsecret id="inputPassword" styleclass="form-control"/> 
+          <div class="checkbox">
+          <apex:outputLabel value="Remember me "></apex:outputLabel><apex:inputCheckbox label="Remember me" title="Remember me" />
+        </div>
+            <apex:commandbutton action="{!login}" styleclass="btn btn-lg btn-primary btn-block" value="Sign in"/>
+      </form>
+
+    </div> <!-- /container -->
+
+  </body>
+ </html>
+ </apex:form>
+</apex:page>
